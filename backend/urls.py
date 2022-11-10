@@ -1,0 +1,3 @@
+from django.urls import include,path
+from .views import IndexView,TagsView,tags_ajax,tags_create,tags_delete,tags_update,LogoView,logo_ajax,logo_create,logo_delete,logo_update
+urlpatterns=[path('',IndexView.as_view(),name='dashboard'),path('tags/',TagsView.as_view(),name='tags'),path('tags-ajax/',tags_ajax,name='tags_ajax'),path('tags/create/',tags_create,name='tags_create'),path('tags/update/<uuid:uuid>/',tags_update,name='tags_update'),path('tags/delete/<uuid:uuid>/',tags_delete,name='tags_delete'),path('logo/',LogoView.as_view(),name='logo'),path('logo-ajax/',logo_ajax,name='logo_ajax'),path('logo/create/',logo_create,name='logo_create'),path('logo/update/<uuid:uuid>/',logo_update,name='logo_update'),path('logo/delete/<uuid:uuid>/',logo_delete,name='logo_delete')]

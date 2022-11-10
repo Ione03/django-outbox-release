@@ -1,0 +1,925 @@
+@media (max-width:1199px){
+	.tg-headervtwo {margin: 0 0 -106px;}
+	.tg-headervtwo .tg-logo {width: 220px;}
+	.tg-headervtwo .tg-navigation > ul > li {
+		padding: 0 0 25px;
+		margin: 0 0 0 15px;
+	}
+	.mega-menu.tg-fullmegamenu {width: 940px !important;}
+	.tg-homebannervtwo .tg-homeslider{width:100%;}
+	.tg-homeslidervthree .tg-slidercontent{padding:106px 0 0;}
+	.tg-homeslidervfour .tg-slidercontent{padding:30px;}
+	.tg-noticeboardarea{
+		width:100%;
+		padding:20px 0 0;
+	}
+	.tg-noticeboardarea{
+		width:auto;
+		float:none;
+		clear:both;
+		margin:0 -15px;
+		overflow:hidden;
+	}
+	.tg-noticeboardarea .tg-widget{
+		width:50%;
+		padding:0 15px;
+	}
+	.tg-noticeboardarea .tg-widget + .tg-widget{margin:0;}
+	.tg-glanceatuoeandkvtwo{padding:0 0 30px;}
+	.tg-themepostleftimg .tg-themepostcontent{padding: 5px 0 5px 20px;}
+	.tg-detailpage .tg-themeposttitle h1 {
+		font-size: 22px;
+		line-height: 25px;
+	}
+	.tg-themepostinfo li {padding: 0px 11px;}
+	.tg-coursestabs .tg-themetabnav li a {padding: 0 40px;}
+	.tg-formsignupfree {width: 50%;}
+	.tg-signuptextbox{
+		width:100%;
+		padding:0 0 15px;
+	}
+	.tg-formsignupfree{width:100%;}
+	.tg-formsignupfree .form-group:first-child{padding:0 30px 0 0;}
+	.tg-infolist li address {max-width: 180px;}
+	.tg-widgetlatestcourses .tg-campuscontent .tg-matadata{
+		padding:0;
+		font-size:12px;
+	}
+	.tg-addmission .tg-pagetitle h2 {
+		font-size:25px;
+		line-height: 30px;
+	}
+	.tg-widgetothercapmus .tg-widgetcontent ul li address{
+		width:80%;
+		overflow:hidden;
+		white-space:nowrap;
+		text-overflow:ellipsis;
+	}
+	.tg-maincampus .tg-themepostcontent{padding:0 0 0 15px;}
+	.tg-maincampuses .tg-capmusinfo{line-height:15px;}
+	.tg-maincampuses .tg-campuseslocation{height:227px;}
+	.tg-campuses ul li address{
+		max-width:86%;
+		font-size:12px;
+	}
+	.tg-ouridentityimages{width:55%;}
+	.tg-comingcountdown .tg-counterbox {padding: 60px 30px;}
+	.tg-jobs .tg-themecollapsecontent ul li .tg-description p{
+		width: 100%;
+		overflow: hidden;
+		white-space: nowrap;
+		padding: 0 15px 0 0;
+		text-overflow: ellipsis;
+	}
+	.tg-homeslidervthree .tg-slidercontent h1 {
+		font-size: 50px;
+		line-height: 50px;
+	}
+	.tg-homeslidervthree .tg-slidercontent h1 span {
+		font-size: 55px;
+		line-height: 35px;
+	}
+}
+@media (max-width:991px){
+	.tg-navigation ul li a {padding: 0 13px;}
+	li.menu-item-has-children > a:before,
+	li.menu-item-has-mega-menu > a:before {
+		top: 2px;
+		right: 3px;
+	}
+	.mega-menu.tg-fullmegamenu,
+	.mega-menu{
+		left:0 !important;
+		width:100% !important;
+	}
+	.tg-headervtwo {margin: 0 0 -119px;}
+	.tg-addressinfo li {padding: 0 15px 0 0;}
+	.tg-addressinfo li i {
+		padding: 0;
+		font-size: 15px;
+		line-height: 15px;
+	}
+	.tg-headervtwo .tg-btndropdown span + span {padding: 0 0 0 5px;}
+	.tg-headervtwo .tg-logo {
+		width: 100%;
+		margin: 20px 0 0;
+	}
+	.tg-headervtwo .tg-logo a img{
+		margin:0 auto;
+		display:block;
+	}
+	.tg-headervtwo .tg-navigationandsearch {padding: 10px 0 0;}
+	.tg-headervtwo .tg-navigation > ul > li{padding:0;}
+	.tg-headervthree .tg-navigationandsearch {padding: 20px 0;}
+	.tg-homeslidervthree .tg-slidercontent h1 {
+		font-size: 35px;
+		line-height: 25px;
+	}
+	.tg-homeslidervthree .tg-slidercontent h1 span {
+		font-size: 35px;
+		line-height: 30px;
+		padding: 10px 0;
+	}
+	.tg-homeslidervthree .tg-slidercontent .tg-btn{padding:0 40px;}
+	.tg-homeslidervfour .tg-slidercontent h1 {
+		font-size: 60px;
+		line-height: 60px;
+	}
+	.tg-homeslidervfour .tg-slidercontent h1 span {
+		font-size: 70px;
+		line-height: 50px;
+		padding: 10px 0 30px;
+	}
+	.tg-homeslidervfour .tg-slidercontent .tg-btn{padding:0 50px;}
+	.tg-slidercontent{width:50%;}
+	.tg-borderheading h1 {
+		font-size: 28px;
+		line-height: 28px;
+	}
+	.tg-borderheading h1 span {padding: 5px 0 0;}
+	.tg-slidercontent .tg-description {padding: 15px 0;}
+	.tg-fullmegamenu .tg-tabpane {padding: 17px 30px 30px 30px;}
+	.tg-ticker .item .tg-description p {
+		width: 100%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.tg-welcomeandgreeting{text-align:center;}
+	.tg-welcomeandgreeting figure{
+		float:none;
+		display:inline-block;
+	}
+	.tg-welcomeandgreeting .tg-shortcodetextbox{
+		width:100%;
+		text-align:left;
+		padding:20px 0 0;
+	}
+	.tg-welcomeandgreeting-v2 figure{float:left;}
+	.tg-welcomeandgreeting-v2 .tg-shortcodetextbox{
+		width:auto;
+		overflow:hidden;
+		text-align:left;
+		padding:6px 0 6px 20px;
+	}
+	.tg-widgetquicklinksvtwo .tg-widgetcontent ul li a{
+		min-height:90px;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		align-content: center;
+	}
+	.tg-themepostleftthumb .tg-featuredimg,
+	.tg-themepostleftimg .tg-featuredimg{width:100%;}
+	.tg-themepostleftthumb .tg-featuredimg img,
+	.tg-themepostleftimg .tg-featuredimg img{
+		width:100%;
+		height:auto;
+		display:block;
+	}
+	.tg-themepostleftthumb .tg-themepostcontent,
+	.tg-themepostleftimg .tg-themepostcontent{
+		width:100%;
+		float:left;
+		padding:15px 0 0;
+	}
+	.tg-glanceatuoeandk{padding:0 0 30px;}
+	.tg-footer .tg-widget {min-height: 300px;}
+	.tg-list .tg-featuredimg{
+		width:100%;
+		margin:0 0 30px;
+	}
+	.tg-headervtwo .mega-menu.tg-fullmegamenu {left: 0 !important;}
+	.tg-list .tg-themepostcontent{
+		width:100%;
+		float:left;
+		padding:0;
+	}
+	.tg-themepostinfo li{width:100%;}
+	.tg-themepostinfo li + li{border:0;}
+	.tg-coursestabs .tg-themetabnav li{width:49%;}
+	.tg-courseinfo{
+		width:100%;
+		margin:0 0 30px;
+	}
+	.tg-tutors .tg-boxleft{width:100%;}
+	.tg-tutors .tg-boxright{
+		float:left;
+		padding:20px 0 0;
+	}
+	.tg-tutors .tg-boxright .tg-socialicons{margin:0;}
+	.tg-campuses ul li address,
+	.tg-widgetothercapmus .tg-widgetcontent ul{font-size:12px;}
+	.tg-widgetothercapmus .tg-widgetcontent ul li address {
+		max-width: 124px;
+		line-height: 16px;
+	}
+	.tg-facultydetail figure{
+		width:100%;
+		margin:0 0 30px;
+	}
+	.tg-facultydetail figure img{
+		display:block;
+		margin:0 auto;
+	}
+	.tg-facultycontent{
+		width:100%;
+		float:left;
+	}
+	.tg-eventdetailpage .tg-themepostinfo li,
+	.tg-events.tg-list .tg-themepostcontent{padding:0;}
+	.tg-faculty,
+	.tg-speaker{padding:15px 0;}
+	.tg-maincampus,
+	.tg-maincampuses .tg-mapholder{width:100%;}
+	.tg-maincampuses .tg-campuseslocation {height: 350px;}
+	.tg-maincampus .tg-themepostcontent{padding:0 0 0 30px;}
+	.tg-honoraward{display:block;}
+	.tg-honorawardcontent,
+	.tg-honoraward figure{width:100%;}
+	.tg-honoraward figure{margin:0 0 30px;}
+	.tg-honorawardcontent{padding:0;}
+	.tg-rectormessage,
+	.tg-leadership{padding:0;}
+	.tg-rectormessage figure,
+	.tg-leadership figure{
+		width:100%;
+		float:left;
+		position:relative;
+	}
+	.tg-rectormessage figure img,
+	.tg-leadership figure img{
+		width:100%;
+		height:auto;
+		display:block;
+	}
+	.tg-rectormessage figure{margin:0 0 30px;}
+	.tg-ouridentityimages,
+	.tg-objectivesimages{
+		width:100%;
+		margin:0 0 30px;
+	}
+	.tg-ouridentity .tg-description,
+	.tg-Objectives .tg-description{
+		padding:0;
+		width:100%;
+	}
+	.tg-list .tg-newspost .tg-themepostcontent{padding:0;}
+	.tg-detailpage blockquote,
+	.tg-detailpage blockquote q {
+		font-size:15px;
+		line-height:20px;
+	}
+	.tg-tagstext,
+	.tg-sharetext{
+		width:100%;
+		padding: 0;
+	}
+	.tg-tagstext{padding:0 0 30px;}
+	.tg-postauthorhead{padding:0 0 15px;}
+	.tg-postauthorhead .tg-socialicons{position:relative;}
+	.tg-postauthorhead .tg-socialicons li:first-child{padding:0;}
+	.tg-masonrygrid{width:25%;}
+	.tg-comingcountdown .tg-counter {
+		width: 50%;
+		padding: 15px;
+	}
+	.tg-departmentscollapse .tg-themecollapsecontent{padding:0 0 20px 0;}
+	.tg-departmentscollapse .tg-themecollapsecontent ul li .tg-description {padding: 10px 90px 10px 60px;}
+	.tg-themecollapsecontent ul li > strong,
+	.tg-themecollapsecontent ul li span,
+	.tg-themecollapsecontent ul li a {
+		width: 120px;
+		padding: 10px;
+	}
+	.tg-coursesemestercollapse .tg-themecollapsecontent ul li > strong,
+	.tg-coursesemestercollapse .tg-themecollapsecontent ul li span{width:90px;}
+	.tg-coursesemestercollapse .tg-themecollapsecontent ul li .tg-description {padding: 10px 110px;}
+	.tg-themecollapsecontent ul li .tg-description {padding: 10px 130px;}
+	.tg-postnav li{
+		width: 50%;
+		padding: 0 0 0 15px;
+	}
+	.tg-postnav li:first-child{padding: 0 15px 0 0;}
+	.tg-postnavcontent h3 a{
+		display: block;
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		text-overflow: ellipsis;
+		-webkit-box-orient: vertical;
+	}
+	.tg-jobs .tg-themecollapsecontent ul li:first-child{display: none;}
+	.tg-jobs .tg-themecollapsecontent ul li a{
+		width: auto;
+		float: left;
+	}
+	.tg-jobs .tg-themecollapsecontent ul li span,
+	.tg-jobs .tg-themecollapsecontent ul li .tg-description{
+		border: 0;
+		width: 100%;
+		float: left;
+		text-align: left;
+		position: relative;
+		border-bottom: 1px solid #fff;
+		padding: 10px 10px 10px 110px;
+	}
+	.tg-jobs .tg-themecollapsecontent ul li span:before,
+	.tg-jobs .tg-themecollapsecontent ul li .tg-description:before{
+		top: 0;
+		left: 0;
+		width: 100px;
+		padding: 10px;
+		text-align: left;
+		position: absolute;
+		font-size: inherit;
+		font-weight: bold;
+		line-height: inherit;
+		text-transform: capitalize;
+		border-right: 1px solid #fff;
+	}
+	.tg-jobs .tg-themecollapsecontent ul li span:first-child:before{content:attr(data-date);}
+	.tg-jobs .tg-themecollapsecontent ul li span:before{content:attr(data-action);}
+	.tg-jobs .tg-themecollapsecontent ul li .tg-description:before{content:attr(data-jobtitle);}
+	.tg-homeslidervthree .tg-slidercontent {padding: 120px 15px 0;}
+	.tg-allsemesterhours li > strong{
+		width: 90px;
+		padding: 0 10px;
+	}
+	.tg-allsemesterhours li .tg-description {padding: 0 100px 0 0;}
+	.tg-postauthor,
+	.tg-comment{padding: 15px;}
+}
+@media (max-width:800px){
+	.tg-homeslidervfour .tg-slidercontent h1 {
+		font-size: 40px;
+		line-height: 40px;
+	}
+	.tg-homeslidervfour .tg-slidercontent h1 span {
+		font-size: 50px;
+		line-height: 30px;
+		padding: 10px 0 20px;
+	}
+}
+@media (max-width:767px){
+	.tg-logo{width:100%;}
+	.tg-logo a img{
+		width:auto;
+		margin:0 auto;
+		display:block;
+	}
+	.tg-nav{padding:0;}
+	.tg-nav .navbar-toggle{
+		margin:0;
+		border: 0;
+		width: 40px;
+		height: 40px;
+		padding: 9px;
+		border-radius: 0;
+	}
+	.tg-nav .navbar-toggle .icon-bar{background:#fff;}
+	.tg-navigation{
+		left: 0;
+		top: 100%;
+		padding:0 15px;
+		background: #fff;
+		margin: 10px 0 0;
+		position: absolute;
+	}
+	.tg-headervtwo .tg-navigation{
+		margin:0;
+		position:absolute;
+	}
+	.tg-navigation > ul > li{
+		width:100%;
+		border-bottom:1px solid #ddd;
+	}
+	.sub-menu {
+		opacity: 1;
+		width: 100%;
+		float: left;
+		display: none;
+		position: static;
+		box-shadow: none;
+		visibility: visible;
+	}
+	.mega-menu{
+		float:left;
+		opacity:1;
+		display:none;
+		position:static;
+		box-shadow:none;
+		visibility:visible;
+			width:100% !important;
+	}
+	.mega-menu.tg-fullmegamenu{
+		float:left;
+		width:100% !important;
+	}
+	.tg-dropdowarrow{display: block;}
+	.sub-menu li.menu-item-has-children > a:after,
+	a[data-new]:after,
+	a[data-new]:before,
+	.tg-navigation ul li:hover a[data-new]:after,
+	.tg-navigation ul li a:hover[data-new]:after,
+	li.menu-item-has-children > a:before,
+	li.menu-item-has-mega-menu > a:before{display:none;}
+	li.menu-item-has-mega-menu{position:relative;}
+	.tg-navigation > ul > li.current-menu-item > a,
+	.tg-navigation > ul > li:hover > a,
+	.tg-navigation > ul > li > a:hover{
+		color:#333;
+		background:none;
+	}
+	.tg-megamenuslider .tg-themepostcontent .tg-matadata{
+		width:100%;
+		margin:0 0 10px;
+	}
+	.tg-megamenuslider .tg-themepostcontent .tg-pricebox{float:left;}
+	.tg-fullmegamenu .tg-tabpane {padding: 17px 30px 10px 30px;}
+	.tg-headervtwo .tg-navigation > ul > li{margin:0;}
+	.tg-headervtwo .tg-navigation > ul > li > a{color:#333;}
+	.tg-headervtwo {margin: 0 0 -60px;}
+	.tg-headervtwo .tg-logo{width:240px;}
+	.tg-headervtwo .tg-navigationarea{border:0;}
+	.tg-homeslidervthree .tg-slidercontent{
+		position:absolute;
+		padding:50px 30px 30px 30px;
+	}
+	.tg-slidercontent {
+		width: 100%;
+		position: relative;
+	}
+	.tg-homeslider .owl-nav{
+		right:0;
+		left:auto;
+	}
+	.tg-homebannervtwo .tg-homeslider .owl-nav {top: 35%;}
+	.tg-homeslidervfour .tg-slidercontent {padding:0 30px;}
+	.tg-homeslidervfour .tg-slidercontent h1 {
+		font-size: 35px;
+		line-height: 35px;
+	}
+	.tg-homeslidervfour .tg-slidercontent h1 span {
+		padding: 10px 0;
+		font-size: 40px;
+		line-height: 20px;
+	}
+	.tg-sidebar{padding:30px 0 0;}
+	.tg-signupbox {padding: 30px 15px;}
+	.tg-footer .tg-widget {
+		min-height: 0;
+		padding: 15px 0;
+	}
+	.tg-infolist li address {max-width: none;}
+	.tg-coursestabs .tg-themetabnav li{width:auto;}
+	.tg-coursestabs .tg-themetabnav li a {padding: 0 30px;}
+	.tg-widgetcoursecategories{margin:0 0 30px;}
+	.tg-facultydetail{padding:40px 0;}
+	.tg-contactus .tg-officelocation{margin:0 0 30px;}
+	.tg-honorawards,
+	.tg-campuslife{padding:30px 15px 0 15px;}
+	.tg-campuslife figure{padding:0;}
+	.tg-visionmission,
+	.tg-rectormessage,
+	.tg-leadership{padding:30px 0 0;}
+	.tg-themeposttitle h3 a{
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-line-clamp: 1;
+		text-overflow: ellipsis;
+		-webkit-box-orient: vertical;
+	}
+	.tg-jobdetail h1 {
+		font-size: 25px;
+		line-height: 28px;
+	}
+	.tg-optionset li {padding: 0 5px;}
+	.tg-masonrygrid{width:33.33%;}
+	.tg-comingsoon {padding: 80px 0;}
+	/* .tg-departmentscollapse ul li .tg-description p{
+		width: 100%;
+		overflow: hidden;
+		white-space: nowrap;
+		padding: 0 15px 0 0;
+		text-overflow: ellipsis;
+	} */
+	.tg-borderheading h1 span{
+		padding: 0 0 0 8px;
+		display: inline-block;
+	}
+	.tg-departmentscollapse .tg-themecollapsecontent ul{background: transparent;}
+	.tg-departmentscollapse .tg-themecollapsecontent ul li{
+		position: relative;
+		padding: 0 0 0 42px;
+	}
+	.tg-departmentscollapse .tg-themecollapsecontent ul li span{background: #f7f7f7 !important;}
+	.tg-departmentscollapse .tg-themecollapsecontent ul li a{width: 90px;}
+	.tg-departmentscollapse .tg-themecollapsecontent ul li .tg-description{
+		background: #f7f7f7 !important;
+		padding: 10px 90px 10px 10px;
+	}
+}
+@media (max-width:700px){
+	.tg-topbar .tg-rightbox .tg-tollfree {padding: 0 10px 0 0;}
+	.tg-datebox,
+	.tg-rtltextbox{
+		margin: 0 5px 0 0;
+		padding: 0 5px 0 0;
+	}
+	.tg-rtltextbox em {padding: 0 5px 0 0;}
+	.tg-btndropdown{padding:0 30px 0 15px;}
+	.tg-headervtwo .tg-topbar{text-align:center;}
+	.tg-addressinfo{
+		width:100%;
+		text-align:center;
+	}
+	.tg-addressinfo li{
+		width:100%;
+		float:none;
+		padding:5px 0;
+		display:inline-block;
+	}
+	.tg-addressinfo li:last-child{padding:5px 0;}
+	.tg-headervtwo .tg-languagesdropdown{
+		width:90px;
+		float:none;
+		margin:0 auto;
+		padding:0 0 10px;
+		display:inline-block;
+	}
+	.tg-homeslidervthree .item img{
+		width:auto;
+		height:350px;
+		max-width:none;
+	}
+}
+@media (max-width:640px){
+	.tg-topbar .tg-leftbox{
+		width:100%;
+		text-align:center;
+		padding:0 15px 15px;
+	}
+	.tg-rtltextbox{
+		margin:0;
+		padding:0;
+	}
+	.tg-topbar .tg-rightbox{width:100%;}
+	.tg-addnav ul li {padding: 0 0 0 15px;}
+	.tg-headervtwo .tg-logo{width:200px;}
+	.tg-welcomeandgreeting-v2 figure{
+		float:none;
+		display:inline-block;
+	}
+	.tg-welcomeandgreeting-v2 .tg-shortcodetextbox{
+		width:100%;
+		text-align:left;
+		padding:20px 0 0;
+	}
+	.tg-homeslidervthree .tg-slidercontent h1 {
+		font-size: 30px;
+		line-height: 20px;
+	}
+	.tg-homeslidervthree .tg-slidercontent h1 span {
+		padding: 10px 0;
+		font-size: 28px;
+		line-height: 22px;
+	}
+	.tg-coursestabs .tg-themetabnav li{width:49%;}
+	.tg-masonrygrid{width:50%;}
+	.tg-topbar {padding: 0;}
+	.tg-topbar .tg-rightbox {padding: 0 0 0 15px;}
+	.mega-menu-col .tg-themetabnav{width:100%;}
+	.tg-fullmegamenu .tg-themetabcontent{
+		width:100%;
+		float:left;
+	}
+	.tg-tabpane .tg-posts{
+		margin:0;
+		width:100%;
+		float:left;
+		clear:none;
+	}
+	.tg-megamenuslider .tg-themepost{padding:0;}
+	.tg-megamenuslider .tg-themepostcontent .tg-matadata{
+		margin:0;
+		width:auto;
+	}
+	.tg-megamenuslider .tg-themepostcontent .tg-pricebox{float:right;}
+	.tg-fullmegamenu .tg-tabpane {padding:30px;}
+}
+@media (max-width:568px){
+	.tg-homebannervtwo .tg-slidercontent .tg-titledescription{
+		width:100%;
+		float:left;
+		padding:0;
+	}
+	.tg-homebannervtwo .tg-slidercontentbox {
+		padding: 0 0 70px;
+		position: relative;
+	}
+	.tg-homebannervtwo .tg-slidercontent .tg-btn{
+		bottom:0;
+		margin:0;
+		float:none;
+		position:absolute;
+	}
+	.tg-othercampuses > .row > [class^="col-"],
+	.tg-othercampuses .row > [class*="col-"],
+	.tg-noticeboardarea .tg-widgetadmissionform,
+	.tg-gallery li:first-child,
+	.tg-events > .row > [class^="col-"],
+	.tg-events .row > [class*="col-"],
+	.tg-grid > .row > [class^="col-"],
+	.tg-grid .row > [class*="col-"]{width:100%;}
+	.tg-gallery li {width: 50%;}
+	.tg-noticeboardarea {
+		width:100%;
+		float:left;
+		clear:none;
+		margin:-15px 0;
+	}
+	.tg-glanceatuoeandkvtwo .tg-gallery li{width:33.33%;}
+	.tg-noticeboardarea .tg-widgetadmissionform{padding:15px 0;}
+	.tg-widgetflickrgallery .tg-widgetcontent ul li {width: 33.33%;}
+	.tg-addnav,
+	.tg-copyright{
+		width:100%;
+		text-align:center;
+	}
+	.tg-copyright{padding:0 0 10px;}
+	.tg-addnav ul li{
+		float:none;
+		display:inline-block;
+	}
+	.tg-addnav ul li:first-child{padding-left:0;}
+	.tg-widgetquicklinksvtwo .tg-widgetcontent ul li{
+		width:100%;
+		min-height:0;
+	}
+	.tg-campusimg{width:100%;}
+	.tg-maincampus .tg-themepostcontent{
+		width:100%;
+		padding:30px;
+	}
+	.tg-aboutusimages figure,
+	.tg-objectivesimages figure{width:100%;}
+	.tg-commentcontent,
+	.tg-postauthorcontent{
+		width:100%;
+		float:left;
+	}
+	.tg-postauthor figure,
+	.tg-comment figure{display: none;}
+	.tg-commentchild{padding:0;}
+	.tg-errorimg{padding:0 15px;}
+	.tg-errorcontent h2 {
+		font-size: 50px;
+		line-height: 50px;
+	}
+	.tg-errorcontent h3 {
+		font-size: 25px;
+		line-height: 28px;
+	}
+	.tg-comingsoon h2 {
+		font-size: 40px;
+		line-height: 40px;
+	}
+	.tg-comingsoon h3 {
+		font-size: 25px;
+		line-height: 25px;
+	}
+	.tg-comingsoon .tg-description {padding: 0 12% 40px;}
+	.tg-borderheading h1 span{
+		display: block;
+		padding: 5px 0 0;
+	}
+}
+@media (max-width:480px){
+	.tg-rtltextbox,
+	.tg-datebox{
+		margin:0;
+		padding:0;
+		width:100%;
+		float:left;
+	}
+	.tg-datebox:before{display:none;}
+	.tg-tabpane .tg-themepost{width:100%;}
+	.mega-menu-col figure,
+	.mega-menu-col{
+		width:100%;
+		float:left;
+	}
+	.mega-menu-col figure img{
+		display:block;
+		margin:0 auto;
+	}
+	.tg-navigation .mega-menu-col > a{margin:0 13px;}
+	.mega-menu-col .tg-textbox{
+		float:left;
+		padding:40px 15px;
+	}
+	.mega-menu-col + .mega-menu-col{background:none;}
+	.tg-tabpane strong{
+		font-size:15px;
+		line-height:15px;
+		padding:0 0 50px;
+	}
+	.tg-megamenuslider.owl-carousel .owl-nav {
+		right: 50%;
+		margin: 0 -34px 0 0;
+	}
+	.tg-headervtwo {margin: 0 0 -122px;}
+	.tg-headervtwo .tg-logo{
+		float:none;
+		width:200px;
+		margin:20px auto 0;
+		display:block;
+	}
+	.tg-headervtwo .tg-navigationandsearch{width:100%;}
+	.tg-headervtwo .tg-nav{
+		float:left;
+		padding:3px 0;
+	}
+	.tg-searchbox .tg-formtheme {width: 250px;}
+	.tg-slidercontentbox .tg-borderheading{padding:0 0 10px;}
+	.tg-slidercontent .tg-description {padding: 10px 0;}
+	.tg-slidercontent{padding:15px;}
+	.tg-borderheading h1 {
+		font-size: 15px;
+		line-height: 15px;
+	}
+	.tg-taglatestnews {
+		padding: 0 5px;
+		font-size: 12px;
+		line-height: 22px;
+	}
+	.tg-slidercontent .tg-description {font-size: 15px;}
+	.tg-slidercontent .tg-description p{
+		font-size:13px;
+		line-height:16px;
+	}
+	.tg-slidercontent .tg-btn {
+		line-height:30px;
+		padding: 0 20px;
+	}
+	.tg-slidercontent .tg-titledescription h1 {
+		font-size: 15px;
+		line-height: 15px;
+		margin: 0 0 10px;
+	}
+	.tg-homebannervtwo .tg-slidercontent {padding: 15px;}
+	.tg-homebannervtwo .tg-slidercontentbox {padding: 0 0 45px;}
+	.tg-homeslider .owl-nav {
+		width: 47%;
+		padding: 30px 15px;
+	}
+	.tg-homeslidervthree .owl-nav{
+		width:100%;
+		padding:0 15px;
+	}
+	.tg-homeslidervfour .tg-slidercontent .tg-btn {padding: 0 30px;}
+	.tg-btnpluslogo .tg-btn{
+		width:100%;
+		margin:0 0 15px;
+	}
+	.tg-btnpluslogo .tg-universitylogo{width:100%;}
+	.tg-borderheading h2 {
+		font-size: 16px;
+		line-height: 16px;
+	}
+	.tg-formsignupfree .form-group{width:100%;}
+	.tg-formsignupfree .form-group:first-child{
+		width:100%;
+		padding:0 0 15px;
+	}
+	.tg-addnav ul li {padding: 0 0 0 5px;}
+	.tg-coursestabs .tg-themetabnav li{width:100%;}
+	.tg-detailpage > .tg-themepost > .tg-themepostcontent > .tg-pricebox{
+		width:100%;
+		margin:15px 0 0;
+		position:relative;
+	}
+	.tg-detailpage > .tg-themepost > .tg-themepostcontent {padding: 0 0 30px 0;}
+	.tg-documenticon{display:none;}
+	.tg-btndownload{
+		width:100%;
+		margin:0 0 10px;
+		position:relative;
+	}
+	.tg-eventspeakers .row > [class^="col-"],
+	.tg-eventspeakers .row > [class*="col-"],
+	.tg-eventcounter.tg-counter .tg-counterbox,
+	.tg-faculties .row > [class^="col-"],
+	.tg-faculties .row > [class*="col-"]{width:100%;}
+	/* .tg-result .tg-description p {
+		width: 100%;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	} */
+	.tg-addmission .tg-pagetitle h2{font-size:20px;}
+	.tg-addmissionslider.owl-carousel .owl-item img{
+		width: auto;
+		display: block;
+		height: 100%;
+		max-width: none;
+	}
+	.tg-addmission .tg-liststyledot li:before {top: 9px;}
+	.tg-optionset li {
+		width: 100%;
+		padding:0;
+	}
+	.tg-optionset li:before{display:none;}
+	.tg-optionset li a{padding:8px 0;}
+	.tg-masonrygrid {width: 100%;}
+	.tg-errorcontent h3 {
+		font-size: 20px;
+		line-height: 23px;
+	}
+	.tg-comingcountdown .tg-counter {width: 100%;}
+	.tg-comingsoon h3 {
+		font-size: 20px;
+		line-height: 20px;
+	}
+	.tg-comingsoon .tg-description {padding: 0 15px 15px;}
+	.tg-themecollapsecontent{padding: 0 0 20px;}
+	.tg-coursesemestercollapse .tg-themecollapsecontent ul li:first-child{display: none;}
+	.tg-coursesemestercollapse .tg-themecollapsecontent ul li span{
+		top: 0;
+		left: 0;
+		border: 0;
+		width: 100%;
+		float: left;
+		right: auto;
+		text-align: left;
+		position: relative;
+		padding: 10px 10px 10px 110px;
+		border-bottom: 2px solid #fff;
+	}
+	.tg-coursesemestercollapse .tg-themecollapsecontent ul li span:before,
+	.tg-coursesemestercollapse .tg-themecollapsecontent ul li .tg-description:before{
+		top: 0;
+		left: 0;
+		width: 100px;
+		padding: 10px;
+		text-align: left;
+		position: absolute;
+		font-size: inherit;
+		font-weight: bold;
+		line-height: inherit;
+		border-right: 2px solid #fff;
+	}
+	.tg-coursesemestercollapse .tg-themecollapsecontent ul li .tg-description{
+		border: 0;
+		text-align: left;
+		position: relative;
+		padding: 10px 10px 10px 110px;
+	}
+	.tg-coursesemestercollapse .tg-themecollapsecontent ul li span:first-child:before{content:attr(data-serial);}
+	.tg-coursesemestercollapse .tg-themecollapsecontent ul li span:before{content:attr(data-credithrs);}
+	.tg-coursesemestercollapse .tg-themecollapsecontent ul li .tg-description:before{content:attr(data-coursetitle);}
+	.tg-coursesemestercollapse .tg-themecollapsecontent ul li:last-child > strong:first-child{display: none;}
+	.tg-coursesemestercollapse .tg-themecollapsecontent ul li:last-child > strong{width: 60px;}
+	.tg-coursesemestercollapse .tg-themecollapsecontent ul li:last-child > .tg-description{padding: 10px 70px 10px 10px;}
+	.tg-coursesemestercollapse .tg-themecollapsecontent ul li:last-child > .tg-description:before{display: none;}
+	.tg-btndownload{
+		height: 40px;
+		line-height: 40px;
+	}
+	.tg-courseoutline li span{float: left;}
+	.tg-courseoutline li span:last-child{float: right;}
+	.tg-courseoutline li .tg-description{
+		width: 100%;
+		float: left;
+		padding: 10px 0 0;
+	}
+	.tg-allsemesterhours li > strong{
+		width: 60px;
+		padding: 0 10px;
+	}
+	.tg-allsemesterhours li .tg-description {padding: 0 60px 0 0;}
+}
+@media (max-width:479px){
+	.tg-homeslidervthree .tg-slidercontent h1 {
+		font-size: 20px;
+		line-height: 10px;
+	}
+	.tg-homeslidervthree .tg-slidercontent h1 span {
+		font-size: 22px;
+		line-height: 16px;
+	}
+	.tg-postnav li{
+		width: 100%;
+		padding: 15px 0 0;
+	}
+	.tg-postnav li:first-child{padding: 0 0 15px;}
+	.tg-result .tg-description{clear: both;}
+	.tg-btndownloadresult {
+		float: left;
+		line-height: 20px;
+		margin: 10px 0 0;
+	}
+	.tg-detailpage blockquote {padding: 0 0 0 85px;}
+}
+@media (max-width:360px){}
