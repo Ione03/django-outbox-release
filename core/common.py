@@ -1,8 +1,8 @@
 from .models import Service,Agency
 def get_agency_info(site_id):
-	D=Service.objects.filter(site_id=site_id).values_list('agency',flat=True);C=None
-	if D:C=Agency.objects.filter(id=D[0])
+	C=Service.objects.filter(site_id=site_id).values_list('agency',flat=True);print('service=',C);D=None
+	if C:E=Agency.objects.filter(id=C[0])[0];F=E.get_current_language();D=Agency.objects.language(F).filter(id=C[0])
 	A={}
-	if C:
-		for B in C:A['email']=B.email;A['phone']=B.phone;A['fax']=B.fax;A['whatsapp']=B.whatsapp
+	if D:
+		for B in D:A['name']=B.name;A['email']=B.email;A['phone']=B.phone;A['fax']=B.fax;A['whatsapp']=B.whatsapp;A['address']=B.address;A['notes']=B.notes
 	return A
