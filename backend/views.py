@@ -140,7 +140,7 @@ def logo_create(request):
 	return render(request,template,context)
 def logo_update(request,uuid):
 	context={};context[_D]=_j;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=Logo.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);post_photo=post.photo.all()
-	if post_photo:post_photo=post_photo.get()
+	if post_photo:post_photo=post_photo.first()
 	if request.method==_H:
 		form=LogoForm(request.POST,instance=post);photo=PhotoForm(request.POST,instance=post_photo)
 		if form.is_valid():
@@ -168,7 +168,7 @@ def announcement_create(request):
 	return render(request,template,context)
 def announcement_update(request,uuid):
 	context={};context[_D]=_k;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=Announcement.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);post_photo=post.photo.all()
-	if post_photo:post_photo=post_photo.get()
+	if post_photo:post_photo=post_photo.first()
 	if request.method==_H:
 		form=AnnouncementForm(request.POST,instance=post);photo=PhotoForm(request.POST,instance=post_photo)
 		if form.is_valid():
@@ -196,7 +196,7 @@ def news_create(request):
 	return render(request,template,context)
 def news_update(request,uuid):
 	context={};context[_D]=_n;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=News.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);post_photo=post.photo.all()
-	if post_photo:post_photo=post_photo.get()
+	if post_photo:post_photo=post_photo.first()
 	if request.method==_H:
 		form=NewsForm(request.POST,instance=post);photo=PhotoForm(request.POST,instance=post_photo)
 		if form.is_valid():
@@ -224,7 +224,7 @@ def article_create(request):
 	return render(request,template,context)
 def article_update(request,uuid):
 	context={};context[_D]=_o;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=Article.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);post_photo=post.photo.all()
-	if post_photo:post_photo=post_photo.get()
+	if post_photo:post_photo=post_photo.first()
 	if request.method==_H:
 		form=ArticleForm(request.POST,instance=post);photo=PhotoForm(request.POST,instance=post_photo)
 		if form.is_valid():
@@ -252,7 +252,7 @@ def events_create(request):
 	return render(request,template,context)
 def events_update(request,uuid):
 	context={};context[_D]=_p;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=Events.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);post_photo=post.photo.all()
-	if post_photo:post_photo=post_photo.get()
+	if post_photo:post_photo=post_photo.first()
 	if request.method==_H:
 		form=EventsForm(request.POST,instance=post);photo=PhotoForm(request.POST,instance=post_photo)
 		if form.is_valid():
@@ -332,7 +332,7 @@ def greeting_create(request):
 	return render(request,template,context)
 def greeting_update(request,uuid):
 	context={};context[_D]=_q;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=Greeting.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);post_photo=post.photo.all()
-	if post_photo:post_photo=post_photo.get()
+	if post_photo:post_photo=post_photo.first()
 	if request.method==_H:
 		form=GreetingForm(request.POST,instance=post);photo=PhotoForm(request.POST,instance=post_photo)
 		if form.is_valid():
@@ -360,7 +360,7 @@ def pages_create(request):
 	return render(request,template,context)
 def pages_update(request,uuid):
 	context={};context[_D]=_r;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=Pages.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);post_photo=post.photo.all()
-	if post_photo:post_photo=post_photo.get()
+	if post_photo:post_photo=post_photo.first()
 	if request.method==_H:
 		form=PagesForm(request.POST,instance=post);photo=PhotoForm(request.POST,instance=post_photo)
 		if form.is_valid():
@@ -412,7 +412,7 @@ def photogallery_create(request):
 	return render(request,template,context)
 def photogallery_update(request,uuid):
 	context={};context[_D]=_y;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=PhotoGallery.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);post_photo=post.photo.all()
-	if post_photo:post_photo=post_photo.get()
+	if post_photo:post_photo=post_photo.first()
 	if request.method==_H:
 		form=PhotoGalleryForm(request.POST,instance=post);photo=PhotoForm(request.POST,instance=post_photo)
 		if form.is_valid():
