@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 from parler.admin import TranslatableAdmin
-from .models import Announcement,Article,DailyAlert,Document,Events,Greeting,Logo,News,Pages,PhotoGallery,Popup,RelatedLink,SlideShow,SocialMedia,Tags,VideoGallery
+from .models import *
 class LogoAdmin(admin.ModelAdmin):list_filter=_A,_B;list_display=[_A,_B];search_fields=_A,_B;ordering='-updated_at',
 admin.site.register(Logo,LogoAdmin)
 admin.site.register(Announcement,TranslatableAdmin)
@@ -22,3 +22,4 @@ admin.site.register(RelatedLink,TranslatableAdmin)
 admin.site.register(SlideShow,TranslatableAdmin)
 admin.site.register(SocialMedia,TranslatableAdmin)
 admin.site.register(Tags,TranslatableAdmin)
+admin.site.register(Categories,TranslatableAdmin)

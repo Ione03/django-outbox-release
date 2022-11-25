@@ -79,7 +79,7 @@ class RelatedLinkForm(TranslatableModelForm):
 class DocumentForm(TranslatableModelForm):
 	class Meta:model=Document;fields=[_E,_F,_L,_G,_B]
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_E,css_class=_A),Column(_F,css_class=_A),Column(_L,css_class=_A),Column(_G,css_class=_A),Column(_B,css_class=_A)))
-class MenuForm(ModelForm):
+class MenuForm(TranslatableModelForm):
 	class Meta:model=Menu;fields=[_E,_M,_H,_N,'icon',_O,_P]
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_E,css_class=_A),Column(_M,css_class=_A),Column(_H,css_class=_A),Column(_N,css_class=_A),Column('icon',css_class=_A),Column(_O,css_class=_A),Column(_P,css_class=_A)))
 class AgencyForm(TranslatableModelForm):
