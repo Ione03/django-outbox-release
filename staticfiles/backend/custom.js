@@ -25,13 +25,16 @@ function do_create(url) {
     });
 };
 
-function do_cancel(url) {
-    $("#do_cancel").click(function() {
-        window.location.href = url;   
+// sender = sumber form [form create atau update]
+function do_cancel(selector, sender, url) {
+    $(selector).click(function() {
+        if (confirm('Batalkan proses "'+ sender + '"?')) {
+            window.location.href = url;   
+        };
     });
 };
 
-function do_create_table(url) {
+function do_create_table(url, one_record_only=false, edit_button=true, delete_button=true) {
     $.ajax({
         "url": url,
         "dataSrc": "",
@@ -43,6 +46,7 @@ function do_create_table(url) {
             var first_loop = true;
             var tmp_data = {};
             var main_col = '';
+            var foto_idx = -1;   // # cari index 
 
             for(key in d) {
 
@@ -60,8 +64,16 @@ function do_create_table(url) {
                             columns.push({"title": tmp[i], "data": tmp[i]});     
 
                         // console.log('i=', i);
+                        // console.log('=',tmp[i]);
                         if (i==3)
                             main_col = tmp[i];
+
+                        if (tmp[i]=='Foto') {
+                            foto_idx = i;
+                            console.log('foto idx change', i);
+                        };
+
+                        console.log('=',foto_idx);
                     };
 
                     // extra column last
@@ -84,70 +96,114 @@ function do_create_table(url) {
             res["columns"] = columns;
             res["data"] = data;
             
+            if (one_record_only)
+                if (data.length >= 1)
+                    $("#do_create").hide();
+                    
             // ref : https://stackoverflow.com/questions/36046139/datatables-dynamic-columns-from-ajax-data-source
             // tidak menggunakan datatable ajax seperti biasa,
             // gunakan ajax di luar, kemudian hasilnya untuk populate datatable
 
-            $('#datatable_tabletools').DataTable({
-                // dom: "Bfrtip",
-                "data": res.data,
-                "columns": res.columns,
-                "order": [[ 2, "desc" ]],   
-                "columnDefs": [
-                    {
-                        "targets": [ 1, 2 ],
-                        "visible": false,
-                        "searchable": false,
-                    },  
-                    { 
-                        "targets": 0, 
-                        "width": "5px",
-                        "sortable": false,
-                        "searchable": false,
-                    },
-                    { 
-                        "targets": [ res.columns.length-2 ], 
-                        "width": "100px",
-                        "sortable": false,
-                        "searchable": false,
-                    },
-                    {
-                        "targets": [ res.columns.length-3 ],
-                        
-                        render: function(data) {
-                            if (data != null) {
-                                //console.log( data);
-                                return '<img src="/media/' + data + '" class="img-thumbnail">'
-                            }
-                            else return 'tidak ada'
-                        }
-                    
-                    },  
-                    { 
-                        "targets": [ res.columns.length-1 ], 
-                        "width": "60px",
-                        "sortable": false,
-                        "searchable": false,                                                            
-                        render: function(data, type, row) {                                    
-                            // console.log("Object=", Object.keys(res.columns)[0]);
-                            // row["Name (id)"]
+            // console.log('foto_idx', foto_idx);
 
-                            return  "<div class='toolbar text-right'><button onclick='do_edit(\"" + row.uuid + "\");' class='btn btn-success btn-xs' title='Edit Data'> "+
-                                    "    <i class='fa fa-edit'></i> "+                                                           
-                                    "</button> "+
-                                    "<button onclick='do_delete(\"" + row.uuid + "\", \"" + row[main_col] + "\"" + ");' class='btn btn-danger btn-xs' title='Hapus Data'> "+
-                                    "    <i class='fa fa-eraser'></i> "+                                                           
-                                    "</button>"+
-                                    "</div>";
-                        }
-                    },
-                ],
-                "sDom": "<'dt-toolbar text-right'<'col-xs-12 col-sm-6 'f><'toolbar'>r>"+                
-                        "t"+
-                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",      
-                "autoWidth" : true,
-                
-            });
+            // {% if one_record_only %}
+            //     $("#do_create").hide();
+            // {% endif %}
+
+            // console.log('res.data=', res.data);
+
+            if (res.data.length>0) {
+                $('#datatable_tabletools').DataTable({
+                    // dom: "Bfrtip",
+                    "data": res.data,
+                    "columns": res.columns,
+                    "order": [[ 2, "desc" ]],   
+                    "columnDefs": [
+                        {
+                            "targets": [ 1, 2 ],
+                            "visible": false,
+                            "searchable": false,
+                        },  
+                        { 
+                            "targets": 0, 
+                            "width": "5px",
+                            "sortable": false,
+                            "searchable": false,
+                        },
+                        { 
+                            "targets": [ res.columns.length-2 ], 
+                            "width": "100px",
+                            "sortable": false,
+                            "searchable": false,
+                        },
+                        {
+                            // manfaatkan kondisi target yg harus integer, jika string maka tidak akan di jalankna
+                            "targets": [ (foto_idx > -1) ? parseInt(foto_idx): '-1' ],
+                            
+                            render: function(data) {
+                                // console.log('inside target');
+                                // console.log(foto_idx);
+
+                                // if (foto_idx > -1) {
+                                if (data != null)                                     
+                                    return  '<img src="/media/' + data + 
+                                            '" class="img-thumbnail">';
+                                
+                                return 'tidak ada';                                
+                            }                    
+                        },  
+                        {
+                            // tampilkan hiperlink di kolom pertama (agar dapat melakukan editing dengan klik field 1)
+                            "targets": [ 3 ],
+                            
+                            render: function(data, type, row) {                            
+                                return  "<a href='javascript:void(0);' onclick='do_edit(\"" + row.uuid + "\");' title='Edit Data'>"+ 
+                                        "<strong>" + data + "</strong>" +
+                                        "</a>";                                
+                            }                    
+                        }, 
+                        { 
+                            "targets": [ res.columns.length-1 ], 
+                            "width": "60px",
+                            "sortable": false,
+                            "searchable": false,                                                            
+                            render: function(data, type, row) {                                    
+                                // console.log("Object=", Object.keys(res.columns)[0]);
+                                // row["Name (id)"]
+                                var tmp = '';
+                                if (edit_button)
+                                    tmp =   "<button onclick='do_edit(\"" + row.uuid + "\");' class='btn btn-success btn-xs' title='Edit Data'> "+
+                                            "    <i class='fa fa-edit'></i> "+                                                           
+                                            "</button> ";
+
+                                if (delete_button)
+                                    tmp = tmp +
+                                            "<button onclick='do_delete(\"" + row.uuid + "\", \"" + row[main_col] + "\"" + ");' class='btn btn-danger btn-xs' title='Hapus Data'> "+
+                                            "    <i class='fa fa-eraser'></i> "+                                                           
+                                            "</button>";
+
+                                return  "<div class='toolbar text-right'>" + tmp +
+                                        "</div>";                                    
+                            }
+                        },
+                    ],
+                    "sDom": "<'dt-toolbar text-right'<'col-xs-12 col-sm-6 'f><'toolbar'>r>"+                
+                            "t"+
+                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",      
+                    "autoWidth" : true,
+                    
+                });
+            }
+            else {
+                // console.log($("#no-data").val());
+
+                $("#no-data").empty();
+                $("#no-data").append(
+                    '<p class="alert alert-info no-margin">' +
+                        'No data to display ...  '+
+                    '</p>');
+            };
+
         }
     }); 
 };
@@ -202,7 +258,12 @@ $(document).ready(function() {
         // console.log('Inside #modalCrop');
         // console.log(ww);
         // console.log(hh);
-        
+        // console.log("DIMENSI:");
+        // console.log($("#id_dim_w").val());
+        // console.log($("#id_dim_h").val());
+        // DImensi ini di buat di form masing2
+        ww = $("#id_dim_w").val();
+        hh = $("#id_dim_h").val();
         // acpec ration tidak perlu hh/ww untuk kondisi hh>ww
         var aspect_ratio = ww/hh;
         console.log('aspect ratio', aspect_ratio);

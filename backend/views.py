@@ -55,8 +55,8 @@ _P='updated_at'
 _O='uuid'
 _N='photo'
 _M='icon'
-_L='str_file_path'
-_K='status'
+_L='status'
+_K='str_file_path'
 _J='content'
 _I='en'
 _H='POST'
@@ -112,14 +112,14 @@ def tags_create(request):
 		if form.is_valid():
 			tmp=Tags.objects.filter(translations__name=request.POST.get(_F))
 			if tmp:messages.info(request,mMsgBox.get('file_exists'));context[_G]=TagsForm()
-			else:post=Tags.objects.language(_A).create(name=request.POST.get(_F),status=request.POST.get(_K));post.set_current_language(_I);post.name=request.POST.get(_F);post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_F)));return redirect(reverse_lazy(_Y))
+			else:post=Tags.objects.language(_A).create(name=request.POST.get(_F));post.set_current_language(_I);post.name=request.POST.get(_F);post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_F)));return redirect(reverse_lazy(_Y))
 	else:messages.info(request,mMsgBox.get(_T));context[_G]=TagsForm()
 	return render(request,template,context)
 def tags_update(request,uuid):
 	context={};context[_D]=_Y;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=Tags.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data)
 	if request.method==_H:
 		form=TagsForm(request.POST,instance=post)
-		if form.is_valid():lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.name=request.POST.get(_F);obj.status=request.POST.get(_K);obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_F)));return redirect(reverse_lazy(_Y))
+		if form.is_valid():lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.name=request.POST.get(_F);obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_F)));return redirect(reverse_lazy(_Y))
 	else:messages.info(request,mMsgBox.get(_W));context[_G]=TagsForm(instance=post)
 	return render(request,template,context)
 def tags_delete(request,uuid):context={};site_id=get_site_id(request);data=Tags.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);tmp=post.name;post.delete();messages.info(request,mMsgBox.get(_X,tmp));return redirect(reverse_lazy(_Y))
@@ -135,7 +135,7 @@ def logo_create(request):
 	context={};context[_D]=_j;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=LogoForm(request.POST);photo=PhotoForm(request.POST)
-		if form.is_valid():post=form.save();Photo.objects.create(content_object=post,file_path=request.POST.get(_L));messages.info(request,mMsgBox.get(_S,request.POST.get(_F)));return redirect(reverse_lazy(_j))
+		if form.is_valid():post=form.save();Photo.objects.create(content_object=post,file_path=request.POST.get(_K));messages.info(request,mMsgBox.get(_S,request.POST.get(_F)));return redirect(reverse_lazy(_j))
 	else:messages.info(request,mMsgBox.get(_T));context[_G]=LogoForm();context[_N]=PhotoForm()
 	return render(request,template,context)
 def logo_update(request,uuid):
@@ -146,7 +146,7 @@ def logo_update(request,uuid):
 		if form.is_valid():
 			post=form.save()
 			if photo.is_valid():
-				if request.POST.get(_L):post.photo.clear();Photo.objects.create(content_object=post,file_path=request.POST.get(_L))
+				if request.POST.get(_K):post.photo.clear();Photo.objects.create(content_object=post,file_path=request.POST.get(_K))
 			messages.info(request,mMsgBox.get(_V,request.POST.get(_F)));return redirect(reverse_lazy(_j))
 	else:messages.info(request,mMsgBox.get(_W));context[_G]=LogoForm(instance=post);context[_N]=PhotoForm(instance=post_photo)
 	return render(request,template,context)
@@ -163,7 +163,7 @@ def announcement_create(request):
 	context={};context[_D]=_k;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=AnnouncementForm(request.POST);photo=PhotoForm(request.POST)
-		if form.is_valid():post=Announcement.objects.language(_A).create(title=request.POST.get(_E),content=request.POST.get(_J),categories_id=request.POST.get(_b),status=request.POST.get(_K));post.set_current_language(_I);post.title=request.POST.get(_E);post.content=request.POST.get(_J);post.save();save_tags(request.POST.getlist(_Y),post);Photo.objects.create(content_object=post,file_path=request.POST.get(_L));messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_k))
+		if form.is_valid():post=Announcement.objects.language(_A).create(title=request.POST.get(_E),content=request.POST.get(_J),categories_id=request.POST.get(_b),status=request.POST.get(_L));post.set_current_language(_I);post.title=request.POST.get(_E);post.content=request.POST.get(_J);post.save();save_tags(request.POST.getlist(_Y),post);Photo.objects.create(content_object=post,file_path=request.POST.get(_K));messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_k))
 	else:messages.info(request,mMsgBox.get(_T));context[_G]=AnnouncementForm();context[_N]=PhotoForm()
 	return render(request,template,context)
 def announcement_update(request,uuid):
@@ -172,9 +172,9 @@ def announcement_update(request,uuid):
 	if request.method==_H:
 		form=AnnouncementForm(request.POST,instance=post);photo=PhotoForm(request.POST,instance=post_photo)
 		if form.is_valid():
-			lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.content=request.POST.get(_J);obj.categories_id=request.POST.get(_b);obj.status=request.POST.get(_K);obj.save();obj.tags.clear();save_tags(request.POST.getlist(_Y),obj)
+			lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.content=request.POST.get(_J);obj.categories_id=request.POST.get(_b);obj.status=request.POST.get(_L);obj.save();obj.tags.clear();save_tags(request.POST.getlist(_Y),obj)
 			if photo.is_valid():
-				if request.POST.get(_L):post.photo.clear();Photo.objects.create(content_object=post,file_path=request.POST.get(_L))
+				if request.POST.get(_K):post.photo.clear();Photo.objects.create(content_object=post,file_path=request.POST.get(_K))
 			messages.info(request,mMsgBox.get(_V,request.POST.get(_E)));return redirect(reverse_lazy(_k))
 	else:messages.info(request,mMsgBox.get(_W));context[_G]=AnnouncementForm(instance=post);context[_N]=PhotoForm(instance=post_photo)
 	return render(request,template,context)
@@ -191,7 +191,7 @@ def news_create(request):
 	context={};context[_D]=_n;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=NewsForm(request.POST);photo=PhotoForm(request.POST)
-		if form.is_valid():post=News.objects.language(_A).create(title=request.POST.get(_E),content=request.POST.get(_J),categories_id=request.POST.get(_b),status=request.POST.get(_K));post.set_current_language(_I);post.title=request.POST.get(_E);post.content=request.POST.get(_J);post.save();save_tags(request.POST.getlist(_Y),post);Photo.objects.create(content_object=post,file_path=request.POST.get(_L));messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_n))
+		if form.is_valid():post=News.objects.language(_A).create(title=request.POST.get(_E),content=request.POST.get(_J),categories_id=request.POST.get(_b),status=request.POST.get(_L));post.set_current_language(_I);post.title=request.POST.get(_E);post.content=request.POST.get(_J);post.save();save_tags(request.POST.getlist(_Y),post);Photo.objects.create(content_object=post,file_path=request.POST.get(_K));messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_n))
 	else:messages.info(request,mMsgBox.get(_T));context[_G]=NewsForm();context[_N]=PhotoForm()
 	return render(request,template,context)
 def news_update(request,uuid):
@@ -200,9 +200,9 @@ def news_update(request,uuid):
 	if request.method==_H:
 		form=NewsForm(request.POST,instance=post);photo=PhotoForm(request.POST,instance=post_photo)
 		if form.is_valid():
-			lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.content=request.POST.get(_J);obj.categories_id=request.POST.get(_b);obj.status=request.POST.get(_K);obj.save();obj.tags.clear();save_tags(request.POST.getlist(_Y),obj)
+			lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.content=request.POST.get(_J);obj.categories_id=request.POST.get(_b);obj.status=request.POST.get(_L);obj.save();obj.tags.clear();save_tags(request.POST.getlist(_Y),obj)
 			if photo.is_valid():
-				if request.POST.get(_L):post.photo.clear();Photo.objects.create(content_object=post,file_path=request.POST.get(_L))
+				if request.POST.get(_K):post.photo.clear();Photo.objects.create(content_object=post,file_path=request.POST.get(_K))
 			messages.info(request,mMsgBox.get(_V,request.POST.get(_E)));return redirect(reverse_lazy(_n))
 	else:messages.info(request,mMsgBox.get(_W));context[_G]=NewsForm(instance=post);context[_N]=PhotoForm(instance=post_photo)
 	return render(request,template,context)
@@ -219,7 +219,7 @@ def article_create(request):
 	context={};context[_D]=_o;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=ArticleForm(request.POST);photo=PhotoForm(request.POST)
-		if form.is_valid():post=Article.objects.language(_A).create(title=request.POST.get(_E),content=request.POST.get(_J),categories_id=request.POST.get(_b),status=request.POST.get(_K));post.set_current_language(_I);post.title=request.POST.get(_E);post.content=request.POST.get(_J);post.save();save_tags(request.POST.getlist(_Y),post);Photo.objects.create(content_object=post,file_path=request.POST.get(_L));messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_o))
+		if form.is_valid():post=Article.objects.language(_A).create(title=request.POST.get(_E),content=request.POST.get(_J),categories_id=request.POST.get(_b),status=request.POST.get(_L));post.set_current_language(_I);post.title=request.POST.get(_E);post.content=request.POST.get(_J);post.save();save_tags(request.POST.getlist(_Y),post);Photo.objects.create(content_object=post,file_path=request.POST.get(_K));messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_o))
 	else:messages.info(request,mMsgBox.get(_T));context[_G]=ArticleForm();context[_N]=PhotoForm()
 	return render(request,template,context)
 def article_update(request,uuid):
@@ -228,9 +228,9 @@ def article_update(request,uuid):
 	if request.method==_H:
 		form=ArticleForm(request.POST,instance=post);photo=PhotoForm(request.POST,instance=post_photo)
 		if form.is_valid():
-			lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.content=request.POST.get(_J);obj.categories_id=request.POST.get(_b);obj.status=request.POST.get(_K);obj.save();obj.tags.clear();save_tags(request.POST.getlist(_Y),obj)
+			lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.content=request.POST.get(_J);obj.categories_id=request.POST.get(_b);obj.status=request.POST.get(_L);obj.save();obj.tags.clear();save_tags(request.POST.getlist(_Y),obj)
 			if photo.is_valid():
-				if request.POST.get(_L):post.photo.clear();Photo.objects.create(content_object=post,file_path=request.POST.get(_L))
+				if request.POST.get(_K):post.photo.clear();Photo.objects.create(content_object=post,file_path=request.POST.get(_K))
 			messages.info(request,mMsgBox.get(_V,request.POST.get(_E)));return redirect(reverse_lazy(_o))
 	else:messages.info(request,mMsgBox.get(_W));context[_G]=ArticleForm(instance=post);context[_N]=PhotoForm(instance=post_photo)
 	return render(request,template,context)
@@ -247,7 +247,7 @@ def events_create(request):
 	context={};context[_D]=_p;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=EventsForm(request.POST);photo=PhotoForm(request.POST)
-		if form.is_valid():post=Events.objects.language(_A).create(title=request.POST.get(_E),content=request.POST.get(_J),location=request.POST.get(_A8),categories_id=request.POST.get(_b),status=request.POST.get(_K),date=request.POST.get('date'),time=request.POST.get('time'));post.set_current_language(_I);post.title=request.POST.get(_E);post.content=request.POST.get(_J);post.location=request.POST.get(_A8);post.save();save_tags(request.POST.getlist(_Y),post);Photo.objects.create(content_object=post,file_path=request.POST.get(_L));messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_p))
+		if form.is_valid():post=Events.objects.language(_A).create(title=request.POST.get(_E),content=request.POST.get(_J),location=request.POST.get(_A8),categories_id=request.POST.get(_b),status=request.POST.get(_L),date=request.POST.get('date'),time=request.POST.get('time'));post.set_current_language(_I);post.title=request.POST.get(_E);post.content=request.POST.get(_J);post.location=request.POST.get(_A8);post.save();save_tags(request.POST.getlist(_Y),post);Photo.objects.create(content_object=post,file_path=request.POST.get(_K));messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_p))
 	else:messages.info(request,mMsgBox.get(_T));context[_G]=EventsForm();context[_N]=PhotoForm()
 	return render(request,template,context)
 def events_update(request,uuid):
@@ -256,9 +256,9 @@ def events_update(request,uuid):
 	if request.method==_H:
 		form=EventsForm(request.POST,instance=post);photo=PhotoForm(request.POST,instance=post_photo)
 		if form.is_valid():
-			lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.content=request.POST.get(_J);obj.location=request.POST.get(_A8);obj.categories_id=request.POST.get(_b);obj.status=request.POST.get(_K);obj.date=request.POST.get('date');obj.time=request.POST.get('time');obj.save();obj.tags.clear();save_tags(request.POST.getlist(_Y),obj)
+			lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.content=request.POST.get(_J);obj.location=request.POST.get(_A8);obj.categories_id=request.POST.get(_b);obj.status=request.POST.get(_L);obj.date=request.POST.get('date');obj.time=request.POST.get('time');obj.save();obj.tags.clear();save_tags(request.POST.getlist(_Y),obj)
 			if photo.is_valid():
-				if request.POST.get(_L):post.photo.clear();Photo.objects.create(content_object=post,file_path=request.POST.get(_L))
+				if request.POST.get(_K):post.photo.clear();Photo.objects.create(content_object=post,file_path=request.POST.get(_K))
 			messages.info(request,mMsgBox.get(_V,request.POST.get(_E)));return redirect(reverse_lazy(_p))
 	else:messages.info(request,mMsgBox.get(_W));context[_G]=EventsForm(instance=post);context[_N]=PhotoForm(instance=post_photo)
 	return render(request,template,context)
@@ -275,7 +275,7 @@ def slideshow_create(request):
 	context={};context[_D]=_t;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=SlideShowForm(request.POST);photo=PhotoForm(request.POST)
-		if form.is_valid():post=SlideShow.objects.language(_A).create(title=request.POST.get(_E),content=request.POST.get(_J),link=request.POST.get(_c),status=request.POST.get(_K));post.set_current_language(_I);post.title=request.POST.get(_E);post.content=request.POST.get(_J);post.save();Photo.objects.create(content_object=post,file_path=request.POST.get(_L));messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_t))
+		if form.is_valid():post=SlideShow.objects.language(_A).create(title=request.POST.get(_E),content=request.POST.get(_J),link=request.POST.get(_c),status=request.POST.get(_L));post.set_current_language(_I);post.title=request.POST.get(_E);post.content=request.POST.get(_J);post.save();Photo.objects.create(content_object=post,file_path=request.POST.get(_K));messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_t))
 		else:print(_u);context[_G]=SlideShowForm();context[_N]=PhotoForm()
 	else:messages.info(request,mMsgBox.get(_T));context[_G]=SlideShowForm();context[_N]=PhotoForm()
 	return render(request,template,context)
@@ -284,8 +284,8 @@ def slideshow_update(request,uuid):
 	if request.method==_H:
 		form=SlideShowForm(request.POST,instance=post);photo=PhotoForm(request.POST,instance=post_photo)
 		if form.is_valid():
-			lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.content=request.POST.get(_J);obj.link=request.POST.get(_c);obj.status=request.POST.get(_K);obj.save()
-			if request.POST.get(_L):Photo.objects.create(content_object=obj,file_path=request.POST.get(_L))
+			lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.content=request.POST.get(_J);obj.link=request.POST.get(_c);obj.status=request.POST.get(_L);obj.save()
+			if request.POST.get(_K):Photo.objects.create(content_object=obj,file_path=request.POST.get(_K))
 			else:print('photo not valid')
 			messages.info(request,mMsgBox.get(_V,request.POST.get(_E)));return redirect(reverse_lazy(_t))
 	else:messages.info(request,mMsgBox.get(_W));context[_G]=SlideShowForm(instance=post);context[_N]=PhotoForm(instance=post_photo)
@@ -303,7 +303,7 @@ def dailyalert_create(request):
 	context={};context[_D]=_v;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=DailyAlertForm(request.POST)
-		if form.is_valid():post=DailyAlert.objects.language(_A).create(alert=request.POST.get(_w),link=request.POST.get(_c),status=request.POST.get(_K));post.set_current_language(_I);post.alert=request.POST.get(_w);post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_w)));return redirect(reverse_lazy(_v))
+		if form.is_valid():post=DailyAlert.objects.language(_A).create(alert=request.POST.get(_w),link=request.POST.get(_c),status=request.POST.get(_L));post.set_current_language(_I);post.alert=request.POST.get(_w);post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_w)));return redirect(reverse_lazy(_v))
 		else:print(_u);context[_G]=DailyAlertForm()
 	else:messages.info(request,mMsgBox.get(_T));context[_G]=DailyAlertForm()
 	return render(request,template,context)
@@ -311,7 +311,7 @@ def dailyalert_update(request,uuid):
 	context={};context[_D]=_v;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=DailyAlert.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data)
 	if request.method==_H:
 		form=DailyAlertForm(request.POST,instance=post)
-		if form.is_valid():lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.alert=request.POST.get(_w);obj.link=request.POST.get(_c);obj.status=request.POST.get(_K);obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_w)));return redirect(reverse_lazy(_v))
+		if form.is_valid():lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.alert=request.POST.get(_w);obj.link=request.POST.get(_c);obj.status=request.POST.get(_L);obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_w)));return redirect(reverse_lazy(_v))
 	else:messages.info(request,mMsgBox.get(_W));context[_G]=DailyAlertForm(instance=post)
 	return render(request,template,context)
 def dailyalert_delete(request,uuid):context={};site_id=get_site_id(request);data=DailyAlert.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);tmp=post.alert;post.delete();messages.info(request,mMsgBox.get(_X,tmp));return redirect(reverse_lazy(_v))
@@ -327,7 +327,7 @@ def greeting_create(request):
 	context={};context[_D]=_q;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=GreetingForm(request.POST);photo=PhotoForm(request.POST)
-		if form.is_valid():post=Greeting.objects.language(_A).create(title=request.POST.get(_E),content=request.POST.get(_J),name=request.POST.get(_F),designation=request.POST.get(_A9),status=request.POST.get(_K));post.set_current_language(_I);post.title=request.POST.get(_E);post.content=request.POST.get(_J);post.name=request.POST.get(_F);post.designation=request.POST.get(_A9);post.save();save_tags(request.POST.getlist(_Y),post);Photo.objects.create(content_object=post,file_path=request.POST.get(_L));messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_q))
+		if form.is_valid():post=Greeting.objects.language(_A).create(title=request.POST.get(_E),content=request.POST.get(_J),name=request.POST.get(_F),designation=request.POST.get(_A9),status=request.POST.get(_L));post.set_current_language(_I);post.title=request.POST.get(_E);post.content=request.POST.get(_J);post.name=request.POST.get(_F);post.designation=request.POST.get(_A9);post.save();save_tags(request.POST.getlist(_Y),post);Photo.objects.create(content_object=post,file_path=request.POST.get(_K));messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_q))
 	else:messages.info(request,mMsgBox.get(_T));context[_G]=GreetingForm();context[_N]=PhotoForm()
 	return render(request,template,context)
 def greeting_update(request,uuid):
@@ -336,9 +336,9 @@ def greeting_update(request,uuid):
 	if request.method==_H:
 		form=GreetingForm(request.POST,instance=post);photo=PhotoForm(request.POST,instance=post_photo)
 		if form.is_valid():
-			lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.content=request.POST.get(_J);obj.name=request.POST.get(_F);obj.designation=request.POST.get(_A9);obj.status=request.POST.get(_K);obj.save()
+			lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.content=request.POST.get(_J);obj.name=request.POST.get(_F);obj.designation=request.POST.get(_A9);obj.status=request.POST.get(_L);obj.save()
 			if photo.is_valid():
-				if request.POST.get(_L):post.photo.clear();Photo.objects.create(content_object=post,file_path=request.POST.get(_L))
+				if request.POST.get(_K):post.photo.clear();Photo.objects.create(content_object=post,file_path=request.POST.get(_K))
 			messages.info(request,mMsgBox.get(_V,request.POST.get(_E)));return redirect(reverse_lazy(_q))
 	else:messages.info(request,mMsgBox.get(_W));context[_G]=GreetingForm(instance=post);context[_N]=PhotoForm(instance=post_photo)
 	return render(request,template,context)
@@ -355,7 +355,7 @@ def pages_create(request):
 	context={};context[_D]=_r;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=PagesForm(request.POST);photo=PhotoForm(request.POST)
-		if form.is_valid():post=Pages.objects.language(_A).create(title=request.POST.get(_E),content=request.POST.get(_J),menu_id=request.POST.get(_i),status=request.POST.get(_K));post.set_current_language(_I);post.title=request.POST.get(_E);post.content=request.POST.get(_J);post.save();save_tags(request.POST.getlist(_Y),post);Photo.objects.create(content_object=post,file_path=request.POST.get(_L));messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_r))
+		if form.is_valid():post=Pages.objects.language(_A).create(title=request.POST.get(_E),content=request.POST.get(_J),menu_id=request.POST.get(_i),status=request.POST.get(_L));post.set_current_language(_I);post.title=request.POST.get(_E);post.content=request.POST.get(_J);post.save();save_tags(request.POST.getlist(_Y),post);Photo.objects.create(content_object=post,file_path=request.POST.get(_K));messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_r))
 	else:messages.info(request,mMsgBox.get(_T));context[_G]=PagesForm();context[_N]=PhotoForm()
 	return render(request,template,context)
 def pages_update(request,uuid):
@@ -364,9 +364,9 @@ def pages_update(request,uuid):
 	if request.method==_H:
 		form=PagesForm(request.POST,instance=post);photo=PhotoForm(request.POST,instance=post_photo)
 		if form.is_valid():
-			lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.content=request.POST.get(_J);obj.menu_id=request.POST.get(_i);obj.status=request.POST.get(_K);obj.save();obj.tags.clear();save_tags(request.POST.getlist(_Y),obj)
+			lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.content=request.POST.get(_J);obj.menu_id=request.POST.get(_i);obj.status=request.POST.get(_L);obj.save();obj.tags.clear();save_tags(request.POST.getlist(_Y),obj)
 			if photo.is_valid():
-				if request.POST.get(_L):post.photo.clear();Photo.objects.create(content_object=post,file_path=request.POST.get(_L))
+				if request.POST.get(_K):post.photo.clear();Photo.objects.create(content_object=post,file_path=request.POST.get(_K))
 			messages.info(request,mMsgBox.get(_V,request.POST.get(_E)));return redirect(reverse_lazy(_r))
 	else:messages.info(request,mMsgBox.get(_W));context[_G]=PagesForm(instance=post);context[_N]=PhotoForm(instance=post_photo)
 	return render(request,template,context)
@@ -406,7 +406,7 @@ def photogallery_create(request):
 	context={};context[_D]=_y;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=PhotoGalleryForm(request.POST);photo=PhotoForm(request.POST)
-		if form.is_valid():post=PhotoGallery.objects.language(_A).create(title=request.POST.get(_E),status=request.POST.get(_K));post.set_current_language(_I);post.title=request.POST.get(_E);post.save();Photo.objects.create(content_object=post,file_path=request.POST.get(_L));messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_y))
+		if form.is_valid():post=PhotoGallery.objects.language(_A).create(title=request.POST.get(_E),status=request.POST.get(_L));post.set_current_language(_I);post.title=request.POST.get(_E);post.save();Photo.objects.create(content_object=post,file_path=request.POST.get(_K));messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_y))
 		else:print(_u);context[_G]=PhotoGalleryForm();context[_N]=PhotoForm()
 	else:messages.info(request,mMsgBox.get(_T));context[_G]=PhotoGalleryForm();context[_N]=PhotoForm()
 	return render(request,template,context)
@@ -416,9 +416,9 @@ def photogallery_update(request,uuid):
 	if request.method==_H:
 		form=PhotoGalleryForm(request.POST,instance=post);photo=PhotoForm(request.POST,instance=post_photo)
 		if form.is_valid():
-			lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.status=request.POST.get(_K);obj.save()
+			lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.status=request.POST.get(_L);obj.save()
 			if photo.is_valid():
-				if request.POST.get(_L):post.photo.clear();Photo.objects.create(content_object=post,file_path=request.POST.get(_L))
+				if request.POST.get(_K):post.photo.clear();Photo.objects.create(content_object=post,file_path=request.POST.get(_K))
 			messages.info(request,mMsgBox.get(_V,request.POST.get(_E)));return redirect(reverse_lazy(_y))
 	else:messages.info(request,mMsgBox.get(_W));context[_G]=PhotoGalleryForm(instance=post);context[_N]=PhotoForm(instance=post_photo)
 	return render(request,template,context)
@@ -435,7 +435,7 @@ def videogallery_create(request):
 	context={};context[_D]=_z;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=VideoGalleryForm(request.POST)
-		if form.is_valid():post=VideoGallery.objects.language(_A).create(title=request.POST.get(_E),embed=request.POST.get('embed'),status=request.POST.get(_K));post.set_current_language(_I);post.title=request.POST.get(_E);post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_z))
+		if form.is_valid():post=VideoGallery.objects.language(_A).create(title=request.POST.get(_E),embed=request.POST.get('embed'),status=request.POST.get(_L));post.set_current_language(_I);post.title=request.POST.get(_E);post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_z))
 		else:print(_u);context[_G]=VideoGalleryForm()
 	else:messages.info(request,mMsgBox.get(_T));context[_G]=VideoGalleryForm()
 	return render(request,template,context)
@@ -443,7 +443,7 @@ def videogallery_update(request,uuid):
 	context={};context[_D]=_z;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=VideoGallery.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data)
 	if request.method==_H:
 		form=VideoGalleryForm(request.POST,instance=post)
-		if form.is_valid():lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.embed=request.POST.get('embed');obj.status=request.POST.get(_K);obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_E)));return redirect(reverse_lazy(_z))
+		if form.is_valid():lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.embed=request.POST.get('embed');obj.status=request.POST.get(_L);obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_E)));return redirect(reverse_lazy(_z))
 	else:messages.info(request,mMsgBox.get(_W));context[_G]=VideoGalleryForm(instance=post)
 	return render(request,template,context)
 def videogallery_delete(request,uuid):context={};site_id=get_site_id(request);data=VideoGallery.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);tmp=post.title;post.delete();messages.info(request,mMsgBox.get(_X,tmp));return redirect(reverse_lazy(_z))
@@ -459,7 +459,7 @@ def relatedlink_create(request):
 	context={};context[_D]=_A0;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=RelatedLinkForm(request.POST)
-		if form.is_valid():post=RelatedLink.objects.language(_A).create(name=request.POST.get(_F),link=request.POST.get(_c),status=request.POST.get(_K));post.set_current_language(_I);post.name=request.POST.get(_F);post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_F)));return redirect(reverse_lazy(_A0))
+		if form.is_valid():post=RelatedLink.objects.language(_A).create(name=request.POST.get(_F),link=request.POST.get(_c),status=request.POST.get(_L));post.set_current_language(_I);post.name=request.POST.get(_F);post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_F)));return redirect(reverse_lazy(_A0))
 		else:print(_u);context[_G]=RelatedLinkForm()
 	else:messages.info(request,mMsgBox.get(_T));context[_G]=RelatedLinkForm()
 	return render(request,template,context)
@@ -467,7 +467,7 @@ def relatedlink_update(request,uuid):
 	context={};context[_D]=_A0;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=RelatedLink.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data)
 	if request.method==_H:
 		form=RelatedLinkForm(request.POST,instance=post)
-		if form.is_valid():lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.name=request.POST.get(_F);obj.link=request.POST.get(_c);obj.status=request.POST.get(_K);obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_F)));return redirect(reverse_lazy(_A0))
+		if form.is_valid():lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.name=request.POST.get(_F);obj.link=request.POST.get(_c);obj.status=request.POST.get(_L);obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_F)));return redirect(reverse_lazy(_A0))
 	else:messages.info(request,mMsgBox.get(_W));context[_G]=RelatedLinkForm(instance=post)
 	return render(request,template,context)
 def relatedlink_delete(request,uuid):context={};site_id=get_site_id(request);data=RelatedLink.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);tmp=post.name;post.delete();messages.info(request,mMsgBox.get(_X,tmp));return redirect(reverse_lazy(_A0))
@@ -481,14 +481,14 @@ def document_ajax(request):
 	return JsonResponse(lst,safe=_B)
 def document_create(request):
 	context={};context[_D]=_A1;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
-	if request.method==_H:form=DocumentForm(request.POST,request.FILES);print('form=',form);post=Document.objects.language(_A).create(name=request.POST.get(_F),content=request.POST.get(_J),file_path_doc=request.POST.get(_AC),status=request.POST.get(_K));post.set_current_language(_I);post.name=request.POST.get(_F);post.content=request.POST.get(_J);post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_F)));return redirect(reverse_lazy(_A1))
+	if request.method==_H:form=DocumentForm(request.POST,request.FILES);print('form=',form);post=Document.objects.language(_A).create(name=request.POST.get(_F),content=request.POST.get(_J),file_path_doc=request.POST.get(_AC),status=request.POST.get(_L));post.set_current_language(_I);post.name=request.POST.get(_F);post.content=request.POST.get(_J);post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_F)));return redirect(reverse_lazy(_A1))
 	else:messages.info(request,mMsgBox.get(_T));context[_G]=DocumentForm()
 	return render(request,template,context)
 def document_update(request,uuid):
 	context={};context[_D]=_A1;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=Document.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data)
 	if request.method==_H:
 		form=DocumentForm(request.POST,request.FILES,instance=post)
-		if form.is_valid():lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.name=request.POST.get(_F);obj.content=request.POST.get(_J);obj.file_path_doc=request.POST.get(_AC);obj.status=request.POST.get(_K);obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_F)));return redirect(reverse_lazy(_A1))
+		if form.is_valid():lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.name=request.POST.get(_F);obj.content=request.POST.get(_J);obj.file_path_doc=request.POST.get(_AC);obj.status=request.POST.get(_L);obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_F)));return redirect(reverse_lazy(_A1))
 	else:messages.info(request,mMsgBox.get(_W));context[_G]=DocumentForm(instance=post)
 	return render(request,template,context)
 def document_delete(request,uuid):context={};site_id=get_site_id(request);data=Document.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);tmp=post.name;post.delete();messages.info(request,mMsgBox.get(_X,tmp));return redirect(reverse_lazy(_A1))
@@ -545,14 +545,14 @@ def agency_create(request):
 	context={};context[_D]=_s;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=AgencyForm(request.POST)
-		if form.is_valid():post=Agency.objects.language(_A).create(address=request.POST.get(_A5),notes=request.POST.get(_A6),name=request.POST.get(_F),email=request.POST.get(_AA),phone=request.POST.get(_AB),fax=request.POST.get('fax'),whatsapp=request.POST.get('whatsapp'),status=request.POST.get(_K));post.set_current_language(_I);post.address=request.POST.get(_A5);post.notes=request.POST.get(_A6);post.save();site_name_update(site_id,request.POST.get(_F));print(_AG);messages.info(request,mMsgBox.get(_S,request.POST.get(_F)));return redirect(reverse_lazy(_s))
+		if form.is_valid():post=Agency.objects.language(_A).create(address=request.POST.get(_A5),notes=request.POST.get(_A6),name=request.POST.get(_F),email=request.POST.get(_AA),phone=request.POST.get(_AB),fax=request.POST.get('fax'),whatsapp=request.POST.get('whatsapp'),status=request.POST.get(_L));post.set_current_language(_I);post.address=request.POST.get(_A5);post.notes=request.POST.get(_A6);post.save();site_name_update(site_id,request.POST.get(_F));print(_AG);messages.info(request,mMsgBox.get(_S,request.POST.get(_F)));return redirect(reverse_lazy(_s))
 	else:messages.info(request,mMsgBox.get(_T));context[_G]=AgencyForm()
 	return render(request,template,context)
 def agency_update(request,uuid):
 	context={};context[_D]=_s;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=Agency.objects.filter(uuid=uuid);post=get_object_or_404(data)
 	if request.method==_H:
 		form=AgencyForm(request.POST,instance=post)
-		if form.is_valid():lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.address=request.POST.get(_A5);obj.notes=request.POST.get(_A6);obj.name=request.POST.get(_F);obj.email=request.POST.get(_AA);obj.phone=request.POST.get(_AB);obj.fax=request.POST.get('fax');obj.whatsapp=request.POST.get('whatsapp');obj.status=request.POST.get(_K);obj.save();print('site name begin update');site_name_update(site_id,request.POST.get(_F));print(_AG);messages.info(request,mMsgBox.get(_V,request.POST.get(_F)));return redirect(reverse_lazy(_s))
+		if form.is_valid():lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.address=request.POST.get(_A5);obj.notes=request.POST.get(_A6);obj.name=request.POST.get(_F);obj.email=request.POST.get(_AA);obj.phone=request.POST.get(_AB);obj.fax=request.POST.get('fax');obj.whatsapp=request.POST.get('whatsapp');obj.status=request.POST.get(_L);obj.save();print('site name begin update');site_name_update(site_id,request.POST.get(_F));print(_AG);messages.info(request,mMsgBox.get(_V,request.POST.get(_F)));return redirect(reverse_lazy(_s))
 	else:messages.info(request,mMsgBox.get(_W));context[_G]=AgencyForm(instance=post)
 	return render(request,template,context)
 def agency_delete(request,uuid):context={};site_id=get_site_id(request);data=Agency.objects.filter(uuid=uuid);post=get_object_or_404(data);tmp=post.name;post.delete();messages.info(request,mMsgBox.get(_X,tmp));return redirect(reverse_lazy(_s))
@@ -568,14 +568,14 @@ def categories_create(request):
 	context={};context[_D]=_b;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=CategoriesForm(request.POST)
-		if form.is_valid():post=Categories.objects.language(_A).create(name=request.POST.get(_F),status=request.POST.get(_K));post.set_current_language(_I);post.name=request.POST.get(_F);post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_F)));return redirect(reverse_lazy(_b))
+		if form.is_valid():post=Categories.objects.language(_A).create(name=request.POST.get(_F));post.set_current_language(_I);post.name=request.POST.get(_F);post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_F)));return redirect(reverse_lazy(_b))
 	else:messages.info(request,mMsgBox.get(_T));context[_G]=CategoriesForm()
 	return render(request,template,context)
 def categories_update(request,uuid):
 	context={};context[_D]=_b;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=Categories.objects.filter(uuid=uuid);post=get_object_or_404(data)
 	if request.method==_H:
 		form=CategoriesForm(request.POST,instance=post)
-		if form.is_valid():lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.name=request.POST.get(_F);obj.status=request.POST.get(_K);obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_F)));return redirect(reverse_lazy(_b))
+		if form.is_valid():lang=request.POST.get(_a);obj=data.get();obj.set_current_language(lang);obj.name=request.POST.get(_F);obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_F)));return redirect(reverse_lazy(_b))
 	else:messages.info(request,mMsgBox.get(_W));context[_G]=CategoriesForm(instance=post)
 	return render(request,template,context)
 def categories_delete(request,uuid):context={};site_id=get_site_id(request);data=Categories.objects.filter(uuid=uuid);post=get_object_or_404(data);tmp=post.name;post.delete();messages.info(request,mMsgBox.get(_X,tmp));return redirect(reverse_lazy(_b))

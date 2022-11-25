@@ -21,7 +21,7 @@ class IndexView(TemplateView):
 	def get_context_data(self,*args,**kwargs):
 		I='news';H='photogallery';G='events';F='greeting';E='slideshow';D='announcement';C='file_path';B='id';A='-updated_at';context=super(IndexView,self).get_context_data(*(args),**kwargs);menugroup=MenuGroup.objects.filter(site=self.site_id,kind=1);print('menugroup = ',menugroup)
 		if menugroup:context['menugroup']=int(menugroup[0].id)
-		else:raise Http404("Menu Group '%s' belum terdaftar, silahkan daftar di halaman <a href='%s'>admin</a>"%(request.get_host(),_A))
+		else:raise Http404("Menu Group '%s' belum terdaftar, silahkan daftar di halaman <a href='%s'>admin</a>"%(self.request.get_host(),_A))
 		agency=get_agency_info(self.site_id);context.update(agency);statistic=get_statistic(self.request);context.update(statistic);logo=Logo.objects.filter(site_id=self.site_id)[:1]
 		if logo:
 			logo=logo.get();photo=logo.photo.all()
