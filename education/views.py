@@ -26,21 +26,21 @@ class IndexView(TemplateView):
 		if logo:
 			logo=logo.get();photo=logo.photo.all()
 			if photo:photo=photo.get();context['logo']=photo.file_path
-		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(B),content_type__model=D).values(C));obj=Announcement();lang=obj.get_current_language();announcement=Announcement.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(A)[:6]
+		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(B),content_type__model=D).values(C)[:1]);obj=Announcement();lang=obj.get_current_language();announcement=Announcement.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(A)[:6]
 		if announcement:context[D]=announcement
-		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(B),content_type__model=E).values(C));slideshow=SlideShow.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(A)
+		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(B),content_type__model=E).values(C)[:1]);slideshow=SlideShow.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(A)
 		if slideshow:context[E]=slideshow
 		dailyalert=DailyAlert.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).order_by(A)
 		if dailyalert:context['dailyalert']=dailyalert
-		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(B),content_type__model=F).values(C));greeting=Greeting.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(A)
+		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(B),content_type__model=F).values(C)[:1]);greeting=Greeting.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(A)
 		if greeting:context[F]=greeting
-		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(B),content_type__model=G).values(C));events=Events.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(A)
+		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(B),content_type__model=G).values(C)[:1]);events=Events.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(A)
 		if events:context[G]=events
-		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(B),content_type__model=H).values(C));photogallery=PhotoGallery.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(A)
+		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(B),content_type__model=H).values(C)[:1]);photogallery=PhotoGallery.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(A)
 		if photogallery:context[H]=photogallery
 		relatedlink=RelatedLink.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).order_by(A)
 		if relatedlink:context['relatedlink']=relatedlink
-		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(B),content_type__model=I).values(C));news=News.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(A)
+		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(B),content_type__model=I).values(C)[:1]);news=News.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(A)
 		if news:context[I]=news
 		document=Document.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).order_by(A)
 		if document:context['document']=document
