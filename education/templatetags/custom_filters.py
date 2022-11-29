@@ -2,6 +2,7 @@ from django import template
 register=template.Library()
 @register.filter
 def phone_number(number):
-	A=number
-	if A:B=A[:3];C=A[3:6];D=A[6:9];E=A[9:];return'('+B+')'+' '+C+'-'+D+'-'+E
+	B='-';A=number;G=['62','60','65','63','66','84']
+	if A[:2]in G:C=A[:2];D=A[2:4];E=A[4:7];F=A[7:10];H=A[10:];return'('+C+')'+' '+D+B+E+B+F+B+H
+	elif A:C=A[:3];D=A[3:6];E=A[6:9];F=A[9:];return'('+C+')'+' '+D+B+E+B+F
 	return''

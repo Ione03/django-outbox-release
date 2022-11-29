@@ -1,4 +1,5 @@
 asgiref==3.5.2
+beautifulsoup4==4.11.1
 certifi==2022.9.24
 cffi==1.15.1
 chardet==5.0.0
@@ -9,10 +10,11 @@ Django==4.1.2
 django-appconf==1.0.5
 django-bootstrap-modal-forms==2.2.0
 django-ckeditor==6.5.1
+django-cors-headers==3.13.0
 django-crispy-forms==1.14.0
 django-cryptography==1.1
 django-etc==1.4.0
-django-hitcount @ git+https://github.com/PROJECT-OUTBOX/django-hitcount.git@fc664bfa56a3e21f4c9e78f8cd39fb4b7e47166f
+-e git+https://github.com/PROJECT-OUTBOX/django-hitcount.git@fc664bfa56a3e21f4c9e78f8cd39fb4b7e47166f#egg=django_hitcount
 django-import-export==3.0.1
 django-js-asset==2.0.0
 django-outbox-menu==1.0.14
@@ -34,6 +36,7 @@ pytz==2022.5
 PyYAML==6.0
 shortuuid==1.0.9
 six==1.16.0
+soupsieve==2.3.2.post1
 sqlparse==0.4.3
 tablib==3.2.1
 urllib3==1.26.12
