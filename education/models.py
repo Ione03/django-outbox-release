@@ -8,7 +8,9 @@ _D='-'
 _C='--'
 _B=False
 _A=True
-import random,math,string
+import random,math,string,os
+from django.db.models import signals
+from django.dispatch import receiver
 from ckeditor_uploader.fields import RichTextUploadingField
 from core.models import Photo
 from django.contrib.auth import get_user_model
@@ -110,9 +112,9 @@ class RelatedLink(BaseAbstractModel,TranslatableModel):
 	def __str__(A):return A.name
 	def save(A,*B,**C):A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(RelatedLink,A).save(*(B),**C)
 class Document(BaseAbstractModel,TranslatableModel):
-	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_F));admin=models.ForeignKey(User,on_delete=models.PROTECT);file_path_doc=models.FileField(verbose_name=_('file path Document'));translations=TranslatedFields(name=encrypt(models.CharField(_('name'),max_length=150)),content=encrypt(RichTextUploadingField(_(_G),blank=_A,null=_A)));categories=models.ForeignKey(Categories,on_delete=models.PROTECT);word_count=models.PositiveIntegerField(default=0,blank=_A,editable=_B);reading_time=models.PositiveIntegerField(default=0,blank=_A,editable=_B);size=models.BigIntegerField(_('size'),null=_A,blank=_A,default=0,editable=_B);hits=models.IntegerField(_('hits'),default=0,editable=_B);status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
+	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_F));admin=models.ForeignKey(User,on_delete=models.PROTECT);file_path_doc=models.FileField(verbose_name=_('file path Document'));translations=TranslatedFields(name=encrypt(models.CharField(_('name'),max_length=150)),content=encrypt(RichTextUploadingField(_(_G),blank=_A,null=_A)));categories=models.ForeignKey(Categories,on_delete=models.PROTECT);word_count=models.PositiveIntegerField(default=0,blank=_A,editable=_B);reading_time=models.PositiveIntegerField(default=0,blank=_A,editable=_B);size=models.BigIntegerField(_('size'),null=_A,blank=_A,default=0,editable=_B);hits=models.IntegerField(_('hits'),null=_A,blank=_A,default=0,editable=_B);status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
 	def __str__(A):return A.name
-	def save(A,*B,**C):A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;A.word_count=word_count(A.content);A.reading_time=reading_time(A.word_count);super(Document,A).save(*(B),**C)
+	def save(A,*B,**C):A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;A.word_count=word_count(A.content);A.reading_time=reading_time(A.word_count);A.size=os.stat(A.file_path_doc.path).st_size;super(Document,A).save(*(B),**C)
 class Popup(BaseAbstractModel,TranslatableModel):
 	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_F));admin=models.ForeignKey(User,on_delete=models.PROTECT);translations=TranslatedFields(title=encrypt(models.CharField(_(_E),max_length=500)));link=encrypt(models.URLField(_(_I),max_length=255,null=_A,blank=_A));photo=GenericRelation(Photo,verbose_name=_(_H));status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
 	def __str__(A):return A.title
@@ -121,3 +123,17 @@ class Banner(BaseAbstractModel):
 	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_F));admin=models.ForeignKey(User,on_delete=models.PROTECT);photo=GenericRelation(Photo,verbose_name=_(_H));link=models.URLField(max_length=255,null=_A,blank=_A);position=models.PositiveIntegerField(choices=Position.choices)
 	def __str__(A):return str(A.position)
 	def save(A,*B,**C):A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(Banner,A).save(*(B),**C)
+@receiver(models.signals.post_delete,sender=Document)
+def auto_delete_file_on_delete(sender,instance,**B):
+	A=instance
+	if A.file_path_doc:
+		if os.path.isfile(A.file_path_doc.path):os.remove(A.file_path_doc.path)
+@receiver(models.signals.pre_save,sender=Document)
+def auto_delete_file_on_change(sender,instance,**E):
+	C=sender;A=instance
+	if not A.pk:return _B
+	try:B=C.objects.get(pk=A.pk).file_path_doc
+	except C.DoesNotExist:return _B
+	D=A.file_path_doc
+	if not B==D:
+		if os.path.isfile(B.path):os.remove(B.path)

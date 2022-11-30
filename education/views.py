@@ -1,3 +1,4 @@
+_V='base_url'
 _U='socialmedia'
 _T='document'
 _S='relatedlink'
@@ -54,22 +55,24 @@ class IndexView(TemplateView):
 		if announcement:context[_E]=announcement
 		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(_A),content_type__model=_H).values(_B)[:1]);slideshow=SlideShow.objects.filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_C)
 		if slideshow:context[_H]=slideshow
-		dailyalert=DailyAlert.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).order_by(_C)
+		dailyalert=DailyAlert.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).order_by(_C)[:10]
 		if dailyalert:context['dailyalert']=dailyalert
-		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(_A),content_type__model=_I).values(_B)[:1]);greeting=Greeting.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_C)
+		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(_A),content_type__model=_I).values(_B)[:1]);greeting=Greeting.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_C)[:1]
 		if greeting:context[_I]=greeting
-		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(_A),content_type__model=_M).values(_B)[:1]);events=Events.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_C)
+		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(_A),content_type__model=_M).values(_B)[:1]);events=Events.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_C)[:7]
 		if events:context[_M]=events
-		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(_A),content_type__model=_J).values(_B)[:1]);photogallery=PhotoGallery.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_C)
+		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(_A),content_type__model=_J).values(_B)[:1]);photogallery=PhotoGallery.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_C)[:10]
 		if photogallery:context[_J]=photogallery
-		relatedlink=RelatedLink.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).order_by(_C)
+		relatedlink=RelatedLink.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).order_by(_C)[:10]
 		if relatedlink:context[_S]=relatedlink
-		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(_A),content_type__model=_N).values(_B)[:1]);news=News.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_C)
+		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(_A),content_type__model=_N).values(_B)[:1]);news=News.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_C)[:7]
 		if news:context[_N]=news
-		document=Document.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).order_by(_C)
+		document=Document.objects.language(lang).filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).order_by(_C)[:7]
 		if document:context[_T]=document
 		socialmedia=SocialMedia.objects.filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).order_by(_K)
 		if socialmedia:context[_U]=socialmedia
+		my_path=self.request.path;my_path=my_path.split('/')
+		if my_path:context[_V]=my_path[0]+'/'+my_path[1]+'/'+my_path[2]
 		return context
 def add_months(sourcedate,months):month=sourcedate.month-1+months;year=sourcedate.year+month//12;month=month%12+1;day=min(sourcedate.day,calendar.monthrange(year,month)[1]);return datetime.date(year,month,day)
 def get_statistic(request):
@@ -109,7 +112,7 @@ class DetailView(TemplateView):
 				all=0
 				for i in obj:i[D]=slugify(i[_G]);all+=i[E]
 				categories_list.append(obj[0]);categories_all={A:0,E:all,_G:'All',D:'all'};categories_list.insert(0,categories_all);context['categories_list']=categories_list
-			subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(_A),content_type__model=kind).values(_B)[:1]);obj=model.objects.translated(lang).filter(site_id=self.site_id).annotate(file_path=subquery_foto).order_by('-created_at')[:3];context['latest_kind']=obj;subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(_A),content_type__model=kind).values(_B)[:1]);req_no_of_random_items=5;qs=model.objects.translated(lang).filter(site_id=self.site_id)
+			subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(_A),content_type__model=kind).values(_B)[:1]);obj=model.objects.translated(lang).filter(site_id=self.site_id).annotate(file_path=subquery_foto).exclude(slug=slug).order_by('-created_at')[:3];context['latest_kind']=obj;subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(_A),content_type__model=kind).values(_B)[:1]);req_no_of_random_items=5;qs=model.objects.translated(lang).filter(site_id=self.site_id)
 			if qs:possible_ids=list(qs.values_list(_A,flat=True));possible_ids=random.choices(possible_ids,k=req_no_of_random_items);random_paint=qs.filter(pk__in=possible_ids).annotate(file_path=subquery_foto);context['random_paint']=random_paint;print('random_paint = ',random_paint)
 		subquery_foto=Subquery(Photo.objects.filter(object_id=OuterRef(_A),content_type__model=kind).values(_B)[:1]);obj=model.objects.translated(lang).filter(site_id=self.site_id,slug=slug).annotate(file_path=subquery_foto)
 		if obj:context['content_detail']=obj[0]
@@ -120,4 +123,6 @@ class DetailView(TemplateView):
 		if relatedlink:context[_S]=relatedlink
 		socialmedia=SocialMedia.objects.filter(site_id=self.site_id,status=OptStatusPublish.PUBLISHED).order_by(_K)
 		if socialmedia:context[_U]=socialmedia
+		my_path=self.request.path;my_path=my_path.split('/')
+		if my_path:context[_V]=my_path[0]+'/'+my_path[1]+'/'+my_path[2]
 		return context
