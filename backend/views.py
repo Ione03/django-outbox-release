@@ -1,7 +1,8 @@
-_AH='site name updated'
-_AG='is_external'
-_AF='is_visibled'
-_AE='order_menu'
+_AI='site name updated'
+_AH='is_external'
+_AG='is_visibled'
+_AF='order_menu'
+_AE='file_path = '
 _AD='phone'
 _AC='email'
 _AB='designation'
@@ -129,7 +130,7 @@ class LogoView(TemplateView):
 	def get(self,request,*args,**kwargs):self.site_id=get_site_id(request);template=get_template(self.site_id,is_frontend=_B);self.template_name=template+'logo.html';return super(LogoView,self).get(request,*(args),**kwargs)
 	def get_context_data(self,*args,**kwargs):context=super(LogoView,self).get_context_data(*(args),**kwargs);context[_A9]=True;context[_D]=_j;return context
 def logo_ajax(request):
-	site_id=get_site_id(request);subquery=Subquery(Photo.objects.filter(object_id=OuterRef(_A),content_type__model=_j).values(_c));obj2=Logo.objects.filter(site_id=site_id).distinct().annotate(file_path=subquery).annotate(jml=Count(subquery));lst=[]
+	site_id=get_site_id(request);subquery=Subquery(Photo.objects.filter(object_id=OuterRef(_A),content_type__model=_j).values(_c)[:1]);obj2=Logo.objects.filter(site_id=site_id).distinct().annotate(file_path=subquery).annotate(jml=Count(subquery));lst=[]
 	for i in obj2:res={};res[_M]=_C;res[_O]=i.uuid;res[_P]=i.updated_at;res['Name']=Truncator(i.name).chars(20);res[_h]=i.jml;res[_d]=i.file_path;res[_Y]=get_natural_datetime(i.updated_at);res[_Q]=_C;lst.append(res)
 	return JsonResponse(lst,safe=_B)
 def logo_create(request):
@@ -483,7 +484,7 @@ def document_create(request):
 	context={};context[_D]=_A2;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=DocumentForm(request.POST,request.FILES);print('form=',form)
-		if form.is_valid():print('categories = ',request.POST.get(_a));print('file = ',request.FILES.get(_A6));post=Document.objects.language(_A).create(name=request.POST.get(_G),content=request.POST.get(_J),file_path_doc=request.FILES.get(_A6),categories_id=request.POST.get(_a),status=request.POST.get(_L));post.set_current_language(_I);post.name=request.POST.get(_G);post.content=request.POST.get(_J);post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_G)));return redirect(reverse_lazy(_A2))
+		if form.is_valid():print('categories = ',request.POST.get(_a));print('file = ',request.FILES.get(_A6));post=Document.objects.language(_A).create(name=request.POST.get(_G),content=request.POST.get(_J),file_path_doc=request.FILES.get(_A6),categories_id=request.POST.get(_a),status=request.POST.get(_L));post.set_current_language(_I);post.name=request.POST.get(_G);post.content=request.POST.get(_J);post.save();print(_AE,post.file_path_doc.path);post.size=os.stat(post.file_path_doc.path).st_size;post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_G)));return redirect(reverse_lazy(_A2))
 		else:messages.info(request,mMsgBox.get('form_fail'));context[_F]=DocumentForm()
 	else:messages.info(request,mMsgBox.get(_T));context[_F]=DocumentForm()
 	return render(request,template,context)
@@ -494,7 +495,7 @@ def document_update(request,uuid):
 		if form.is_valid():
 			lang=request.POST.get(_b);obj=data.get();obj.set_current_language(lang);obj.name=request.POST.get(_G);obj.content=request.POST.get(_J)
 			if request.FILES.get(_A6):obj.file_path_doc=request.FILES.get(_A6)
-			obj.status=request.POST.get(_L);obj.categories_id=request.POST.get(_a);obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_G)));return redirect(reverse_lazy(_A2))
+			obj.status=request.POST.get(_L);obj.categories_id=request.POST.get(_a);obj.save();print(_AE,obj.file_path_doc.path);obj.size=os.stat(obj.file_path_doc.path).st_size;obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_G)));return redirect(reverse_lazy(_A2))
 	else:messages.info(request,mMsgBox.get(_W));context[_F]=DocumentForm(instance=post)
 	return render(request,template,context)
 def document_delete(request,uuid):context={};site_id=get_site_id(request);data=Document.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);tmp=post.name;post.delete();messages.info(request,mMsgBox.get(_X,tmp));return redirect(reverse_lazy(_A2))
@@ -526,7 +527,7 @@ def menu_create(request):
 	context={};context[_D]=_i;site_id=get_site_id(request);group_id=get_menu_group(request.user.id);menu_group=MenuGroup.objects.get(id=group_id);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=MenuForm(request.POST)
-		if form.is_valid():form_clean=form.cleaned_data;print(form_clean);post=Menu.objects.language(_A).create(name=form_clean[_G],parent_id=request.POST.get('parent'),link=form_clean[_g],order_menu=form_clean[_AE],icon=form_clean[_M],is_visibled=form_clean[_AF],is_external=form_clean[_AG]);post.menu_group.add(menu_group);post.set_current_language(_I);post.name=form_clean[_G];post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_G)));return redirect(reverse_lazy(_i))
+		if form.is_valid():form_clean=form.cleaned_data;print(form_clean);post=Menu.objects.language(_A).create(name=form_clean[_G],parent_id=request.POST.get('parent'),link=form_clean[_g],order_menu=form_clean[_AF],icon=form_clean[_M],is_visibled=form_clean[_AG],is_external=form_clean[_AH]);post.menu_group.add(menu_group);post.set_current_language(_I);post.name=form_clean[_G];post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_G)));return redirect(reverse_lazy(_i))
 		else:print(_v);context[_F]=MenuForm()
 	else:messages.info(request,mMsgBox.get(_T));context[_F]=MenuForm()
 	return render(request,template,context)
@@ -534,7 +535,7 @@ def menu_update(request,uuid):
 	context={};context[_D]=_i;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=Menu.objects.filter(uuid=uuid);post=get_object_or_404(data)
 	if request.method==_H:
 		form=MenuForm(request.POST,instance=post)
-		if form.is_valid():form_clean=form.cleaned_data;print(form_clean);lang=request.POST.get(_b);obj=data.get();obj.set_current_language(lang);obj.name=form_clean[_G];obj.parent_id=request.POST.get('parent');obj.link=form_clean[_g];obj.order_menu=form_clean[_AE];obj.icon=form_clean[_M];obj.is_visibled=form_clean[_AF];obj.is_external=form_clean[_AG];obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_G)));return redirect(reverse_lazy(_i))
+		if form.is_valid():form_clean=form.cleaned_data;print(form_clean);lang=request.POST.get(_b);obj=data.get();obj.set_current_language(lang);obj.name=form_clean[_G];obj.parent_id=request.POST.get('parent');obj.link=form_clean[_g];obj.order_menu=form_clean[_AF];obj.icon=form_clean[_M];obj.is_visibled=form_clean[_AG];obj.is_external=form_clean[_AH];obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_G)));return redirect(reverse_lazy(_i))
 	else:messages.info(request,mMsgBox.get(_W));context[_F]=MenuForm(instance=post)
 	return render(request,template,context)
 def menu_delete(request,uuid):context={};site_id=get_site_id(request);data=Menu.objects.filter(uuid=uuid);post=get_object_or_404(data);tmp=post.name;post.delete();messages.info(request,mMsgBox.get(_X,tmp));return redirect(reverse_lazy(_i))
@@ -551,14 +552,14 @@ def agency_create(request):
 	context={};context[_D]=_s;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=AgencyForm(request.POST)
-		if form.is_valid():post=Agency.objects.language(_A).create(address=request.POST.get(_A7),notes=request.POST.get(_A8),name=request.POST.get(_G),email=request.POST.get(_AC),phone=request.POST.get(_AD),fax=request.POST.get('fax'),whatsapp=request.POST.get('whatsapp'),status=request.POST.get(_L));post.set_current_language(_I);post.address=request.POST.get(_A7);post.notes=request.POST.get(_A8);post.save();site_name_update(site_id,request.POST.get(_G));print(_AH);messages.info(request,mMsgBox.get(_S,request.POST.get(_G)));return redirect(reverse_lazy(_s))
+		if form.is_valid():post=Agency.objects.language(_A).create(address=request.POST.get(_A7),notes=request.POST.get(_A8),name=request.POST.get(_G),email=request.POST.get(_AC),phone=request.POST.get(_AD),fax=request.POST.get('fax'),whatsapp=request.POST.get('whatsapp'),status=request.POST.get(_L));post.set_current_language(_I);post.address=request.POST.get(_A7);post.notes=request.POST.get(_A8);post.save();site_name_update(site_id,request.POST.get(_G));print(_AI);messages.info(request,mMsgBox.get(_S,request.POST.get(_G)));return redirect(reverse_lazy(_s))
 	else:messages.info(request,mMsgBox.get(_T));context[_F]=AgencyForm()
 	return render(request,template,context)
 def agency_update(request,uuid):
 	context={};context[_D]=_s;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=Agency.objects.filter(uuid=uuid);post=get_object_or_404(data)
 	if request.method==_H:
 		form=AgencyForm(request.POST,instance=post)
-		if form.is_valid():lang=request.POST.get(_b);obj=data.get();obj.set_current_language(lang);obj.address=request.POST.get(_A7);obj.notes=request.POST.get(_A8);obj.name=request.POST.get(_G);obj.email=request.POST.get(_AC);obj.phone=request.POST.get(_AD);obj.fax=request.POST.get('fax');obj.whatsapp=request.POST.get('whatsapp');obj.status=request.POST.get(_L);obj.save();print('site name begin update');site_name_update(site_id,request.POST.get(_G));print(_AH);messages.info(request,mMsgBox.get(_V,request.POST.get(_G)));return redirect(reverse_lazy(_s))
+		if form.is_valid():lang=request.POST.get(_b);obj=data.get();obj.set_current_language(lang);obj.address=request.POST.get(_A7);obj.notes=request.POST.get(_A8);obj.name=request.POST.get(_G);obj.email=request.POST.get(_AC);obj.phone=request.POST.get(_AD);obj.fax=request.POST.get('fax');obj.whatsapp=request.POST.get('whatsapp');obj.status=request.POST.get(_L);obj.save();print('site name begin update');site_name_update(site_id,request.POST.get(_G));print(_AI);messages.info(request,mMsgBox.get(_V,request.POST.get(_G)));return redirect(reverse_lazy(_s))
 	else:messages.info(request,mMsgBox.get(_W));context[_F]=AgencyForm(instance=post)
 	return render(request,template,context)
 def agency_delete(request,uuid):context={};site_id=get_site_id(request);data=Agency.objects.filter(uuid=uuid);post=get_object_or_404(data);tmp=post.name;post.delete();messages.info(request,mMsgBox.get(_X,tmp));return redirect(reverse_lazy(_s))
