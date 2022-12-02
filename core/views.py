@@ -19,7 +19,7 @@ def register(request):
 	else:A=forms.CustomUserCreationForm(label_suffix='')
 	return render(B,'registration/register.html',{'form':A})
 def create_unique_name(request):A=get_site_id(request);B=datetime.now();return str(A)+'-'+B.strftime('%Y%m%d-%H%M%S-%f')
-def download_image(request,url):D=create_unique_name(request);B=settings.MEDIA_ROOT;A='youtube/';E=os.makedirs(B/A,exist_ok=_A);print('create dir = ',E);F='.jpg';A=A+D+F;C=B/A;print(C);urllib.request.urlretrieve(url,C);return A
+def download_image(request,url):D=create_unique_name(request);B=settings.MEDIA_ROOT;A='youtube/';E=os.makedirs(B/A,exist_ok=_A);print('create dir = ',E);F='.jpg';A=A+D+F;C=B/A;print(C);urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler({'http':'proxy.server:3128'})));urllib.request.urlretrieve(url,C);return A
 def upload_photo(request,width,height):
 	K='JPEG';J='image/png';I='.jpeg';G=request;F='/';A=G.FILES.get('photo');L=Image.open(io.BytesIO(A.read()));B=L.resize((width,height),Image.ANTIALIAS);M=create_unique_name(G);N=tgl.strftime('%Y');O=tgl.strftime('%m');P=tgl.strftime('%d')
 	if A.content_type=='image/gif':D='.gif'

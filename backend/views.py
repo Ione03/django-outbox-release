@@ -449,7 +449,7 @@ def videogallery_update(request,uuid):
 	context={};context[_D]=_A0;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=VideoGallery.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data)
 	if request.method==_H:
 		form=VideoGalleryForm(request.POST,instance=post)
-		if form.is_valid():lang=request.POST.get(_b);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.embed=request.POST.get('embed');obj.status=request.POST.get(_L);obj.save();video_id=get_video_id(post.embed_video);file_path=download_thumbnail(request,video_id);post.photo.clear();Photo.objects.create(content_object=post,file_path=file_path);messages.info(request,mMsgBox.get(_V,request.POST.get(_E)));return redirect(reverse_lazy(_A0))
+		if form.is_valid():lang=request.POST.get(_b);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.embed=request.POST.get('embed');obj.status=request.POST.get(_L);obj.save();print('data = ');print(obj);print(post);video_id=get_video_id(obj.embed_video);file_path=download_thumbnail(request,video_id);obj.photo.clear();Photo.objects.create(content_object=obj,file_path=file_path);messages.info(request,mMsgBox.get(_V,request.POST.get(_E)));return redirect(reverse_lazy(_A0))
 	else:messages.info(request,mMsgBox.get(_W));context[_F]=VideoGalleryForm(instance=post)
 	return render(request,template,context)
 def videogallery_delete(request,uuid):context={};site_id=get_site_id(request);data=VideoGallery.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);tmp=post.title;post.delete();messages.info(request,mMsgBox.get(_X,tmp));return redirect(reverse_lazy(_A0))
