@@ -91,6 +91,7 @@ from menu.models import *
 from menu.menus import Menus
 from .forms import *
 from core.forms import PhotoForm
+from core.views import download_image
 mMsgBox=msgbox.ClsMsgBox()
 def save_tags(tag_list,obj_master):
 	i=0
@@ -424,6 +425,10 @@ def photogallery_update(request,uuid):
 	else:messages.info(request,mMsgBox.get(_W));context[_F]=PhotoGalleryForm(instance=post);context[_N]=PhotoForm(instance=post_photo)
 	return render(request,template,context)
 def photogallery_delete(request,uuid):context={};site_id=get_site_id(request);data=PhotoGallery.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);tmp=post.title;post.delete();messages.info(request,mMsgBox.get(_X,tmp));return redirect(reverse_lazy(_z))
+def get_video_id(url_video):
+	tmp=url_video.split('/')
+	if tmp:return tmp[len(tmp)-1]
+def download_thumbnail(request,video_id):download_url='https://img.youtube.com/vi/'+video_id+'/mqdefault.jpg';return download_image(request,download_url)
 class VideoGalleryView(TemplateView):
 	site_id=_C
 	def get(self,request,*args,**kwargs):self.site_id=get_site_id(request);template=get_template(self.site_id,is_frontend=_B);self.template_name=template+'video_gallery.html';return super(VideoGalleryView,self).get(request,*(args),**kwargs)
@@ -436,7 +441,7 @@ def videogallery_create(request):
 	context={};context[_D]=_A0;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_R
 	if request.method==_H:
 		form=VideoGalleryForm(request.POST)
-		if form.is_valid():post=VideoGallery.objects.language(_A).create(title=request.POST.get(_E),embed=request.POST.get('embed'),status=request.POST.get(_L));post.set_current_language(_I);post.title=request.POST.get(_E);post.save();messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_A0))
+		if form.is_valid():post=VideoGallery.objects.language(_A).create(title=request.POST.get(_E),embed=request.POST.get('embed'),status=request.POST.get(_L));post.set_current_language(_I);post.title=request.POST.get(_E);post.save();video_id=get_video_id(post.embed_video);file_path=download_thumbnail(request,video_id);Photo.objects.create(content_object=post,file_path=file_path);messages.info(request,mMsgBox.get(_S,request.POST.get(_E)));return redirect(reverse_lazy(_A0))
 		else:print(_v);context[_F]=VideoGalleryForm()
 	else:messages.info(request,mMsgBox.get(_T));context[_F]=VideoGalleryForm()
 	return render(request,template,context)
@@ -444,7 +449,7 @@ def videogallery_update(request,uuid):
 	context={};context[_D]=_A0;site_id=get_site_id(request);template=get_template(site_id,is_frontend=_B)+_U;data=VideoGallery.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data)
 	if request.method==_H:
 		form=VideoGalleryForm(request.POST,instance=post)
-		if form.is_valid():lang=request.POST.get(_b);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.embed=request.POST.get('embed');obj.status=request.POST.get(_L);obj.save();messages.info(request,mMsgBox.get(_V,request.POST.get(_E)));return redirect(reverse_lazy(_A0))
+		if form.is_valid():lang=request.POST.get(_b);obj=data.get();obj.set_current_language(lang);obj.title=request.POST.get(_E);obj.embed=request.POST.get('embed');obj.status=request.POST.get(_L);obj.save();video_id=get_video_id(post.embed_video);file_path=download_thumbnail(request,video_id);post.photo.clear();Photo.objects.create(content_object=post,file_path=file_path);messages.info(request,mMsgBox.get(_V,request.POST.get(_E)));return redirect(reverse_lazy(_A0))
 	else:messages.info(request,mMsgBox.get(_W));context[_F]=VideoGalleryForm(instance=post)
 	return render(request,template,context)
 def videogallery_delete(request,uuid):context={};site_id=get_site_id(request);data=VideoGallery.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);tmp=post.title;post.delete();messages.info(request,mMsgBox.get(_X,tmp));return redirect(reverse_lazy(_A0))

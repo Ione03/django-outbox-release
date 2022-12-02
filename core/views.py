@@ -1,3 +1,4 @@
+_A=True
 from PIL import Image
 from django_outbox.common import get_site_id
 from datetime import datetime
@@ -9,6 +10,7 @@ from django.contrib.auth import login
 from django.contrib import messages
 from django.shortcuts import render,redirect
 from .  import forms
+import urllib
 def register(request):
 	B=request
 	if B.method=='POST':
@@ -16,18 +18,20 @@ def register(request):
 		if A.is_valid():C=A.save();return redirect('/account/login')
 	else:A=forms.CustomUserCreationForm(label_suffix='')
 	return render(B,'registration/register.html',{'form':A})
+def create_unique_name(request):A=get_site_id(request);B=datetime.now();return str(A)+'-'+B.strftime('%Y%m%d-%H%M%S-%f')
+def download_image(request,url):D=create_unique_name(request);B=settings.MEDIA_ROOT;A='youtube/';E=os.makedirs(B/A,exist_ok=_A);print('create dir = ',E);F='.jpg';A=A+D+F;C=B/A;print(C);urllib.request.urlretrieve(url,C);return A
 def upload_photo(request,width,height):
-	M='JPEG';L='image/png';K='.jpeg';I=request;H='/';G=True;A=I.FILES.get('photo');N=get_site_id(I);O=Image.open(io.BytesIO(A.read()));B=O.resize((width,height),Image.ANTIALIAS);E=datetime.now();P=str(N)+'-'+E.strftime('%Y%m%d-%H%M%S-%f');Q=E.strftime('%Y');R=E.strftime('%m');S=E.strftime('%d')
+	K='JPEG';J='image/png';I='.jpeg';G=request;F='/';A=G.FILES.get('photo');L=Image.open(io.BytesIO(A.read()));B=L.resize((width,height),Image.ANTIALIAS);M=create_unique_name(G);N=tgl.strftime('%Y');O=tgl.strftime('%m');P=tgl.strftime('%d')
 	if A.content_type=='image/gif':D='.gif'
-	elif A.content_type=='image/jpeg':D=K
+	elif A.content_type=='image/jpeg':D=I
 	elif A.content_type=='image/jpg':D='.jpg'
-	elif A.content_type==L:D=K
+	elif A.content_type==J:D=I
 	elif A.content_type=='image/bmp':D='.bmp'
 	else:D='.ief'
-	T=settings.BASE_DIR;F=settings.MEDIA_ROOT;C='crop/'+Q+H+R+H+S+H;U=os.makedirs(F/C,exist_ok=G);C=C+P+D
-	if A.content_type==L:
-		B.load();J=Image.new('RGB',B.size,(255,255,255))
-		if B.mode=='RGBA':J.paste(B,mask=B.getchannel('A'));J.save(F/C,M,quality=80,optimize=G)
-		else:B.save(F/C,M,quality=80,optimize=G)
-	else:B.save(F/C,quality=80,optimize=G)
+	E=settings.MEDIA_ROOT;C='crop/'+N+F+O+F+P+F;Q=os.makedirs(E/C,exist_ok=_A);C=C+M+D
+	if A.content_type==J:
+		B.load();H=Image.new('RGB',B.size,(255,255,255))
+		if B.mode=='RGBA':H.paste(B,mask=B.getchannel('A'));H.save(E/C,K,quality=80,optimize=_A)
+		else:B.save(E/C,K,quality=80,optimize=_A)
+	else:B.save(E/C,quality=80,optimize=_A)
 	return HttpResponse(C)

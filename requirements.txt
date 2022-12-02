@@ -14,7 +14,6 @@ django-ckeditor==6.5.1
 django-cors-headers==3.13.0
 django-crispy-forms==1.14.0
 django-cryptography==1.1
-django-embed-video==1.4.8
 django-etc==1.4.0
 -e git+https://github.com/PROJECT-OUTBOX/django-hitcount.git@0e501db64713f04e9ded3881cc80459e37eeae19#egg=django_hitcount
 django-import-export==3.0.1

@@ -1,11 +1,12 @@
-_T='base_url'
-_S='socialmedia'
-_R='document'
-_Q='relatedlink'
-_P='menugroup'
-_O='/admin'
-_N="service untuk '%s' belum terdaftar, silahkan daftar di halaman <a href='%s'>admin</a>"
-_M='Halaman tidak ditemukan!'
+_U='base_url'
+_T='socialmedia'
+_S='document'
+_R='relatedlink'
+_Q='menugroup'
+_P='/admin'
+_O="service untuk '%s' belum terdaftar, silahkan daftar di halaman <a href='%s'>admin</a>"
+_N='Halaman tidak ditemukan!'
+_M='videogallery'
 _L='banner'
 _K='/dashboard'
 _J='news'
@@ -70,7 +71,7 @@ def get_dailyalert(site_id,lang):return DailyAlert.objects.language(lang).filter
 def get_greeting(site_id,lang):subquery_foto=get_photo(_E);return Greeting.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_A)[:1]
 def get_events(site_id,lang):subquery_foto=get_photo(_H);return Events.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_A)[:7]
 def get_photogallery(site_id,lang):subquery_foto=get_photo(_I);return PhotoGallery.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_A)[:10]
-def get_videogallery(site_id,lang):return VideoGallery.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).order_by(_A)[:6]
+def get_videogallery(site_id,lang):subquery_foto=get_photo(_M);return VideoGallery.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_A)[:6]
 def get_relatedlink(site_id,lang):return RelatedLink.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).order_by(_A)[:10]
 def get_news(site_id,lang):subquery_foto=get_photo(_J);return News.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_A)[:7]
 def get_document(site_id,lang):return Document.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).order_by(_A)[:7]
@@ -88,28 +89,28 @@ def get_related_model(site_id,lang,max_data,model,kind,slug):
 def get_content_detail(site_id,lang,model,kind,slug):
 	subquery_foto=get_photo(kind);obj=model.objects.translated(lang).filter(site_id=site_id,slug=slug).annotate(file_path=subquery_foto)
 	if obj:return obj.get()
-	else:raise Http404(_M)
+	else:raise Http404(_N)
 class IndexView(TemplateView):
 	site_id=_B
 	def get(self,request,*args,**kwargs):
 		self.site_id=get_site_id(request);service=service_exists(request)
-		if not service:raise Http404(_N%(request.get_host(),_O))
+		if not service:raise Http404(_O%(request.get_host(),_P))
 		print('request.session.session_key = ',request.session.session_key)
 		if request.session.session_key:obj=Site.objects.get(id=self.site_id);hit_count=HitCount.objects.get_for_object(request,obj);hit_count_response=HitCountMixin.hit_count(request,hit_count)
 		template=get_template(self.site_id);self.template_name=template+'index.html';return super(IndexView,self).get(request,*(args),**kwargs)
-	def get_context_data(self,*args,**kwargs):context=super(IndexView,self).get_context_data(*(args),**kwargs);context[_P]=get_menu_group(self.site_id);agency=get_agency_info(self.site_id);context.update(agency);statistic=get_statistic(self.site_id,True);context.update(statistic);context[_F]=get_logo(self.site_id);lang=get_active_language_choices()[0];context[_L]=get_banner(self.site_id);context[_C]=get_announcement(self.site_id,lang,4);context[_D]=get_slideshow(self.site_id,lang);context['dailyalert']=get_dailyalert(self.site_id,lang);context[_E]=get_greeting(self.site_id,lang);context[_H]=get_events(self.site_id,lang);context[_I]=get_photogallery(self.site_id,lang);context['videogallery']=get_videogallery(self.site_id,lang);context[_Q]=get_relatedlink(self.site_id,lang);context[_J]=get_news(self.site_id,lang);context[_R]=get_document(self.site_id,lang);context[_S]=get_socialmedia(self.site_id);context[_T]=get_base_url(self.request);return context
+	def get_context_data(self,*args,**kwargs):context=super(IndexView,self).get_context_data(*(args),**kwargs);context[_Q]=get_menu_group(self.site_id);agency=get_agency_info(self.site_id);context.update(agency);statistic=get_statistic(self.site_id,True);context.update(statistic);context[_F]=get_logo(self.site_id);lang=get_active_language_choices()[0];context[_L]=get_banner(self.site_id);context[_C]=get_announcement(self.site_id,lang,4);context[_D]=get_slideshow(self.site_id,lang);context['dailyalert']=get_dailyalert(self.site_id,lang);context[_E]=get_greeting(self.site_id,lang);context[_H]=get_events(self.site_id,lang);context[_I]=get_photogallery(self.site_id,lang);context[_M]=get_videogallery(self.site_id,lang);context[_R]=get_relatedlink(self.site_id,lang);context[_J]=get_news(self.site_id,lang);context[_S]=get_document(self.site_id,lang);context[_T]=get_socialmedia(self.site_id);context[_U]=get_base_url(self.request);return context
 class DetailView(TemplateView):
 	site_id=_B
 	def get(self,request,*args,**kwargs):
 		self.site_id=get_site_id(request);service=service_exists(request)
-		if not service:raise Http404(_N%(request.get_host(),_O))
+		if not service:raise Http404(_O%(request.get_host(),_P))
 		template=get_template(self.site_id);self.template_name=template+'detail.html';return super(DetailView,self).get(request,*(args),**kwargs)
 	def get_context_data(self,*args,**kwargs):
-		B='kind';A='pages';context=super(DetailView,self).get_context_data(*(args),**kwargs);context[_P]=get_menu_group(self.site_id);slug=self.kwargs['slug']
+		B='kind';A='pages';context=super(DetailView,self).get_context_data(*(args),**kwargs);context[_Q]=get_menu_group(self.site_id);slug=self.kwargs['slug']
 		if not slug:raise Http404("Menu Group '%s' belum terdaftar, silahkan daftar di halaman <a href='%s'>admin</a>"%(self.request.get_host(),_K))
-		agency=get_agency_info(self.site_id);context.update(agency);statistic=get_statistic(self.site_id,True);context.update(statistic);context[_F]=get_logo(self.site_id);lang=get_active_language_choices()[0];kinds=[_C,_J,'article',_H,_R,_E,A,_D];kind=self.kwargs[B]
+		agency=get_agency_info(self.site_id);context.update(agency);statistic=get_statistic(self.site_id,True);context.update(statistic);context[_F]=get_logo(self.site_id);lang=get_active_language_choices()[0];kinds=[_C,_J,'article',_H,_S,_E,A,_D];kind=self.kwargs[B]
 		if kind in kinds:context[B]=kind
-		else:raise Http404(_M)
+		else:raise Http404(_N)
 		context[_C]=get_announcement(self.site_id,lang,6);model=apps.get_model('education',kind)
 		if kind not in[A,_E,_D]:context['categories_list']=get_categories_list(self.site_id,lang,10,model);context['latest_kind']=get_latest_model(self.site_id,lang,3,model,kind,slug);context['random_paint']=get_related_model(self.site_id,lang,5,model,kind,slug)
-		content_detail=get_content_detail(self.site_id,lang,model,kind,slug);context['content_detail']=content_detail;hit_count=HitCount.objects.get_for_object(self.request,content_detail);hit_count_response=HitCountMixin.hit_count(self.request,hit_count);print(hit_count_response);context[_I]=get_photogallery(self.site_id,lang);context[_Q]=get_relatedlink(self.site_id,lang);context[_S]=get_socialmedia(self.site_id);context[_T]=get_base_url(self.request);return context
+		content_detail=get_content_detail(self.site_id,lang,model,kind,slug);context['content_detail']=content_detail;hit_count=HitCount.objects.get_for_object(self.request,content_detail);hit_count_response=HitCountMixin.hit_count(self.request,hit_count);print(hit_count_response);context[_I]=get_photogallery(self.site_id,lang);context[_R]=get_relatedlink(self.site_id,lang);context[_T]=get_socialmedia(self.site_id);context[_U]=get_base_url(self.request);return context

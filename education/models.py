@@ -9,7 +9,6 @@ _C='--'
 _B=False
 _A=True
 import random,math,string,os
-from embed_video.fields import EmbedVideoField
 from django.db.models import signals
 from django.dispatch import receiver
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -118,7 +117,7 @@ def save_embed_video(embed):
 	if A.find('watch')<=0:A=A.replace('"','');A=A.replace('&quot;','');return A
 	else:return None
 class VideoGallery(BaseAbstractModel,BaseGalleryModel,TranslatableModel):
-	translations=TranslatedFields(title=encrypt(models.CharField(_(_E),max_length=500)));embed=RichTextUploadingField(_('embed'),blank=_A,null=_A,config_name='embed_video');embed_video=EmbedVideoField(blank=_A,null=_A)
+	translations=TranslatedFields(title=encrypt(models.CharField(_(_E),max_length=500)));embed=RichTextUploadingField(_('embed'),blank=_A,null=_A,config_name='embed_video');embed_video=models.URLField(blank=_A,null=_A);photo=GenericRelation(Photo,verbose_name=_(_H))
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.slug=A.get_current_language()+_D+slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;A.embed_video=save_embed_video(A.embed);super(VideoGallery,A).save(*(B),**C)
 class RelatedLink(BaseAbstractModel,TranslatableModel):
