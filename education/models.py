@@ -9,6 +9,7 @@ _C='--'
 _B=False
 _A=True
 import random,math,string,os
+from embed_video.fields import EmbedVideoField
 from django.db.models import signals
 from django.dispatch import receiver
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -103,10 +104,23 @@ class PhotoGallery(BaseAbstractModel,BaseGalleryModel,TranslatableModel):
 	translations=TranslatedFields(title=encrypt(models.CharField(_(_E),max_length=500)));photo=GenericRelation(Photo,verbose_name=_(_H))
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.slug=A.get_current_language()+_D+slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(PhotoGallery,A).save(*(B),**C)
+def save_embed_video(embed):
+	E='src';D=0;A='';F=embed.split(' ');B=_B
+	for G in F:
+		if B:break
+		H=G.split('=');B=_B
+		for C in H:
+			if not B and C.lower()==E:B=_A
+			if B and C.lower()!=E:
+				if D==0:A+=C;D+=1
+				else:A+='='+C
+				print(A)
+	if A.find('watch')<=0:A=A.replace('"','');A=A.replace('&quot;','');return A
+	else:return None
 class VideoGallery(BaseAbstractModel,BaseGalleryModel,TranslatableModel):
-	translations=TranslatedFields(title=encrypt(models.CharField(_(_E),max_length=500)));embed=RichTextUploadingField(_('embed'),blank=_A,null=_A)
+	translations=TranslatedFields(title=encrypt(models.CharField(_(_E),max_length=500)));embed=RichTextUploadingField(_('embed'),blank=_A,null=_A,config_name='embed_video');embed_video=EmbedVideoField(blank=_A,null=_A)
 	def __str__(A):return A.title
-	def save(A,*B,**C):A.slug=A.get_current_language()+_D+slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(VideoGallery,A).save(*(B),**C)
+	def save(A,*B,**C):A.slug=A.get_current_language()+_D+slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;A.embed_video=save_embed_video(A.embed);super(VideoGallery,A).save(*(B),**C)
 class RelatedLink(BaseAbstractModel,TranslatableModel):
 	site=models.ForeignKey(Site,on_delete=models.CASCADE,blank=_A,verbose_name=_(_F));link=encrypt(models.URLField(_(_I),max_length=255));translations=TranslatedFields(name=encrypt(models.CharField(_('name'),max_length=150)));status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
 	def __str__(A):return A.name
