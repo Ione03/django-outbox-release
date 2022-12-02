@@ -21,17 +21,17 @@ def register(request):
 def create_unique_name(request):A=get_site_id(request);B=datetime.now();return str(A)+'-'+B.strftime('%Y%m%d-%H%M%S-%f')
 def download_image(request,url):D=create_unique_name(request);B=settings.MEDIA_ROOT;A='youtube/';E=os.makedirs(B/A,exist_ok=_A);print('create dir = ',E);F='.jpg';A=A+D+F;C=B/A;print(C);urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler({'http':'proxy.server:3128'})));urllib.request.urlretrieve(url,C);return A
 def upload_photo(request,width,height):
-	K='JPEG';J='image/png';I='.jpeg';G=request;F='/';A=G.FILES.get('photo');L=Image.open(io.BytesIO(A.read()));B=L.resize((width,height),Image.ANTIALIAS);M=create_unique_name(G);N=tgl.strftime('%Y');O=tgl.strftime('%m');P=tgl.strftime('%d')
+	L='JPEG';K='image/png';J='.jpeg';H=request;G='/';A=H.FILES.get('photo');M=Image.open(io.BytesIO(A.read()));B=M.resize((width,height),Image.ANTIALIAS);N=create_unique_name(H);F=datetime.now();O=F.strftime('%Y');P=F.strftime('%m');Q=F.strftime('%d')
 	if A.content_type=='image/gif':D='.gif'
-	elif A.content_type=='image/jpeg':D=I
+	elif A.content_type=='image/jpeg':D=J
 	elif A.content_type=='image/jpg':D='.jpg'
-	elif A.content_type==J:D=I
+	elif A.content_type==K:D=J
 	elif A.content_type=='image/bmp':D='.bmp'
 	else:D='.ief'
-	E=settings.MEDIA_ROOT;C='crop/'+N+F+O+F+P+F;Q=os.makedirs(E/C,exist_ok=_A);C=C+M+D
-	if A.content_type==J:
-		B.load();H=Image.new('RGB',B.size,(255,255,255))
-		if B.mode=='RGBA':H.paste(B,mask=B.getchannel('A'));H.save(E/C,K,quality=80,optimize=_A)
-		else:B.save(E/C,K,quality=80,optimize=_A)
+	E=settings.MEDIA_ROOT;C='crop/'+O+G+P+G+Q+G;R=os.makedirs(E/C,exist_ok=_A);C=C+N+D
+	if A.content_type==K:
+		B.load();I=Image.new('RGB',B.size,(255,255,255))
+		if B.mode=='RGBA':I.paste(B,mask=B.getchannel('A'));I.save(E/C,L,quality=80,optimize=_A)
+		else:B.save(E/C,L,quality=80,optimize=_A)
 	else:B.save(E/C,quality=80,optimize=_A)
 	return HttpResponse(C)

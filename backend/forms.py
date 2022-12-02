@@ -42,7 +42,7 @@ class NewsForm(TranslatableModelForm):
 	class Meta:model=News;fields=[_D,_F,_G,_I,_B]
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column(_F,css_class=_A),Column(_G,css_class=_A),Column(_I,css_class=_A),Column(_B,css_class=_A)))
 class ArticleForm(TranslatableModelForm):
-	dim_w=forms.CharField(widget=forms.HiddenInput(),initial=68);dim_h=forms.CharField(widget=forms.HiddenInput(),initial=68)
+	dim_w=forms.CharField(widget=forms.HiddenInput(),initial=870);dim_h=forms.CharField(widget=forms.HiddenInput(),initial=500)
 	class Meta:model=Article;fields=[_D,_F,_G,_I,_B]
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column(_F,css_class=_A),Column(_G,css_class=_A),Column(_I,css_class=_A),Column(_B,css_class=_A)))
 class EventsForm(TranslatableModelForm):
@@ -61,7 +61,7 @@ class GreetingForm(TranslatableModelForm):
 	class Meta:model=Greeting;fields=[_D,_E,_L,_F,_B]
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column(_E,css_class=_A),Column(_L,css_class=_A),Column(_F,css_class=_A),Column(_B,css_class=_A)))
 class PagesForm(TranslatableModelForm):
-	dim_w=forms.CharField(widget=forms.HiddenInput(),initial=68);dim_h=forms.CharField(widget=forms.HiddenInput(),initial=68)
+	dim_w=forms.CharField(widget=forms.HiddenInput(),initial=870);dim_h=forms.CharField(widget=forms.HiddenInput(),initial=500)
 	class Meta:model=Pages;fields=[_D,'menu',_F,_B]
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column('menu',css_class=_A),Column(_F,css_class=_A),Column(_B,css_class=_A)))
 class SocialMediaForm(ModelForm):
@@ -72,7 +72,6 @@ class PhotoGalleryForm(TranslatableModelForm):
 	class Meta:model=PhotoGallery;fields=[_D,_B]
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column(_B,css_class=_A)))
 class VideoGalleryForm(TranslatableModelForm):
-	dim_w=forms.CharField(widget=forms.HiddenInput(),initial=68);dim_h=forms.CharField(widget=forms.HiddenInput(),initial=68)
 	class Meta:model=VideoGallery;fields=[_D,'embed',_B]
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column('embed',css_class=_A),Column(_B,css_class=_A)))
 class RelatedLinkForm(TranslatableModelForm):
