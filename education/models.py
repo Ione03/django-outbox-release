@@ -1,3 +1,4 @@
+_K='embed_video'
 _J='education'
 _I='link'
 _H='photo'
@@ -117,7 +118,7 @@ def save_embed_video(embed):
 	if A.find('watch')<=0:A=A.replace('"','');A=A.replace('&quot;','');return A
 	else:return None
 class VideoGallery(BaseAbstractModel,BaseGalleryModel,TranslatableModel):
-	translations=TranslatedFields(title=encrypt(models.CharField(_(_E),max_length=500)));embed=RichTextUploadingField(_('embed'),blank=_A,null=_A,config_name='embed_video');embed_video=models.URLField(blank=_A,null=_A);photo=GenericRelation(Photo,verbose_name=_(_H))
+	translations=TranslatedFields(title=encrypt(models.CharField(_(_E),max_length=500)));embed=RichTextUploadingField(_('embed'),blank=_A,null=_A,config_name=_K);embed_video=models.URLField(blank=_A,null=_A);photo=GenericRelation(Photo,verbose_name=_(_H))
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.slug=A.get_current_language()+_D+slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;A.embed_video=save_embed_video(A.embed);super(VideoGallery,A).save(*(B),**C)
 class RelatedLink(BaseAbstractModel,TranslatableModel):
@@ -136,6 +137,10 @@ class Banner(BaseAbstractModel):
 	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_F));admin=models.ForeignKey(User,on_delete=models.PROTECT);photo=GenericRelation(Photo,verbose_name=_(_H));link=models.URLField(max_length=255,null=_A,blank=_A);position=models.PositiveIntegerField(choices=Position.choices)
 	def __str__(A):return str(A.position)
 	def save(A,*B,**C):A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(Banner,A).save(*(B),**C)
+class Location(BaseAbstractModel,BaseGalleryModel,TranslatableModel):
+	translations=TranslatedFields(title=encrypt(models.CharField(_(_E),max_length=500)));embed=RichTextUploadingField(_('embed'),blank=_A,null=_A,config_name=_K)
+	def __str__(A):return A.title
+	def save(A,*B,**C):A.slug=A.get_current_language()+_D+slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(Location,A).save(*(B),**C)
 @receiver(models.signals.post_delete,sender=Document)
 def auto_delete_file_on_delete(sender,instance,**B):
 	A=instance

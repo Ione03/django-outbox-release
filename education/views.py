@@ -92,6 +92,7 @@ def get_content_detail(site_id,lang,model,kind,slug):
 	subquery_foto=get_photo(kind);obj=model.objects.translated(lang).filter(site_id=site_id,slug=slug).annotate(file_path=subquery_foto)
 	if obj:return obj.get()
 	else:raise Http404(_O)
+def get_location(site_id,lang):return Location.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED)[:1]
 class IndexView(TemplateView):
 	site_id=_B
 	def get(self,request,*args,**kwargs):
@@ -100,7 +101,7 @@ class IndexView(TemplateView):
 		print('request.session.session_key = ',request.session.session_key)
 		if request.session.session_key:obj=Site.objects.get(id=self.site_id);hit_count=HitCount.objects.get_for_object(request,obj);hit_count_response=HitCountMixin.hit_count(request,hit_count)
 		template=get_template(self.site_id);self.template_name=template+'index.html';return super(IndexView,self).get(request,*(args),**kwargs)
-	def get_context_data(self,*args,**kwargs):context=super(IndexView,self).get_context_data(*(args),**kwargs);context[_R]=get_menu_group(self.site_id);agency=get_agency_info(self.site_id);context.update(agency);statistic=get_statistic(self.site_id,True);context.update(statistic);context[_F]=get_logo(self.site_id);lang=get_active_language_choices()[0];context[_M]=get_banner(self.site_id);context[_C]=get_announcement(self.site_id,lang,4);context[_D]=get_slideshow(self.site_id,lang);context['dailyalert']=get_dailyalert(self.site_id,lang);context[_E]=get_greeting(self.site_id,lang);context[_H]=get_events(self.site_id,lang);context[_I]=get_photogallery(self.site_id,lang);context[_N]=get_videogallery(self.site_id,lang);context[_S]=get_relatedlink(self.site_id,lang);context[_J]=get_news(self.site_id,lang);context[_K]=get_article(self.site_id,lang);context[_T]=get_document(self.site_id,lang);context[_U]=get_socialmedia(self.site_id);context[_V]=get_base_url(self.request);return context
+	def get_context_data(self,*args,**kwargs):context=super(IndexView,self).get_context_data(*(args),**kwargs);context[_R]=get_menu_group(self.site_id);agency=get_agency_info(self.site_id);context.update(agency);statistic=get_statistic(self.site_id,True);context.update(statistic);context[_F]=get_logo(self.site_id);lang=get_active_language_choices()[0];context[_M]=get_banner(self.site_id);context[_C]=get_announcement(self.site_id,lang,4);context[_D]=get_slideshow(self.site_id,lang);context['dailyalert']=get_dailyalert(self.site_id,lang);context[_E]=get_greeting(self.site_id,lang);context[_H]=get_events(self.site_id,lang);context[_I]=get_photogallery(self.site_id,lang);context[_N]=get_videogallery(self.site_id,lang);context[_S]=get_relatedlink(self.site_id,lang);context[_J]=get_news(self.site_id,lang);context[_K]=get_article(self.site_id,lang);context[_T]=get_document(self.site_id,lang);context[_U]=get_socialmedia(self.site_id);context['location']=get_location(self.site_id,lang);context[_V]=get_base_url(self.request);return context
 class DetailView(TemplateView):
 	site_id=_B
 	def get(self,request,*args,**kwargs):
