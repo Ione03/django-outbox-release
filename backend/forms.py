@@ -1,10 +1,9 @@
-_T='position'
-_S='address'
-_R='whatsapp'
-_Q='is_external'
-_P='is_visibled'
-_O='order_menu'
-_N='parent'
+_S='position'
+_R='address'
+_Q='whatsapp'
+_P='is_external'
+_O='is_visibled'
+_N='order_menu'
 _M='file_path_doc'
 _L='designation'
 _K='location'
@@ -62,8 +61,8 @@ class GreetingForm(TranslatableModelForm):
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column(_E,css_class=_A),Column(_L,css_class=_A),Column(_F,css_class=_A),Column(_B,css_class=_A)))
 class PagesForm(TranslatableModelForm):
 	dim_w=forms.CharField(widget=forms.HiddenInput(),initial=870);dim_h=forms.CharField(widget=forms.HiddenInput(),initial=500)
-	class Meta:model=Pages;fields=[_D,'menu',_F,_B]
-	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column('menu',css_class=_A),Column(_F,css_class=_A),Column(_B,css_class=_A)))
+	class Meta:model=Pages;fields=[_D,_F,_B]
+	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column(_F,css_class=_A),Column(_B,css_class=_A)))
 class SocialMediaForm(ModelForm):
 	class Meta:model=SocialMedia;fields=['kind',_H,_B]
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column('kind',css_class=_A),Column(_H,css_class=_A),Column(_B,css_class=_A)))
@@ -81,15 +80,15 @@ class DocumentForm(TranslatableModelForm):
 	class Meta:model=Document;fields=[_E,_F,_M,_G,_B]
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_E,css_class=_A),Column(_F,css_class=_A),Column(_M,css_class=_A),Column(_G,css_class=_A),Column(_B,css_class=_A)))
 class MenuForm(TranslatableModelForm):
-	class Meta:model=Menu;fields=[_E,_N,_H,_O,'icon',_P,_Q]
-	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_E,css_class=_A),Column(_N,css_class=_A),Column(_H,css_class=_A),Column(_O,css_class=_A),Column('icon',css_class=_A),Column(_P,css_class=_A),Column(_Q,css_class=_A)))
+	class Meta:model=Menu;fields=[_E,_H,_N,'icon',_O,_P]
+	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_E,css_class=_A),Column(_H,css_class=_A),Column(_N,css_class=_A),Column('icon',css_class=_A),Column(_O,css_class=_A),Column(_P,css_class=_A)))
 class AgencyForm(TranslatableModelForm):
-	class Meta:model=Agency;fields=[_E,'email','phone','fax',_R,_S,'notes']
-	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_E,css_class=_A),Column('email',css_class=_A),Column('phone',css_class=_A),Column('fax',css_class=_A),Column(_R,css_class=_A),Column(_S,css_class=_A),Column('notes',css_class=_A)))
+	class Meta:model=Agency;fields=[_E,'email','phone','fax',_Q,_R,'notes']
+	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_E,css_class=_A),Column('email',css_class=_A),Column('phone',css_class=_A),Column('fax',css_class=_A),Column(_Q,css_class=_A),Column(_R,css_class=_A),Column('notes',css_class=_A)))
 class CategoriesForm(TranslatableModelForm):
 	class Meta:model=Categories;fields=[_E]
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_E,css_class=_A)))
 class BannerForm(ModelForm):
 	dim_w=forms.CharField(widget=forms.HiddenInput(),initial=267);dim_h=forms.CharField(widget=forms.HiddenInput(),initial=417)
-	class Meta:model=Banner;fields=[_T,_H]
-	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_T,css_class=_A),Column(_H,css_class=_A)))
+	class Meta:model=Banner;fields=[_S,_H]
+	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_S,css_class=_A),Column(_H,css_class=_A)))

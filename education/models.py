@@ -88,7 +88,7 @@ class Greeting(BaseAbstractModel,TranslatableModel):
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.slug=A.get_current_language()+_D+slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(Greeting,A).save(*(B),**C)
 class Pages(BaseAbstractModel,BaseContentModel,TranslatableModel):
-	translations=TranslatedFields(title=encrypt(models.CharField(_(_E),max_length=500)),content=encrypt(RichTextUploadingField(_(_G),blank=_A,null=_A)));menu=models.ForeignKey(Menu,on_delete=models.PROTECT,verbose_name='Access From Menu');word_count=models.PositiveIntegerField(default=0,blank=_A,editable=_B);reading_time=models.PositiveIntegerField(default=0,blank=_A,editable=_B)
+	translations=TranslatedFields(title=encrypt(models.CharField(_(_E),max_length=500)),content=encrypt(RichTextUploadingField(_(_G),blank=_A,null=_A)));menu=models.ForeignKey(Menu,on_delete=models.PROTECT,verbose_name='Access From Menu',blank=_A);word_count=models.PositiveIntegerField(default=0,blank=_A,editable=_B);reading_time=models.PositiveIntegerField(default=0,blank=_A,editable=_B)
 	class Meta:verbose_name=_('page');verbose_name_plural=_('pages')
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.slug=A.get_current_language()+_D+slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;A.word_count=word_count(A.content);A.reading_time=reading_time(A.word_count);super(Pages,A).save(*(B),**C)
