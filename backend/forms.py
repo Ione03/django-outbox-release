@@ -1,4 +1,3 @@
-_T='position'
 _S='address'
 _R='whatsapp'
 _Q='is_external'
@@ -7,8 +6,8 @@ _O='order_menu'
 _N='file_path_doc'
 _M='designation'
 _L='location'
-_K='priority'
-_J='embed'
+_K='embed'
+_J='priority'
 _I='tags'
 _H='link'
 _G='categories'
@@ -27,16 +26,16 @@ from parler.forms import TranslatableModelForm
 from menu.models import Menu
 from core.models import Agency
 class TagsForm(TranslatableModelForm):
-	class Meta:model=Tags;fields=[_E]
-	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_E,css_class=_A)))
+	class Meta:model=Tags;fields=[_E,_B]
+	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_E,css_class=_A),Column(_B,css_class=_A)))
 class LogoForm(ModelForm):
 	dim_w=forms.CharField(widget=forms.HiddenInput(),initial=300);dim_h=forms.CharField(widget=forms.HiddenInput(),initial=48)
 	class Meta:model=Logo;fields=[_E]
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_E,css_class=_A)))
 class AnnouncementForm(TranslatableModelForm):
 	dim_w=forms.CharField(widget=forms.HiddenInput(),initial=870);dim_h=forms.CharField(widget=forms.HiddenInput(),initial=500)
-	class Meta:model=Announcement;fields=[_D,_F,_G,_I,_K,_B]
-	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column(_F,css_class=_A),Column(_G,css_class=_A),Column(_K,css_class=_A),Column(_I,css_class=_A),Column(_B,css_class=_A)))
+	class Meta:model=Announcement;fields=[_D,_F,_G,_I,_J,_B]
+	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column(_F,css_class=_A),Column(_G,css_class=_A),Column(_J,css_class=_A),Column(_I,css_class=_A),Column(_B,css_class=_A)))
 class NewsForm(TranslatableModelForm):
 	dim_w=forms.CharField(widget=forms.HiddenInput(),initial=870);dim_h=forms.CharField(widget=forms.HiddenInput(),initial=500)
 	class Meta:model=News;fields=[_D,_F,_G,_I,_B]
@@ -72,8 +71,8 @@ class PhotoGalleryForm(TranslatableModelForm):
 	class Meta:model=PhotoGallery;fields=[_D,_B]
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column(_B,css_class=_A)))
 class VideoGalleryForm(TranslatableModelForm):
-	class Meta:model=VideoGallery;fields=[_D,_J,_B]
-	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column(_J,css_class=_A),Column(_B,css_class=_A)))
+	class Meta:model=VideoGallery;fields=[_D,_K,_B]
+	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column(_K,css_class=_A),Column(_B,css_class=_A)))
 class RelatedLinkForm(TranslatableModelForm):
 	class Meta:model=RelatedLink;fields=[_E,_H,_B]
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_E,css_class=_A),Column(_H,css_class=_A),Column(_B,css_class=_A)))
@@ -87,12 +86,12 @@ class AgencyForm(TranslatableModelForm):
 	class Meta:model=Agency;fields=[_E,'email','phone','fax',_R,_S,'notes']
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_E,css_class=_A),Column('email',css_class=_A),Column('phone',css_class=_A),Column('fax',css_class=_A),Column(_R,css_class=_A),Column(_S,css_class=_A),Column('notes',css_class=_A)))
 class CategoriesForm(TranslatableModelForm):
-	class Meta:model=Categories;fields=[_E]
-	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_E,css_class=_A)))
+	class Meta:model=Categories;fields=[_E,_B]
+	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_E,css_class=_A),Column(_B,css_class=_A)))
 class BannerForm(ModelForm):
 	dim_w=forms.CharField(widget=forms.HiddenInput(),initial=267);dim_h=forms.CharField(widget=forms.HiddenInput(),initial=417)
-	class Meta:model=Banner;fields=[_T,_H]
-	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_T,css_class=_A),Column(_H,css_class=_A)))
+	class Meta:model=Banner;fields=[_J,_H]
+	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_J,css_class=_A),Column(_H,css_class=_A)))
 class LocationForm(TranslatableModelForm):
-	class Meta:model=Location;fields=[_D,_J,_B]
-	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column(_J,css_class=_A),Column(_B,css_class=_A)))
+	class Meta:model=Location;fields=[_D,_K,_B]
+	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column(_K,css_class=_A),Column(_B,css_class=_A)))

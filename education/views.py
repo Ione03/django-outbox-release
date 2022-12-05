@@ -67,7 +67,7 @@ def get_statistic(site_id,is_cache=False):
 	context[tmp]=tmp_cache;start_date=tgl+datetime.timedelta(hours=-5);start_date=datetime.datetime(start_date.year,start_date.month,start_date.day,start_date.hour,0,0);end_date=datetime.datetime(tgl.year,tgl.month,tgl.day,tgl.hour,59,59);hit_online=Hit.objects.filter(hitcount_id=hitcount_id,created__range=(start_date,end_date)).values(C).order_by(C).distinct();context['hit_online']=hit_online.count()if hit_online else 1;hit_count=HitCount.objects.filter(object_pk=site_id,content_type_id=content_type_id);context['hit_all']=hit_count[0].hits if hit_count else 1;return context
 def get_banner(site_id):subquery_foto=get_photo(_M);return Banner.objects.filter(site_id=site_id).annotate(file_path=subquery_foto)[:5]
 def get_announcement(site_id,lang,max_data):subquery_foto=get_photo(_C);return Announcement.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by('priority',_A)[:max_data]
-def get_slideshow(site_id,lang):subquery_foto=get_photo(_D);return SlideShow.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_A)
+def get_slideshow(site_id,lang):subquery_foto=get_photo(_D);return SlideShow.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_A)[:10]
 def get_dailyalert(site_id,lang):return DailyAlert.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).order_by(_A)[:10]
 def get_greeting(site_id,lang):subquery_foto=get_photo(_E);return Greeting.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_A)[:1]
 def get_events(site_id,lang):subquery_foto=get_photo(_H);return Events.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_A)[:7]
@@ -77,7 +77,7 @@ def get_relatedlink(site_id,lang):return RelatedLink.objects.language(lang).filt
 def get_news(site_id,lang):subquery_foto=get_photo(_J);return News.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_A)[:7]
 def get_article(site_id,lang):subquery_foto=get_photo(_K);return Article.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_A)[:6]
 def get_document(site_id,lang):return Document.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).order_by(_A)[:7]
-def get_socialmedia(site_id):return SocialMedia.objects.filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).order_by(_A)
+def get_socialmedia(site_id):return SocialMedia.objects.filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).order_by(_A)[:6]
 def get_categories_list(site_id,lang,max_data,model):
 	C='count';B='name_slugify';A='categories_id';subquery=Subquery(Categories.objects.translated(lang).filter(id=OuterRef(A)).values('translations__name')[:1]);categories_list=[];obj=model.objects.filter(site_id=site_id).values(A).annotate(count=Count(A)).annotate(name=subquery).order_by(A)[:max_data]
 	if obj:
@@ -116,4 +116,4 @@ class DetailView(TemplateView):
 		else:raise Http404(_O)
 		context[_C]=get_announcement(self.site_id,lang,6);model=apps.get_model('education',kind)
 		if kind not in[A,_E,_D]:context['categories_list']=get_categories_list(self.site_id,lang,10,model);context['latest_kind']=get_latest_model(self.site_id,lang,3,model,kind,slug);context['random_paint']=get_related_model(self.site_id,lang,5,model,kind,slug)
-		print('detail model = ',model,kind);content_detail=get_content_detail(self.site_id,lang,model,kind,slug);context['content_detail']=content_detail;hit_count=HitCount.objects.get_for_object(self.request,content_detail);hit_count_response=HitCountMixin.hit_count(self.request,hit_count);print(hit_count_response);context[_I]=get_photogallery(self.site_id,lang);context[_S]=get_relatedlink(self.site_id,lang);context[_U]=get_socialmedia(self.site_id);context[_V]=get_base_url(self.request);return context
+		print('detail model = ',model,kind);content_detail=get_content_detail(self.site_id,lang,model,kind,slug);context['content_detail']=content_detail;hit_count=HitCount.objects.get_for_object(self.request,content_detail);hit_count_response=HitCountMixin.hit_count(self.request,hit_count);context[_I]=get_photogallery(self.site_id,lang);context[_S]=get_relatedlink(self.site_id,lang);context[_U]=get_socialmedia(self.site_id);context[_V]=get_base_url(self.request);return context

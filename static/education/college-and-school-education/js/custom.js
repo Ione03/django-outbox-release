@@ -1,0 +1,1 @@
+try{var windowH=$(window).height()/2;$(window).on("scroll",function(){$(this).scrollTop()>windowH?$("#myBtn").addClass("show-btn-back-to-top"):$("#myBtn").removeClass("show-btn-back-to-top")}),$("#myBtn").on("click",function(){$("html, body").animate({scrollTop:0},300)})}catch(o){console.log(o)}
