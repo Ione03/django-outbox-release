@@ -24,15 +24,17 @@ def get_week_date(year,month,day):
 		if E:break
 	B=A[D][0];B=datetime(B.year,B.month,B.day,0,0,0);C=A[D][6];C=datetime(C.year,C.month,C.day,23,59,59);return B,C
 def add_months(sourcedate,months):B=sourcedate;A=B.month-1+months;C=B.year+A//12;A=A%12+1;D=min(B.day,calendar.monthrange(C,A)[1]);return datetime(C,A,D)
-def get_natural_datetime(skrg,data_datetime):
-	B=data_datetime;A=skrg;B=B.replace(tzinfo=None);H=datetime(A.year,A.month,A.day,0,0,0);I=datetime(A.year,A.month,A.day,23,59,59);D=A-timedelta(days=1);J=datetime(D.year,D.month,D.day,0,0,0);K=datetime(D.year,D.month,D.day,23,59,59);F,G=get_week_date(A.year,A.month,A.day);L=F-timedelta(days=7);M=G-timedelta(days=7);N=F-timedelta(days=14);O=G-timedelta(days=14);P=F-timedelta(days=21);Q=G-timedelta(days=21);E=calendar.monthrange(A.year,A.month)[1];R=datetime(A.year,A.month,1,0,0,0);S=datetime(A.year,A.month,E,23,59,59);C=add_months(A,-1);E=calendar.monthrange(C.year,C.month)[1];T=datetime(C.year,C.month,1,0,0,0);U=datetime(C.year,C.month,E,23,59,59);C=add_months(A,-2);E=calendar.monthrange(C.year,C.month)[1];V=datetime(C.year,C.month,1,0,0,0);W=datetime(C.year,C.month,E,23,59,59)
-	if H<=B<=I:return naturaltime(B)
-	elif J<=B<=K:return naturalday(B)
+def get_natural_datetime(data_datetime,skrg=datetime.now()):
+	H='minggu lalu';B=data_datetime;A=skrg;B=B.replace(tzinfo=None);I=datetime(A.year,A.month,A.day,0,0,0);J=datetime(A.year,A.month,A.day,23,59,59);D=A-timedelta(days=1);K=datetime(D.year,D.month,D.day,0,0,0);L=datetime(D.year,D.month,D.day,23,59,59);F,G=get_week_date(A.year,A.month,A.day);M=F-timedelta(days=7);N=G-timedelta(days=7);O=F-timedelta(days=14);P=G-timedelta(days=14);Q=F-timedelta(days=21);R=G-timedelta(days=21);E=calendar.monthrange(A.year,A.month)[1];S=datetime(A.year,A.month,1,0,0,0);T=datetime(A.year,A.month,E,23,59,59);C=add_months(A,-1);E=calendar.monthrange(C.year,C.month)[1];U=datetime(C.year,C.month,1,0,0,0);V=datetime(C.year,C.month,E,23,59,59);C=add_months(A,-2);E=calendar.monthrange(C.year,C.month)[1];W=datetime(C.year,C.month,1,0,0,0);X=datetime(C.year,C.month,E,23,59,59)
+	if I<=B<=J:return naturaltime(B)
+	elif K<=B<=L:return naturalday(B)
 	elif F<=B<=G:return _(B.strftime('%A'))
-	elif L<=B<=M:return _('minggu lalu')+' hari '+_(B.strftime('%A'))
-	elif N<=B<=O and A.weekday()==B.weekday():return _('dua minggu lalu')
-	elif P<=B<=Q and A.weekday()==B.weekday():return _('tiga minggu lalu')
-	elif R<=B<=S:return _('bulan ini')
-	elif T<=B<=U and (A-B).days>=30:return _('bulan lalu')
-	elif V<=B<=W and (A-B).days>=60:return _('dua bulan lalu')
+	elif M<=B<=N:
+		if B.weekday()==6:return _(H)
+		else:return _(H)+' hari '+_(B.strftime('%A'))
+	elif O<=B<=P and A.weekday()==B.weekday():return _('dua minggu lalu')
+	elif Q<=B<=R and A.weekday()==B.weekday():return _('tiga minggu lalu')
+	elif S<=B<=T:return _('bulan ini')
+	elif U<=B<=V and (A-B).days>=30:return _('bulan lalu')
+	elif W<=B<=X and (A-B).days>=60:return _('dua bulan lalu')
 	return naturalday(B)

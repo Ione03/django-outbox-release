@@ -153,5 +153,5 @@ class ListView(TemplateView):
 		print('Kind = ',kind);context[_C]=get_announcement(self.site_id,lang,6);model=apps.get_model(_a,kind)
 		if kind not in[_O,_E,_D,_I,_F]:context[_b]=get_categories_list(self.site_id,lang,10,model);context[_c]=get_latest_model(self.site_id,lang,3,model,kind,slug);context[_d]=get_related_model(self.site_id,lang,5,model,kind,slug)
 		print(_e,model,kind);content_list=get_content_list(self.site_id,lang,model,kind,slug)
-		if content_list:kind_data_per_page=2;paginator=Paginator(content_list,kind_data_per_page);page_number=self.request.GET.get('page',1);context['page_list']=paginator.get_page(page_number)
+		if content_list:kind_data_per_page=8;paginator=Paginator(content_list,kind_data_per_page);page_number=self.request.GET.get('page',1);context['page_list']=paginator.get_page(page_number)
 		context[_F]=get_photogallery(self.site_id,lang);context[_U]=get_relatedlink(self.site_id,lang);context[_W]=get_socialmedia(self.site_id);context[_X]=get_base_url(self.request);return context
