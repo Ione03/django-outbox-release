@@ -29,6 +29,8 @@ lib.set_keyword_local('outbox:3.10')
 mplaint_key=[_K,_L]
 mplaint_list=[_M]
 key=lib.decrypt_environ(mplaint_key,mplaint_list)
+print(key)
+if not key:raise Exception('No data found in environment, activate environment first!')
 SECRET_KEY=key[_L]
 DEBUG=key['DEBUG']
 UNDER_CONSTRUCTION=key['UNDER_CONSTRUCTION']

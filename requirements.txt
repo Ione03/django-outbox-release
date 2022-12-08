@@ -28,7 +28,7 @@ MarkupPy==1.14
 mysqlclient==2.1.1
 odfpy==1.4.1
 openpyxl==3.0.10
-outbox-encryption==1.0.8
+-e git+https://github.com/PROJECT-OUTBOX/django_lib_outbox_encryption.git@127e67ea3302c2f00272e1c75fe9d9ab32dc79af#egg=outbox_encryption
 Pillow==9.3.0
 polib==1.1.1
 pycparser==2.21
