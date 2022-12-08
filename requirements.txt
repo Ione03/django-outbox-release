@@ -28,8 +28,8 @@ MarkupPy==1.14
 mysqlclient==2.1.1
 odfpy==1.4.1
 openpyxl==3.0.10
-outbox-encryption==1.0.7
-Pillow==9.2.0
+outbox-encryption==1.0.8
+Pillow==9.3.0
 polib==1.1.1
 pycparser==2.21
 python-decouple==3.6

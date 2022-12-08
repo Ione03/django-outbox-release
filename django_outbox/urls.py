@@ -11,6 +11,6 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from .views import redirect_service
 from core.views import register
 urlpatterns=[path(_('secret-admin/'),admin.site.urls),path('',include('core.urls')),path('accounts/',include('django.contrib.auth.urls'),name='login'),path('register/',register,name='register')]
-urlpatterns+=i18n_patterns(path('',redirect_service),path('ckeditor/',include('ckeditor_uploader.urls')),path('ckeditor/upload/',login_required(ckeditor_views.upload),name='ckeditor_upload'),path('ckeditor/browse/',never_cache(login_required(ckeditor_views.browse)),name='ckeditor_browse'),path(_('edu/'),include('education.urls')),path(_('dashboard/'),include('backend.urls')))
+urlpatterns+=i18n_patterns(path('',redirect_service),path('ckeditor/',include('ckeditor_uploader.urls')),path('ckeditor/upload/',login_required(ckeditor_views.upload),name='ckeditor_upload'),path('ckeditor/browse/',never_cache(login_required(ckeditor_views.browse)),name='ckeditor_browse'),path(_('edu')+'/',include('education.urls')),path(_('dashboard')+'/',include('backend.urls')))
 if settings.DEBUG:urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 else:urlpatterns+=staticfiles_urlpatterns()
