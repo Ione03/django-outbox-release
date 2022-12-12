@@ -1,20 +1,25 @@
-_T='youtube'
-_S='plain-text'
-_R='extraPlugins'
-_Q='pasteFilter'
-_P='toolbarCanCollapse'
-_O='toolbar'
-_N='bootstrap4'
+_Y='youtube'
+_X='plain-text'
+_W='extraPlugins'
+_V='pasteFilter'
+_U='toolbarCanCollapse'
+_T='toolbar'
+_S='bootstrap4'
+_R='MEDIA_ROOT'
+_Q='STATIC_ROOT'
+_P='DB_NAME'
+_O='DB_ENGINE'
+_N='ENGINE'
 _M='ALLOWED_HOSTS'
 _L='SECRET_KEY'
 _K='DB_PASSWORD'
 _J='/dashboard'
-_I=False
-_H='default'
-_G='key'
-_F='secret'
-_E='client_id'
-_D='APP'
+_I='key'
+_H='secret'
+_G='client_id'
+_F='APP'
+_E='default'
+_D=False
 _C='id'
 _B='NAME'
 _A=True
@@ -25,11 +30,10 @@ lib=OutboxEncryption(BASE_DIR)
 lib.set_keyword_local('django-outbox-dev')
 lib.set_keyword_local('outbox')
 lib.set_keyword_local('env_outbox')
-lib.set_keyword_local('outbox:3.10')
+lib.set_keyword_local('django_outbox_release_v2:3.8')
 mplaint_key=[_K,_L]
 mplaint_list=[_M]
 key=lib.decrypt_environ(mplaint_key,mplaint_list)
-print(key)
 if not key:raise Exception('No data found in environment, activate environment first!')
 SECRET_KEY=key[_L]
 DEBUG=key['DEBUG']
@@ -40,19 +44,25 @@ MIDDLEWARE=['django.middleware.security.SecurityMiddleware','django.contrib.sess
 ROOT_URLCONF='django_outbox.urls'
 TEMPLATES=[{'BACKEND':'django.template.backends.django.DjangoTemplates','DIRS':[BASE_DIR/'templates'],'APP_DIRS':_A,'OPTIONS':{'context_processors':['django.template.context_processors.debug','django.template.context_processors.request','django.contrib.auth.context_processors.auth','django.contrib.messages.context_processors.messages','education.processor.context_outbox','backend.processor.context_outbox']}}]
 WSGI_APPLICATION='django_outbox.wsgi.application'
-DATABASES={_H:{'ENGINE':key['DB_ENGINE'],_B:key['DB_NAME'],'USER':key['DB_USER'],'PASSWORD':key[_K],'HOST':key['DB_HOST'],'PORT':key['DB_PORT']}}
+DB_TYPE=key['DB_TYPE']
+found=_D
+if DB_TYPE:
+	if DB_TYPE=='sqlite':found=_A;DATABASES={_E:{_N:key[_O],_B:BASE_DIR/key[_P]}}
+if not found:DATABASES={_E:{_N:key[_O],_B:key[_P],'USER':key['DB_USER'],'PASSWORD':key[_K],'HOST':key['DB_HOST'],'PORT':key['DB_PORT']}}
 AUTH_PASSWORD_VALIDATORS=[{_B:'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},{_B:'django.contrib.auth.password_validation.MinimumLengthValidator'},{_B:'django.contrib.auth.password_validation.CommonPasswordValidator'},{_B:'django.contrib.auth.password_validation.NumericPasswordValidator'}]
 LANGUAGE_CODE=_C
 TIME_ZONE='Asia/Makassar'
 USE_I18N=_A
 USE_L10N=_A
-USE_TZ=_I
-STATIC_URL='static/'
+USE_TZ=_D
 DEFAULT_AUTO_FIELD='django.db.models.BigAutoField'
-STATIC_ROOT=BASE_DIR/'staticfiles'
+STATIC_URL='/static/'
+tmp=key.get(_Q)
+STATIC_ROOT=key[_Q]if tmp else BASE_DIR/'staticfiles'
 STATICFILES_DIRS=[BASE_DIR/'static']
 MEDIA_URL='/media/'
-MEDIA_ROOT=BASE_DIR/'media'
+tmp=key.get(_R)
+MEDIA_ROOT=key[_R]if tmp else BASE_DIR/'media'
 SITE_ID=1
 LOGIN_REDIRECT_URL=_J
 LOGOUT_REDIRECT_URL=_J
@@ -72,19 +82,19 @@ ACCOUNT_LOGIN_REDIRECT_URL=_J
 ACCOUNT_AUTHENTICATION_METHOD='email'
 ACCOUNT_UNIQUE_EMAIL=_A
 ACCOUNT_USER_MODEL_USERNAME_FIELD=None
-ACCOUNT_USERNAME_REQUIRED=_I
+ACCOUNT_USERNAME_REQUIRED=_D
 ACCOUNT_LOGOUT_ON_GET=_A
-CRISPY_TEMPLATE_PACK=_N
+CRISPY_TEMPLATE_PACK=_S
 CKEDITOR_UPLOAD_PATH='uploads/'
 CKEDITOR_BASEPATH='/static/ckeditor/ckeditor/'
 CKEDITOR_RESTRICT_BY_USER=_A
-CKEDITOR_CONFIGS={_H:{'width':'100%',_O:'full',_P:_A,_Q:_S,'removePlugins':('exportpdf','scayt'),_R:','.join(['texttransform','html5audio','html5video','wordcount',_T,'embedsemantic','autolink','codesnippet','previewgoogledrive','previewdocument'])},'embed_video':{_R:','.join([_T]),_P:_A,_Q:_S,_O:'Custom','toolbar_Custom':[['Source','Iframe'],['Youtube']]}}
-SOCIALACCOUNT_PROVIDERS={'github':{'SCOPE':['user','repo','read:org'],_D:{_E:'85c0e07e059b13f51fa7',_F:'864b498f57989b0c9673d4c26ece9639da235799',_G:''}},'facebook':{_D:{_E:'1599138133769755',_F:'fce558238cc11cfb1e321e24dbdb808a',_G:''}},'instagram':{_D:{_E:'1661150634264663',_F:'d230d65cf872859e0b9c57d07491ed84',_G:''}},'google':{_D:{_E:'52853440607-t3jdk23e1ku0ic77r4fgkekgr7vpd75b.apps.googleusercontent.com',_F:'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',_G:''}}}
+CKEDITOR_CONFIGS={_E:{'width':'100%',_T:'full',_U:_A,_V:_X,'removePlugins':('exportpdf','scayt'),_W:','.join(['texttransform','html5audio','html5video','wordcount',_Y,'embedsemantic','autolink','codesnippet','previewgoogledrive','previewdocument'])},'embed_video':{_W:','.join([_Y]),_U:_A,_V:_X,_T:'Custom','toolbar_Custom':[['Source','Iframe'],['Youtube']]}}
+SOCIALACCOUNT_PROVIDERS={'github':{'SCOPE':['user','repo','read:org'],_F:{_G:'85c0e07e059b13f51fa7',_H:'864b498f57989b0c9673d4c26ece9639da235799',_I:''}},'facebook':{_F:{_G:'1599138133769755',_H:'fce558238cc11cfb1e321e24dbdb808a',_I:''}},'instagram':{_F:{_G:'1661150634264663',_H:'d230d65cf872859e0b9c57d07491ed84',_I:''}},'google':{_F:{_G:'52853440607-t3jdk23e1ku0ic77r4fgkekgr7vpd75b.apps.googleusercontent.com',_H:'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',_I:''}}}
 from django.utils.translation import gettext_lazy as _
 LANGUAGES=(_C,_('Indonesia')),('en',_('English'))
 LOCALE_PATHS=[BASE_DIR/'locale/']
 PARLER_DEFAULT_LANGUAGE_CODE=_C
-PARLER_LANGUAGES={1:({'code':_C},{'code':'en'}),_H:{'fallbacks':[_C],'hide_untranslated':_I}}
-CRISPY_TEMPLATE_PACK=_N
+PARLER_LANGUAGES={1:({'code':_C},{'code':'en'}),_E:{'fallbacks':[_C],'hide_untranslated':_D}}
+CRISPY_TEMPLATE_PACK=_S
 HITCOUNT_KEEP_HIT_IN_DATABASE={'months':3}
 HITCOUNT_KEEP_HIT_ACTIVE={'hours':1}

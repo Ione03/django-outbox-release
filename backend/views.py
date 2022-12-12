@@ -107,6 +107,9 @@ from menu.menus import Menus
 from .forms import *
 from core.forms import PhotoForm
 from core.views import download_image
+from django.contrib.contenttypes.models import ContentType
+from hitcount.models import HitCount,Hit
+import datetime,calendar
 mMsgBox=msgbox.ClsMsgBox()
 def save_tags(tag_list,obj_master):
 	i=0
@@ -680,3 +683,8 @@ def location_update(request,uuid):
 	else:messages.info(request,mMsgBox.get(_X));context[_F]=LocationForm(instance=post)
 	return render(request,template,context)
 def location_delete(request,uuid):context={};site_id=get_site_id(request);data=Location.objects.filter(site_id=site_id,uuid=uuid);post=get_object_or_404(data);tmp=post.title;post.delete();messages.info(request,mMsgBox.get(_Y,tmp));return redirect(reverse_lazy(_g))
+def add_months(sourcedate,months):month=sourcedate.month-1+months;year=sourcedate.year+month//12;month=month%12+1;day=min(sourcedate.day,calendar.monthrange(year,month)[1]);return datetime.date(year,month,day)
+def hitcount_ajax(request):
+	A='created__date';tgl=datetime.datetime.now();lst=[];site_id=get_site_id(request);content_type_id=ContentType.objects.get(app_label='sites',model='site');content_type_id=content_type_id.id if content_type_id else _C;print('content_type_id = ',content_type_id);hitcount_id=HitCount.objects.filter(content_type_id=content_type_id,object_pk=site_id).first();hitcount_id=hitcount_id.id if hitcount_id else _C;print('hitcount_id = ',hitcount_id);start_date=add_months(tgl,-3);start_date=datetime.datetime(start_date.year,start_date.month,1,0,0,0);print('start_date=',start_date);res=calendar.monthrange(tgl.year,tgl.month);day=res[1];end_date=datetime.datetime(tgl.year,tgl.month,day,23,59,59);print('end_date=',end_date);hit=Hit.objects.filter(hitcount_id=hitcount_id,created__range=(start_date,end_date)).values(A).annotate(count=Count(_A)).order_by(A);cat=[];val=[]
+	for i in hit:tmp=[];dtime=i[A];cat.append(dtime.strftime('%Y-%m'));val.append(i['count'])
+	lst.append(cat);lst.append(val);return JsonResponse(lst,safe=_B)

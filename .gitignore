@@ -1,8 +1,4 @@
 media/
 staticfiles/
-backend/__pycache__/
-django_outbox/__pycache__/
-education/__pycache__/
-education/migrations/__pycache__/
-education/templatetags/__pycache__/
-db/
+*.pyc
+*.sqlite3

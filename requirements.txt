@@ -25,12 +25,13 @@ django-widget-tweaks==1.4.12
 et-xmlfile==1.1.0
 idna==3.4
 MarkupPy==1.14
-mysqlclient==2.1.1
+#mysqlclient==2.1.1
 odfpy==1.4.1
 openpyxl==3.0.10
--e git+https://github.com/PROJECT-OUTBOX/django_lib_outbox_encryption.git@127e67ea3302c2f00272e1c75fe9d9ab32dc79af#egg=outbox_encryption
+outbox-encryption==1.0.15
 Pillow==9.3.0
 polib==1.1.1
+protobuf==3.20.1
 pycparser==2.21
 python-decouple==3.6
 pytz==2022.5
