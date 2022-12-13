@@ -95,7 +95,7 @@ def get_categories_list(site_id,lang,max_data,model):
 	if obj:
 		all=0
 		for i in obj:all+=i[B]
-		print(obj[0]);categories_list.append(obj[0]);categories_all={A:0,B:all,'name':'All',_L:'all'};categories_list.insert(0,categories_all);return categories_list
+		categories_list.append(obj[0]);categories_all={A:0,B:all,'name':'All',_L:'all'};categories_list.insert(0,categories_all);return categories_list
 def get_latest_model(site_id,lang,max_data,model,kind,slug):subquery_foto=get_photo(kind);return model.objects.translated(lang).filter(site_id=site_id).annotate(file_path=subquery_foto).exclude(slug=slug).order_by(_B)[:max_data]
 def get_related_model(site_id,lang,max_data,model,kind,slug):
 	subquery_foto=get_photo(kind);req_no_of_random_items=max_data;qs=model.objects.translated(lang).filter(site_id=site_id).exclude(slug=slug)
@@ -119,7 +119,6 @@ class IndexView(TemplateView):
 	def get(self,request,*args,**kwargs):
 		self.site_id=get_site_id(request);service=service_exists(request)
 		if not service:raise Http404(_R%(request.get_host(),_S))
-		print('request.session.session_key = ',request.session.session_key)
 		if request.session.session_key:obj=Site.objects.get(id=self.site_id);hit_count=HitCount.objects.get_for_object(request,obj);hit_count_response=HitCountMixin.hit_count(request,hit_count)
 		template=get_template(self.site_id);self.template_name=template+'index.html';return super(IndexView,self).get(request,*(args),**kwargs)
 	def get_context_data(self,*args,**kwargs):context=super(IndexView,self).get_context_data(*(args),**kwargs);context[_T]=get_menu_group(self.site_id);agency=get_agency_info(self.site_id);context.update(agency);statistic=get_statistic(self.site_id,_M);context.update(statistic);context[_G]=get_logo(self.site_id);lang=get_active_language_choices()[0];context[_Y]=get_banner(self.site_id);context[_C]=get_announcement(self.site_id,lang,4);context[_D]=get_slideshow(self.site_id,lang);context['dailyalert']=get_dailyalert(self.site_id,lang);context[_E]=get_greeting(self.site_id,lang);context[_H]=get_events(self.site_id,lang);context[_F]=get_photogallery(self.site_id,lang);context[_I]=get_videogallery(self.site_id,lang);context[_U]=get_relatedlink(self.site_id,lang);context[_J]=get_news(self.site_id,lang);context[_K]=get_article(self.site_id,lang);context[_V]=get_document(self.site_id,lang);context[_W]=get_socialmedia(self.site_id);context['location']=get_location(self.site_id,lang);context[_X]=get_base_url(self.request);return context

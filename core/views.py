@@ -19,19 +19,19 @@ def register(request):
 	else:A=forms.CustomUserCreationForm(label_suffix='')
 	return render(B,'registration/register.html',{'form':A})
 def create_unique_name(request):A=get_site_id(request);B=datetime.now();return str(A)+'-'+B.strftime('%Y%m%d-%H%M%S-%f')
-def download_image(request,url):D=create_unique_name(request);B=settings.MEDIA_ROOT;A='youtube/';E=os.makedirs(B/A,exist_ok=_A);print('create dir = ',E);F='.jpg';A=A+D+F;C=B/A;print(C);urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler({'http':'proxy.server:3128'})));urllib.request.urlretrieve(url,C);return A
+def download_image(request,url):D=create_unique_name(request);E=settings.MEDIA_ROOT;A='youtube/';B=os.path.join(E,A);F=os.makedirs(B,exist_ok=_A);print('create dir = ',F);G='.jpg';A=A+D+G;C=B;print(C);urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler({'http':'proxy.server:3128'})));urllib.request.urlretrieve(url,C);return A
 def upload_photo(request,width,height):
 	L='JPEG';K='image/png';J='.jpeg';H=request;G='/';A=H.FILES.get('photo');M=Image.open(io.BytesIO(A.read()));B=M.resize((width,height),Image.ANTIALIAS);N=create_unique_name(H);F=datetime.now();O=F.strftime('%Y');P=F.strftime('%m');Q=F.strftime('%d')
-	if A.content_type=='image/gif':D='.gif'
-	elif A.content_type=='image/jpeg':D=J
-	elif A.content_type=='image/jpg':D='.jpg'
-	elif A.content_type==K:D=J
-	elif A.content_type=='image/bmp':D='.bmp'
-	else:D='.ief'
-	E=settings.MEDIA_ROOT;C='crop/'+O+G+P+G+Q+G;R=os.makedirs(E/C,exist_ok=_A);C=C+N+D
+	if A.content_type=='image/gif':C='.gif'
+	elif A.content_type=='image/jpeg':C=J
+	elif A.content_type=='image/jpg':C='.jpg'
+	elif A.content_type==K:C=J
+	elif A.content_type=='image/bmp':C='.bmp'
+	else:C='.ief'
+	R=settings.MEDIA_ROOT;D='crop/'+O+G+P+G+Q+G;E=os.path.join(R,D);S=os.makedirs(E,exist_ok=_A);D=D+N+C
 	if A.content_type==K:
 		B.load();I=Image.new('RGB',B.size,(255,255,255))
-		if B.mode=='RGBA':I.paste(B,mask=B.getchannel('A'));I.save(E/C,L,quality=80,optimize=_A)
-		else:B.save(E/C,L,quality=80,optimize=_A)
-	else:B.save(E/C,quality=80,optimize=_A)
-	return HttpResponse(C)
+		if B.mode=='RGBA':I.paste(B,mask=B.getchannel('A'));I.save(E,L,quality=80,optimize=_A)
+		else:B.save(E,L,quality=80,optimize=_A)
+	else:B.save(E,quality=80,optimize=_A)
+	return HttpResponse(D)

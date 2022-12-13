@@ -15,7 +15,7 @@ django-cors-headers==3.13.0
 django-crispy-forms==1.14.0
 django-cryptography==1.1
 django-etc==1.4.0
--e git+https://github.com/PROJECT-OUTBOX/django-hitcount.git@0e501db64713f04e9ded3881cc80459e37eeae19#egg=django_hitcount
+django-hitcount @ git+https://github.com/PROJECT-OUTBOX/django-hitcount.git@3958dbca99551892bd72550886aecfb5b436f1ae
 django-import-export==3.0.1
 django-js-asset==2.0.0
 django-outbox-menu==1.0.15
