@@ -13,7 +13,7 @@ _N='ENGINE'
 _M='ALLOWED_HOSTS'
 _L='SECRET_KEY'
 _K='DB_PASSWORD'
-_J='/dashboard'
+_J='/id/dashboard/'
 _I='key'
 _H='secret'
 _G='client_id'
@@ -24,6 +24,7 @@ _C='id'
 _B='NAME'
 _A=True
 from pathlib import Path
+import os
 BASE_DIR=Path(__file__).resolve().parent.parent
 from encryption import OutboxEncryption
 lib=OutboxEncryption(BASE_DIR)
@@ -42,12 +43,12 @@ ALLOWED_HOSTS=key[_M]
 INSTALLED_APPS=['django.contrib.admin','django.contrib.auth','django.contrib.contenttypes','django.contrib.sessions','django.contrib.messages','django.contrib.staticfiles','django.contrib.sites','django.contrib.humanize','core','education','region','menu','ckeditor','ckeditor_uploader','parler','hitcount','crispy_forms','corsheaders']
 MIDDLEWARE=['django.middleware.security.SecurityMiddleware','django.contrib.sessions.middleware.SessionMiddleware','django.middleware.locale.LocaleMiddleware','corsheaders.middleware.CorsMiddleware','django.middleware.common.CommonMiddleware','django.middleware.csrf.CsrfViewMiddleware','django.contrib.auth.middleware.AuthenticationMiddleware','django.contrib.messages.middleware.MessageMiddleware','django.middleware.clickjacking.XFrameOptionsMiddleware','education.request_exposer.RequestExposerMiddleware','hitcount.request_exposer.RequestExposerMiddleware']
 ROOT_URLCONF='django_outbox.urls'
-TEMPLATES=[{'BACKEND':'django.template.backends.django.DjangoTemplates','DIRS':[BASE_DIR/'templates'],'APP_DIRS':_A,'OPTIONS':{'context_processors':['django.template.context_processors.debug','django.template.context_processors.request','django.contrib.auth.context_processors.auth','django.contrib.messages.context_processors.messages','education.processor.context_outbox','backend.processor.context_outbox']}}]
+TEMPLATES=[{'BACKEND':'django.template.backends.django.DjangoTemplates','DIRS':[os.path.join(BASE_DIR,'templates')],'APP_DIRS':_A,'OPTIONS':{'context_processors':['django.template.context_processors.debug','django.template.context_processors.request','django.contrib.auth.context_processors.auth','django.contrib.messages.context_processors.messages','education.processor.context_outbox','backend.processor.context_outbox']}}]
 WSGI_APPLICATION='django_outbox.wsgi.application'
 DB_TYPE=key['DB_TYPE']
 found=_D
 if DB_TYPE:
-	if DB_TYPE=='sqlite':found=_A;DATABASES={_E:{_N:key[_O],_B:BASE_DIR/key[_P]}}
+	if DB_TYPE=='sqlite':found=_A;DATABASES={_E:{_N:key[_O],_B:key[_P]}}
 if not found:DATABASES={_E:{_N:key[_O],_B:key[_P],'USER':key['DB_USER'],'PASSWORD':key[_K],'HOST':key['DB_HOST'],'PORT':key['DB_PORT']}}
 AUTH_PASSWORD_VALIDATORS=[{_B:'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},{_B:'django.contrib.auth.password_validation.MinimumLengthValidator'},{_B:'django.contrib.auth.password_validation.CommonPasswordValidator'},{_B:'django.contrib.auth.password_validation.NumericPasswordValidator'}]
 LANGUAGE_CODE=_C
@@ -58,11 +59,11 @@ USE_TZ=_D
 DEFAULT_AUTO_FIELD='django.db.models.BigAutoField'
 STATIC_URL='/static/'
 tmp=key.get(_Q)
-STATIC_ROOT=key[_Q]if tmp else BASE_DIR/'staticfiles'
-STATICFILES_DIRS=[BASE_DIR/'static']
+STATIC_ROOT=key[_Q]if tmp else os.path.join(BASE_DIR,'staticfiles')
+STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
 MEDIA_URL='/media/'
 tmp=key.get(_R)
-MEDIA_ROOT=key[_R]if tmp else BASE_DIR/'media'
+MEDIA_ROOT=key[_R]if tmp else os.path.join(BASE_DIR,'media')
 SITE_ID=1
 LOGIN_REDIRECT_URL=_J
 LOGOUT_REDIRECT_URL=_J
@@ -77,7 +78,7 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS=1
 ACCOUNT_EMAIL_REQUIRED=_A
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT=5
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT=86400
-ACCOUNT_LOGOUT_REDIRECT_URL='/accounts/login/'
+ACCOUNT_LOGOUT_REDIRECT_URL='/id/accounts/login/'
 ACCOUNT_LOGIN_REDIRECT_URL=_J
 ACCOUNT_AUTHENTICATION_METHOD='email'
 ACCOUNT_UNIQUE_EMAIL=_A
@@ -92,7 +93,7 @@ CKEDITOR_CONFIGS={_E:{'width':'100%',_T:'full',_U:_A,_V:_X,'removePlugins':('exp
 SOCIALACCOUNT_PROVIDERS={'github':{'SCOPE':['user','repo','read:org'],_F:{_G:'85c0e07e059b13f51fa7',_H:'864b498f57989b0c9673d4c26ece9639da235799',_I:''}},'facebook':{_F:{_G:'1599138133769755',_H:'fce558238cc11cfb1e321e24dbdb808a',_I:''}},'instagram':{_F:{_G:'1661150634264663',_H:'d230d65cf872859e0b9c57d07491ed84',_I:''}},'google':{_F:{_G:'52853440607-t3jdk23e1ku0ic77r4fgkekgr7vpd75b.apps.googleusercontent.com',_H:'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',_I:''}}}
 from django.utils.translation import gettext_lazy as _
 LANGUAGES=(_C,_('Indonesia')),('en',_('English'))
-LOCALE_PATHS=[BASE_DIR/'locale/']
+LOCALE_PATHS=[os.path.join(BASE_DIR,'locale')]
 PARLER_DEFAULT_LANGUAGE_CODE=_C
 PARLER_LANGUAGES={1:({'code':_C},{'code':'en'}),_E:{'fallbacks':[_C],'hide_untranslated':_D}}
 CRISPY_TEMPLATE_PACK=_S
