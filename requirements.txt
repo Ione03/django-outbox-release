@@ -1,10 +1,10 @@
 asgiref==3.5.2
 beautifulsoup4==4.11.1
-certifi==2022.9.24
+certifi==2022.12.7
 cffi==1.15.1
 chardet==5.0.0
 charset-normalizer==2.1.1
-cryptography==38.0.1
+cryptography==38.0.4
 defusedxml==0.7.1
 diff-match-patch==20200713
 Django==4.1.2
@@ -31,7 +31,7 @@ openpyxl==3.0.10
 outbox-encryption==1.0.15
 Pillow==9.3.0
 polib==1.1.1
-protobuf==3.20.1
+protobuf==4.21.11
 pycparser==2.21
 python-decouple==3.6
 pytz==2022.5
