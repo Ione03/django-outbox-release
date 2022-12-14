@@ -7,4 +7,4 @@ def phone_number(number):
 	elif A:C=A[:3];D=A[3:6];E=A[6:9];F=A[9:];return'('+C+')'+' '+D+B+E+B+F
 	return''
 @register.filter
-def replace_with(string,find_replace=',|_'):A=find_replace;print(A);B,C=A.split('|');print('[',B,C,']');return string.replace(B,C)
+def replace_with(string,find_replace=',|_'):A,B=find_replace.split('|');return string.replace(A,B)
