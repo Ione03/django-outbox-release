@@ -1,0 +1,70 @@
+{% extends 'education/nurture/base-detail.html' %}
+{% load static %}
+{% load hitcount_tags %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="row justify-content-left">
+        <div class="col col-lg-4">
+          <hr>
+          <h5 class="section-title">Search</h5>
+          <input placeholder="Search Slider" style="border-radius: 10px;" class="form-control">
+          <hr>
+          <a href="#" class="btn btn-primary btn-sm" style="width: 100%;" data-aos="fade-up" data-aos-delay="200">Search <span class="icon-search"></span></a>
+          <hr>
+          {% for i in announcement|slice:":2" %}
+          {% if i.priority == 1 %}
+          <div class="col col-lg-12">
+            <div class="block-v2 color-3" data-aos="fade-up" data-aos-delay="200">
+              <img src="/media/{{ i.file_path }}" alt="Image" class="img-fluid">
+              <hr>
+              <a href="">
+                <h3>{{ i.title }}</h3>
+              </a>
+              <p>{{ i.content|striptags|truncatechars_html:160 }}<a style="color: aliceblue;"
+                  href="pages/description/">Read More</a></p>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+          <br>
+          <!-- {% for i in news|slice:":3"  %}
+              <div class="mb-5 e desc mx-" data-aos="fade-up" data-aos-delay="200">
+                <img src="/media/{{i.file_path}}" alt="Image" class="img-fluid">
+                <hr>
+                <h6 class="mb-4"><a href="#">{{i.title|safe}}</a></h6>
+                <div class="meta "><span class="icon-calendar mr-2"></span><span>{{ i.created_at }}</span>
+                  &nbsp; | &nbsp; <span class="icon-eye mr-2"></span><span>{% get_hit_count for content_detail %} </span>
+                </div>
+                <hr>
+              </div>
+          {% endfor %} -->
+        </div>
+        <div class="col-lg-7 text-center text-lg-left">
+          <div class="mb-5 e desc mx-" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="mb-4"><a href="#">{{content_detail.title|safe}}</a></h2>
+            <img src="/media/{{content_detail.file_path}}" alt="Image" class="img-fluid">
+            <hr>
+            <div class="meta "><span class="icon-calendar mr-2"></span><span>{{ content_detail.created_at }}</span>
+              &nbsp; | &nbsp; <span class="icon-eye mr-2"></span><span>{% get_hit_count for content_detail %} </span>
+              &nbsp; | &nbsp; Share <span class="icon-share mr-2"></span><a href="#"><span
+                  class="icon-facebook mr-2"></span></a>
+              <a href="#"><span class="icon-twitter mr-2"></span></a> <a href="#"><span
+                  class="icon-instagram mr-2"></span></a>
+            </div>
+            <hr>
+            <p style="text-align: justify;">{{ content_detail.content|safe }} Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Debitis, cumque illum accusantium maiores commodi harum esse fugit amet velit laboriosam
+              ducimus vero nam ut? Dolor ullam neque hic cupiditate nam!</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock %}
