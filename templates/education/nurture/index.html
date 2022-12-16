@@ -41,7 +41,7 @@
           <img src="/media/{{ i.file_path }}" alt="Image" class="img-fluid">
           <hr>
           <a href=""><h3>{{ i.title }}</h3></a>
-          <p>{{ i.content|safe|truncatechars_html:160 }}<a style="color: aliceblue;" href="pages/description/">Read More</a></p>
+          <p>{{ i.content|striptags|truncatechars_html:160 }}<a style="color: aliceblue;" href="pages/description/">Read More</a></p>
         </div>
       </div>
       {% endif %}
@@ -78,7 +78,7 @@
             {% for i in slideshow %}
             <div class="">
               <figure class="img-wrap">
-                <img src="/media/{{ i.file_path }}" alt="Image" class="img-fluid">
+                <a href="slideshow/detail/{{i.slug}}/"><img src="/media/{{ i.file_path }}" alt="Image" class="img-fluid"></a>
               </figure>
             </div>
             {% endfor %}
@@ -111,7 +111,7 @@
       </div>
     </div>
     <div class="row align-items-stretch">
-      {% for i in news  %}
+      {% for i in news|slice:":6"  %}
       <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
         <div class="media-h d-flex h-100">
           <figure>
@@ -120,7 +120,7 @@
           <div class="media-h-body">
             <h2 class="mb-3"><a href="#">{{ i.title }}</a></h2>
             <div class="meta "><span class="icon-calendar mr-2"></span><span>{{ i.created_at }}</span></div>
-            <p style="text-align: justify;">{{ i.content|safe|truncatechars_html:160 }}<a href="pages/description/">Read More...</a></p>
+            <p style="text-align: justify;">{{ i.content|striptags|truncatechars_html:160 }}<a href="pages/description/">Read More...</a></p>
           </div>
         </div>
       </div>
@@ -146,6 +146,7 @@
               </h2>
               <div id="{{i.slug}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion_1">
                 <div class="accordion-body">
+                  <img src="/media/{{ i.file_path }}" alt="Image" class="img-fluid">
                   {{ i.content|safe|truncatechars_html:160 }} <a href="">Read More</a>
                 </div>
               </div>
@@ -186,7 +187,7 @@
               <img src="/media/{{ i.file_path }}" alt="Image" class="img-fluid" />
               <hr>
               <div class="meta ">
-                <h6 class="mb-3"><a href="#">{{ i.title }}</a></h6>
+                <h6 class="mb-3"><a href="#">{{ i.title|truncatechars_html:25 }}</a></h6>
                 <small class="icon-calendar mr-2"></small><small>{{ i.created_at }}</small>
               </div>
               <p>{{ i.content|safe|truncatechars_html:160 }}<a href="">Read More</a></p>

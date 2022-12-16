@@ -67,6 +67,8 @@
                         <li><a href="https://wa.me/{{ whatsapp }}">{{ whatsapp }}</a></li>
                     </ul>
                 </div>
+                {% for i in location  %} {{ i.embed|safe }}{% endfor %}
+
             </div>
         </div>
         <div class="row mt-5">
