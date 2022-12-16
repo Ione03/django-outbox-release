@@ -1,0 +1,1 @@
+<div class=tg-tickerbox > <span>Daily Alerts:</span> <div id=tg-ticker  class="tg-ticker owl-carousel"> {% for i in dailyalert %} <div class=item > <div class=tg-description > {% if i.link %} <p><a href="{{i.link}}" target=_blank > {{i.alert|truncatewords_html:20}}</a></p> {% else %} <p>{{i.alert|truncatewords_html:20}}</p> {% endif %} </div> </div> {% endfor %} </div> </div>

@@ -1,3 +1,3 @@
 from django.urls import path,include
 from .views import IndexView,DetailView,ListView,DescriptionView,GreetingView
-urlpatterns=[path('',IndexView.as_view(),name='education_index'),path('<str:kind>/detail/<slug:slug>/',DetailView.as_view(),name='education_detail'),path('<str:kind>/list/<slug:slug>/',ListView.as_view(),name='education_list'),path('pages/description/',DescriptionView.as_view(),name='pages_description'),path('pages/greeting/',GreetingView.as_view(),name='pages_greeting')]
+urlpatterns=[path('',IndexView.as_view(),name='education_index'),path('<str:kind>/detail/<slug:slug>/',DetailView.as_view(),name='education_detail'),path('<str:kind>/list/<slug:slug>/',ListView.as_view(),name='education_list'),path('description/detail/',DescriptionView.as_view(),name='pages_description'),path('greeting/detail/',GreetingView.as_view(),name='pages_greeting')]

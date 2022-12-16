@@ -1,0 +1,1 @@
+<div class="tg-widget tg-widgetdownload"> <div class=tg-widgettitle > <h3>Documents</h3> </div> <div class=tg-widgetcontent > <ul> {% for i in document %} <li> <a href="/media/{{i.file_path_doc}}"> <i class="fa fa-paperclip"></i> <span>{{i.name}} ({{i.size|filesizeformat}})</span> </a> {% endfor %} </ul> </div> </div>
