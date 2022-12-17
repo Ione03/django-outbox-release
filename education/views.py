@@ -81,7 +81,7 @@ def get_statistic(site_id,is_cache=False):
 	tmp_cache+=selisih;context[tmp]=tmp_cache;return context
 def get_banner(site_id):subquery_foto=get_photo(_Z);return Banner.objects.filter(site_id=site_id).annotate(file_path=subquery_foto)[:5]
 def get_announcement(site_id,lang,max_data):subquery_foto=get_photo(_C);return Announcement.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by('priority',_B)[:max_data]
-def get_slideshow(site_id,lang):subquery_foto=get_photo(_H);return SlideShow.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_B)[:10]
+def get_slideshow(site_id,lang):subquery_foto=get_photo(_H);obj=SlideShow.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_B)[:10];obj=list(obj);random.shuffle(obj);return obj
 def get_dailyalert(site_id,lang):return DailyAlert.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).order_by(_B)[:10]
 def get_greeting(site_id,lang):subquery_foto=get_photo(_F);return Greeting.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_B)[:1]
 def get_events(site_id,lang):subquery_foto=get_photo(_Q);return Events.objects.language(lang).filter(site_id=site_id,status=OptStatusPublish.PUBLISHED).annotate(file_path=subquery_foto).order_by(_B)[:7]
@@ -102,9 +102,10 @@ def get_latest_model(site_id,lang,max_data,model,kind,slug=_A):
 	subquery_foto=get_photo(kind)
 	if slug:return model.objects.translated(lang).filter(site_id=site_id).annotate(file_path=subquery_foto).exclude(slug=slug).order_by(_B)[:max_data]
 	else:return model.objects.translated(lang).filter(site_id=site_id).annotate(file_path=subquery_foto).order_by(_B)[:max_data]
+def get_random_items(qs,max_data):possible_ids=list(qs.values_list('id',flat=_I));req_no_of_random_items=len(possible_ids)+1 if len(possible_ids)+1<max_data else max_data;possible_ids=random.choices(possible_ids,k=req_no_of_random_items);return qs.filter(pk__in=possible_ids)
 def get_related_model(site_id,lang,max_data,model,kind,slug):
-	subquery_foto=get_photo(kind);req_no_of_random_items=max_data;qs=model.objects.translated(lang).filter(site_id=site_id).exclude(slug=slug)
-	if qs:possible_ids=list(qs.values_list('id',flat=_I));possible_ids=random.choices(possible_ids,k=req_no_of_random_items);random_paint=qs.filter(pk__in=possible_ids).annotate(file_path=subquery_foto);return random_paint
+	subquery_foto=get_photo(kind);qs=model.objects.translated(lang).filter(site_id=site_id).exclude(slug=slug)
+	if qs:random_paint=get_random_items(qs,max_data);random_paint=random_paint.annotate(file_path=subquery_foto);return random_paint
 def get_content_detail(site_id,lang,model,kind,slug):
 	print(site_id,lang,model,kind,slug);subquery_foto=get_photo(kind);obj=model.objects.translated(lang).filter(site_id=site_id,slug=slug).annotate(file_path=subquery_foto)
 	if obj:return obj.get()

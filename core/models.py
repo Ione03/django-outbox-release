@@ -22,8 +22,8 @@ from shortuuid.django_fields import ShortUUIDField
 from .abstract import BaseAbstractModel
 from .managers import *
 import os
-class OptBillingType(models.IntegerChoices):TRANSACTION_BASE=1;TIME_BASE=2;ADVERTISE_BASE=3
-class OptServiceType(models.IntegerChoices):EDUCATION=1
+class OptBillingType(models.IntegerChoices):TRANSACTION_BASE=1,_('Transaction Base');TIME_BASE=2,_('Time Base');ADVERTISE_BASE=3,_('Advertise Base')
+class OptServiceType(models.IntegerChoices):EDUCATION=1,_('Education');TRAVEL=2,_('Travel')
 class Photo(BaseAbstractModel):
 	file_path=models.ImageField();content_type=models.ForeignKey(ContentType,on_delete=models.CASCADE);object_id=models.PositiveIntegerField();content_object=GenericForeignKey()
 	class Meta:verbose_name=_('photo');verbose_name_plural=_('photos')
