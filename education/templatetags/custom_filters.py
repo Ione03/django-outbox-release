@@ -1,3 +1,5 @@
+from django_outbox.common import get_natural_datetime
+import datetime
 from django import template
 register=template.Library()
 @register.filter
@@ -8,3 +10,5 @@ def phone_number(number):
 	return''
 @register.filter
 def replace_with(string,find_replace=',|_'):A,B=find_replace.split('|');return string.replace(A,B)
+@register.filter
+def natural_datetime(data_datetime):A=datetime.datetime.now();return get_natural_datetime(data_datetime,A)
