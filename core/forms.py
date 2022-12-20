@@ -1,4 +1,5 @@
-_A='file_path'
+_B='file_path'
+_A=False
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Column,Layout,Row
 from django.forms import ModelForm
@@ -7,9 +8,19 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from .models import Photo
+from django.contrib.auth import get_user_model
+from allauth.account.forms import LoginForm,ResetPasswordForm,SignupForm
 class PhotoForm(ModelForm):
 	str_file_path=forms.CharField(widget=forms.HiddenInput())
-	class Meta:model=Photo;fields=[_A]
-	def __init__(A,*B,**C):super().__init__(*(B),**C);A.helper=FormHelper();A.helper.form_method='post';A.helper.layout=Layout(Row(Column(_A,css_class='form-group col-md-12 mb-0')))
+	class Meta:model=Photo;fields=[_B]
+	def __init__(A,*B,**C):super().__init__(*(B),**C);A.helper=FormHelper();A.helper.form_method='post';A.helper.layout=Layout(Row(Column(_B,css_class='form-group col-md-12 mb-0')))
 class CustomUserCreationForm(UserCreationForm):
-	class Meta(UserCreationForm.Meta):fields=UserCreationForm.Meta.fields+('email',)
+	is_accept_terms=forms.BooleanField(required=True)
+	class Meta(UserCreationForm.Meta):model=get_user_model();fields='email','name','is_accept_terms'
+class UserLoginForm(LoginForm):
+	def __init__(A,*B,**C):super(UserLoginForm,A).__init__(*(B),**C);A.helper=FormHelper(A);A.helper.form_show_labels=_A
+class UserResetPasswordForm(ResetPasswordForm):
+	def __init__(A,*B,**C):super(UserResetPasswordForm,A).__init__(*(B),**C);A.helper=FormHelper(A);A.helper.form_show_labels=_A
+class UserSignupForm(SignupForm):
+	is_accept_terms=forms.BooleanField(required=True)
+	def __init__(A,*B,**C):super(UserSignupForm,A).__init__(*(B),**C);A.helper=FormHelper(A);A.helper.form_show_labels=_A

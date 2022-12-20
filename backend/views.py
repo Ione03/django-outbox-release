@@ -729,7 +729,7 @@ def get_hitcount_weekly(request):
 		if hit_2:
 			for j in hit_2:cat.insert(0,week_begin_2.strftime(_AV)+' - '+week_end_2.strftime(_AV));val.insert(0,j[_AW])
 	lst.append(cat);lst.append(val);return lst
-def hitcount_ajax(request,period):
+def hitcount_ajax(request,period='2'):
 	lst=[]
 	if period=='2':lst=get_hitcount_daily(request)
 	elif period=='4':lst=get_hitcount_monthly(request)
