@@ -1,4 +1,6 @@
-_A='upload_photo'
+_B='upload_photo'
+_A='post_login_redirect'
 from django.urls import include,path
-from .views import upload_photo
-urlpatterns=[path('dashboard/upload-photo/<int:width>/<int:height>/',upload_photo,name=_A),path('dashboard/upload-photo/<int:width>/<int:height>/<int:save_as_png>/',upload_photo,name=_A)]
+from backend.views import PostLoginView
+from .views import force_authenticate_out,post_login_redirect,pre_login,redirect_to_main,social_media,upload_photo
+urlpatterns=[path('dashboard/upload-photo/<int:width>/<int:height>/',upload_photo,name=_B),path('dashboard/upload-photo/<int:width>/<int:height>/<int:save_as_png>/',upload_photo,name=_B),path('pre-login/',pre_login,name='pre_login'),path('post-login/',PostLoginView.as_view(),name='post_login'),path('post-login/redirect/',post_login_redirect,name=_A),path('post-login/redirect/<uuid:uuid>/',post_login_redirect,name=_A),path('post-login/redirect/<int:user_id>/<uuid:uuid>/',post_login_redirect,name=_A),path('login-social-media/<str:social_media>/<int:site_id>/',redirect_to_main,name='redirect_to_main'),path('social-media/<int:user_id>/<uuid:uuid>/',social_media,name='social_media'),path('force-authenticate-out/',force_authenticate_out,name='force_authenticate_out')]

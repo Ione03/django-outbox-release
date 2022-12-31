@@ -1,6 +1,6 @@
-from core.models import Service
 from django.http import Http404
 from django.shortcuts import redirect
+from core.models import Service
 from .common import get_site_id
 def service_exists(request):A=get_site_id(request);return Service.objects.filter(site_id=A).values_list('kind',flat=True)
 def redirect_service(request):

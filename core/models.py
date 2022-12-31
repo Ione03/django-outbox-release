@@ -33,7 +33,7 @@ class Agency(BaseAbstractModel,TranslatableModel):
 	class Meta:verbose_name=_('agency');verbose_name_plural=_('agencies')
 	def __str__(self):return self.name
 class User(AbstractBaseUser,PermissionsMixin):
-	email=models.EmailField(_('email address'),max_length=100,unique=_A);name=models.CharField(_(_C),max_length=100,blank=_A);is_active=models.BooleanField(_('active'),default=_A);is_staff=models.BooleanField(_('staff'),default=_A);is_superuser=models.BooleanField(_('super user'),default=_B);avatar=GenericRelation(Photo);agency=models.ManyToManyField(Agency,related_name='user_agencies');menu_group=models.ForeignKey(MenuGroup,on_delete=models.PROTECT,blank=_A,null=_A,verbose_name=_('menu group'));is_main_user=models.BooleanField(default=_B,blank=_A);is_first_enter=models.BooleanField(default=_A,blank=_A);is_management=models.BooleanField(default=_A,blank=_A);date_joined=models.DateTimeField(_('date joined'),auto_now_add=_A,editable=_B);last_login=models.DateTimeField(_('last login'),null=_A,blank=_A);objects=UserManager();USERNAME_FIELD=_D;EMAIL_FIELD=_D;REQUIRED_FIELDS=[]
+	email=models.EmailField(_('email address'),max_length=100,unique=_A);name=models.CharField(_(_C),max_length=100,blank=_A);is_active=models.BooleanField(_('active'),default=_A);is_staff=models.BooleanField(_('staff'),default=_A);is_superuser=models.BooleanField(_('super user'),default=_B);avatar=GenericRelation(Photo);agency=models.ManyToManyField(Agency);menu_group=models.ForeignKey(MenuGroup,on_delete=models.PROTECT,blank=_A,null=_A,verbose_name=_('menu group'));is_main_user=models.BooleanField(default=_B,blank=_A);is_first_enter=models.BooleanField(default=_A,blank=_A);is_management=models.BooleanField(default=_A,blank=_A);date_joined=models.DateTimeField(_('date joined'),auto_now_add=_A,editable=_B);last_login=models.DateTimeField(_('last login'),null=_A,blank=_A);objects=UserManager();USERNAME_FIELD=_D;EMAIL_FIELD=_D;REQUIRED_FIELDS=[]
 	class Meta:verbose_name=_('user');verbose_name_plural=_('users')
 	def __str__(self):return self.email
 	def get_absolute_url(self):return'/users/%i/'%self.pk
@@ -45,6 +45,10 @@ class Template(BaseAbstractModel):
 	site=models.ManyToManyField(Site,related_name='templates_site');name=models.CharField(_(_C),max_length=50);rel_path=models.CharField(_('relative path'),max_length=255);is_frontend=models.BooleanField(default=_A)
 	class Meta:verbose_name=_('template');verbose_name_plural=_('templates')
 	def __str__(self):return self.name
+class UserLog(BaseAbstractModel):
+	site=models.ForeignKey(Site,on_delete=models.CASCADE);user=models.ForeignKey(User,on_delete=models.CASCADE,blank=_A,null=_A);user_agent=models.CharField(max_length=255,editable=_B);ip_address=models.CharField(max_length=40,editable=_B);is_expired=models.BooleanField(default=_B);social_media=models.CharField(max_length=20)
+	class Meta:verbose_name=_('userlog');verbose_name_plural=_('userlogs')
+	def __str__(self):return self.social_media
 @receiver(signals.post_save,sender=Agency)
 def _update_shortuuid(sender,instance,**kwargs):
 	tmp=str(instance.id);print(tmp);lebar=len(tmp)

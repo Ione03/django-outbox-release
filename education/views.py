@@ -31,24 +31,23 @@ _D='photogallery'
 _C='announcement'
 _B='-updated_at'
 _A=None
-from core.common import get_agency_info
-from django.views.generic import TemplateView
-from django_outbox.common import get_site_id,get_template
-from .models import *
-from django.db.models import OuterRef,Subquery,Count
-from django_outbox.views import service_exists
-from django.http import Http404
-from django.contrib.sites.models import Site
+import calendar,datetime,random
 from django.apps import apps
-import datetime,calendar,random
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.sites.models import Site
+from django.core.cache import cache
+from django.core.paginator import Paginator
+from django.db.models import Count,OuterRef,Subquery
+from django.http import Http404
+from django.views.generic import TemplateView
+from hitcount.models import Hit,HitCount
+from hitcount.views import HitCountMixin
 from menu.models import MenuGroup
 from parler.utils import get_active_language_choices
-from hitcount.models import HitCount,Hit
-from hitcount.views import HitCountMixin
-from django.contrib.contenttypes.models import ContentType
-from django.core.cache import cache
-from django_outbox.common import get_week_date
-from django.core.paginator import Paginator
+from core.common import get_agency_info
+from django_outbox.common import get_site_id,get_template,get_week_date
+from django_outbox.views import service_exists
+from .models import *
 def get_menu_group(site_id):
 	menugroup=MenuGroup.objects.filter(site_id=site_id,kind=1)
 	if menugroup:return menugroup[0].id
@@ -63,7 +62,7 @@ def get_base_url(request):
 		if len(my_path)>2:return my_path[0]+A+my_path[1]+A+my_path[2]
 def add_months(sourcedate,months):month=sourcedate.month-1+months;year=sourcedate.year+month//12;month=month%12+1;day=min(sourcedate.day,calendar.monthrange(year,month)[1]);return datetime.date(year,month,day)
 def get_statistic(site_id,is_cache=False):
-	C='user_agent';B=')';A='load from DB (';context={};tgl=datetime.datetime.now();content_type_id=ContentType.objects.get(app_label='sites',model='site');content_type_id=content_type_id.id if content_type_id else _A;hitcount_id=HitCount.objects.filter(content_type_id=content_type_id,object_pk=site_id).first();hitcount_id=hitcount_id.id if hitcount_id else _A;jam00=datetime.datetime(tgl.year,tgl.month,tgl.day+1,0,1,0);timeout=(jam00-tgl).seconds;selisih=0;tmp='hit_today';tmp_cache=cache.get(tmp,version=site_id)
+	C='user_agent';B=')';A='load from DB (';context={};tgl=datetime.datetime.now();content_type_id=ContentType.objects.get(app_label='sites',model='site');content_type_id=content_type_id.id if content_type_id else _A;hitcount_id=HitCount.objects.filter(content_type_id=content_type_id,object_pk=site_id).first();hitcount_id=hitcount_id.id if hitcount_id else _A;tgl00=tgl+datetime.timedelta(days=1);jam00=datetime.datetime(tgl00.year,tgl00.month,tgl00.day+1,0,1,0);timeout=(jam00-tgl00).seconds;selisih=0;tmp='hit_today';tmp_cache=cache.get(tmp,version=site_id)
 	if not(is_cache and tmp_cache is not _A):print(A+tmp+B);hit_today=Hit.objects.filter(hitcount_id=hitcount_id,created__year=tgl.year,created__month=tgl.month,created__day=tgl.day);tmp_cache=hit_today.count()if hit_today else 1;cache.set(tmp,tmp_cache,timeout,version=site_id);context[tmp]=tmp_cache
 	else:hit_today=Hit.objects.filter(hitcount_id=hitcount_id,created__year=tgl.year,created__month=tgl.month,created__day=tgl.day);context[tmp]=hit_today.count()if hit_today else 1;selisih=context[tmp]-tmp_cache;print('selisih = ',selisih)
 	tmp='hit_yesterday';tmp_cache=cache.get(tmp,version=site_id)
