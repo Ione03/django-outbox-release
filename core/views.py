@@ -24,7 +24,7 @@ def register(request):
 	else:A=forms.CustomUserCreationForm(label_suffix='')
 	return render(B,'registration/register.html',{'form':A})
 def create_unique_name(request):A=get_site_id(request);B=datetime.now();return str(A)+'-'+B.strftime('%Y%m%d-%H%M%S-%f')
-def download_image(request,url):D=create_unique_name(request);E=settings.MEDIA_ROOT;A='youtube/';B=os.path.join(E,A);F=os.makedirs(B,exist_ok=_A);print('create dir = ',F);G='.jpg';A=A+D+G;C=B;print(C);urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler({'http':'proxy.server:3128'})));urllib.request.urlretrieve(url,C);return A
+def download_image(request,url):B=create_unique_name(request);F=settings.MEDIA_ROOT;A='youtube/';C=os.path.join(F,A);G=os.makedirs(C,exist_ok=_A);print('create dir = ',G);D='.jpg';A=A+B+D;H=B+D;E=os.path.join(C,H);print('full name = ',E);urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler({'http':'proxy.server:3128'})));urllib.request.urlretrieve(url,E);return A
 def upload_photo(request,width,height,save_as_png=0):
 	O='JPEG';N='image/png';M='.jpeg';L='data.content_type=';I=save_as_png;H=request;A=H.FILES.get('photo');P=Image.open(io.BytesIO(A.read()));B=P.resize((width,height),Image.ANTIALIAS);F=create_unique_name(H);G=datetime.now();Q=G.strftime('%Y');R=G.strftime('%m');S=G.strftime('%d');print(L,A.content_type)
 	if A.content_type=='image/gif':C='.gif'
@@ -70,9 +70,9 @@ def social_media(request,user_id,uuid):
 	else:return HttpResponse({'session key not valid'})
 	A=None;C=Service.objects.filter(site_id=B.site.id)
 	if C:
-		C=C.get();print('agency id=',C.agency.id);A=User.objects.filter(id=user_id)
+		C=C.get();A=User.objects.filter(id=user_id)
 		if A:
-			A=A.get();E=_B;print(A.agency.all())
+			A=A.get();E=_B
 			for G in A.agency.all():
 				if G.id==C.agency.id:E=_A;break
 			if not E:return HttpResponse({'user not registered in this site'})
