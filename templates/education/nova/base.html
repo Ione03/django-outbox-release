@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'education/nova/snippets/header.html' %}
+
+<body class="page-index">
+
+  {% include 'education/nova/snippets/menu.html' %}
+    
+  {% block content %}
+  {% endblock %}
+
+  {% include 'education/nova/snippets/footer.html' %}
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  {% include 'education/nova/snippets/scripts.html' %}
+</body>
+
+</html>
