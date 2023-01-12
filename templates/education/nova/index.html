@@ -64,9 +64,8 @@
               <div class="swiper-slide">
                 <div class="item">
                   <center><img src="/media/{{ i.file_path }}" class="img-fluid" width="800px" alt=""></center>
-                  <h3 class="mb-3">{{ i.title }}</h3>
-                  <h4 class="mb-3">Optio reiciendis accusantium iusto architecto at quia minima maiores quidem,
-                    dolorum.</h4>
+                  <hr>
+                  <a href="slideshow/detail/{{ i.slug }}"><h3 class="mb-3">{{ i.title }}</h3></a>
                   <p>
                     {{ i.content|safe|truncatechars_html:160 }}
                   </p>
@@ -102,7 +101,7 @@
             </div>
             <h3 class="post-title">{{ i.title }}</h3>
             <p>{{ i.content|safe|truncatechars_html:160 }}</p>
-            <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i
+            <a href="news/detail/{{ i.slug }}" class="readmore stretched-link"><span>Read More</span><i
                 class="bi bi-arrow-right"></i></a>
           </div>
         </div>
@@ -154,11 +153,11 @@
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <img src="/media/{{ i.file_path }}" class="img-fluid" alt="">
             <div class="portfolio-info">
-              <a href="#"><h4>{{ i.title }}</h4></a>
+              <a href="announcement/detail/{{ i.slug }}"><h4>{{ i.title }}</h4></a>
               <p>{{ i.content|safe|truncatechars_html:100}}</p>
               <a href="/media/{{ i.file_path }}" title="{{ i.title }}" data-gallery="portfolio-gallery-app"
                 class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-              <a href="#" title="More Details" class="details-link"><i
+              <a href="announcement/detail/{{ i.slug }}" title="More Details" class="details-link"><i
                   class="bi bi-link-45deg"></i></a>
             </div>
           </div><!-- End Portfolio Item -->
@@ -194,7 +193,7 @@
             </div>
             <h3 class="post-title">{{ i.title }}</h3>
             <p>{{ i.content|safe|truncatechars_html:160 }}</p>
-            <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i
+            <a href="events/detail/{{ i.slug }}" class="readmore stretched-link"><span>Read More</span><i
                 class="bi bi-arrow-right"></i></a>
           </div>
         </div>
@@ -226,7 +225,7 @@
             </div>
             <h3 class="post-title">{{ i.title }}</h3>
             <p>{{ i.content|safe|truncatechars_html:160 }}</p>
-            <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i
+            <a href="article/detail/{{ i.slug }}" class="readmore stretched-link"><span>Read More</span><i
                 class="bi bi-arrow-right"></i></a>
           </div>
         </div>
