@@ -3,19 +3,18 @@
 
 
 {% block content %}
-  <!-- ======= Breadcrumbs ======= -->
-  <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/blog-header.jpg');">
+<!-- ======= Breadcrumbs ======= -->
+<div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/blog-header.jpg');">
     <div class="container position-relative d-flex flex-column align-items-center">
 
-      <h2>{{ kind }}</h2>
-      <ol>
-        <li><a href="{{base_url}}/">Home</a></li>
-        <li><a href="{{base_url}}/{{kind}}/list/all/">{{ kind }}</a></li>
-        <li>Detail</li>
-      </ol>
-
+        <h2>{{ kind }}</h2>
+        <ol>
+            <li><a href="{{base_url}}/">Home</a></li>
+            <li><a href="{{base_url}}/{{kind}}/list/all/">{{ kind }}</a></li>
+            <li>Detail</li>
+        </ol>
     </div>
-  </div><!-- End Breadcrumbs -->
+</div><!-- End Breadcrumbs -->
 <!-- ======= Blog Details Section ======= -->
 <section id="blog" class="blog">
     <div class="container" data-aos="fade-up">
@@ -31,7 +30,8 @@
                             <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
                                     href="blog-details.html">{{ content_detail.admin.name }}</a></li>
                             <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
-                                    href="blog-details.html"><time datetime="2020-01-01">{{ content_detail.created_at }}</time></a></li>
+                                    href="blog-details.html"><time datetime="2020-01-01">{{ content_detail.created_at
+                                        }}</time></a></li>
                         </ul>
                     </div><!-- End meta top -->
                     <div class="content">
@@ -40,7 +40,7 @@
                     <div class="meta-bottom">
                         <i class="bi bi-tags"></i>
                         <ul class="tags">
-                            {% comment %} {% for i in   %}{% endfor %} {% endcomment %}
+                            {% comment %} {% for i in %}{% endfor %} {% endcomment %}
                             <li><a href="#">Creative</a></li>
                             <li><a href="#">Tips</a></li>
                             <li><a href="#">Marketing</a></li>
@@ -202,11 +202,8 @@
                 </div><!-- End blog comments -->
 
             </div>
-
             <div class="col-lg-4" data-aos="fade-up" data-aos-delay="400">
-
                 <div class="sidebar ps-lg-4">
-
                     <div class="sidebar-item search-form">
                         <h3 class="sidebar-title">Search</h3>
                         <form action="" class="mt-3">
@@ -214,20 +211,19 @@
                             <button type="submit"><i class="bi bi-search"></i></button>
                         </form>
                     </div><!-- End sidebar search formn-->
-
                     <div class="sidebar-item categories">
                         <h3 class="sidebar-title">{{ kind }} Categories</h3>
                         <ul class="mt-3">
                             {% for i in categories_list %}
-                            <li><a href="{{base_url}}/{{kind}}/list/{{i.slug}}/">{{ i.name }} <span>({{i.count}})</span></a></li>
+                            <li><a href="{{base_url}}/{{kind}}/list/{{i.slug}}/">{{ i.name }}
+                                    <span>({{i.count}})</span></a></li>
                             {% endfor %}
                         </ul>
                     </div><!-- End sidebar categories-->
-
                     <div class="sidebar-item recent-posts">
                         <h3 class="sidebar-title">Latest {{ kind }}</h3>
                         <div class="mt-3">
-                            {% for i in latest_kind  %}
+                            {% for i in latest_kind %}
                             <div class="post-item mt-3">
                                 <img src="/media/{{i.file_path}}" alt="" class="flex-shrink-0">
                                 <div>
@@ -236,24 +232,20 @@
                                 </div>
                             </div><!-- End recent post item-->
                             {% endfor %}
-                        </div>
 
-                    </div><!-- End sidebar recent posts-->
-
-                    <div class="sidebar-item tags">
-                        <h3 class="sidebar-title">{{ kind }} Tags</h3>
-                        <ul class="mt-3">
-                            {% for i in tags_list %}
-                            <li><a href="#">{{ i.name }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div><!-- End sidebar tags-->
-
-                </div><!-- End Blog Sidebar -->
-
+                        </div><!-- End sidebar recent posts-->
+                        <div class="sidebar-item tags">
+                            <h3 class="sidebar-title">{{ kind }} Tags</h3>
+                            <ul class="mt-3">
+                                {% for i in tags_list %}
+                                <li><a href="#">{{ i.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div><!-- End sidebar tags-->
+                    </div><!-- End Blog Sidebar -->
+                </div>
             </div>
         </div>
-
     </div>
 </section><!-- End Blog Details Section -->
 
