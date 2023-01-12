@@ -719,8 +719,8 @@ def get_hitcount_daily(request):
 	for i in hit:tmp=[];dtime=i[A];cat.append(dtime.strftime(_AV));val.append(i[_AW])
 	lst.append(cat);lst.append(val);return lst
 def get_hitcount_monthly(request):
-	A='created__month';lst=[];tgl=datetime.datetime.now();site_id=get_site_id(request);content_type_id=ContentType.objects.get(app_label=_AS,model='site');content_type_id=content_type_id.id if content_type_id else _C;hitcount_id=HitCount.objects.filter(content_type_id=content_type_id,object_pk=site_id).first();hitcount_id=hitcount_id.id if hitcount_id else _C;start_date=add_months(tgl,-3);start_date=datetime.datetime(start_date.year,start_date.month,1,0,0,0);print(_AT,start_date);res=calendar.monthrange(tgl.year,tgl.month);day=res[1];end_date=datetime.datetime(tgl.year,tgl.month,day,23,59,59);print(_AU,end_date);hit=Hit.objects.filter(hitcount_id=hitcount_id,created__range=[start_date,end_date]).values(A).annotate(count=Count(_A)).order_by(A);print(hit);cat=[];val=[]
-	for i in hit:tmp=[];dtime=i[A];print('dtime=',dtime);cat.append(calendar.month_abbr[dtime]);val.append(i[_AW])
+	B='created__month';A='created__year';lst=[];tgl=datetime.datetime.now();site_id=get_site_id(request);content_type_id=ContentType.objects.get(app_label=_AS,model='site');content_type_id=content_type_id.id if content_type_id else _C;hitcount_id=HitCount.objects.filter(content_type_id=content_type_id,object_pk=site_id).first();hitcount_id=hitcount_id.id if hitcount_id else _C;start_date=add_months(tgl,-3);start_date=datetime.datetime(start_date.year,start_date.month,1,0,0,0);print(_AT,start_date);res=calendar.monthrange(tgl.year,tgl.month);day=res[1];end_date=datetime.datetime(tgl.year,tgl.month,day,23,59,59);print(_AU,end_date);hit=Hit.objects.filter(hitcount_id=hitcount_id,created__range=[start_date,end_date]).values(A,B).annotate(count=Count(_A)).order_by(A,B);print(hit);cat=[];val=[]
+	for i in hit:tmp=[];dtime=i[B];dtime_year=i[A];cat.append(calendar.month_abbr[dtime]+' '+str(dtime_year));val.append(i[_AW])
 	lst.append(cat);lst.append(val);return lst
 def get_hitcount_weekly(request):
 	lst=[];tgl=datetime.datetime.now();site_id=get_site_id(request);content_type_id=ContentType.objects.get(app_label=_AS,model='site');content_type_id=content_type_id.id if content_type_id else _C;hitcount_id=HitCount.objects.filter(content_type_id=content_type_id,object_pk=site_id).first();hitcount_id=hitcount_id.id if hitcount_id else _C;start_date=add_months(tgl,-3);start_date=datetime.datetime(start_date.year,start_date.month,1,0,0,0);print(_AT,start_date);res=calendar.monthrange(tgl.year,tgl.month);day=res[1];end_date=datetime.datetime(tgl.year,tgl.month,day,23,59,59);print(_AU,end_date);hit=Hit.objects.filter(hitcount_id=hitcount_id,created__range=[start_date,end_date]);week_begin,week_end=get_week_date(tgl.year,tgl.month,tgl.day);cat=[];val=[]
@@ -732,6 +732,6 @@ def get_hitcount_weekly(request):
 def hitcount_ajax(request,period='2'):
 	lst=[]
 	if period=='2':lst=get_hitcount_daily(request)
-	elif period=='4':lst=get_hitcount_monthly(request)
 	elif period=='3':lst=get_hitcount_weekly(request)
+	elif period=='4':lst=get_hitcount_monthly(request)
 	return JsonResponse(lst,safe=_B)
