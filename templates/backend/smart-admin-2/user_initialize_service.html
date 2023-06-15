@@ -1,0 +1,445 @@
+{% extends "allauth/base.html" %}
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block header %}
+    <div id="logo-group">
+        <span id="logo"> <img src="{% static 'backend/smart-admin-2/img/logo.png' %}" alt="SmartAdmin"> 
+        <!--LOGIN INFO-->
+        
+        <!-- <div class="pull-right"> -->
+            <!-- <button class="btn btn-primary pull-right">
+                Sign Up
+            </button> -->
+        <!-- </div> {% get_current_language as LANGUAGE_CODE %}-->
+            
+        </span>                
+    </div>
+    <!--<span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">{% trans "Create an Account" %}?</span> <a href="login.html" class="btn btn-danger">{% trans "Sign Up" %}</a> </span>-->
+    <span id="extr-page-header-space"> 
+        <span class="hidden-mobile hiddex-xs">Back to Login Page</span> 
+        
+        
+        <a href="{% url 'account_login' %}" class="btn btn-danger">Login</a> 
+    </span>
+    
+
+    <!-- <span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">Need an account?</span> <a href="register.html" class="btn btn-danger">Create account</a> </span> -->
+{% endblock %}
+
+{% block content %}
+	<!-- MAIN CONTENT -->
+    <div id="content" class="container">
+       <!-- active domain = {{active_domain}} <br>
+       main domain = {{main_domain}}
+        -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+                {% include "allauth/snippets/login_info.html" %}
+                
+                <div class="row">
+                    <!-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <h5 class="about-heading">About SmartAdmin - Are you up to date?</h5>
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.
+                        </p>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <h5 class="about-heading">Not just your average template!</h5>
+                        <p>
+                            Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi voluptatem accusantium!
+                        </p>
+                    </div> -->
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                <!-- <div class="provider text-center">
+                {% get_providers as socialaccount_providers %}
+                {% if socialaccount_providers %}
+                    <h5 class="text-center"> - {% trans "Sign in using" %} -</h5>
+                    <ul class="list-inline text-center">
+                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}                
+                    </ul>
+                                    <ul class="list-inline text-center">
+                                        <li>
+                                            <a href="javascript:void(0);" class="btn btn-primary btn-circle"><i class="fa fa-facebook"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" class="btn btn-info btn-circle"><i class="fa fa-twitter"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" class="btn btn-warning btn-circle"><i class="fa fa-linkedin"></i></a>
+                                        </li>
+                                    </ul> 
+                    <h5 class="text-center"> - {% trans "or" %} -</h5>
+                {% endif %}
+                </div> -->
+
+                <div class="well no-padding">
+                    <form method="POST" id="init-form" class="smart-form client-form">
+                        {% csrf_token %}
+                        <header>
+                            {% trans "Inisialisasi Data" %}
+                        </header>
+
+                        <fieldset>
+                            {% comment %}
+                                {% if form.errors %}
+                                    <p style="color: crimson ;"><b>{% trans "Nama Pengguna dan Sandi Masih Salah. Silahkan Coba Kembali." %}</b></p><br>
+                                {% endif %}
+                            {% endcomment %}
+
+                            <section>
+                                <label class="label">Login Sebagai :
+                                
+                                    <!-- <i class="icon-append fa fa-user"></i> -->
+                                &nbsp;<strong>{{ user.name|default:user.email|lower }} </strong>
+                                <div class="pull-right"> 
+                                    <a href="{% url 'account_logout' %}">Logout</a>
+                                </div>
+                                </label>
+                            </section>
+                            <hr><br>
+
+                            {% if service %}
+                                <section>
+                                    <label class="label">Pilih Nama Service:</label>                                                                            
+                                        {% for i in service %}
+                                            <p>
+                                                <a href="javascript:void(0)" onclick="on_click_service('/dashboard/user/initialize/service-ajax/{{agency_id}}/{{i.id}}')">{{i.get_kind_display}} :</a> {{i.site.domain}}
+                                            </p>                                
+                                        {% endfor %}                                                                    
+                                </section>
+
+                            {% else %}
+                                <section>
+                                    <label class="label">Jenis Service</label>
+                                    <label class="select">
+                                        <select id="select_service" name="select_service">
+                                            <option value="0">--pilih salah satu--</option>                                        
+                                            {% for i, j in service_opt %}                                            
+                                                <option value="{{i}}">{{j}}</option>                                        
+                                            {% endfor %}
+                                            
+                                        </select> <i></i> 
+                                    </label>
+                                </section>                                                    
+
+                            {% endif %}
+
+                            <!-- <section>
+                                <label class="label">{{form.login.label}}</label>
+                                <label class="input"> <i class="icon-append fa fa-user"></i>                                    
+                                    {{form.login}}
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> {% trans "Please enter email address" %}</b>
+                                </label>
+
+                                <label class="label">Select default</label>
+                                <label class="select">
+                                    <select>
+                                        <option value="0">Choose name</option>
+                                        <option value="1">Alexandra</option>
+                                        <option value="2">Alice</option>
+                                        <option value="3">Anastasia</option>
+                                        <option value="4">Avelina</option>
+                                    </select> <i></i> 
+                                </label>
+                            </section> -->
+
+                            <!--
+                            <section>
+                                <label class="label">{{form.password.label}}</label>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                
+                                    {{form.password}}
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> {% trans "Enter your password" %}</b> </label>
+                                <div class="note">
+                                    <a href="/accounts/password_reset">{% trans "Forgot password" %}?</a>
+                                </div>
+                                
+                                <input type="hidden" name="next" value="/post-login/" />
+                            </section>
+
+                            <section>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="remember" checked="">
+                                    <i></i>{% trans "Stay signed in" %}</label>
+                            </section>
+                            -->
+                        </fieldset>
+                        <footer>
+                            <button id="btn-sign-in" type="submit" class="btn btn-primary">
+                                {% trans "Submit" %}
+                            </button>
+                        </footer>
+                    </form>
+
+                </div>                                                                
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_body %}
+    <!-- replace href social media dengan URL website default -->
+    <!-- <script src="{% static 'backend/smart-admin-2/js/plugin/select2/select2.min.js' %}"></script> -->
+    <script>
+        function on_click_service(param) {
+            // alert('ok');
+            // alert(param);
+
+            $.ajax({
+                url: param,
+                success: function(result) {
+                    // console.log('RESULT',result);
+                    // console.log(result['result']);
+
+                    // APAPUN RESULT, kembalikan ke dashboard
+                    // if (result['result'])
+                    window.location.href = '/dashboard/';
+                        // console.log(param);
+                        // alert(param);
+                        // window.location.href = param.replace('agency-ajax','service');
+                        // window.location.href = param;
+                }
+            });
+        };
+
+        $(function() {
+            // ACTIVE DOMAIN = {{active_domain}}
+            // let active_domain = "{{active_domain}}";            
+            // console.log(active_domain);
+            // url.split('?')[0]
+            let main_domain = "{{main_domain}}";            
+            console.log('maindomain', main_domain);
+            
+            
+                        
+            
+            console.log('baseurl', window.location.host);
+
+            console.log('origin', window.location.origin.toString());
+            
+            let url = window.location.origin.toString();
+            console.log('url',url);
+            
+            let rep = url.replace(window.location.host, main_domain);
+            console.log('replace', rep);
+            if (main_domain !== window.location.host)
+                window.location.href = rep + "/" + "dashboard";
+            
+            //url = window.history.pushState({}, rep, "/" + "dashboard");
+            //window.location.href = url;
+            
+            const queryString = window.location.search;
+            //let queryString =  window.location.origin;
+            const urlParams = new URLSearchParams(queryString);
+            //console.log(urlParams.get('id'));
+            let site_id = "{{site_id}}";                        
+            
+            const session_key = urlParams.get('s');            
+            const user_id = urlParams.get('u');
+            const social_media = urlParams.get('media');
+
+            // console.log(session_key);
+            if (session_key != null) {                
+                // console.log('ada');
+                $(".provider").html(
+                    "<br>" +
+                    "<a href='/social-media/"+ user_id +"/" + session_key + 
+                    "/'><h5><strong><i class='fa fa-"+ social_media +
+                    "'></i> {% trans 'Go to Dashboard Now' %} <i class='fa fa-arrow-circle-right'></i> </strong></h5></a>" +                    
+                    '<h5 class="text-center"> - {% trans "or" %} -</h5>'
+                );
+            }
+            else {
+                $(".socialaccount_provider").each(function() {
+                    tmp = $(this).attr('href');
+                    // console.log('link:', tmp);
+
+                    link = tmp.split("/");
+                    // console.log(link[3]);
+                    if (link.length>3) 
+                        $(this).attr('href', main_domain + '/login-social-media/'+ link[3] + '/' + site_id + '/');
+
+                    // console.log("sesssion = {{request.session.name}} ");
+                    // console.log($(this).attr('href'));
+                });
+            };
+
+            // ?s=0f47ad7b-4861-4109-8b81-b2afeceb7c10
+            // localStorage.setItem('session_key',session_key);
+            // console.log(localStorage.getItem('session_key'));
+
+            // Clear session (s) parameter url on sign in with original way
+            $("#btn-sign-in").click(function() {
+                //alert('do it');
+                //console.log(window.location.pathname);
+                window.history.pushState(null, null, window.location.pathname);
+                localStorage.removeItem('session_key');
+            });
+
+            {% comment %}
+                {% if request.user.is_authenticated %}
+                    console.log('is auth');
+                {% else %}
+                    console.log('is not auth');
+                    $.ajax({
+                        url: "/post-login/force-authenticate/4/",
+                        success: function(result) {
+                            console.log('force authenticate:',result);
+                        }
+                    });
+
+                {% endif %}
+            {% endcomment %}
+
+            // init
+            $('.select2_template').select2({placeholder: "--Pilih salah satu--"});
+
+            $('#select_service').on('change', function (e) {
+                var optionSelected = $("option:selected", this);
+                var valueSelected = this.value;
+                console.log('res', optionSelected, valueSelected);
+
+                $('.select2_template').val('0'); // Select the option with a value of '1'
+                $('.select2_template').trigger('change'); // Notify any JS components that the value changed
+
+                $('.select2_template').select2({
+                    ajax: {
+                        url: "/dashboard/service-change-ajax/" + valueSelected,
+                        delay: 250, // wait 250 milliseconds before triggering the request
+                        dataType: 'json',
+                        data: function (params) {
+                            var query = {
+                                search: params.term,
+                                page: params.page || 1
+                                // type: 'public'
+                            };
+                            // $('#select2_company option:eq(0)').prop('selected',true);
+                            // Query parameters will be ?search=[term]&type=public
+                            return query;
+                        },
+                        processResults: function (data, params) {
+                            params.page = params.page || 1;
+
+                            return {
+                                results: data.results,
+                                pagination: {
+                                    more: (params.page * 10) < data.count_filtered
+                                }
+                            };
+                        },
+                    },
+                    
+                    // theme: 'bootstrap4',
+                    placeholder: "--Pilih salah satu--",
+                    allowClear: false,
+                });
+
+                // $.ajax({
+                //     url: "/dashboard/service-change-ajax/" + valueSelected,
+                //     success: function(result) {
+                //         console.log('service-change-result',result);
+                //     }
+                // });
+                // $('.js-template-ajax').select2({
+                //     ajax: {
+                //         url: "/dashboard/service-change-ajax/" + valueSelected.toString,
+                //         dataType: 'json',
+                //         // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+                //         delay: 250,
+                //         data: function (params) {
+                //             return {
+                //                 q: params.term, // search term
+                //                 page: params.page
+                //             };
+                //         },
+                //         processResults: function (data, params) {
+                //         // parse the results into the format expected by Select2
+                //         // since we are using custom formatting functions we do not need to
+                //         // alter the remote JSON data, except to indicate that infinite
+                //         // scrolling can be used
+                //         params.page = params.page || 1;
+
+                //         return {
+                //             results: data.items,
+                //             pagination: {
+                //             more: (params.page * 30) < data.total_count
+                //             }
+                //         };
+                //         },
+                //         cache: true
+                //     },
+                //     placeholder: 'Search for a repository',
+                // });
+                // alert('complete');
+
+            });
+
+            // update data pre login di tabel UserLog
+            // $.ajax({
+            //     url: "/pre-login/",
+            //     success: function(result) {
+            //         console.log('pre-login:',result);
+            //     }
+            // });
+
+            // set key
+            // localStorage.test = 2;
+
+            // // get key
+            // alert( localStorage.test ); // 2
+
+            // // remove key
+            // delete localStorage.test;
+            // localStorage.active_domain = active_domain;
+            // localStorage.main_domain = main_domain;
+
+            // var different_window = window.open(active_domain);
+
+            // window.MyLib = {};
+            // MyLib.active_domain = active_domain;
+            // MyLib.main_domain = main_domain;
+            // window.open(active_domain);
+
+            // console.log('MyLib = ', MyLib);
+            // different_window.localStorage.setItem("active_domain", active_domain);
+            // different_window.localStorage.setItem("main_domain", main_domain);
+
+            // localstorage only visible on same origin, (same site)
+            // cannot use this type of variable
+            // console.log(different_window.localStorage.active_domain);
+            // console.log(different_window.localStorage.main_domain);
+
+
+            // SOLUSI:
+            // https://stackoverflow.com/questions/2787650/manually-logging-in-a-user-without-password
+            
+            $('form').submit(function () {
+
+
+                // Get the Login Name value and trim it
+                // var name = $.trim($('#agent-name').val());
+                //console.log('name', name);                
+                var select_service = $('#select_service').find(":selected").val();
+                // console.log('select_service', select_service);
+                
+                // Check if empty of not
+
+                var mfind = false;
+                if (select_service==0) {
+                    alert('Jenis Instansi belum dipilih.');
+                    mfind = true;
+                }
+
+                return (!mfind);
+            });
+
+        });
+
+    </script>
+    
+{% endblock %}

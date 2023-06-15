@@ -1,1 +1,335 @@
-{% extends "backend/smart-admin-2/base-crud.html" %} {% load static %} {% load menu_tags %} {% load crispy_forms_tags %} {% load i18n %} {% block breadcrumb %} <div id=ribbon > <span class=ribbon-button-alignment > <span id=refresh  class="btn btn-ribbon" data-action=resetWidgets  data-title=refresh  rel=tooltip  data-placement=bottom  data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true"> <i class="fa fa-refresh"></i> </span> </span> <ol class=breadcrumb > <li>Dashboard {% for i in my_active %} <li>{{i}} {% endfor %} <li>Update Data </ol> </div> {% endblock %} {% block content %} <div id=content > <form method=post  enctype = "multipart/form-data"> {% csrf_token %} <div class=row > <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4"> <h1 class="page-title txt-color-blueDark"> {% for i in my_menu %} {% if i.name in my_active|slice:"1:" %} <i class="fa-fw fa {{ i.icon }}"></i> {% endif %} {% endfor %} {% for i in my_active %} {% if forloop.last %} {{ i }} {% endif %} {% endfor %} <span>> Update Data </span> </h1> </div> <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8"> <ul id=sparks > <li class=sparks-info > {% get_current_language as CURRENT_LANGUAGE %} {% get_available_languages as AVAILABLE_LANGUAGES %} {% get_language_info_list for AVAILABLE_LANGUAGES as languages %} <div class=col > <select name=language  class="form-control custom-scroll" title="Klik untuk memilih bahasa"> {% for language in languages %} {% if language.code == CURRENT_LANGUAGE %} <option value="{{ language.code }}" selected=selected >{{ language.name_local }} {% else %} <option value="{{ language.code }}">{{ language.name_local }} {% endif %} {% endfor %} </select> </div> <li class=sparks-info > <button type=submit  class="btn btn-primary" title=Simpan >Simpan</button> <button id=do_cancel  class="btn btn-danger" type=button  name=button  title=Batal ><i class="fa fa-times"></i> Batal</button> </ul> </div> </div> <section id=widget-grid  class=""> <div class=row > <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> <div class="jarviswidget jarviswidget-color-blueDark" id=wid-id-0  data-widget-colorbutton=false  data-widget-editbutton=false  data-widget-custombutton=false > <header> <span class=widget-icon > <i class="fa fa-pencil"></i> </span> <h2>Update Data </h2> </header> <div> <div class=jarviswidget-editbox > <input class=form-control  type=text > </div> <div class=widget-body > {% if select2 %} <div class=form-group > <label for=id_select2_menu  class=" requiredField" style="width: 100%; "> {{select2}} <select id=id_select2_menu  name=select2_menu  class="form-control select2_menu" style="width: 100%; "> </select> </label> </div> {% endif %} {{ form|crispy }} {% if photo %} {{ photo|crispy }} {% endif %} {% comment %} {% if post_photo %} {% for i in post_photo %} <img src="{{i}}" class=img-thumbnail > {% endfor %} {% endif %} {% endcomment %} <hr class=simple > <div class=text-right > <button type=submit  class="btn btn-primary" title=Simpan >Simpan</button> <button id=do_cancel2  class="btn btn-danger" type=button  name=button  title=Batal ><i class="fa fa-times"></i> Batal</button> </div> </div> </div> </div> </article> </div> <div class=row > <div class=col-sm-12 > </div> </div> </section> </form> </div> {% endblock %} {% block extra_body %} <script> $(document).ready(function() { do_cancel("#do_cancel", "Update Data", "{% url active_page_url %}"); do_cancel("#do_cancel2", "Update Data", "{% url active_page_url %}"); $('.select2_menu').select2({ ajax: { url: '/dashboard/menu-lookup-ajax/', delay: 250, dataType: 'json', data: function (params) { var query = { search: params.term, page: params.page || 1 }; return query; }, processResults: function (data, params) { params.page = params.page || 1; return { results: data.results, pagination: { more: (params.page * 10) < data.count_filtered } }; }, }, theme: 'bootstrap4', placeholder: "ROOT", allowClear: false, }); {% if select2_update %} var select2_update = {{select2_update|safe}}; $(".select2_menu").select2("trigger", "select", { data : select2_update }); {% endif %} }); </script> {% endblock %}
+{% extends "backend/smart-admin-2/base-crud.html" %}
+{% load static %}
+{% load menu_tags %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block breadcrumb %}
+    <div id="ribbon">
+
+        <span class="ribbon-button-alignment"> 
+            <span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true">
+                <i class="fa fa-refresh"></i>
+            </span> 
+        </span>
+
+        <!-- breadcrumb -->
+
+
+        <ol class="breadcrumb">
+            <!-- <li>Home</li><li>Miscellaneous</li><li>Blank Page</li> -->
+            <li>Dashboard</li> 
+            {% for i in my_active %}
+                <li>{{i}}</li>
+            {% endfor %}
+            <li>Update Data</li>
+        </ol>
+        <!-- end breadcrumb -->
+
+        <!-- You can also add more buttons to the
+        ribbon for further usability
+
+        Example below:
+
+        <span class="ribbon-button-alignment pull-right">
+        <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
+        <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
+        <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
+        </span> -->
+
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div id="content">
+        <form method="post" enctype = "multipart/form-data">
+        {% csrf_token %}
+
+        <!-- row -->
+        <div class="row">
+            
+            <!-- col -->
+            <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+                <h1 class="page-title txt-color-blueDark">                                      
+
+                    <!-- PAGE HEADER -->
+                    <!-- <i class="fa-fw fa fa-home"></i> 
+                        Page Header  -->
+                    {% for i in my_menu %}
+                        {% if i.name in my_active|slice:"1:" %}
+                            <i class="fa-fw fa {{ i.icon }}"></i>    
+                        {% endif %}
+                    {% endfor %}
+
+                    {% for i in my_active %}
+                        {% if forloop.last %}
+                            {{ i }}
+                        {% endif %}
+                    {% endfor %}
+
+                    <span>>  
+                        Update Data
+                    </span>
+                </h1>
+            </div>
+            <!-- end col -->
+            
+            <!-- right side of the page with the sparkline graphs -->
+            <!-- col -->
+            <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">                
+                <!-- sparks -->
+                <!--  -->
+                <ul id="sparks">
+                    <li class="sparks-info">
+                        {% get_current_language as CURRENT_LANGUAGE %}                                
+                        {% get_available_languages as AVAILABLE_LANGUAGES %}
+                        {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
+
+                        <!-- <div class="form-group"> -->
+                            <!-- <label class="col-md-2 control-label" for="multiselect1">Pilih Bahasa</label> -->
+                            <div class="col">
+                                <select name="language" class="form-control custom-scroll" title="Klik untuk memilih bahasa">
+                                    {% for language in languages %}                                                
+                                        {% if language.code == CURRENT_LANGUAGE %}
+                                            <option value="{{ language.code }}" selected="selected">{{ language.name_local }}</option>
+                                        {% else %}
+                                            <option value="{{ language.code }}">{{ language.name_local }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        <!-- </div> -->
+                    </li>
+                    <li class="sparks-info">
+                        
+                        
+                        <button type="submit" class="btn btn-primary" title="Simpan">Simpan</button>                        
+                        <button id="do_cancel" class="btn btn-danger" type="button" name="button" title="Batal"><i class="fa fa-times"></i> Batal</button>
+                    </li>
+                </ul>
+
+                <!-- <ul id="sparks">
+                    <li class="sparks-info">
+                        <h5> My Income <span class="txt-color-blue">$47,171</span></h5>
+                        <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
+                            1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
+                        </div>
+                    </li>
+                    <li class="sparks-info">
+                        <h5> Site Traffic <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span></h5>
+                        <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+                            110,150,300,130,400,240,220,310,220,300, 270, 210
+                        </div>
+                    </li>
+                    <li class="sparks-info">
+                        <h5> Site Orders <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
+                        <div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+                            110,150,300,130,400,240,220,310,220,300, 270, 210
+                        </div>
+                    </li>
+                </ul> -->
+                <!-- end sparks -->
+            </div>
+            <!-- end col -->
+            
+        </div>
+        <!-- end row -->
+        
+        <!--
+            The ID "widget-grid" will start to initialize all widgets below 
+            You do not need to use widgets if you dont want to. Simply remove 
+            the <section></section> and you can use wells or panels instead 
+            -->
+        
+        <!-- widget grid -->
+        <section id="widget-grid" class="">
+        
+            <!-- row -->
+            <div class="row">
+                
+                <!-- NEW WIDGET START -->
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    
+                    <!-- Widget ID (each widget will need unique ID)-->
+                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0"
+                            data-widget-colorbutton="false"	
+                            data-widget-editbutton="false"
+                            data-widget-custombutton="false">
+
+                        <!-- widget options:
+                            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+                            
+                            data-widget-colorbutton="false"	
+                            data-widget-editbutton="false"
+                            data-widget-togglebutton="false"
+                            data-widget-deletebutton="false"
+                            data-widget-fullscreenbutton="false"
+                            data-widget-custombutton="false"
+                            data-widget-collapsed="true" 
+                            data-widget-sortable="false"
+                            
+                        -->
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
+                            <h2>Update Data </h2>				
+                            
+                        </header>
+        
+                        <!-- widget div-->
+                        <div>
+                            
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+                                <input class="form-control" type="text">	
+                            </div>
+                            <!-- end widget edit box -->
+                            
+                            <!-- widget content -->
+                            <div class="widget-body">
+                               
+                                {% if select2 %}
+                                    <div class="form-group"> 
+                                        <label for="id_select2_menu" class=" requiredField" style="width: 100%; "> {{select2}}
+                                            <select id="id_select2_menu" name="select2_menu" 
+                                            class="form-control select2_menu" style="width: 100%; ">
+                                            </select>
+                                        </label>
+                                    </div>
+                                {% endif %}
+
+                                {{ form|crispy }}
+                                {% if photo %}
+                                    {{ photo|crispy }}
+                                {% endif %}
+
+                                {% comment %}
+                                    {% if post_photo %}
+                                        <!-- <div class="row"> -->
+                                            {% for i in post_photo %}
+                                                <!-- <div class="form-group"> -->
+                                                    <!-- <button type="submit" class="close">
+                                                        <span>&times;</span>
+                                                    </button> -->
+                                                    <img src="{{i}}" class="img-thumbnail">
+                                                    <!-- img-thumbnail -->
+                                                <!-- </div> -->
+                                            {% endfor %}
+                                        <!-- </div> -->
+                                    {% endif %}
+                                {% endcomment %}
+
+                                <hr class="simple">
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-primary" title="Simpan">Simpan</button>
+                                    <button id="do_cancel2" class="btn btn-danger" type="button" name="button" title="Batal"><i class="fa fa-times"></i> Batal</button>
+                                </div>
+                            </div>
+                            <!-- end widget content -->
+                            
+                        </div>
+                        <!-- end widget div -->
+                        
+                    </div>
+                    <!-- end widget -->
+        
+                </article>
+                <!-- WIDGET END -->
+                
+            </div>
+        
+            <!-- end row -->
+        
+            <!-- row -->
+        
+            <div class="row">
+        
+                <!-- a blank row to get started -->
+                <div class="col-sm-12">
+                    <!-- your contents here -->
+                </div>
+                    
+            </div>
+        
+            <!-- end row -->
+        
+        </section>
+        <!-- end widget grid -->
+
+        </form>
+    </div>
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript">                
+        $(document).ready(function() {
+            // console.log("{{active_page}}");
+            // Update ww dan hh image crop
+            $.ajax({
+                url: "/get-crop-image-size/{{active_page}}/", 
+                success: function(result){   
+                    console.log('before' + $("#id_dim_w").val() + ' x ' + $("#id_dim_h").val());
+                    console.log('width height image = ' + result.ww + ' ' + result.hh);
+                    // tulis ke #id_dim_w
+                    // jika result = 0 0 maka gunakan nilai default dari initial form
+                    if (!(result.ww==0 || result.hh==0)) {
+                        $("#id_dim_w").val(result.ww);
+                        $("#id_dim_h").val(result.hh);
+                    };
+                    
+                    console.log('after' + $("#id_dim_w").val() + ' x ' + $("#id_dim_h").val());
+                 }
+            });
+
+            do_cancel("#do_cancel", "Update Data", "{% url active_page_url %}");
+            do_cancel("#do_cancel2", "Update Data", "{% url active_page_url %}");
+
+            // $("#do_cancel").click(function() {
+            //     window.location.href =  "{% url 'tags' %}";   
+            // });
+
+            $('.select2_menu').select2({
+                ajax: {
+                    url: '/dashboard/menu-lookup-ajax/',
+                    delay: 250, // wait 250 milliseconds before triggering the request
+                    dataType: 'json',
+                    data: function (params) {
+                        var query = {
+                            search: params.term,
+                            page: params.page || 1
+                            // type: 'public'
+                        };
+                        // $('#select2_company option:eq(0)').prop('selected',true);
+                        // Query parameters will be ?search=[term]&type=public
+                        return query;
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+
+                        return {
+                            results: data.results,
+                            pagination: {
+                                more: (params.page * 10) < data.count_filtered
+                            }
+                        };
+                    },
+                },
+                
+                theme: 'bootstrap4',
+                placeholder: "ROOT",
+                allowClear: false,
+            });
+
+            {% if select2_update %}
+                var select2_update = {{select2_update|safe}};
+                // console.log(select2_update);
+
+                $(".select2_menu").select2("trigger", "select", {
+                    // data: { id: {{form_provinsi.id}}, text: {{form_provinsi.name}} }    
+                    
+                    data : select2_update
+                });  
+            {% endif %}
+        });        
+    </script>
+{% endblock %}

@@ -1,1 +1,528 @@
-{% extends "backend/smart-admin-2/base-crud.html" %} {% load static %} {% load menu_tags %} {% block breadcrumb %} <div id=ribbon > <span class=ribbon-button-alignment > <span id=refresh  class="btn btn-ribbon" data-action=resetWidgets  data-title=refresh  rel=tooltip  data-placement=bottom  data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true"> <i class="fa fa-refresh"></i> </span> </span> <ol class=breadcrumb > {% for i in my_active %} <li>{{i}} {% endfor %} </ol> </div> {% endblock %} {% block content %} <div id=content > <div class=row > <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4"> <h1 class="page-title txt-color-blueDark"> {% for i in my_menu %} {% if i.name in my_active %} <i class="fa-fw fa {{ i.icon }}"></i> {% endif %} {% endfor %} {% for i in my_active %} {% if forloop.last %} {{ i }} {% endif %} {% endfor %} </h1> </div> <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8"> </div> </div> <section id=widget-grid  class=""> <div class=row > <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> <div class="jarviswidget jarviswidget-color-blueDark" id=wid-id-0  data-widget-colorbutton=false  data-widget-editbutton=false  data-widget-custombutton=false  data-widget-fullscreenbutton=false  > <header> <span class=widget-icon > <i class="fa fa-comments"></i> </span> <h2>Hit Count (three month earlier)</h2> </header> <div> <div class=jarviswidget-editbox > <input class=form-control  type=text > </div> <div class=widget-body > <div class=row > <div class=col-lg-12 > <div class="btn-group pull-right"> <button class="btn btn-primary period"> Period </button> <button class="btn btn-primary dropdown-toggle" data-toggle=dropdown > <span class=caret ></span> </button> <ul class=dropdown-menu > <li> <a href="javascript:void(0);" onclick="change_period(4, this.text);">Monthly</a> <li> <a href="javascript:void(0);" onclick="change_period(3, this.text);">Weekly</a> <li> <a href="javascript:void(0);" onclick="change_period(2, this.text);">Daily</a> </ul> </div> </div> </div> <div class=row > <div class=col-lg-12 > <div id=id_hit_count ></div> </div> </div> </div> </div> </div> </article> </div> <div class=row > <div class=col-sm-12 > </div> </div> </section> </div> {% endblock %} {% block extra_body %} <script> function change_period(period, name) { $('.period').text(name); create_hit_count(period); }; function create_hit_count(period) { Highcharts.getJSON( "/dashboard/hitcount-ajax/" + period, function (data) { Highcharts.chart('id_hit_count', { chart: { type: 'spline', scrollablePlotArea: { minWidth: 1000, scrollPositionX: 1000 }, }, title: { text: 'Website Hit Count' }, subtitle: { text: 'Based on Unique Visitors Per Day' }, xAxis: { categories: data[0], }, yAxis: { title: { text: 'Hit Count' }, }, plotOptions: { line: { dataLabels: { enabled: true }, enableMouseTracking: false } }, series: [{ name: 'Hit Count', data: data[1] }] }); } ); }; $(document).ready(function() { change_period(2, 'Daily'); }); </script> {% endblock %}
+{% extends "backend/smart-admin-2/base-crud.html" %}
+{% load static %}
+{% comment %}
+    {% load menu_tags %}
+{% endcomment %}
+
+{% block breadcrumb %}
+    <div id="ribbon">
+
+        <span class="ribbon-button-alignment"> 
+            <span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true">
+                <i class="fa fa-refresh"></i> 
+            </span> 
+        
+        </span>
+        
+        <!-- breadcrumb -->
+        <ol class="breadcrumb">
+            <!-- <li>Home</li><li>Miscellaneous</li><li>Blank Page</li> -->
+            {% for i in my_active %}
+                <li>{{i}}</li>
+            {% endfor %}
+        </ol>
+        <!-- end breadcrumb -->
+
+        <!-- You can also add more buttons to the
+        ribbon for further usability
+
+        Example below:
+
+        <span class="ribbon-button-alignment pull-right">
+        <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
+        <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
+        <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
+        </span> -->
+
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div id="content">
+
+        <!-- row -->
+        <div class="row">
+           
+            <!-- col -->
+            <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+                <h1 class="page-title txt-color-blueDark">
+                    {% for i in my_menu %}
+                        {% if i.name in my_active %}
+                            <i class="fa-fw fa {{ i.icon }}"></i>    
+                        {% endif %}
+                    {% endfor %}
+
+                    {% for i in my_active %}
+                        {% if forloop.last %}
+                            {{ i }}
+                        {% endif %}
+                    {% endfor %}
+
+                    <!-- PAGE HEADER -->
+                    <!-- <i class="fa-fw fa fa-home"></i> 
+                        Page Header 
+                    <span>>  
+                        Subtitle
+                    </span> -->
+                </h1>
+            </div>
+            <!-- end col -->
+            
+            <!-- right side of the page with the sparkline graphs -->
+            <!-- col -->
+            <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+                <!-- sparks -->
+                <!-- <ul id="sparks">
+                    <li class="sparks-info">
+                        <h5> My Income <span class="txt-color-blue">$47,171</span></h5>
+                        <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
+                            1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
+                        </div>
+                    </li>
+                    <li class="sparks-info">
+                        <h5> Site Traffic <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span></h5>
+                        <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+                            110,150,300,130,400,240,220,310,220,300, 270, 210
+                        </div>
+                    </li>
+                    <li class="sparks-info">
+                        <h5> Site Orders <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
+                        <div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+                            110,150,300,130,400,240,220,310,220,300, 270, 210
+                        </div>
+                    </li>
+                </ul> -->
+                <!-- end sparks -->
+            </div>
+            <!-- end col -->
+            
+        </div>
+        <!-- end row -->
+        
+        <!--
+            The ID "widget-grid" will start to initialize all widgets below 
+            You do not need to use widgets if you dont want to. Simply remove 
+            the <section></section> and you can use wells or panels instead 
+            -->
+        
+        <!-- widget grid -->
+        <section id="widget-grid" class="">
+        
+            <!-- row -->
+            <div class="row">
+
+                <!-- NEW WIDGET START -->
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        
+                    <!-- Widget ID (each widget will need unique ID)-->
+                    <div class="jarviswidget jarviswidget-color-blue" id="wid-id-0" 
+                            data-widget-colorbutton="false"	                            
+                            data-widget-custombutton="false"
+                            data-widget-fullscreenbutton="false"
+                            data-widget-editbutton="false">
+                        <!-- widget options:
+                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+        
+                        data-widget-colorbutton="false"
+                        data-widget-editbutton="false"
+                        data-widget-togglebutton="false"
+                        data-widget-deletebutton="false"
+                        data-widget-fullscreenbutton="false"
+                        data-widget-custombutton="false"
+                        data-widget-collapsed="true"
+                        data-widget-sortable="false"
+        
+                        -->
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-lg fa-user"></i> </span>
+                            <h2>Informasi User </h2>
+        
+                        </header>
+        
+                        <!-- widget div-->
+                        <div>
+        
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+        
+                            </div>
+                            <!-- end widget edit box -->
+        
+                            <!-- widget content -->
+                            <div class="widget-body">
+        
+                                <!-- <div class="widget-body-toolbar bg-color-white">
+        
+                                    <form class="form-inline" role="form">
+        
+                                        <div class="row">
+        
+                                            <div class="col-sm-12 col-md-10">
+        
+                                                <div class="form-group">
+                                                    <label class="sr-only">Task title</label>
+                                                    <input type="email" class="form-control input-sm" placeholder="My Task">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="sr-only">Pick Week</label>
+                                                    <select class="form-control input-sm">
+                                                        <option>Week 1</option>
+                                                        <option>Week 2</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="sr-only">Days</label>
+                                                    <select class="form-control input-sm">
+                                                        <option>Monday</option>
+                                                        <option>Tuesday</option>
+                                                        <option>Wednesday</option>
+                                                        <option>Thursday</option>
+                                                        <option>Friday</option>
+                                                        <option>Saturday</option>
+                                                        <option>Sunday</option>
+                                                    </select>
+                                                </div>
+        
+                                            </div>
+        
+                                            <div class="col-sm-12 col-md-2 text-align-right">
+        
+                                                <button type="submit" class="btn btn-warning btn-xs">
+                                                    <i class="fa fa-plus"></i> Add
+                                                </button>
+        
+                                            </div>
+        
+                                        </div>
+        
+                                    </form>
+        
+                                </div> -->
+        
+                                <div class="tree">
+                                    <ul>
+                                        <li>
+                                            <span><i class="fa fa-lg fa-user"></i> &nbsp;Name: {{user.email}} <strong>{{user.name}} </strong></span>
+                                            <ul>
+                                                {% for i in agency %}
+                                                    
+                                                    <li>
+                                                        <span class="label label-success">
+                                                            <i class="fa fa-lg fa-plus-circle"></i> &nbsp;Agency: [ {{i.shortuuid}} ] <strong>{{i.name}} </strong></span>
+                                                        <ul>
+                                                            {% for j in service|slice:"forloop.counter0:forloop.counter0+1" %}
+                                                                {% for k in j %}
+                                                                    {% if k.agency_id == i.id %}
+                                                                        <li>
+                                                                            <span><i class="fa fa-clock-o"></i> 
+                                                                                Service: 
+                                                                                    <strong>{{k.get_kind_display}}</strong>, 
+                                                                                    expired: {{k.expired_date}}
+                                                                                </span> &ndash; Site: <a href="javascript:void(0);">
+                                                                                    {{k.site}}</a>                                                                
+                                                                        </li>
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            {% endfor %}
+                                                            
+                                                        </ul>
+                                                    </li>
+                                                {% endfor %}
+                                                <!-- <li>
+                                                    <span class="label label-success"><i class="fa fa-lg fa-minus-circle"></i> Tuesday, January 8: 8.00 hours</span>
+                                                    <ul>
+                                                        <li>
+                                                            <span><i class="fa fa-clock-o"></i> 6.00</span> &ndash; <a href="javascript:void(0);">Altered code...</a>
+                                                        </li>
+                                                        <li>
+                                                            <span><i class="fa fa-clock-o"></i> 2.00</span> &ndash; <a href="javascript:void(0);">Simplified our approach to...</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <span class="label label-warning"><i class="fa fa-lg fa-minus-circle"></i> Wednesday, January 9: 6.00 hours</span>
+                                                    <ul>
+                                                        <li>
+                                                            <span><i class="fa fa-clock-o"></i> 3.00</span> &ndash; <a href="javascript:void(0);">Fixed bug caused by...</a>
+                                                        </li>
+                                                        <li>
+                                                            <span><i class="fa fa-clock-o"></i> 3.00</span> &ndash; <a href="javascript:void(0);">Comitting latest code to Git...</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <span class="label label-danger"><i class="fa fa-lg fa-minus-circle"></i> Wednesday, January 9: 4.00 hours</span>
+                                                    <ul>
+                                                        <li>
+                                                            <span><i class="fa fa-clock-o"></i> 2.00</span> &ndash; <a href="javascript:void(0);">Create component that...</a>
+                                                        </li>
+                                                    </ul>
+                                                </li> -->
+                                            </ul>
+                                        </li>
+                                        <!-- <li>
+                                            <span><i class="fa fa-lg fa-calendar"></i> 2013, Week 3</span>
+                                            <ul>
+                                                <li>
+                                                    <span class="label label-success"><i class="fa fa-lg fa-minus-circle"></i> Monday, January 14: 8.00 hours</span>
+                                                    <ul>
+                                                        <li>
+                                                            <span><i class="fa fa-clock-o"></i> 7.75</span> &ndash; <a href="javascript:void(0);">Writing documentation...</a>
+                                                        </li>
+                                                        <li>
+                                                            <span><i class="fa fa-clock-o"></i> 0.25</span> &ndash; <a href="javascript:void(0);">Reverting code back to...</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li> -->
+                                    </ul>
+                                </div>
+        
+                            </div>
+                            <!-- end widget content -->
+        
+                        </div>
+                        <!-- end widget div -->
+        
+                    </div>
+                    <!-- end widget -->
+        
+                </article>
+                <!-- WIDGET END -->
+	                
+                
+                <!-- NEW WIDGET START -->
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    
+                    <!-- Widget ID (each widget will need unique ID)-->
+                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1"
+                            data-widget-colorbutton="false"	
+                            data-widget-editbutton="false"
+                            data-widget-custombutton="false"
+                            data-widget-fullscreenbutton="false"
+                            >
+
+                        <!-- widget options:
+                            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+                            
+                            data-widget-colorbutton="false"	
+                            data-widget-editbutton="false"
+                            data-widget-togglebutton="false"
+                            data-widget-deletebutton="false"
+                            data-widget-fullscreenbutton="false"
+                            data-widget-custombutton="false"
+                            data-widget-collapsed="true" 
+                            data-widget-sortable="false"
+                            
+                        -->
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
+                            <h2>Hit Count (three month earlier)</h2>				
+                            
+                        </header>
+        
+                        <!-- widget div-->
+                        <div>
+                            
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+                                <input class="form-control" type="text">	
+                            </div>
+                            <!-- end widget edit box -->
+                            
+                            <!-- widget content -->
+                            <div class="widget-body">
+                                
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <!-- this is what the user will see -->
+                                        
+
+                                        <div class="btn-group pull-right">
+                                            <button class="btn btn-primary period">
+                                                Period
+                                            </button>
+                                            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a href="javascript:void(0);" onclick="change_period(4, this.text);">Monthly</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" onclick="change_period(3, this.text);">Weekly</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" onclick="change_period(2, this.text);">Daily</a>
+                                                </li>
+                                                <!-- <li>
+                                                    <a href="javascript:void(0);" onclick="change_period(1, this.text);">Hourly</a>
+                                                </li> -->
+                                                <!-- <li class="divider"></li>
+                                                <li>
+                                                    <a href="javascript:void(0);">Separated link</a>
+                                                </li> -->
+                                            </ul>
+                                        </div>
+
+                                        <!-- <div class="btn-group pull-right">
+                                            &nbsp;
+                                        </div>
+                                        
+                                        <div class="btn-group pull-right">
+                                            <ul class="demo-btns">
+                                                <li>
+                                                    <a href="javascript:void(0);" class="btn btn-primary ">
+                                                        <i class="glyphicon glyphicon-chevron-left"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" class="btn btn-primary ">
+                                                        <i class="glyphicon glyphicon-chevron-right"></i>
+                                                    </a>
+                                                </li>                                                
+                                            </ul>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div id="id_hit_count"></div>
+                                    </div>
+                                </div>
+                            
+        
+                            </div>
+                            <!-- end widget content -->
+                            
+                        </div>
+                        <!-- end widget div -->
+                        
+                    </div>
+                    <!-- end widget -->
+        
+                </article>
+                <!-- WIDGET END -->
+                
+            </div>
+        
+            <!-- end row -->
+        
+            <!-- row -->
+        
+            <div class="row">
+        
+                <!-- a blank row to get started -->
+                <div class="col-sm-12">
+                    <!-- your contents here -->
+                </div>
+                    
+            </div>
+        
+            <!-- end row -->
+        
+        </section>
+        <!-- end widget grid -->
+
+    </div>
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript"> 
+        // Monthly = 4
+        // Weekly = 3
+        // Daily = 2
+        // hourly = 1 # Tidak jadi di buat , karena susah banget dan nformasinya tidak terlalu relevan
+        function change_period(period, name) {
+            // alert('Period');
+            $('.period').text(name);
+
+            create_hit_count(period);
+        };
+
+        function create_hit_count(period) {
+            // alert(period);
+
+            Highcharts.getJSON(
+                //'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
+                // spline
+                // " url 'hitcount_ajax' ?period=period",
+                "/dashboard/hitcount-ajax/" + period,
+                function (data) {
+
+                    Highcharts.chart('id_hit_count', {
+                        chart: {
+                            type: 'spline',
+                            // zoomType: 'x'
+                            scrollablePlotArea: {
+                                minWidth: 1000,
+                                scrollPositionX: 1000
+                            },
+                        },
+                        title: {
+                            text: 'Website Hit Count'
+                        },
+                        subtitle: {
+                            text: 'Based on Unique Visitors Per Day'
+                        },
+                        xAxis: {
+                            categories: data[0],
+                            // min: 0,
+                            // max: 5,
+                            // scrollbar: {
+                            //     enabled: true
+                            // }, 
+                            // labels: {
+                            //     overflow: 'justify'
+                            // }
+
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Hit Count'
+                            },                            
+                        },
+                        plotOptions: {
+                            line: {
+                                dataLabels: {
+                                    enabled: true
+                                },
+                                enableMouseTracking: false
+                            }
+                        },
+                        series: [{
+                            name: 'Hit Count',
+                            data: data[1]
+                        }]
+                    });
+                }
+            );
+        };        
+
+        $(document).ready(function() {
+
+            // $('.period').text('Daily');
+            change_period(2, 'Daily');
+            // console.log("sesssion = {{request.session.name}} ");
+
+            $('.tree > ul').attr('role', 'tree').find('ul').attr('role', 'group');
+			$('.tree').find('li:has(ul)').addClass('parent_li').attr('role', 'treeitem').find(' > span').attr('title', 'Collapse this branch').on('click', function(e) {
+				var children = $(this).parent('li.parent_li').find(' > ul > li');
+				if (children.is(':visible')) {
+					children.hide('fast');
+					$(this).attr('title', 'Expand this branch').find(' > i').removeClass().addClass('fa fa-lg fa-plus-circle');
+				} else {
+					children.show('fast');
+					$(this).attr('title', 'Collapse this branch').find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle');
+				}
+				e.stopPropagation();
+			});	
+            
+        });                
+    </script>
+
+{% endblock %}
+

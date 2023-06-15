@@ -1,1 +1,33 @@
-{% load static %} <script src="{% static 'backend/smart-admin-2/js/plugin/pace/pace.min.js' %}"></script> <script src="{% static 'backend/smart-admin-2/js/libs/jquery-2.1.1.min.js' %}"></script> <script src="{% static 'backend/smart-admin-2/js/libs/jquery-ui-1.10.3.min.js' %}"></script> <script src="{% static 'backend/smart-admin-2/js/app.config.js' %}"></script> <script src="{% static 'backend/smart-admin-2/js/bootstrap/bootstrap.min.js' %}"></script> <script src="{% static 'backend/smart-admin-2/js/plugin/jquery-validate/jquery.validate.min.js' %}"></script> <script src="{% static 'backend/smart-admin-2/js/plugin/masked-input/jquery.maskedinput.min.js' %}"></script> <script src="{% static 'backend/smart-admin-2/js/app.min.js' %}"></script>
+{% load static %}
+
+<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+<script src="{% static 'backend/smart-admin-2/js/plugin/pace/pace.min.js' %}"></script>
+
+<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script> if (!window.jQuery) { document.write('<script src="js/libs/jquery-2.1.1.min.js"><\/script>');} </script> -->
+<script src="{% static 'backend/smart-admin-2/js/libs/jquery-2.1.1.min.js' %}"></script>
+
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script> if (!window.jQuery.ui) { document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');} </script> -->
+<script src="{% static 'backend/smart-admin-2/js/libs/jquery-ui-1.10.3.min.js' %}"></script>
+
+<!-- IMPORTANT: APP CONFIG -->
+<script src="{% static 'backend/smart-admin-2/js/app.config.js' %}"></script>
+
+<!-- JS TOUCH : include this plugin for mobile drag / drop touch events 		
+<script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> -->
+
+<!-- BOOTSTRAP JS -->		
+<script src="{% static 'backend/smart-admin-2/js/bootstrap/bootstrap.min.js' %}"></script>
+
+<!-- JQUERY VALIDATE -->
+<script src="{% static 'backend/smart-admin-2/js/plugin/jquery-validate/jquery.validate.min.js' %}"></script>
+
+<!-- JQUERY MASKED INPUT -->
+<script src="{% static 'backend/smart-admin-2/js/plugin/masked-input/jquery.maskedinput.min.js' %}"></script>
+
+<!-- MAIN APP JS FILE -->
+<script src="{% static 'backend/smart-admin-2/js/app.min.js' %}"></script>
+
+<script src="{% static 'backend/smart-admin-2/js/plugin/select2/select2.min.js' %}"></script>

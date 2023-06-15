@@ -1,1 +1,128 @@
-{% extends "allauth/base.html" %} {% load static %} {% load i18n %} {% load account socialaccount %} {% block header %} <div id=logo-group > <span id=logo > <img src="{% static 'backend/smart-admin-2/img/logo.png' %}" alt=SmartAdmin > </span> </div> <span id=extr-page-header-space > <span class="hidden-mobile hiddex-xs">{% trans "Create an Account" %}?</span> <a href=login.html  class="btn btn-danger">{% trans "Sign Up" %}</a> </span> {% endblock %} {% block content %} <div id=content  class=container > <div class=row > <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm"> {% include "allauth/snippets/login_info.html" %} <div class=row > </div> </div> <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4"> <div class="well no-padding"> <form method=POST  id=login-form  class="smart-form client-form"> {% csrf_token %} <header> {% trans "Social Network Login Failure" %} </header> <fieldset> {% trans "An error occurred while attempting to login via your social network account." %} <ul> {% if user.is_authenticated %} <li><a href="{% url 'account_email' %}">Change E-mail</a> <li><a href="{% url 'account_logout' %}">Sign Out</a> {% else %} <li><a href="{% url 'account_login' %}">Sign In</a> <li><a href="{% url 'account_signup' %}">Sign Up</a> {% endif %} </ul> <br><br> </fieldset> </form> </div> </div> </div> </div> {% endblock %} {% block extra_body %} {% endblock %} {% comment %} {% extends "socialaccount/base.html" %} {% load i18n %} {% block head_title %}{% trans "Social Network Login Failure" %}{% endblock %} {% block content %} <h1>{% trans "Social Network Login Failure" %}</h1> <p>{% trans "An error occurred while attempting to login via your social network account." %}</p> {% endblock %} {% endcomment %}
+{% extends "allauth/base.html" %}
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block header %}
+    <div id="logo-group">
+        <span id="logo"> <img src="{% static 'backend/smart-admin-2/img/logo.png' %}" alt="SmartAdmin"> 
+
+        <!-- <div class="pull-right"> -->
+            <!-- <button class="btn btn-primary pull-right">
+                Sign Up
+            </button> -->
+        <!-- </div> -->
+            
+        </span>
+        
+        
+    </div>
+    <span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">{% trans "Create an Account" %}?</span> <a href="login.html" class="btn btn-danger">{% trans "Sign Up" %}</a> </span>
+    
+    
+
+    <!-- <span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">Need an account?</span> <a href="register.html" class="btn btn-danger">Create account</a> </span> -->
+{% endblock %}
+
+{% block content %}
+	<!-- MAIN CONTENT -->
+    <div id="content" class="container">
+       <!-- This IS POST LOGIN <br>
+
+       active domain = {{active_domain}} <br>
+       main domain = {{main_domain}} -->
+       
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+                {% include "allauth/snippets/login_info.html" %}
+
+                <div class="row">
+                    <!-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <h5 class="about-heading">About SmartAdmin - Are you up to date?</h5>
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.
+                        </p>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <h5 class="about-heading">Not just your average template!</h5>
+                        <p>
+                            Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi voluptatem accusantium!
+                        </p>
+                    </div> -->
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                
+                
+                <div class="well no-padding">
+                    <form method="POST" id="login-form" class="smart-form client-form">
+                        {% csrf_token %}
+                        <header>
+                            {% trans "Social Network Login Failure" %}
+                        </header>
+
+                  
+                        <fieldset>
+                            {% trans "An error occurred while attempting to login via your social network account." %}
+
+                            
+                            {% if user.is_authenticated %}
+                                <p><a href="{% url 'account_email' %}">Change E-mail</a></p>
+                                <p><a href="{% url 'account_logout' %}">Sign Out</a></p>
+                            {% else %}
+                                <p>> <a href="{% url 'account_login' %}">Sign In</a></p>
+                                <p>> <a href="{% url 'account_signup' %}">Sign Up</a></p>
+                            {% endif %}
+                            
+                            
+                            <br><br>
+                        </fieldset>
+                        <!-- <footer>
+                            <button type="submit" class="btn btn-primary">
+                                {% trans "Sign in" %}
+                            </button>
+                        </footer> -->
+                    </form>
+
+                </div>
+                
+                
+                
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_body %}
+    <!-- replace href social media dengan URL website default -->
+    
+
+    <!-- <script>
+
+
+        $(function() {
+            // 
+
+        });
+
+    </script> -->
+    
+{% endblock %}
+
+{% comment %}
+
+    {% extends "socialaccount/base.html" %}
+
+    {% load i18n %}
+
+    {% block head_title %}{% trans "Social Network Login Failure" %}{% endblock %}
+
+    {% block content %}
+    <h1>{% trans "Social Network Login Failure" %}</h1>
+
+    <p>{% trans "An error occurred while attempting to login via your social network account." %}</p>
+    {% endblock %}
+
+{% endcomment %}

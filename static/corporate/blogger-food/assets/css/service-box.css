@@ -1,0 +1,60 @@
+/*01A092*/
+:root{ --main-color: #141727; }
+.serviceBox{
+    background: linear-gradient(to top right,#fff,#f8f9fa);
+    font-family:'Poppins', sans-serif;
+    text-align: center; /*center;*/
+    padding: 25px 0 10px;
+    margin: 0 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 1;
+}
+.serviceBox:after{
+    content: '';
+    background-color: var(--main-color);
+    clear: both;
+    display: block;
+    height: 10px;
+    width: calc(100% - 20px);
+    margin: 25px auto 0;
+}
+.serviceBox .service-icon{
+    color: #fff;
+    background-color: var(--main-color);
+    font-size: 40px;
+    width: 156px;
+    padding: 3px 3px 3px; /*4px 10px 2px;*/
+    margin: 0 0 25px -10px;
+    position: relative;
+}
+.serviceBox .service-icon:after{
+    content: '';
+    background: linear-gradient(to top right,transparent 50%,#aaa 50%);
+    height: 10px;
+    width: 10px;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+}
+.serviceBox .title{
+    color: var(--main-color);
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 15px 10px;
+}
+.serviceBox .description{
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+    margin: 0 15px;
+}
+.serviceBox.purple{ --main-color: #7D1B87; }
+.serviceBox.orange{ --main-color: #E75516; }
+.serviceBox.green{ --main-color: #0BA360; }
+@media only screen and (max-width: 1199px){
+    .serviceBox{ margin: 0 15px 30px; }
+}

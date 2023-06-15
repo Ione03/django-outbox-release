@@ -1,0 +1,30 @@
+{% extends "corporate/blogger-food/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    {% comment %}
+        {% block landing-page %}{% endblock %}
+    {% endcomment %}
+
+    {% block detail %}{% endblock %}
+
+    {% comment %}
+        {% block fasilities %}{% endblock %}
+        
+        {% block timeline %}{% endblock %}
+        
+        {% block price %}{% endblock %} 
+
+        {% block article %}{% endblock %}
+    {% endcomment %}
+    
+    {% comment %}
+        {% block why-us %}{% endblock %}
+    {% endcomment %}
+    
+    {% comment %}    
+        {% block newsletter %}{% endblock %}
+    {% endcomment %}
+    
+{% endblock %}      

@@ -2,7 +2,6 @@ _B='is_superuser'
 _A=None
 from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
-from django.http import JsonResponse
 class UserQuerySet(models.QuerySet):
 	def get_user(A,user_id):return A.filter(id=user_id)
 	def get_user_company(A,user_id,company_id):return A.filter(id=user_id).filter(company__id=company_id)

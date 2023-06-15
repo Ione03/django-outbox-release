@@ -1,1 +1,118 @@
-{% load static %} <meta name=description  content="website, education"> <meta name=author  content="grid software, inc."> <meta name=viewport  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <link rel=stylesheet  type="text/css" media=screen  href="{% static 'backend/smart-admin-2/css/bootstrap.min.css' %}"> <link rel=stylesheet  type="text/css" media=screen  href="{% static 'backend/smart-admin-2/css/font-awesome.min.css' %}"> <link rel=stylesheet  type="text/css" media=screen  href="{% static 'backend/smart-admin-2/css/smartadmin-production-plugins.min.css' %}"> <link rel=stylesheet  type="text/css" media=screen  href="{% static 'backend/smart-admin-2/css/smartadmin-production.min.css' %}"> <link rel=stylesheet  type="text/css" media=screen  href="{% static 'backend/smart-admin-2/css/smartadmin-skins.min.css' %}"> <link rel=stylesheet  type="text/css" media=screen  href="{% static 'backend/smart-admin-2/css/smartadmin-rtl.min.css' %}"> <link rel=stylesheet  type="text/css" media=screen  href="{% static 'backend/smart-admin-2/css/demo.min.css' %}"> <link rel="shortcut icon" href="{% static 'backend/smart-admin-2/img/favicon/favicon.ico' %}" type="image/x-icon"> <link rel=icon  href="{% static 'backend/smart-admin-2/img/favicon/favicon.ico' %}" type="image/x-icon"> <link rel=stylesheet  href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700"> <link rel=apple-touch-icon  href="{% static 'backend/smart-admin-2/img/splash/sptouch-icon-iphone.png' %}"> <link rel=apple-touch-icon  sizes=76x76  href="{% static 'backend/smart-admin-2/img/splash/touch-icon-ipad.png' %}"> <link rel=apple-touch-icon  sizes=120x120  href="{% static 'backend/smart-admin-2/img/splash/touch-icon-iphone-retina.png' %}"> <link rel=apple-touch-icon  sizes=152x152  href="{% static 'backend/smart-admin-2/img/splash/touch-icon-ipad-retina.png' %}"> <meta name=apple-mobile-web-app-capable  content=yes > <meta name=apple-mobile-web-app-status-bar-style  content=black > <link rel=apple-touch-startup-image  href="{% static 'backend/smart-admin-2/img/splash/ipad-landscape.png' %}" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)"> <link rel=apple-touch-startup-image  href="{% static 'backend/smart-admin-2/img/splash/ipad-portrait.png' %}" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)"> <link rel=apple-touch-startup-image  href="{% static 'backend/smart-admin-2/img/splash/iphone.png' %}" media="screen and (max-device-width: 320px)"> <style> .btn-github { color: white; background-color: black; } .btn-github:hover { color: black; background-color: white; border-color: grey; } .btn-instagram { color: white; background-color: #962fbf; } .btn-instagram:hover { color: black; background-color: white; border-color: grey; } .btn-facebook { color: white; background-color: #4267B2; } .btn-facebook:hover { color: black; background-color: white; border-color: grey; } .btn-google { color: white; background-color: #db3236; } .btn-google:hover { color: black; background-color: white; border-color: grey; } .btn-twitter { color: white; background-color: #1DA1F2; } .btn-twitter:hover { color: black; background-color: white; border-color: grey; } </style>
+{% load static %}
+
+<meta name="description" content="website, education">
+<meta name="author" content="grid software, inc.">
+    
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<!-- Basic Styles -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'backend/smart-admin-2/css/bootstrap.min.css' %}">
+
+<!-- Error menggunakan css ini -->
+<!-- <link rel="stylesheet" type="text/css" media="screen" href="{% static 'backend/django-bootstrap-modal-forms/css/bootstrap.min.css' %}" %}> -->
+
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'backend/smart-admin-2/css/font-awesome.min.css' %}">
+
+<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'backend/smart-admin-2/css/smartadmin-production-plugins.min.css' %}">
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'backend/smart-admin-2/css/smartadmin-production.min.css' %}">
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'backend/smart-admin-2/css/smartadmin-skins.min.css' %}">
+
+<!-- SmartAdmin RTL Support  -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'backend/smart-admin-2/css/smartadmin-rtl.min.css' %}">
+
+<!-- We recommend you use "your_style.css" to override SmartAdmin
+        specific styles this will also ensure you retrain your customization with each SmartAdmin update.
+<link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
+
+<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'backend/smart-admin-2/css/demo.min.css' %}">
+
+<!-- FAVICONS -->
+<link rel="shortcut icon" href="{% static 'backend/smart-admin-2/img/favicon/favicon.ico' %}" type="image/x-icon">
+<link rel="icon" href="{% static 'backend/smart-admin-2/img/favicon/favicon.ico' %}" type="image/x-icon">
+
+<!-- GOOGLE FONT -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+<!-- Specifying a Webpage Icon for Web Clip 
+        Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+<link rel="apple-touch-icon" href="{% static 'backend/smart-admin-2/img/splash/sptouch-icon-iphone.png' %}">
+<link rel="apple-touch-icon" sizes="76x76" href="{% static 'backend/smart-admin-2/img/splash/touch-icon-ipad.png' %}">
+<link rel="apple-touch-icon" sizes="120x120" href="{% static 'backend/smart-admin-2/img/splash/touch-icon-iphone-retina.png' %}">
+<link rel="apple-touch-icon" sizes="152x152" href="{% static 'backend/smart-admin-2/img/splash/touch-icon-ipad-retina.png' %}">
+
+<!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<!-- Startup image for web apps -->
+<link rel="apple-touch-startup-image" href="{% static 'backend/smart-admin-2/img/splash/ipad-landscape.png' %}" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+<link rel="apple-touch-startup-image" href="{% static 'backend/smart-admin-2/img/splash/ipad-portrait.png' %}" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+<link rel="apple-touch-startup-image" href="{% static 'backend/smart-admin-2/img/splash/iphone.png' %}" media="screen and (max-device-width: 320px)">
+
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'backend/smart-admin-2/js/plugin/select2/select2.min.css' %}">
+
+<style>
+
+    /* #logo {
+        display: flex;
+        justify-content: space-between;
+    } */
+
+    .btn-github {
+        color: white;
+        background-color: black;
+        /* border-color: #5bc2c2 */
+    }
+    .btn-github:hover {
+        color: black;
+        background-color: white;
+        border-color: grey;
+    }
+
+    .btn-instagram {
+        color: white;
+        background-color: #962fbf; /* #bc2a8d;*/
+        /* border-color: #5bc2c2 */
+    }
+    .btn-instagram:hover {
+        color: black;
+        background-color: white;
+        border-color: grey;
+    }
+
+    .btn-facebook {
+        color: white;
+        background-color: #4267B2;
+        /* border-color: #5bc2c2 */
+    }
+    .btn-facebook:hover {
+        color: black;
+        background-color: white;
+        border-color: grey;
+    }
+
+    .btn-google {
+        color: white;
+        background-color: #db3236;
+        /* border-color: #5bc2c2 */
+    }
+    .btn-google:hover {
+        color: black;
+        background-color: white;
+        border-color: grey;
+    }
+    
+    .btn-twitter {
+        color: white;
+        background-color: #1DA1F2;
+        /* border-color: #5bc2c2 */
+    }
+    .btn-twitter:hover {
+        color: black;
+        background-color: white;
+        border-color: grey;
+    }
+
+</style>

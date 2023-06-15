@@ -1,1 +1,234 @@
-{% extends "allauth/base.html" %} {% load static %} {% load i18n %} {% load account socialaccount %} {% block header %} <div id=logo-group > <span id=logo > <img src="{% static 'backend/smart-admin-2/img/logo.png' %}" alt=SmartAdmin > </span> </div> <span id=extr-page-header-space > <span class="hidden-mobile hiddex-xs">{% trans "Create an Account" %}?</span> <a href=login.html  class="btn btn-danger">{% trans "Sign Up" %}</a> </span> {% endblock %} {% block content %} <div id=content  class=container > <div class=row > <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm"> {% include "allauth/snippets/login_info.html" %} <div class=row > </div> </div> <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4"> <div class="well no-padding"> <form method=POST  id=login-form  class="smart-form client-form"> {% csrf_token %} <header> {% trans "Redirect Login to Dashboard" %} </header> <fieldset> <div id=redirect_to >{% trans "Please Wait" %} ...</div> <br> <br><br> </fieldset> </form> </div> </div> </div> </div> {% endblock %} {% block extra_body %} <script> $(function() { var session_key = localStorage.getItem('session_key'); if (session_key != null) { var user_id = "{{request.user.id}}"; $.ajax({ url: "/post-login/redirect/" + user_id + "/" + session_key + "/", success: function(result) { $.ajax({ url: "/force-authenticate-out/", success: function(data) { console.log('logout success!'); setTimeout(function() { window.location.href = result; }, 1500); } }); } }); } else { console.log('origin login procedure'); window.location.href = '/id/dashboard/'; }; }); </script> {% endblock %}
+{% extends "allauth/base.html" %}
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block header %}
+    <div id="logo-group">
+        <span id="logo"> <img src="{% static 'backend/smart-admin-2/img/logo.png' %}" alt="SmartAdmin"> 
+
+        <!-- <div class="pull-right"> -->
+            <!-- <button class="btn btn-primary pull-right">
+                Sign Up
+            </button> -->
+        <!-- </div> -->
+            
+        </span>
+        
+        
+    </div>
+    <span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">{% trans "Create an Account" %}?</span> <a href="login.html" class="btn btn-danger">{% trans "Sign Up" %}</a> </span>
+    
+    
+
+    <!-- <span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">Need an account?</span> <a href="register.html" class="btn btn-danger">Create account</a> </span> -->
+{% endblock %}
+
+{% block content %}
+	<!-- MAIN CONTENT -->
+    <div id="content" class="container">
+       <!-- This IS POST LOGIN <br>
+
+       active domain = {{active_domain}} <br>
+       main domain = {{main_domain}} -->
+       
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+                {% include "allauth/snippets/login_info.html" %}
+
+                <div class="row">
+                    <!-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <h5 class="about-heading">About SmartAdmin - Are you up to date?</h5>
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.
+                        </p>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <h5 class="about-heading">Not just your average template!</h5>
+                        <p>
+                            Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi voluptatem accusantium!
+                        </p>
+                    </div> -->
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                
+                
+                <div class="well no-padding">
+                    <form method="POST" id="login-form" class="smart-form client-form">
+                        {% csrf_token %}
+                        <header>
+                            {% trans "Redirect Login to Dashboard" %}
+                        </header>
+
+                  
+                        <fieldset>
+                            <div id="redirect_to">{% trans "Please Wait" %} ...</div>
+                            <br>
+                            <!-- {% trans "Choose One" %} : -->
+                            <!-- If not redirect in several time, please klik the button -->
+
+                            <br><br>
+                        </fieldset>
+                        <!-- <footer>
+                            <button type="submit" class="btn btn-primary">
+                                {% trans "Sign in" %}
+                            </button>
+                        </footer> -->
+                    </form>
+
+                </div>
+                
+                
+                
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_body %}
+    <!-- replace href social media dengan URL website default -->
+    
+
+    <script>
+        // function redirect_to(result, user_id) {
+        //     console.log('redirect to...');
+        //     // alert('before');
+
+        //     window.location.href = result;
+            
+            
+            
+        // };
+
+        $(function() {
+            
+            var session_key = localStorage.getItem('session_key');
+
+            //console.log('post-login', session_key);
+            //console.log("username {{request.user.id}}");
+
+            // ACTIVE DOMAIN = {{active_domain}}
+            // let active_domain = "{{active_domain}}";            
+            // // console.log(active_domain);
+            // let main_domain = "{{main_domain}}";            
+            // // console.log(active_domain);
+
+            // $(".socialaccount_provider").each(function() {
+            //     tmp = $(this).attr('href');
+
+            //     $(this).attr('href', main_domain + tmp);
+
+            //     // console.log($(this).attr('href'));
+            // });
+
+            if (session_key != null) {
+                //alert('session');
+                var user_id = "{{request.user.id}}";
+                
+                $.ajax({
+                    url: "/post-login/redirect/" + user_id + "/" + session_key + "/",
+                    success: function(result) {
+                        // console.log(result);
+
+                        $.ajax({
+                            url: "/force-authenticate-out/",
+                            success: function(data) {
+                                console.log('logout success!');
+                                setTimeout(function() {
+                                    window.location.href = result;
+                                }, 1500);
+                            }
+                        });
+
+                        
+                        
+                        // setTimeout(redirect_to(result, user_id), 1500);
+                    }
+                });
+            }
+            else {
+                //alert('else');
+                // alert ('original login procedure');
+                console.log('origin login procedure');
+                window.location.href = '/id/dashboard/';
+            };
+            
+            // update data pre login di tabel UserLog
+            // $.ajax({
+            //     url: "/post-login/redirect/",
+            //     success: function(result) {
+            //         $("#redirect_to").append('<ul>');
+
+            //         // $("#redirect_to").append(result);
+            //         if (result['user_log'].length==0) {
+            //             // alert('zero');
+            //             let name = "{{request.user.name}}";
+            //             $("#redirect_to").text('Anda belum terdaftar di website ini, hubungi admin utama Anda!');                        
+            //         }
+            //         else if (result['user_log'].length==1) {
+            //             // console.log('redirect to ', result['user_log'][0][0] + '/id/dashboard/');
+            //             // window.location.href = result['user_log'][0][0] + '/id/dashboard/';
+
+            //             $.ajax({
+            //                 url: "/post-login/redirect/" + result['user_log'][0][1] + '/',
+            //                 success: function(result) {
+            //                     console.log(result);
+            //                     // setTimeout(function() {
+            //                     //     window.location.href = result;
+            //                     // }, 1500);
+            //                     setTimeout(redirect_to(result, user_id), 1500);
+            //                 }
+            //             });
+            //         }
+            //         else {
+            //             for (let i=0; i<result['user_log'].length; i++) {
+            //                 // console.log(result['user_log'][i]);
+            //                 $("#redirect_to").append('<li><a href="/post-login/redirect/' + result['user_log'][i][1] + '/">' + result['user_log'][i][0] +'</a></li>');
+            //             };
+
+            //             $("#redirect_to").append('</ul>');
+            //         };
+
+            //         console.log(result['user_log']);
+            //     }
+            // });
+
+            // set key
+            // localStorage.test = 2;
+
+            // // get key
+            // alert( localStorage.test ); // 2
+
+            // // remove key
+            // delete localStorage.test;
+            // localStorage.active_domain = active_domain;
+            // localStorage.main_domain = main_domain;
+
+            // var different_window = window.open(active_domain);
+
+            // window.MyLib = {};
+            // MyLib.active_domain = active_domain;
+            // MyLib.main_domain = main_domain;
+            // window.open(active_domain);
+
+            // console.log('MyLib = ', MyLib);
+            // different_window.localStorage.setItem("active_domain", active_domain);
+            // different_window.localStorage.setItem("main_domain", main_domain);
+
+            // localstorage only visible on same origin, (same site)
+            // cannot use this type of variable
+            // console.log(different_window.localStorage.active_domain);
+            // console.log(different_window.localStorage.main_domain);
+
+
+            // SOLUSI:
+            // https://stackoverflow.com/questions/2787650/manually-logging-in-a-user-without-password
+            
+        });
+
+    </script>
+    
+{% endblock %}

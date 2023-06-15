@@ -1,1 +1,360 @@
-{% extends "education/college-and-school-education/base-detail.html" %} {% load static %} {% load hitcount_tags %} {% load custom_filters %} {% block inner-banner %} <div class=tg-innerbanner > <div class=container > <div class=row > <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> <ol class=tg-breadcrumb > <li><a href="{{base_url}}/">home</a> <li><a href="{{base_url}}/{{kind}}/list/all/">{{kind}}</a> <li class=tg-active >List </ol> </div> </div> </div> </div> {% endblock %} {% block main %} <main id=tg-main  class="tg-main tg-haslayout"> <div class=container > <div class=row > <div id=tg-twocolumns  class=tg-twocolumns > <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 pull-right"> <div id=tg-content  class=tg-content > <div class=tg-resultandstyle > <span class=tg-searchresult >Showing {{page_list.start_index}}-{{page_list.end_index}} of {{page_list.paginator.count}} results <br> </span> </div> <div class="tg-events tg-list"> <div class=row > {% for i in page_list %} <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> <article class="tg-themepost tg-eventpost"> <figure class=tg-featuredimg > <a href="{{base_url}}/{{kind}}/detail/{{i.slug}}"> <img src="/media/{{i.file_path}}" alt="image description"> </a> </figure> <div class=tg-themepostcontent > <div class=tg-themeposttitle > <h3><a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">{{i.title|truncatewords_html:50}}</a></h3> </div> <div class=tg-description > <p>{{i.content|striptags|safe|truncatewords_html:50}}</p> </div> <ul class=tg-matadata > <li> <a href="{{base_url}}/{{kind}}/detail/{{i.slug}}"> <i class="fa fa-calendar"></i> <span>{{i.created_at|natural_datetime|title}}</span> </a> </ul> <div class=tg-btnsbox > <a class=tg-btn  href="{{base_url}}/{{kind}}/detail/{{i.slug}}">read more</a> </div> </div> </article> </div> {% endfor %} </div> </div> {% if page_list.has_other_pages %} <nav class=tg-pagination > <ul> {% if page_list.has_previous %} <li class=tg-prevpage ><a href="?page={{page_list.previous_page_number}}"><i class="fa fa-angle-left"></i></a> {% else %} <li class=disabled ><a href="#"><i class="fa fa-angle-left"></i></a> {% endif %} {% for i in page_list.paginator.page_range %} {% if page_list.number == i %} <li class=tg-active ><span>{{ i }} <span class=sr-only >(current)</span></span> {% else %} <li><a href="?page={{i}}">{{i}}</a> {% endif %} {% endfor %} {% if page_list.has_next %} <li class=tg-nextpage ><a href="?page={{page_list.next_page_number}}"><i class="fa fa-angle-right"></i></a> {% else %} <li class=disabled ><a href="#"><i class="fa fa-angle-right"></i></a> {% endif %} </ul> </nav> {% endif %} </div> </div> <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 pull-left"> <aside id=tg-sidebar  class=tg-sidebar > <div class="tg-widget tg-widgetsearchcourse"> <div class=tg-widgettitle > <h3>Search {{kind}}</h3> </div> <div class=tg-widgetcontent > <form class="tg-formtheme tg-formsearchcourse"> <fieldset> <div class=tg-inputwithicon > <i class=icon-book ></i> <input type=search  name=keyword  class=form-control  placeholder=Keyword > </div> <button type=submit  class=tg-btn >search now</button> <a href="{{base_url}}/{{kind}}/list/all/">View All {{kind}}</a> </fieldset> </form> </div> </div> {% if categories_list %} <div class="tg-widget tg-widgetcoursecategories"> <div class=tg-widgettitle > <h3>{{kind}} Categories</h3> </div> <div class=tg-widgetcontent > <ul> {% for i in categories_list %} <li> <a href="{{base_url}}/{{kind}}/list/{{i.slug}}/"> <span>{{i.name}}</span> <span>({{i.count}})</span> </a> {% endfor %} </ul> </div> </div> {% endif %} {% comment %} {% if latest_kind %} <div class="tg-widget tg-widgetlatestcourses"> <div class=tg-widgettitle > <h3>Latest {{kind}}</h3> </div> <div class=tg-widgetcontent > {% for i in latest_kind %} <article class="tg-campus tg-campusleftthumb"> <a href="{{base_url}}/{{kind}}/detail/{{i.slug}}"> <img src="/media/{{i.file_path}}" alt="image description"> </a> <br><br> <div class=tg-campuscontent > <div class=tg-matadata > <i class="fa fa-calendar"></i> <span>{{i.created_at|natural_datetime|title}}</span> </div> <div class=tg-campustitle > <h3><a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">{{i.title}}</a></h3> </div> </div> </article> {% endfor %} </div> </div> {% endif %} {% endcomment %} {% if announcement %} {% include 'education/college-and-school-education/snippets/side_announcement.html' %} {% endif %} </aside> </div> </div> </div> </div> </main> {% endblock %} {% block extra_body %} {% endblock %}
+{% extends "education/college-and-school-education/base-detail.html" %}
+{% load static %}
+{% load hitcount_tags %}
+{% load custom_filters %}
+
+{% block inner-banner %}
+    <!--************************************
+            Inner Banner Start
+    *************************************-->
+    <div class="tg-innerbanner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ol class="tg-breadcrumb">
+                        <li><a href="{{base_url}}/">home</a></li>
+                        <!-- # goto list of kind -->
+                        <li><a href="{{base_url}}/{{kind}}/list/all/">{{kind}}</a></li> 
+                        <li class="tg-active">List</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--************************************
+            Inner Banner End
+    *************************************-->
+{% endblock %}
+
+{% block main %}
+    <!--************************************
+            Main Start
+    *************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div id="tg-twocolumns" class="tg-twocolumns">
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 pull-right">
+                        <div id="tg-content" class="tg-content">
+                            <div class="tg-resultandstyle">
+                                <span class="tg-searchresult">Showing {{page_list.start_index}}-{{page_list.end_index}} of {{page_list.paginator.count}} results <br>
+                                    <!-- {% comment %}
+                                    pagelist = {{page_list}} <br>
+                                    pagecount = {{page_count}} <br>
+                                    pagenumber = {{page_number}} <br>
+                                    {% endcomment %} -->
+                                </span>
+                                <!-- <ul class="tg-poststyleswitcher">
+                                    <li><a href="eventsgrid.html"><i class="fa fa-th"></i></a></li>
+                                    <li class="tg-active"><a href="eventslist.html"><i class="fa fa-th-list"></i></a></li>
+                                </ul> 
+                                ref: https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html
+                                -->
+                            </div>
+                            <div class="tg-events tg-list">
+                                <div class="row">
+                                    {% for i in page_list %}
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <article class="tg-themepost tg-eventpost">
+                                                <figure class="tg-featuredimg">
+                                                    <a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">
+                                                        <img src="/media/{{i.file_path}}" alt="image description">
+                                                    </a>
+                                                </figure>
+                                                <div class="tg-themepostcontent">
+                                                    <!-- <ul class="tg-themeposttags">
+                                                        <li><a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">Management</a></li>
+                                                        <li><a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">Science</a></li>
+                                                    </ul> -->
+                                                    <div class="tg-themeposttitle">
+                                                        <h3><a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">{{i.title|truncatewords_html:50}}</a></h3>
+                                                    </div>
+                                                    <div class="tg-description">
+                                                        <p>{{i.content|striptags|safe|truncatewords_html:50}}</p>
+                                                    </div>
+                                                    <ul class="tg-matadata">
+                                                        <li>
+                                                            <a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">
+                                                                <i class="fa fa-calendar"></i>
+                                                                <span>{{i.created_at|natural_datetime|title}}</span>
+                                                            </a>
+                                                        </li>
+                                                        <!-- <li>
+                                                            <a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">
+                                                                <i class="fa fa-clock-o"></i>
+                                                                <span>8:00 AM - 5:00 PM</span>
+                                                            </a>
+                                                        </li> -->
+                                                        <!-- <li>
+                                                            <a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">
+                                                                <i class="fa fa-location-arrow"></i>
+                                                                <span>Manchester, UK</span>
+                                                            </a>
+                                                        </li> -->
+                                                    </ul>
+                                                    <div class="tg-btnsbox">
+                                                        <a class="tg-btn" href="{{base_url}}/{{kind}}/detail/{{i.slug}}">read more</a>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    {% endfor %}
+
+
+                                    <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <article class="tg-themepost tg-eventpost">
+                                            <figure class="tg-featuredimg">
+                                                <a href="javascript:void(0);">
+                                                    <img src="images/events/img-18.jpg" alt="image description">
+                                                </a>
+                                            </figure>
+                                            <div class="tg-themepostcontent">
+                                                <ul class="tg-themeposttags">
+                                                    <li><a href="javascript:void(0);">Management</a></li>
+                                                    <li><a href="javascript:void(0);">Science</a></li>
+                                                </ul>
+                                                <div class="tg-themeposttitle">
+                                                    <h3><a href="javascript:void(0);">International Conference on Material Science 2017</a></h3>
+                                                </div>
+                                                <div class="tg-description">
+                                                    <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt labore et dolore amit agna aliqua enimnate minim veniam quis nostrud exercitation ullamco laboris nisi utiata Consectetur adipisicing elit sed do eiusmod tempor incididunt labore et dolore amit agna aliqua enimnate minim veniam quis nostrud exercitation ullamco laboris nisi utiata.</p>
+                                                </div>
+                                                <ul class="tg-matadata">
+                                                    <li>
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-calendar"></i>
+                                                            <span>Tuesday, Apr 21, 2017</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-clock-o"></i>
+                                                            <span>8:00 AM - 5:00 PM</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-location-arrow"></i>
+                                                            <span>Manchester, UK</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tg-btnsbox">
+                                                    <a class="tg-btn" href="javascript:void(0);">read more</a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <article class="tg-themepost tg-eventpost">
+                                            <figure class="tg-featuredimg">
+                                                <a href="javascript:void(0);">
+                                                    <img src="images/events/img-19.jpg" alt="image description">
+                                                </a>
+                                            </figure>
+                                            <div class="tg-themepostcontent">
+                                                <ul class="tg-themeposttags">
+                                                    <li><a href="javascript:void(0);">Management</a></li>
+                                                    <li><a href="javascript:void(0);">Science</a></li>
+                                                </ul>
+                                                <div class="tg-themeposttitle">
+                                                    <h3><a href="javascript:void(0);">Biggest Reality Virtual University Convocation 2017</a></h3>
+                                                </div>
+                                                <div class="tg-description">
+                                                    <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt labore et dolore amit agna aliqua enimnate minim veniam quis nostrud exercitation ullamco laboris nisi utiata Consectetur adipisicing elit sed do eiusmod tempor incididunt labore et dolore amit agna aliqua enimnate minim veniam quis nostrud exercitation ullamco laboris nisi utiata.</p>
+                                                </div>
+                                                <ul class="tg-matadata">
+                                                    <li>
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-calendar"></i>
+                                                            <span>Tuesday, Apr 21, 2017</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-clock-o"></i>
+                                                            <span>8:00 AM - 5:00 PM</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-location-arrow"></i>
+                                                            <span>Manchester, UK</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tg-btnsbox">
+                                                    <a class="tg-btn" href="javascript:void(0);">read more</a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <article class="tg-themepost tg-eventpost">
+                                            <figure class="tg-featuredimg">
+                                                <a href="javascript:void(0);">
+                                                    <img src="images/events/img-20.jpg" alt="image description">
+                                                </a>
+                                            </figure>
+                                            <div class="tg-themepostcontent">
+                                                <ul class="tg-themeposttags">
+                                                    <li><a href="javascript:void(0);">Management</a></li>
+                                                    <li><a href="javascript:void(0);">Science</a></li>
+                                                </ul>
+                                                <div class="tg-themeposttitle">
+                                                    <h3><a href="javascript:void(0);">Launching Best Concept Motorbike for Abnormal People</a></h3>
+                                                </div>
+                                                <div class="tg-description">
+                                                    <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt labore et dolore amit agna aliqua enimnate minim veniam quis nostrud exercitation ullamco laboris nisi utiata Consectetur adipisicing elit sed do eiusmod tempor incididunt labore et dolore amit agna aliqua enimnate minim veniam quis nostrud exercitation ullamco laboris nisi utiata.</p>
+                                                </div>
+                                                <ul class="tg-matadata">
+                                                    <li>
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-calendar"></i>
+                                                            <span>Tuesday, Apr 21, 2017</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-clock-o"></i>
+                                                            <span>8:00 AM - 5:00 PM</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">
+                                                            <i class="fa fa-location-arrow"></i>
+                                                            <span>Manchester, UK</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tg-btnsbox">
+                                                    <a class="tg-btn" href="javascript:void(0);">read more</a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div> -->
+                                </div>
+                            </div>
+
+                            {% if page_list.has_other_pages %}
+                                <nav class="tg-pagination">
+                                    <ul>
+                                        {% if page_list.has_previous %}
+                                            <li class="tg-prevpage"><a href="?page={{page_list.previous_page_number}}"><i class="fa fa-angle-left"></i></a></li>
+                                        {% else %}
+                                            <li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                                        {% endif %}
+                                        
+                                        {% for i in page_list.paginator.page_range %}
+                                            {% if page_list.number == i %}
+                                                <li class="tg-active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                            {% else %}
+                                                <li><a href="?page={{i}}">{{i}}</a></li>
+                                            {% endif %}
+
+                                            <!-- <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li class="tg-active"><a href="#">5</a></li>
+                                            <li>...</li>
+                                            <li><a href="#">10</a></li> -->
+                                        {% endfor %}
+
+                                        {% if page_list.has_next %}
+                                            <li class="tg-nextpage"><a href="?page={{page_list.next_page_number}}"><i class="fa fa-angle-right"></i></a></li>
+                                        {% else %}
+                                            <li class="disabled"><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 pull-left">
+                        <aside id="tg-sidebar" class="tg-sidebar">
+                            <div class="tg-widget tg-widgetsearchcourse">
+                                <div class="tg-widgettitle">
+                                    <h3>Search {{kind}}</h3>
+                                </div>
+                                <div class="tg-widgetcontent">
+                                    <form class="tg-formtheme tg-formsearchcourse">
+                                        <fieldset>
+                                            <div class="tg-inputwithicon">
+                                                <i class="icon-book"></i>
+                                                <input type="search" name="keyword" class="form-control" placeholder="Keyword">
+                                            </div>
+                                            <button type="submit" class="tg-btn">search now</button>
+                                            <a href="{{base_url}}/{{kind}}/list/all/">View All {{kind}}</a>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                            {% if categories_list %}
+                                <div class="tg-widget tg-widgetcoursecategories">
+                                    <div class="tg-widgettitle">
+                                        <h3>{{kind}} Categories</h3>
+                                    </div>
+                                    <div class="tg-widgetcontent">
+                                        <ul>
+                                            {% for i in categories_list %}
+                                                <li>
+                                                    <a href="{{base_url}}/{{kind}}/list/{{i.slug}}/">
+                                                        <span>{{i.name}}</span>
+                                                        <span>({{i.count}})</span>
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            {% comment %}
+                            {% if latest_kind %}
+                                <div class="tg-widget tg-widgetlatestcourses">
+                                    <div class="tg-widgettitle">
+                                        <h3>Latest {{kind}}</h3>
+                                    </div>
+                                    <div class="tg-widgetcontent">
+                                        {% for i in latest_kind %}
+                                            <article class="tg-campus tg-campusleftthumb">
+                                                <!-- <figure class="tg-featuredimg"> -->
+                                                    <a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">
+                                                        <img src="/media/{{i.file_path}}" alt="image description">
+                                                    </a>
+                                                <!-- </figure> -->
+
+                                                <br><br>
+                                                <div class="tg-campuscontent">
+                                                    <div class="tg-matadata">
+                                                        <i class="fa fa-calendar"></i>
+                                                        <span>{{i.created_at|natural_datetime|title}}</span>
+                                                    </div>
+                                                    <div class="tg-campustitle">
+                                                        <h3><a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">{{i.title}}</a></h3>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% endcomment %}
+
+                            {% if announcement %}
+                                {% include 'education/college-and-school-education/snippets/side_announcement.html' %}
+                            {% endif %}
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+{% endblock %}
+
+
+{% block extra_body %}
+{% endblock %}

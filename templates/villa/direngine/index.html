@@ -1,0 +1,919 @@
+{% extends "villa/direngine/base-index.html" %}
+{% load static %}
+
+{% block hero-image %}
+    
+    {% for i in slideshow %}        
+        <div class="slider-item" style="background-image: url(/media/{{i.file_path}})">
+            <div class="title" style="display:none">{{i.title}}</div>
+            <div class="sub-title" style="display:none">{{i.sub_title}}</div>
+            <div class="content" style="display:none">&nbsp;{{i.content|safe}}</div>
+        </div>
+    {% endfor %}
+<!--     
+    <div class="slider-item" style="background-image: url({% static 'villa/direngine/images/bg_2.jpg' %})">
+        
+    
+    </div>
+    <div class="slider-item" style="background-image: url({% static 'villa/direngine/images/bg_3.jpg' %})"></div>
+    <div class="slider-item" style="background-image: url({% static 'villa/direngine/images/bg_4.jpg' %})"></div>
+    <div class="slider-item" style="background-image: url({% static 'villa/direngine/images/bg_5.jpg' %})"></div> -->
+
+    <!-- <div class="slider-item" style="background-image: url(https://source.unsplash.com/aiBYhrzsQw4/1920x1200)"></div>
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/V5Owjg-ZNto/1920x1200)"></div>
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/s1ihVBg5tbI/1920x1200)"></div>
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/Z_t6gnbLmXA/1920x1200)"></div>
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/e3OUQGT9bWU/1920x1200)"></div> -->
+
+    <!-- <div id="slider" class="slider"> hero-wrap js-fullheight-->
+    <div  id="slider" class="slider">
+
+
+        <!-- <div class="overlay"></div>
+        <div class="container"> -->
+        
+            <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+                
+                <div class="slider-panel">
+                    <div class="slider-panel__controls">
+                        <i class="far fa-arrow-alt-circle-left" id="previous"></i>
+                        <i class="far fa-pause-circle" id="pause-play"></i>
+                        <i class="far fa-arrow-alt-circle-right" id="next"></i>
+                    </div>
+                    
+                    <div class="slider-panel__navigation">
+                        
+                        {% for i in slideshow %} 
+                            <i class="fas fa-circle indicator" data-slide-to="{{forloop.counter0}}"></i>
+                        {% endfor %}
+                        <!-- <i class="far fa-circle indicator" data-slide-to="1"></i>
+                        <i class="far fa-circle indicator" data-slide-to="2"></i>
+                        <i class="far fa-circle indicator" data-slide-to="3"></i>
+                        <i class="far fa-circle indicator" data-slide-to="4"></i> -->
+                    </div>                        
+                </div>
+                
+                <div class="slider-item-show">
+                    <!-- <div class="col-md-9 ftco-animate" data-scrollax=" properties: { translateY: '70%' }"> -->
+                        <!-- Explore your amazing city-->
+                        <!-- Find great places to stay -->
+                        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">                            
+                            <strong><div class="title"></div> </strong> 
+                                    <div class="sub-title"></div>
+                        </h1>
+                        <p class="content" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">                            
+                        </p>
+                        <!-- <div class="block-17 my-4"> -->
+                            <!-- <form action="" method="post" class="d-block d-flex">
+                            <div class="fields d-block d-flex">
+                                <div class="textfield-search one-third">
+                                    <input type="text" class="form-control" placeholder="Ex: food, service, hotel">
+                                </div>
+                                <div class="select-wrap one-third">
+                                <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                <select name="" id="" class="form-control" placeholder="Keyword search">
+                                    <option value="">Where</option>
+                                    <option value="">San Francisco USA</option>
+                                    <option value="">Berlin Germany</option>
+                                    <option value="">Lodon United Kingdom</option>
+                                    <option value="">Paris Italy</option>
+                                </select>
+                                </div>
+                            </div>
+                            <input type="submit" class="search-submit btn btn-primary" value="Search">  
+                            </form> -->
+                            <!-- <input type="button" class="search-submit btn btn-primary" onclick="mylinkfunction(self,'#about')" value=" &nbsp; Read More &nbsp; ">   -->
+                            <a href="#about" class="search-submit btn btn-primary"> &nbsp; Read More &nbsp; </a>
+                            <!-- <a href="#" class="nav-link"><span>Add listing</span></a> -->
+                        <!-- </div> -->
+                        <!-- <p>Or browse the highlights</p>
+                        <p class="browse d-md-flex">
+                            <span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-fork"></i>Restaurant</a></span>
+                            <span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-hotel"></i>Hotel</a></span> 
+                            <span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-meeting-point"></i>Places</a></span> 
+                            <span class="d-flex justify-content-md-center align-items-md-	center"><a href="#"><i class="flaticon-shopping-bag"></i>Shopping</a></span>
+                        </p> -->
+                        <!-- </div> -->
+
+                        
+                    <!-- </div> -->
+                </div>
+            </div>
+           
+        <!-- </div> -->
+    <!-- </div> -->
+    </div>
+{% endblock %}
+
+{% block why-us %}
+    <section class="ftco-section services-section bg-light" >
+        <div class="container">
+        <div class="row d-flex">
+            
+            {% for i in whyus %}
+                <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+                    <div class="media block-6 services d-block text-center">
+                        <div class="d-flex justify-content-center"><div class="icon">
+                            <span class="{{i.icon}}"></span></div></div>
+                        <div class="media-body p-2 mt-2">
+                        <h3 class="heading mb-3">{{i.title}}</h3>
+                        <p>{{i.description}}</p>
+                        </div>
+                    </div>      
+                </div>
+            {% endfor %}
+            
+            <!-- <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block text-center">
+                <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-like"></span></div></div>
+                <div class="media-body p-2 mt-2">
+                <h3 class="heading mb-3">Travellers Love Us</h3>
+                <p>A small river named Duden flows by their place and supplies.</p>
+                </div>
+            </div>    
+            </div>
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block text-center">
+                <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-detective"></span></div></div>
+                <div class="media-body p-2 mt-2">
+                <h3 class="heading mb-3">Best Travel Agent</h3>
+                <p>A small river named Duden flows by their place and supplies.</p>
+                </div>
+            </div>      
+            </div>
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block text-center">
+                <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-support"></span></div></div>
+                <div class="media-body p-2 mt-2">
+                <h3 class="heading mb-3">Our Dedicated Support</h3>
+                <p>A small river named Duden flows by their place and supplies.</p>
+                </div>
+            </div>      
+            </div> -->
+        </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block fasilities %}
+    <section class="ftco-section ftco-destination" id="about">
+        <div class="container">
+            <div class="row justify-content-start ">
+            <div class="col-md-7 heading-section ftco-animate">
+                <span class="subheading">About</span>
+            <h2 class="mb-4"><strong>Narvik Villa</strong> Fasilities</h2>
+            
+            </div>
+            
+
+            </div>
+            <div class="row justify-content-center mb-5 ">
+            <div class="col-md-12">
+                <p>
+                    Situated next to Krandangan National Park, you will be nestled in a beautiful valley surrounded by the lush forest. The villa is perfect for a big family or a group of friend. Only 5 minutes by a car or scooter and 20 minutes on a walk to the beach. Our 4-bedroom spacious villa offers an incredible nature view, a private pool, a BBQ grill, a fully equipped kitchen, an advanced Jura coffee machine, PlayStation 4, Netflix, karaoke, and free WIFI available in all areas. Breakfast is served for free. Lunch and dinner can be ordered outside by our staff or prepared by our professional chef at the villa (surcharge). Rent a car or scooter and a half or full day excursion can be organized by request.
+                </p>                
+            </div>
+
+            </div>
+            <div class="bod-modal" data-interval="4" data-title="center">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="destination-slider owl-carousel ftco-animate">
+
+                            
+
+                                <div class="item">
+                                    <div class="destination">
+                                    
+                                        <a href="{% static 'villa/direngine/images/destination-1.jpg' %}" 
+                                            class="img d-flex justify-content-center align-items-center image-popup-no-margins" 
+                                            style="background-image: url({% static 'villa/direngine/images/destination-1.jpg' %});">
+                                            <div class="icon d-flex justify-content-center align-items-center">
+                                                <span class="icon-search2"></span>
+                                            </div>
+                                            <!-- <img src="{% static 'villa/direngine/images/destination-1.jpg' %}"> -->
+                                        </a>
+                                        
+                                        <div class="text p-3">
+                                            <h3><a href="#">Main Room</a></h3>
+                                            <span class="listing">There are two buildings, a large main building and a smaller studio.</span>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="destination">
+                                        <a href="{% static 'villa/direngine/images/destination-2.jpg' %}" 
+                                            class="img d-flex justify-content-center align-items-center image-popup-no-margins" 
+                                            style="background-image: url({% static 'villa/direngine/images/destination-2.jpg' %});">
+                                            <div class="icon d-flex justify-content-center align-items-center">
+                                                <span class="icon-search2"></span>
+                                            </div>
+                                        </a>
+                                        <div class="text p-3">
+                                            <h3><a href="#">Bedroom</a></h3>
+                                            <span class="listing">We have four bedrooms.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="destination">
+                                        <a href="{% static 'villa/direngine/images/destination-3.jpg' %}" 
+                                            class="img d-flex justify-content-center align-items-center image-popup-no-margins" 
+                                            style="background-image: url({% static 'villa/direngine/images/destination-3.jpg' %});">
+                                            <div class="icon d-flex justify-content-center align-items-center">
+                                                <span class="icon-search2"></span>
+                                            </div>
+                                        </a>
+                                        <div class="text p-3">
+                                            <h3><a href="#">Bathroom</a></h3>
+                                            <span class="listing">We have three bathrooms.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="destination">
+                                        <a href="{% static 'villa/direngine/images/destination-4.jpg' %}" 
+                                            class="img d-flex justify-content-center align-items-center image-popup-no-margins" 
+                                            style="background-image: url({% static 'villa/direngine/images/destination-4.jpg' %});">
+                                            <div class="icon d-flex justify-content-center align-items-center">
+                                                <span class="icon-search2"></span>
+                                            </div>
+                                        </a>
+                                        <div class="text p-3">
+                                            <h3><a href="#">Kitchen</a></h3>
+                                            <span class="listing">Our kitchen merges with the main room.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="destination">
+                                        <a href="{% static 'villa/direngine/images/destination-5.jpg' %}" 
+                                            class="img d-flex justify-content-center align-items-center image-popup-no-margins" 
+                                            style="background-image: url({% static 'villa/direngine/images/destination-5.jpg' %});">
+                                            <div class="icon d-flex justify-content-center align-items-center">
+                                                <span class="icon-search2"></span>
+                                            </div>
+                                        </a>
+                                        <div class="text p-3">
+                                            <h3><a href="#">Swimming Pool</a></h3>
+                                            <span class="listing">The pool is the nicest place for relaxation.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+
+                            <!-- <div class="item">
+                                <div class="destination">
+                                    <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-6.jpg' %});">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="icon-search2"></span>
+                                        </div>
+                                    </a>
+                                    <div class="text p-3">
+                                        <h3><a href="#">Paris, Italy</a></h3>
+                                        <span class="listing">3 Listing</span>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block gallery %}
+    <section class="ftco-section ftco-destination" id="gallery">
+        <div class="container">
+            <div class="row justify-content-start ">
+            <div class="col-md-7 heading-section ftco-animate">
+                <span class="subheading">Gallery</span>
+            <h2 class="mb-4"><strong>Narvik Villa</strong> Gallery</h2>
+            
+            </div>
+            
+
+            </div>
+            <div class="row justify-content-center mb-5 ">
+            <div class="col-md-12">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis maxime voluptatem minima architecto at debitis reprehenderit in, ullam magnam iure similique vero nostrum eligendi nisi culpa numquam labore molestias reiciendis!
+                </p>
+            </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="destination-slider owl-carousel ftco-animate">
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-6.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Front Door</a></h3>
+                                    <span class="listing">Front Door description</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-5.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Living Room</a></h3>
+                                    <span class="listing">Living room description.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-3.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Swimming Pool</a></h3>
+                                    <span class="listing">Picture of swimming pool on night</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-2.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Kitchen</a></h3>
+                                    <span class="listing">Our kitchen merges with the main room.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-1.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Swimming Pool</a></h3>
+                                    <span class="listing">The pool is the nicest place for relaxation.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-6.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Garden</a></h3>
+                                    <span class="listing">Foto get using drone</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block special-offers %}
+    <section class="ftco-section" id="offers">
+        <div class="container">
+                <div class="row justify-content-start mb-5 pb-3">
+        <div class="col-md-7 heading-section ftco-animate">
+            <span class="subheading">Special Offers</span>
+            <h2 class="mb-4"><strong>Narvik Villa</strong> Best Offers</h2>
+        </div>
+        </div>    		
+            <div class="row">
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="destination">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/restaurant-1.jpg' %});">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3">
+                            <h3><a href="#">Stay 3 Night, 1 Night Off</a></h3>
+                            <p class="rate">
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star-o"></i>
+                                <span>8 Rating</span>
+                            </p>
+                            <p>Far far away, behind the word mountains, far from the countries</p>
+                            <hr>
+                            <p class="bottom-area d-flex">
+                                <span><i class="icon-map-o"></i> </span> 
+                                <span class="ml-auto"><a href="#">Book Now</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="destination">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/restaurant-2.jpg' %});">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3">
+                            <h3><a href="#">Stay 7 Night, 1 Night Off + Free 1 Night For Next Visit</a></h3>
+                            <p class="rate">
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star-o"></i>
+                                <span>8 Rating</span>
+                            </p>
+                            <p>Far far away, behind the word mountains, far from the countries</p>
+                            <hr>
+                            <p class="bottom-area d-flex">
+                                <span><i class="icon-map-o"></i> </span> 
+                                <span class="ml-auto"><a href="#">Book Now</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="destination">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/restaurant-3.jpg' %});">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3">
+                            <h3><a href="#">Stay 2 Night, For 2 Guest, Free Breakfast & Lunch</a></h3>
+                            <p class="rate">
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star-o"></i>
+                                <span>8 Rating</span>
+                            </p>
+                            <p>Far far away, behind the word mountains, far from the countries</p>
+                            <hr>
+                            <p class="bottom-area d-flex">
+                                <span><i class="icon-map-o"></i> </span> 
+                                <span class="ml-auto"><a href="#">Book Now</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="destination">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/restaurant-4.jpg' %});">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3">
+                            <h3><a href="#">Book This Month, Free Souvenir From Narvik Villa</a></h3>
+                            <p class="rate">
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star-o"></i>
+                                <span>8 Rating</span>
+                            </p>
+                            <p>Far far away, behind the word mountains, far from the countries</p>
+                            <hr>
+                            <p class="bottom-area d-flex">
+                                <span><i class="icon-map-o"></i></span> 
+                                <span class="ml-auto"><a href="#">Book Now</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block testimony %}
+    <section class="ftco-section testimony-section bg-light">
+        <div class="container">
+        <div class="row justify-content-start">
+            <div class="col-md-5 heading-section ftco-animate">
+                <span class="subheading">Best Directory Website</span>
+            <h2 class="mb-4 pb-3"><strong>Why</strong> Choose Us?</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life.</p>
+            <p><a href="#" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3">Read more</a></p>
+            </div>
+                    <div class="col-md-1"></div>
+            <div class="col-md-6 heading-section ftco-animate">
+                <span class="subheading">Testimony</span>
+            <h2 class="mb-4 pb-3"><strong>Our</strong> Guests Says</h2>
+                <div class="row ftco-animate">
+                    <div class="col-md-12">
+                    <div class="carousel-testimony owl-carousel">
+                        <div class="item">
+                        <div class="testimony-wrap d-flex">
+                            <div class="user-img mb-5" style="background-image: url({% static 'villa/direngine/images/person_1.jpg' %})">
+                            <span class="quote d-flex align-items-center justify-content-center">
+                                <i class="icon-quote-left"></i>
+                            </span>
+                            </div>
+                            <div class="text ml-md-4">
+                            <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                            <p class="name">Dennis Green</p>
+                            <span class="position">Guest from italy</span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="item">
+                        <div class="testimony-wrap d-flex">
+                            <div class="user-img mb-5" style="background-image: url({% static 'villa/direngine/images/person_2.jpg' %})">
+                            <span class="quote d-flex align-items-center justify-content-center">
+                                <i class="icon-quote-left"></i>
+                            </span>
+                            </div>
+                            <div class="text ml-md-4">
+                            <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                            <p class="name">Dennis Green</p>
+                            <span class="position">Guest from London</span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="item">
+                        <div class="testimony-wrap d-flex">
+                            <div class="user-img mb-5" style="background-image: url({% static 'villa/direngine/images/person_3.jpg' %})">
+                            <span class="quote d-flex align-items-center justify-content-center">
+                                <i class="icon-quote-left"></i>
+                            </span>
+                            </div>
+                            <div class="text ml-md-4">
+                            <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                            <p class="name">Dennis Green</p>
+                            <span class="position">Guest from Philippines</span>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block calendar %}    
+    <section class="ftco-section ftco-destination" id="calendar-scroll">
+        <div class="container">
+            <div class="row justify-content-start ">
+            <div class="col-md-7 heading-section ftco-animate">
+                <span class="subheading">Calendar</span>
+                <h2 class="mb-4"><strong>Narvik Villa</strong> Calendar</h2>            
+            </div>            
+
+            </div>
+            <div class="row justify-content-center mb-5 ">
+            <div class="col-md-12">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis maxime voluptatem minima architecto at debitis reprehenderit in, ullam magnam iure similique vero nostrum eligendi nisi culpa numquam labore molestias reiciendis!
+                </p>
+            </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12 ftco-animate">
+                    <div id='calendar'></div>                    
+                </div>
+                
+                <div class="col-md-12 ftco-animate">                    
+                    <div class="destination">
+                        <div class="text p-3">
+                            <p class="bottom-area d-flex">
+                                <span><i class="icon-map-o"></i>  
+                                    <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit.  -->
+                                </span> 
+                                <span class="ml-auto"><a href="#"> &nbsp; Book Now &nbsp;  </a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    
+{% endblock %}
+
+{% block article %}
+    <section class="ftco-section bg-light" id="article">
+    <div class="container">
+    <div class="row justify-content-start mb-5 pb-3">
+        <div class="col-md-7 heading-section ftco-animate">
+        <span class="subheading">Recent Blog</span>
+        <h2><strong>Tips</strong> &amp; Articles</h2>
+        </div>
+    </div>
+    <div class="row d-flex">
+        <div class="col-md-3 d-flex ftco-animate">
+        <div class="blog-entry align-self-stretch">
+            <a href="blog-single.html" class="block-20" style="background-image: url({% static 'villa/direngine/images/image_1.jpg' %});">
+            </a>
+            <div class="text p-4 d-block">
+                <span class="tag">Tips, Travel</span>
+            <h3 class="heading mt-3"><a href="#">8 Best homestay in Philippines that you don't miss out</a></h3>
+            <div class="meta mb-3">
+                <div><a href="#">August 12, 2018</a></div>
+                <div><a href="#">Admin</a></div>
+                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-3 d-flex ftco-animate">
+        <div class="blog-entry align-self-stretch">
+            <a href="blog-single.html" class="block-20" style="background-image: url({% static 'villa/direngine/images/image_2.jpg' %});">
+            </a>
+            <div class="text p-4">
+                <span class="tag">Culture</span>
+            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+            <div class="meta mb-3">
+                <div><a href="#">August 12, 2018</a></div>
+                <div><a href="#">Admin</a></div>
+                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-3 d-flex ftco-animate">
+        <div class="blog-entry align-self-stretch">
+            <a href="blog-single.html" class="block-20" style="background-image: url({% static 'villa/direngine/images/image_3.jpg' %});">
+            </a>
+            <div class="text p-4">
+                <span class="tag">Tips, Travel</span>
+            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+            <div class="meta mb-3">
+                <div><a href="#">August 12, 2018</a></div>
+                <div><a href="#">Admin</a></div>
+                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-3 d-flex ftco-animate">
+        <div class="blog-entry align-self-stretch">
+            <a href="blog-single.html" class="block-20" style="background-image: url({% static 'villa/direngine/images/image_4.jpg' %});">
+            </a>
+            <div class="text p-4">
+                <span class="tag">Tips, Travel</span>
+            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+            <div class="meta mb-3">
+                <div><a href="#">August 12, 2018</a></div>
+                <div><a href="#">Admin</a></div>
+                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+    </section>
+{% endblock %}      
+
+{% block extra_body %}
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<span class="fa fa-angle-up"></span>
+		</span>
+	</div>  
+
+    <script>        
+
+        document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        // 
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialDate: '2023-01-12',
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+            },
+            height: 'auto',
+            navLinks: true, // can click day/week names to navigate views
+            editable: false,
+            selectable: true,
+            selectMirror: true,
+            nowIndicator: true,
+            events: [
+            {
+                title: 'All Day Event',
+                start: '2023-01-01',
+            },
+            {
+                title: 'Long Event',
+                start: '2023-01-07',
+                end: '2023-01-10'
+            },
+            {
+                groupId: 999,
+                title: 'Repeating Event',
+                start: '2023-01-09T16:00:00'
+            },
+            {
+                groupId: 999,
+                title: 'Repeating Event',
+                start: '2023-01-16T16:00:00'
+            },
+            {
+                title: 'Conference',
+                start: '2023-01-11',
+                end: '2023-01-13'
+            },
+            {
+                title: 'Meeting',
+                start: '2023-01-12T10:30:00',
+                end: '2023-01-12T12:30:00'
+            },
+            {
+                title: 'Lunch',
+                start: '2023-01-12T12:00:00'
+            },
+            {
+                title: 'Meeting',
+                start: '2023-01-12T14:30:00'
+            },
+            {
+                title: 'Happy Hour',
+                start: '2023-01-12T17:30:00'
+            },
+            {
+                title: 'Dinner',
+                start: '2023-01-12T20:00:00'
+            },
+            {
+                title: 'Birthday Party',
+                start: '2023-01-13T07:00:00'
+            },
+            {
+                title: 'Click for Google',
+                url: 'http://google.com/',
+                start: '2023-01-28'
+            }
+            ]
+        });
+    
+        calendar.render();
+        });
+
+
+        function mylinkfunction(e, target) {
+
+            window.location.href = target; //#"#targetDiv";
+            // $('html, body').animate({scrollTop: 0}, 300);
+
+            /* need to stop the form sending of the form
+
+            UPDATE as comment: This may not be exactly correct syntax 
+            for stopping a form , look up preventing form submission */
+
+            // e.preventDefault();
+            // e.stopPropagation(); 
+
+        };
+
+        $(document).on("ready", function() {
+
+            $('.image-popup-no-margins').magnificPopup({
+                type: 'image',
+                closeOnContentClick: true,
+                closeBtnInside: true,
+                fixedContentPos: true,
+                mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side mfp-no-margins  mfp-with-zoom
+                image: {
+                    horizontalFit: true
+                },
+                zoom: {
+                    enabled: true,
+                    duration: 300 // don't foget to change the duration also in CSS
+                }
+            });
+
+
+            // function scrollToAnchor(aid){
+            //     const destination = $("a[name='"+ aid +"']");
+            //     $('html,body').animate({
+            //         scrollTop: destination.offset().top
+            //     },'slow');
+            // };
+
+            // $(document).on('click', '.smooth-link', function(){
+            //     scrollToAnchor('demo');
+            // });
+
+            /*[ Back to top ]*/
+            try {
+                var windowH = $(window).height()/2;
+
+                $(window).on('scroll',function(){
+                    if ($(this).scrollTop() > windowH) {
+                        $("#myBtn").addClass('show-btn-back-to-top');
+                    } else {
+                        $("#myBtn").removeClass('show-btn-back-to-top');
+                    }
+                });
+
+                $('#myBtn').on("click", function(){
+                    $('html, body').animate({scrollTop: 0}, 300);
+                });
+            } catch(er) {console.log(er);}
+
+            window.onscroll = function() {myFunction()};
+
+            function myFunction() {
+                // if (document.documentElement.scrollTop > 50) {
+                //     document.getElementById("myP").className = "test";
+                // } else {
+                //     document.getElementById("myP").className = "";
+                // }
+
+                // var rect = document.body.getBoundingClientRect();
+                // console.log(rect.top, rect.right, rect.bottom, rect.left);
+                if (document.documentElement.scrollTop  < $('#about').offset().top-50) {
+                    // var current = location.pathname;
+                    // console.log(current);
+                    activate_navlink('home');
+                }
+                else if (document.documentElement.scrollTop < $('#gallery').offset().top-50) {
+                    // var current = location.pathname;
+                    // console.log(current);
+                    activate_navlink('about');
+                }
+                else if (document.documentElement.scrollTop < $('#calendar-scroll').offset().top-50) {
+                    // var current = location.pathname;
+                    // console.log(current);
+                    activate_navlink('gallery');
+                }
+                else if (document.documentElement.scrollTop < $('#offers').offset().top-50) {
+                    // var current = location.pathname;
+                    // console.log(current);
+                    activate_navlink('calendar');
+                }
+                else if (document.documentElement.scrollTop < $('#article').offset().top-50) {
+                    // var current = location.pathname;
+                    // console.log(current);
+                    activate_navlink('offers');
+                }
+                else if (document.documentElement.scrollTop < $('#contact').offset().top-50) {
+                    // var current = location.pathname;
+                    // console.log(current);
+                    activate_navlink('article');
+                }
+                else if (document.documentElement.scrollTop >= $('#contact').offset().top-50) {
+                    // var current = location.pathname;
+                    // console.log(current);
+                    activate_navlink('contact');
+                }
+
+
+                // console.log($('#about').offset().top);
+            };
+
+            function activate_navlink(param) {
+                // $('#ftco-nav li').each(function(){
+                //     var $this = $(this);
+                //     $this.removeClass('active');
+                // });
+
+                $('#ftco-nav li').each(function(){
+                    var $this = $(this);
+                    $this.removeClass('active');
+                    // console.log($this.find('a').attr('href').indexOf(param));
+                    // if the current path is like this link, make it active
+                    if($this.find('a').attr('href').indexOf(param) !== -1){
+                        $this.addClass('active');                            
+                    }
+                });
+            };
+
+        });
+    
+    </script>
+{% endblock %}

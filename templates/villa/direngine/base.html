@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{ title }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    {% include 'villa/direngine/snippets/style.html' %}
+
+	  {% block extra_head %}{% endblock %}  
+  </head>
+  <body onload="loader()" >
+  <div id="home"></div>
+	{% include 'villa/direngine/snippets/navigation.html' %}
+    
+  {% block content %}{% endblock %}
+
+	{% include 'villa/direngine/snippets/footer.html' %}
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+  {% include 'villa/direngine/snippets/script.html' %}
+    
+  {% block extra_body %}{% endblock %}
+  </body>
+</html>

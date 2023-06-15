@@ -1,1 +1,215 @@
-{% load static %} {% load menu_tags %} {% menu_create 1 menugroup as my_menu %} <!DOCTYPE html> <html class=no-js  lang=id > <title> {{ title }} </title> {% include 'education/college-and-school-education/snippets/style.html' %} {% block extra_head %}{% endblock %} <body class="tg-home tg-homeone"> {% comment %} {% if messages %} {% for message in messages %} <div style="border-radius:0;" {% if message.tags %} class="alert alert-icon alert-{{ message.tags }} alert-dismissible fade show mb-0" role=alert  {% endif %}> {{ message }} <button type=button  class=close  data-dismiss=alert  aria-label=Close > <span aria-hidden=true >&times;</span> </button> </div> {% endfor %} {% endif %} {% endcomment %} {% block wrapper %}{% endblock %} <div class=btn-back-to-top  id=myBtn > <span class=symbol-btn-back-to-top > <span class="fa fa-angle-up"></span> </span> </div> {% include 'education/college-and-school-education/snippets/script.html' %} {% block extra_body %}{% endblock %} <script> function change_language_to(url) { if (url.indexOf('/en/') > 0) { if (confirm('Ubah ke Bahasa Indonesa?')) { url = url.replace('/en/','/' + 'id' + '/'); window.location.href = url; }; } else if (url.indexOf('/id/') > 0) { if (confirm('Change to English?')) { url = url.replace('/id/','/' + 'en' + '/'); window.location.href = url; }; }; }; $(document).ready(function() { var url = document.URL; if (url.indexOf('/id/') > 0) { $("#tg-languages").empty(); $("#tg-languages").append( "<span><img src=\"{% static 'education/college-and-school-education/images/flags/img-ind.png' %}\" alt='image description'></span>" + "<span>Id</span>" ); } else if (url.indexOf('/en/') > 0) { $(".tg-btndropdown").empty(); $(".tg-btndropdown").append( "<span><img src=\"{% static 'education/college-and-school-education/images/flags/img-eng.jpg' %}\" alt='image description'></span>" + "<span>En</span>" ); }; }); </script>
+{% load static %}
+{% comment %}
+    {% load menu_tags %}
+    {% menu_create 1 menugroup as my_menu %} 
+{% endcomment %}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>		<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>			<html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>			<html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->	<html class="no-js"  lang="id"> <!--<![endif]-->
+<!-- lang="zxx" -->
+
+<head>
+    <title> {{ title }} </title>
+    
+    {% include 'education/college-and-school-education/snippets/style.html' %}
+
+    {% block extra_head %}{% endblock %}  
+</head>
+<body class="tg-home tg-homeone">
+ 
+    <!-- Messages -->
+    <!-- <div> -->
+        {% comment %}
+            {% if messages %}
+            {% for message in messages %}
+                <div style="border-radius:0;" {% if message.tags %} class="alert alert-icon alert-{{ message.tags }} alert-dismissible fade show mb-0" role="alert" {% endif %}>
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            {% endfor %}
+            {% endif %}
+        {% endcomment %}
+    <!-- </div> -->
+    <!-- End Messages -->
+    
+	<!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+	<!--************************************
+			Wrapper Start
+	*************************************-->
+	{% block wrapper %}{% endblock %}
+	<!--************************************
+			Wrapper End
+	*************************************-->
+
+    <!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<span class="fa fa-angle-up"></span>
+		</span>
+	</div>
+
+	{% include 'education/college-and-school-education/snippets/script.html' %}
+
+    {% block extra_body %}{% endblock %}
+
+    <script>
+        function change_language_to(url) {                                    
+
+            if (url.indexOf('/en/') > 0) {
+                if (confirm('Ubah ke Bahasa Indonesa?')) {
+                    url = url.replace('/en/','/' + 'id' + '/');
+                    window.location.href = url;
+                };
+            }
+            else if (url.indexOf('/id/') > 0) {
+                if (confirm('Change to English?')) {
+                    url = url.replace('/id/','/' + 'en' + '/');
+                    window.location.href = url;
+                };
+            };
+        };
+
+        // function change_language_to(lang) {
+        //     // alert('change to ' + lang);
+        //         // console.log('#tg_languages=', $("#tg-languages").html())
+        //         // console.log('enter1');
+        //         // var currentHTML = this.innerHTML;
+        //         // console.log($(this).children('span').last().text());
+        //         // alert($(this).children('span').last().text() );
+
+        //     // var change_to = $('.tg-languageslist').children('span').last().text();
+        //     var url = document.URL;
+        //     alert(url);
+
+        //     if ((url.indexOf('/en/') > 0) && (lang != 'en')) {
+        //         url = url.replace('/en/','/' + lang + '/');
+        //         window.location.href = url;
+        //     }
+        //     else if ((url.indexOf('/id/') > 0) && (lang != 'id')) {
+        //         url = url.replace('/id/','/' + lang + '/');
+        //         window.location.href = url;
+        //     };
+
+        //     // /// jalankan find dulu, jika di temukan maka replace
+        //     // console.log('url=', url);
+        //     // alert(change_to);
+
+        //     // change_to = change_to.trim().toLowerCase();
+        //     // if (url.indexOf('/en/') > 0) {    // posisi sekarang en
+        //     //     if (change_to != 'en') {
+        //     //         url = url.replace('/en/','/' + change_to + '/');
+        //     //         window.location.href = url;
+        //     //     }
+        //     // }
+        //     // else if (url.indexOf('/id/') > 0) {
+        //     //     if (change_to != 'id') {
+        //     //         url = url.replace('/id/','/' + change_to + '/');
+        //     //         window.location.href = url;
+        //     //     }
+        //     // };
+        // };
+
+        $(document).ready(function() {
+            var url = document.URL;
+
+            if (url.indexOf('/id/') > 0) {
+                $("#tg-languages").empty();
+                $("#tg-languages").append( 
+                    //"<a href='javascript:void(0);' onclick='change_language_to(\'id\');'>" +                  
+                    "<span><img src=\"{% static 'education/college-and-school-education/images/flags/img-ind.png' %}\" alt='image description'></span>" +
+                    "<span>Id</span>"
+                    //"</a>"
+                    );
+            }
+            else if (url.indexOf('/en/') > 0) {
+                $(".tg-btndropdown").empty();
+                $(".tg-btndropdown").append(                    
+                    // "<a href='javascript:void(0);' onclick='change_language_to(\'en\');'>" +                  
+                    "<span><img src=\"{% static 'education/college-and-school-education/images/flags/img-eng.jpg' %}\" alt='image description'></span>" +
+                    "<span>En</span>"
+                    // "</a>"
+                    );
+
+                // console.log($('.tg-languageslist').find('li'));
+            };
+        
+            // $('.tg-languageslist').on("click", "li", ".te",  function () {
+            //     // console.log('#tg_languages=', $("#tg-languages").html())
+            //         // console.log('enter1');
+            //         // var currentHTML = this.innerHTML;
+            //         // console.log($(this).children('span').last().text());
+            //         // alert($(this).children('span').last().text() );
+
+            //         var change_to = $(this).children('span').last().text();
+            //         var url = document.URL;
+            //         /// jalankan find dulu, jika di temukan maka replace
+            //         alert(url);
+
+            //         change_to = change_to.trim().toLowerCase();
+            //         if (url.indexOf('/en/') > 0) {    // posisi sekarang en
+            //             if (change_to != 'en') {
+            //                 url = url.replace('/en/','/' + change_to + '/');
+            //                 window.location.href = url;
+            //             }
+            //         }
+            //         else if (url.indexOf('/id/') > 0) {
+            //             if (change_to != 'id') {
+            //                 url = url.replace('/id/','/' + change_to + '/');
+            //                 window.location.href = url;
+            //             }
+            //         };
+
+            //         // alert(url.indexOf('/en/'));
+            //         // alert(url.indexOf('/id/'));
+            //         // url = url.replace('/en/','/' + change_to.trim() + '/');
+            //         // url = url.replace('/id/','/' + change_to.trim() + '/');
+
+            //         // window.location.href = url;  
+            //         // if ($(this).children('span').last().text() == 'Id') {
+            //         //     // console.log($('#tg-languageslist').innerHTML);
+            //         //     // console.log('enter2');
+            //         //     // console.log('before', $('.tg-languageslist'));
+
+            //         //     $('.tg-languageslist').empty();
+            //         //     $('.tg-languageslist').append(                        
+            //         //         "<li>" +                            
+            //         //             "<span><img src=\"{% static 'education/college-and-school-education/images/flags/img-eng.jpg' %}\" alt='image description'></span>" +
+            //         //             "<span>En</span>" +
+            //         //         "</li>"
+            //         //     );
+
+            //         //     // console.log('after', $('.tg-languageslist'));
+            //         // }
+            //         // else {
+            //         //     $('.tg-languageslist').empty();
+            //         //     $('.tg-languageslist').append(                        
+            //         //         "<li>" +                            
+            //         //             "<span><img src=\"{% static 'education/college-and-school-education/images/flags/img-ind.png' %}\" alt='image description'></span>" +
+            //         //             "<span>Id</span>" +
+            //         //         "</li>"
+            //         //     );
+            //         // };
+
+            //         // console.log($("span:last-child") currentHTML);
+            //         // console.log($(currentHTML[2]));
+            // });
+        });
+
+
+        // function do_change_languages(param) {
+        //     // console.log('#tg_languages=', $("#tg-languages").html())
+        //     // '.tg-languageslist'        
+        // };
+
+    </script>
+</body>
+
+
+</html>

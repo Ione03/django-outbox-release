@@ -1,1 +1,563 @@
-{% extends "education/college-and-school-education/base-detail.html" %} {% load static %} {% load hitcount_tags %} {% load custom_filters %} {% block inner-banner %} <div class=tg-innerbanner > <div class=container > <div class=row > <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> <ol class=tg-breadcrumb > <li><a href="{{base_url}}/">home</a> <li><a href="{{base_url}}/{{kind}}/list/all/">{{kind}}</a> <li class=tg-active >Detail </ol> </div> </div> </div> </div> {% endblock %} {% block main %} <main id=tg-main  class="tg-main tg-haslayout"> <div class=container > <div class=row > <div id=tg-twocolumns  class=tg-twocolumns > <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 pull-right"> <div id=tg-content  class=tg-content > <div class="tg-detailpage tg-eventdetailpage"> <article class="tg-themepost tg-eventpost"> <div class=tg-themepostcontent > <div class=tg-themeposttitle ><h1>{{content_detail.title}}</h1></div> <ul class=tg-themepostinfo > <li> <div class=tg-infodata > <span>Date:</span> <strong><a href="javascript:void(0);">{{content_detail.created_at|natural_datetime|title}}</a></strong> </div> <li> <div class=tg-infodata > <span>Post by:</span> <strong><a href="javascript:void(0);"> {{ content_detail.admin.name|default:content_detail.admin }} </a></strong> </div> <li> <div class=tg-infodata > <span>Views:</span> <strong>{% get_hit_count for content_detail %}</strong> </div> </ul> {% if content_detail.reading_time %} <span class=tg-pricebox > <span>{{content_detail.reading_time}}</span> <span>minutes</span> <a class=tg-btn  href="javascript:void(0);">reading time</a> </span> {% endif %} </div> <figure class=tg-featuredimg ><img src="/media/{{content_detail.file_path}}" alt="image description"></figure> <div class=clearfix ></div> <div> <p> <h3>Description</h3> {{content_detail.content|safe}} </p> </div> <h3>Share</h3> <ul class=tg-socialicons > <li class=tg-facebook ><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a> <li class=tg-twitter ><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a> </ul> </article> {% if random_paint %} <div class=tg-relatedthemeposts > <div class=tg-borderheading > <h2>Related {{kind}} </h2> </div> <div id=tg-latestnewsslider  class="tg-latestnewsslider owl-carousel tg-posts"> {% for i in random_paint %} <div class=item > <article class="tg-themepost tg-eventpost"> <figure class=tg-featuredimg > <a href="{{base_url}}/{{kind}}/detail/{{i.slug}}"> <img src="/media/{{i.file_path}}" alt="image description"> </a> </figure> <div class=tg-themepostcontent > <div class=tg-themeposttitle > <h3><a href="{{base_url}}/{{kind}}/detail/{{i.slug}}"> {{i.title|safe|truncatewords_html:50}}</a></h3> </div> <ul class=tg-matadata > <li> <a href="{{base_url}}/{{kind}}/detail/{{i.slug}}"> <i class="fa fa-calendar"></i> <span>{{i.created_at|natural_datetime|title}}</span> </a> </ul> <div class=clearfix ></div> <a class="tg-btn tg-btn-sm" href="{{base_url}}/{{kind}}/detail/{{i.slug}}">read more</a> </div> </article> </div> {% endfor %} </div> </div> {% endif %} </div> </div> </div> <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 pull-left"> <aside id=tg-sidebar  class=tg-sidebar > <div class="tg-widget tg-widgetsearchcourse"> <div class=tg-widgettitle > <h3>Search {{kind}}</h3> </div> <div class=tg-widgetcontent > <form class="tg-formtheme tg-formsearchcourse"> <fieldset> <div class=tg-inputwithicon > <i class=icon-book ></i> <input type=search  name=keyword  class=form-control  placeholder=Keyword > </div> <button type=submit  class=tg-btn >search now</button> <a href="{{base_url}}/{{kind}}/list/all/">View All {{kind}}</a> </fieldset> </form> </div> </div> {% if categories_list %} <div class="tg-widget tg-widgetcoursecategories"> <div class=tg-widgettitle > <h3>{{kind}} Categories</h3> </div> <div class=tg-widgetcontent > <ul> {% for i in categories_list %} <li> <a href="{{base_url}}/{{kind}}/list/{{i.slug}}/"> <span>{{i.name}}</span> <span>({{i.count}})</span> </a> {% endfor %} </ul> </div> </div> {% endif %} {% if latest_kind %} <div class="tg-widget tg-widgetlatestcourses"> <div class=tg-widgettitle > <h3>Latest {{kind}}</h3> </div> <div class=tg-widgetcontent > {% for i in latest_kind %} <article class="tg-campus tg-campusleftthumb"> <a href="{{base_url}}/{{kind}}/detail/{{i.slug}}"> <img src="/media/{{i.file_path}}" alt="image description"> </a> <br><br> <div class=tg-campuscontent > <div class=tg-datetime > <i class="fa fa-calendar"></i> <span>{{i.created_at|natural_datetime|title}}</span> </div> <div class=tg-campustitle > <h3><a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">{{i.title}}</a></h3> </div> </div> </article> {% endfor %} </div> </div> {% endif %} {% if announcement %} {% include 'education/college-and-school-education/snippets/side_announcement.html' %} {% endif %} </aside> </div> </div> </div> </div> </main> {% endblock %} {% block extra_body %} {% endblock %}
+{% extends "education/college-and-school-education/base-detail.html" %}
+{% load static %}
+{% load hitcount_tags %}
+{% load custom_filters %}
+
+{% block inner-banner %}
+    <!--************************************
+            Inner Banner Start
+    *************************************-->
+    <div class="tg-innerbanner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ol class="tg-breadcrumb">
+                        <li><a href="{{base_url}}/">home</a></li>
+                        <!-- # goto list of kind -->
+                        <li><a href="{{base_url}}/{{kind}}/list/all/">{{kind}}</a></li> 
+                        <li class="tg-active">Detail</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--************************************
+            Inner Banner End
+    *************************************-->
+{% endblock %}
+
+{% block main %}
+    <!--************************************
+            Main Start
+    *************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div id="tg-twocolumns" class="tg-twocolumns">
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 pull-right">
+                        <div id="tg-content" class="tg-content">
+                            <div class="tg-detailpage tg-eventdetailpage">
+                                <article class="tg-themepost tg-eventpost">
+                                    <div class="tg-themepostcontent">
+                                        
+                                        
+                                        <!-- <ul class="tg-themeposttags">
+                                            <li><a href="javascript:void(0);">Management</a></li>
+                                            <li><a href="javascript:void(0);">Science</a></li>
+                                        </ul> -->
+                                        <div class="tg-themeposttitle"><h1>{{content_detail.title}}</h1></div>
+                                        <ul class="tg-themepostinfo">
+                                            <li>
+                                                <div class="tg-infodata">
+                                                    <span>Date:</span>
+                                                    <strong><a href="javascript:void(0);">{{content_detail.created_at|natural_datetime|title}}</a></strong>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="tg-infodata">
+                                                    <span>Post by:</span>
+                                                    <strong><a href="javascript:void(0);">
+                                                        {{ content_detail.admin.name|default:content_detail.admin }}                                                        
+                                                    </a></strong>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="tg-infodata">
+                                                    <span>Views:</span>
+                                                    <strong>{% get_hit_count for content_detail %}</strong>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        
+                                        {% if content_detail.reading_time %}
+                                            <span class="tg-pricebox">
+                                                <span>{{content_detail.reading_time}}</span>
+                                                <span>minutes</span>
+                                                <a class="tg-btn" href="javascript:void(0);">reading time</a>
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                    <figure class="tg-featuredimg"><img src="/media/{{content_detail.file_path}}" alt="image description"></figure>
+                                    <!-- <div id="tg-eventcounter" class="tg-eventcounter tg-counter"></div> -->
+                                    <!-- <div class="tg-description"> -->
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        <p>
+                                            <h3>Description</h3>
+                                                                                   
+                                            {{content_detail.content|safe}}
+                                        </p> 
+                                    </div>
+
+                                        <!-- <h3>Description</h3>
+                                        <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt labore dolore msagna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullaasmco laboris nisi uiat aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit etssse cillum dolore eu fugiat nulla pariatur sintasr occaecat cupidatat proident, sunt in culpa qui officia deserunt mollit anim laborum.</p>
+                                        <h3>Bullet Points</h3>
+                                        <ul class="tg-ullist tg-liststyledot">
+                                            <li>Sed do eiusmod tempor incididunt labore dolore</li>
+                                            <li>Msagna aliqua enim ad minim veniam</li>
+                                            <li>Quis nostrud exercitation ullaasmco laboris nisi uiat</li>
+                                            <li>Aliquip ex ea commodo consequat</li>
+                                            <li>Duis aute irure dolor in reprehenderit in voluptate</li>
+                                            <li>Velit etssse cillum dolore eu fugiat nulla pariatur</li>
+                                            <li>Excepteur sintasr occaecat cupidatat non proident</li>
+                                            <li>Sunt in culpa qui officia deserunt mollit anim id est laborum</li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                        
+                                        <div class="tg-eventspeakers">
+                                            <h3>Event Speakers</h3>
+                                            <div class="row">
+                                                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                                                    <div class="tg-speaker">
+                                                        <figure><a href="javascript:void(0);"><img src="images/speakers/img-01.jpg" alt="image description"></a></figure>
+                                                        <div class="tg-speakername">
+                                                            <h3><a href="javascript:void(0);">Maragaret Ellinger</a></h3>
+                                                        </div>
+                                                        <span class="tg-speakername">Professor</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                                                    <div class="tg-speaker">
+                                                        <figure><a href="javascript:void(0);"><img src="images/speakers/img-02.jpg" alt="image description"></a></figure>
+                                                        <div class="tg-speakername">
+                                                            <h3><a href="javascript:void(0);">Alphonse Travis</a></h3>
+                                                        </div>
+                                                        <span class="tg-speakername">Assistant Professor</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                                                    <div class="tg-speaker">
+                                                        <figure><a href="javascript:void(0);"><img src="images/speakers/img-03.jpg" alt="image description"></a></figure>
+                                                        <div class="tg-speakername">
+                                                            <h3><a href="javascript:void(0);">Bernardina Verde</a></h3>
+                                                        </div>
+                                                        <span class="tg-speakername">Lecturer</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                                                    <div class="tg-speaker">
+                                                        <figure><a href="javascript:void(0);"><img src="images/speakers/img-04.jpg" alt="image description"></a></figure>
+                                                        <div class="tg-speakername">
+                                                            <h3><a href="javascript:void(0);">Deandre Magallan</a></h3>
+                                                        </div>
+                                                        <span class="tg-speakername">Professor</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h3>Event location</h3>
+                                        <div class="tg-eventlocationbox">
+                                            <a class="tg-getdirection" href="javascript:void(0);">get direction</a>
+                                            <div id="tg-eventlocation" class="tg-eventlocation"></div>
+                                        </div>
+                                        <h3>Share</h3>
+                                        <ul class="tg-socialicons">
+                                            <li class="tg-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
+                                            <li class="tg-twitter"><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
+                                            <li class="tg-linkedin"><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
+                                            <li class="tg-googleplus"><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
+                                            <li class="tg-rss"><a href="javascript:void(0);"><i class="fa fa-rss"></i></a></li>
+                                        </ul> -->
+
+                                        <h3>Share</h3>
+                                        <ul class="tg-socialicons">
+                                            <li class="tg-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
+                                            <li class="tg-twitter"><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
+                                            <!-- <li class="tg-linkedin"><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
+                                            <li class="tg-googleplus"><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
+                                            <li class="tg-rss"><a href="javascript:void(0);"><i class="fa fa-rss"></i></a></li> -->
+                                        </ul>
+                                    <!-- </div> -->
+                                </article>
+                                {% if random_paint %}
+                                    <div class="tg-relatedthemeposts">
+                                        <div class="tg-borderheading">
+                                            <h2>Related {{kind}} </h2>
+                                        </div>
+                                        <div id="tg-latestnewsslider" class="tg-latestnewsslider owl-carousel tg-posts">
+                                            {% for i in random_paint %}
+                                                <div class="item">
+                                                    <article class="tg-themepost tg-eventpost">
+                                                        <figure class="tg-featuredimg">
+                                                            <a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">
+                                                                <img src="/media/{{i.file_path}}" alt="image description">
+                                                            </a>
+                                                        </figure>
+                                                        <div class="tg-themepostcontent">
+                                                            <!-- <ul class="tg-themeposttags">
+                                                                <li><a href="javascript:void(0);">Management</a></li>
+                                                                <li><a href="javascript:void(0);">Science</a></li>
+                                                            </ul> -->
+                                                            <div class="tg-themeposttitle">
+                                                                <h3><a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">
+                                                                    {{i.title|safe|truncatewords_html:50}}</a></h3>
+                                                            </div>
+                                                            <ul class="tg-matadata">
+                                                                <li>
+                                                                    <a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">
+                                                                        <i class="fa fa-calendar"></i>
+                                                                        <span>{{i.created_at|natural_datetime|title}}</span>
+                                                                    </a>
+                                                                </li>
+                                                                <!-- <li>
+                                                                    <a href="javascript:void(0);">
+                                                                        <i class="fa fa-clock-o"></i>
+                                                                        <span>8:00 AM - 5:00 PM</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="javascript:void(0);">
+                                                                        <i class="fa fa-location-arrow"></i>
+                                                                        <span>Manchester, UK</span>
+                                                                    </a>
+                                                                </li> -->
+                                                            </ul>
+                                                            <div class="clearfix"></div>
+                                                            <a class="tg-btn tg-btn-sm" href="{{base_url}}/{{kind}}/detail/{{i.slug}}">read more</a>
+                                                        </div>
+                                                    </article>
+                                                </div>
+                                            {% endfor %}
+                                            <!-- <div class="item">
+                                                <article class="tg-themepost tg-eventpost">
+                                                    <figure class="tg-featuredimg">
+                                                        <a href="javascript:void(0);">
+                                                            <img src="images/events/img-09.jpg" alt="image description">
+                                                        </a>
+                                                    </figure>
+                                                    <div class="tg-themepostcontent">
+                                                        <ul class="tg-themeposttags">
+                                                            <li><a href="javascript:void(0);">Management</a></li>
+                                                            <li><a href="javascript:void(0);">Science</a></li>
+                                                        </ul>
+                                                        <div class="tg-themeposttitle">
+                                                            <h3><a href="javascript:void(0);">One Day Awareness Seminar on Future Focus</a></h3>
+                                                        </div>
+                                                        <ul class="tg-matadata">
+                                                            <li>
+                                                                <a href="javascript:void(0);">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                    <span>Tuesday, Apr 21, 2017</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);">
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span>8:00 AM - 5:00 PM</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);">
+                                                                    <i class="fa fa-location-arrow"></i>
+                                                                    <span>Manchester, UK</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <a class="tg-btn tg-btn-sm" href="javascript:void(0);">read more</a>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                            <div class="item">
+                                                <article class="tg-themepost tg-eventpost">
+                                                    <figure class="tg-featuredimg">
+                                                        <a href="javascript:void(0);">
+                                                            <img src="images/events/img-10.jpg" alt="image description">
+                                                        </a>
+                                                    </figure>
+                                                    <div class="tg-themepostcontent">
+                                                        <ul class="tg-themeposttags">
+                                                            <li><a href="javascript:void(0);">Management</a></li>
+                                                            <li><a href="javascript:void(0);">Science</a></li>
+                                                        </ul>
+                                                        <div class="tg-themeposttitle">
+                                                            <h3><a href="javascript:void(0);">One Day Awareness Seminar on Future Focus</a></h3>
+                                                        </div>
+                                                        <ul class="tg-matadata">
+                                                            <li>
+                                                                <a href="javascript:void(0);">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                    <span>Tuesday, Apr 21, 2017</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);">
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span>8:00 AM - 5:00 PM</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);">
+                                                                    <i class="fa fa-location-arrow"></i>
+                                                                    <span>Manchester, UK</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <a class="tg-btn tg-btn-sm" href="javascript:void(0);">read more</a>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                            <div class="item">
+                                                <article class="tg-themepost tg-eventpost">
+                                                    <figure class="tg-featuredimg">
+                                                        <a href="javascript:void(0);">
+                                                            <img src="images/events/img-11.jpg" alt="image description">
+                                                        </a>
+                                                    </figure>
+                                                    <div class="tg-themepostcontent">
+                                                        <ul class="tg-themeposttags">
+                                                            <li><a href="javascript:void(0);">Management</a></li>
+                                                            <li><a href="javascript:void(0);">Science</a></li>
+                                                        </ul>
+                                                        <div class="tg-themeposttitle">
+                                                            <h3><a href="javascript:void(0);">One Day Awareness Seminar on Future Focus</a></h3>
+                                                        </div>
+                                                        <ul class="tg-matadata">
+                                                            <li>
+                                                                <a href="javascript:void(0);">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                    <span>Tuesday, Apr 21, 2017</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);">
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span>8:00 AM - 5:00 PM</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);">
+                                                                    <i class="fa fa-location-arrow"></i>
+                                                                    <span>Manchester, UK</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <a class="tg-btn tg-btn-sm" href="javascript:void(0);">read more</a>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                            <div class="item">
+                                                <article class="tg-themepost tg-eventpost">
+                                                    <figure class="tg-featuredimg">
+                                                        <a href="javascript:void(0);">
+                                                            <img src="images/events/img-12.jpg" alt="image description">
+                                                        </a>
+                                                    </figure>
+                                                    <div class="tg-themepostcontent">
+                                                        <ul class="tg-themeposttags">
+                                                            <li><a href="javascript:void(0);">Management</a></li>
+                                                            <li><a href="javascript:void(0);">Science</a></li>
+                                                        </ul>
+                                                        <div class="tg-themeposttitle">
+                                                            <h3><a href="javascript:void(0);">One Day Awareness Seminar on Future Focus</a></h3>
+                                                        </div>
+                                                        <ul class="tg-matadata">
+                                                            <li>
+                                                                <a href="javascript:void(0);">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                    <span>Tuesday, Apr 21, 2017</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);">
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span>8:00 AM - 5:00 PM</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);">
+                                                                    <i class="fa fa-location-arrow"></i>
+                                                                    <span>Manchester, UK</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <a class="tg-btn tg-btn-sm" href="javascript:void(0);">read more</a>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                            <div class="item">
+                                                <article class="tg-themepost tg-eventpost">
+                                                    <figure class="tg-featuredimg">
+                                                        <a href="javascript:void(0);">
+                                                            <img src="images/events/img-13.jpg" alt="image description">
+                                                        </a>
+                                                    </figure>
+                                                    <div class="tg-themepostcontent">
+                                                        <ul class="tg-themeposttags">
+                                                            <li><a href="javascript:void(0);">Management</a></li>
+                                                            <li><a href="javascript:void(0);">Science</a></li>
+                                                        </ul>
+                                                        <div class="tg-themeposttitle">
+                                                            <h3><a href="javascript:void(0);">One Day Awareness Seminar on Future Focus</a></h3>
+                                                        </div>
+                                                        <ul class="tg-matadata">
+                                                            <li>
+                                                                <a href="javascript:void(0);">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                    <span>Tuesday, Apr 21, 2017</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);">
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span>8:00 AM - 5:00 PM</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);">
+                                                                    <i class="fa fa-location-arrow"></i>
+                                                                    <span>Manchester, UK</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <a class="tg-btn tg-btn-sm" href="javascript:void(0);">read more</a>
+                                                    </div>
+                                                </article>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 pull-left">
+                        <aside id="tg-sidebar" class="tg-sidebar">
+                            <div class="tg-widget tg-widgetsearchcourse">
+                                <div class="tg-widgettitle">
+                                    <h3>Search {{kind}}</h3>
+                                </div>
+                                <div class="tg-widgetcontent">
+                                    <form class="tg-formtheme tg-formsearchcourse">
+                                        <fieldset>
+                                            <div class="tg-inputwithicon">
+                                                <i class="icon-book"></i>
+                                                <input type="search" name="keyword" class="form-control" placeholder="Keyword">
+                                            </div>
+                                            <button type="submit" class="tg-btn">search now</button>
+                                            <a href="{{base_url}}/{{kind}}/list/all/">View All {{kind}}</a>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                            {% if categories_list %}
+                                <div class="tg-widget tg-widgetcoursecategories">
+                                    <div class="tg-widgettitle">
+                                        <h3>{{kind}} Categories</h3>
+                                    </div>
+                                    <div class="tg-widgetcontent">
+                                        <ul>
+                                            {% for i in categories_list %}
+                                                <li>
+                                                    <a href="{{base_url}}/{{kind}}/list/{{i.slug}}/">
+                                                        <span>{{i.name}}</span>
+                                                        <span>({{i.count}})</span>
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+
+                                            <!-- <li>
+                                                <a href="javascript:void(0);">
+                                                    <span>Science</span>
+                                                    <span>(3248)</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);">
+                                                    <span>Management</span>
+                                                    <span>(2148)</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);">
+                                                    <span>Medical</span>
+                                                    <span>(2143)</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);">
+                                                    <span>Arts</span>
+                                                    <span>(21561)</span>
+                                                </a>
+                                            </li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            {% if latest_kind %}
+                                <div class="tg-widget tg-widgetlatestcourses">
+                                    <div class="tg-widgettitle">
+                                        <h3>Latest {{kind}}</h3>
+                                    </div>
+                                    <div class="tg-widgetcontent">
+                                        {% for i in latest_kind %}
+                                            <article class="tg-campus tg-campusleftthumb">
+                                                <!-- <figure class="tg-featuredimg"> -->
+                                                    <a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">
+                                                        <img src="/media/{{i.file_path}}" alt="image description">
+                                                    </a>
+                                                <!-- </figure> -->
+                                                <br><br>
+                                                <div class="tg-campuscontent">
+                                                    <div class="tg-datetime">
+                                                        <i class="fa fa-calendar"></i>
+                                                        <span>{{i.created_at|natural_datetime|title}}</span>
+                                                    </div>
+                                                    <div class="tg-campustitle">
+                                                        <h3><a href="{{base_url}}/{{kind}}/detail/{{i.slug}}">{{i.title}}</a></h3>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        {% endfor %}
+
+                                        <!-- <article class="tg-campus tg-campusleftthumb">
+                                            <figure class="tg-featuredimg">
+                                                <a href="javascript:void(0);">
+                                                    <img src="images/courses/img-02.jpg" alt="image description">
+                                                </a>
+                                            </figure>
+                                            <div class="tg-campuscontent">
+                                                <div class="tg-datetime">
+                                                    <i class="fa fa-calendar"></i>
+                                                    <span>Friday, Mar 06, 2017</span>
+                                                </div>
+                                                <div class="tg-campustitle">
+                                                    <h3><a href="javascript:void(0);">Biggest Reality Virtual University Convocatio Biggest Reality Virtual University</a></h3>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        <article class="tg-campus tg-campusleftthumb">
+                                            <figure class="tg-featuredimg">
+                                                <a href="javascript:void(0);">
+                                                    <img src="images/courses/img-03.jpg" alt="image description">
+                                                </a>
+                                            </figure>
+                                            <div class="tg-campuscontent">
+                                                <div class="tg-datetime">
+                                                    <i class="fa fa-calendar"></i>
+                                                    <span>Friday, Mar 06, 2017</span>
+                                                </div>
+                                                <div class="tg-campustitle">
+                                                    <h3><a href="javascript:void(0);">Launching Best Concept Motorbike for Abnormal Best Concept Motorbike</a></h3>
+                                                </div>
+                                            </div>
+                                        </article> -->
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if announcement %}
+                                {% include 'education/college-and-school-education/snippets/side_announcement.html' %}
+                            {% endif %}
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+{% endblock %}
+
+
+{% block extra_body %}
+{% endblock %}

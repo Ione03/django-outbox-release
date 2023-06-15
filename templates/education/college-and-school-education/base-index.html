@@ -1,1 +1,50 @@
-{% extends "education/college-and-school-education/base.html" %} {% load static %} {% load humanize %} {% block wrapper %} <div id=tg-wrapper  class=tg-wrapper > {% block header %} {% include "education/college-and-school-education/snippets/header.html" %} {% endblock %} <div class=clearfix ></div> {% block slider %}{% endblock %} {% block main %}{% endblock %} {% block footer %} {% include "education/college-and-school-education/snippets/footer.html" %} {% endblock %} </div> {% endblock %}
+{% extends "education/college-and-school-education/base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block wrapper %}
+	<!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+	<!--************************************
+			Wrapper Start
+	*************************************-->
+	<div id="tg-wrapper" class="tg-wrapper">
+		<!--************************************
+				Header Start
+		*************************************-->
+        {% block header %}
+            {% include "education/college-and-school-education/snippets/header.html" %}
+        {% endblock %}        
+		<!--************************************
+				Header End
+		*************************************-->
+		<!--************************************
+				Home Slider Start
+		*************************************-->
+		<div class="clearfix"></div>
+        {% block slider %}{% endblock %}
+		<!--************************************
+				Home Slider End
+		*************************************-->
+		<!--************************************
+				Main Start
+		*************************************-->
+        {% block main %}{% endblock %}        
+		<!--************************************
+				Main End
+		*************************************-->
+		<!--************************************
+				Footer Start
+		*************************************-->
+        {% block footer %}
+            {% include "education/college-and-school-education/snippets/footer.html" %}
+        {% endblock %}
+		<!--************************************
+				Footer End
+		*************************************-->
+	</div>
+	<!--************************************
+			Wrapper End
+	*************************************-->
+{% endblock %}	

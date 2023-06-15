@@ -1,1 +1,58 @@
-<section class="tg-sectionspace tg-haslayout"> <div class=tg-latestnews > <div class=tg-borderheading > <h2>Gallery Video</h2> </div> <div class=tg-events > <div class=row > {% for i in videogallery %} {% if i.embed_video %} <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4"> <article class="tg-themepost tg-eventpost"> <figure class=tg-featuredimg > <a href="javascript:void(0);" onclick="show_modal('{{ i.embed_video }}')"> <div class=co-container > <img src="/media/{{i.file_path}}" alt="image description"> <span class="btn fa fa-youtube-play"></span> </div> </a> </figure> <div class=tg-themepostcontent > <ul class=tg-matadata > <li> <a href="javascript:void(0);" onclick="show_modal('{{ i.embed_video }}')"> <i class="fa fa-calendar"></i> <span>{{i.created_at}}</span> </a> </ul> <div class=tg-themeposttitle > <h3><a href="javascript:void(0);" onclick="show_modal('{{ i.embed_video }}')">{{i.title}}</a> </h3> </div> </div> </article> </div> {% endif %} {% endfor %} </div> </div> <div class=tg-btnsbox > <a class=tg-btn  href="videogallery/list/all/">view all video</a> </div> </div> </section>
+<section class="tg-sectionspace tg-haslayout">
+    <div class="tg-latestnews">
+        <div class="tg-borderheading">
+            <h2>Gallery Video</h2>
+        </div>
+        <div class="tg-events">
+            <div class="row">
+                {% for i in videogallery %}
+                    {% if i.embed_video %}
+                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                        <article class="tg-themepost tg-eventpost">
+                            <figure class="tg-featuredimg">
+
+                                <a href="javascript:void(0);"
+                                    onclick="show_modal('{{ i.embed_video }}')">
+                                    <!-- <img src="images/events/img-08.jpg" alt="image description"> -->
+
+                                    <div class="co-container">
+                                        <img src="/media/{{i.file_path}}" alt="image description">
+                                        <!-- <button class="btn" onclick="show_modal('{{ i.embed_video }}')"> -->
+                                        <!-- Button -->
+                                        <span class="btn fa fa-youtube-play"></span>
+                                        <!-- </button> -->
+                                    </div> 
+                                </a>
+
+                            </figure>
+                            <div class="tg-themepostcontent">
+                                <ul class="tg-matadata">
+                                    <li>
+                                        <a href="javascript:void(0);"
+                                            onclick="show_modal('{{ i.embed_video }}')">
+                                            <i class="fa fa-calendar"></i>
+                                            <span>{{i.created_at}}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tg-themeposttitle">
+                                    <h3><a href="javascript:void(0);"
+                                            onclick="show_modal('{{ i.embed_video }}')">{{i.title}}</a>
+                                    </h3>
+                                </div>
+                                <!-- <div class="tg-description">
+                                                    <p>Consectetur adipisicing elit sed do eiusmod tempor inunt labore... <a href="javascript:void(0);">Read More</a></p>
+                                                </div> -->
+                            </div>
+                        </article>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+                
+            </div>
+        </div>
+        <div class="tg-btnsbox">
+            <a class="tg-btn" href="videogallery/list/all/">view all video</a>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,396 @@
+{% extends "corporate/blogger-food/base-index.html" %}
+{% load static %}
+
+{% block landing-page %}
+    <header class="">
+        {% for i in slideshow %}
+            <div class="page-header min-vh-100" style="background-image: url('/media/{{i.file_path}}');">
+                <!--<span class="mask bg-gradient-dark opacity-2"></span>-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-9 text-start">
+                            <h1 class="display-2 font-weight-bolder text-black mb-4" spellcheck="false">{{i.title}}</h1>
+                            <p class="lead text-grey mb-5">&nbsp;{{i.sub_title}}</p>
+                            <a href="javascript:;" class="btn btn-white">Read more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </header>
+{% endblock %}   
+
+{% block timeline %}
+    <section class="py-0">
+        {% for i in howitworks|slice:":1" %}
+            <div class="row">
+                <div class="col-6 text-center mx-auto mt-5 mb-5">
+                    <h2 spellcheck="false">{{i.title}}</h2>
+                    <p>{{i.content|safe}}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+    <section class="">
+        <div class="container">
+            <div class="row">
+                <!--<div class="container">
+                    <div class="row">-->
+                        <div class="col-md-12">
+                            <div class="main-timeline" >
+                                {% for i in howitworks|slice:"1:" %}
+                                    <div class="timeline" style="box-sizing:unset; position: unset; ">
+                                        <a href="#" class="timeline-content" style="width:80%">
+                                            <div class="timeline-icon"><i class="fa {{i.icon}}"></i></div>
+                                            <h3 class="title">{{i.title}}</h3>
+                                            <p class="description">
+                                                {{i.content}}
+                                            </p>
+                                            <div class="timeline-year">0{{forloop.counter}}</div>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                                
+                                <!--<div class="timeline" style="box-sizing:unset; position: unset;">
+                                    <a href="#" class="timeline-content" style="width:80%">
+                                    <div class="timeline-icon"><i class="fa fa-rocket"></i></div>
+                                        <h3 class="title">Web Development</h3>
+                                        <p class="description">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer males uada tellus lorem, et condimentum neque commodo Integer males uada tellus lorem, et condimentum neque commodo
+                                        </p>
+                                        <div class="timeline-year">02</div>
+                                    </a>
+                                </div>
+                                <div class="timeline" style="box-sizing:unset; position: unset;">
+                                    <a href="#" class="timeline-content" style="width:80%">
+                                    <div class="timeline-icon"><i class="fa fa-rocket"></i></div>
+                                        <h3 class="title">Web Development</h3>
+                                        <p class="description">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer males uada tellus lorem, et condimentum neque commodo Integer males uada tellus lorem, et condimentum neque commodo
+                                        </p>
+                                        <div class="timeline-year">03</div>
+                                    </a>
+                                </div>-->
+                            </div>
+                        </div>
+                    <!--</div>
+                </div>-->
+            </div>
+        </div>
+    </section>
+{% endblock %} 
+
+{% block fasilities %}
+    <section class="py-5">
+        {% for i in fasilities|slice:":1" %}
+            <div class="row">
+                <div class="col-6 text-center mx-auto mt-5 mb-4">
+                    <h2 spellcheck="false">{{i.title}}</h2>
+                    <p>{{i.content|safe}}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+    <section class="">
+        <div class="container">
+            <div class="row">
+                {% for i in fasilities|slice:"1:" %}
+                    {% if forloop.counter0|divisibleby:2 %}
+                        <div class="col-lg-12 mb-5">
+                            <div class="row">
+                                <div class="col-lg-6 justify-content-center d-flex flex-column">
+                                    <div class="card rounded-3">
+                                        <div class="d-block blur-shadow-image">
+                                            <a href="fasilities/detail/{{i.slug}}/" >
+                                                <img src="/media/{{i.file_path}}" alt="img-blur-shadow-blog-2" class="img-fluid shadow rounded-3">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 justify-content-center d-flex flex-column ps-lg-5 pt-lg-0 pt-3">
+                                    <!--<h6 class="category text-info mt-3">{{i.title}}</h6>-->
+                                    <h3>
+                                        <a href="fasilities/detail/{{i.slug}}/" class="text-darker">{{i.title}}</a>
+                                    </h3>
+                                    <p>
+                                        {{i.content|truncatewords_html:30|safe}}
+                                        <a href="fasilities/detail/{{i.slug}}/" class="text-darker icon-move-right text-sm">Read More
+                                            <i class="fas fa-arrow-right text-xs ms-1" aria-hidden="true"></i>
+                                        </a>
+                                    </p>
+                                    <p class="author">
+                                        <!--by <a href="javascript:;" class="ms-1"><span class="font-weight-bold text-info">{{i.admin}}</span></a>, {{i.created_at}}-->
+                                        by&nbsp;<span class="font-weight-bold text-info">{{i.admin}}</span>, {{i.created_at}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="col-lg-12 mb-5">
+                            <div class="row flex-row-reverse">
+                                <div class="col-lg-6 justify-content-center d-flex flex-column">
+                                    <div class="card rounded-3">
+                                        <div class="blur-shadow-image">
+                                            <a href="fasilities/detail/{{i.slug}}/" >
+                                                <img src="/media/{{i.file_path}}" alt="img-blur-shadow-blog-2" class="img-fluid shadow rounded-3">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 pe-lg-5 justify-content-center d-flex flex-column pt-lg-0 pt-3">
+                                    <!--<h6 class="category text-info mt-3">Waffles</h6>-->
+                                    <h3>
+                                        <a href="fasilities/detail/{{i.slug}}/" class="text-darker">{{i.title}}</a>
+                                    </h3>
+                                    <p>
+                                        {{i.content|truncatewords_html:30|safe}}
+                                        <a href="fasilities/detail/{{i.slug}}/" class="text-darker icon-move-right text-sm">Read More
+                                            <i class="fas fa-arrow-right text-xs ms-1" aria-hidden="true"></i>
+                                        </a>
+                                    </p>
+                                    <p class="author">
+                                        by&nbsp;<span class="font-weight-bold text-info">{{i.admin}}</span>, {{i.created_at}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block article %}
+    <section class="py-0">
+        <div class="row">
+            <div class="col-6 text-center mx-auto mt-5 mb-4">
+                {% for i in article|slice:":1" %}
+                    <h2 spellcheck="false">{{i.title}}</h2>
+                    <p>{{i.content|safe}}
+                    </p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="pb-6">
+        <div class="container">
+            <div class="row">
+                {% for i in article|slice:"1:" %}
+                    <div class="col-lg-4 mb-lg-0 mb-4">
+                        <div class="card">
+                            <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+                                <a href="article/detail/{{i.slug}}/" class="d-block">
+                                    <img src="/media/{{i.file_path}}" class="img-fluid border-radius-lg">
+                                </a>
+                            </div>
+
+                            <div class="card-body pt-3">
+                                Reading Time <span class="text-gradient text-warning text-uppercase text-xs font-weight-bold my-2" style="font-size:1rem;">{{i.reading_time}} Minutes</span>
+                                <a href="article/detail/{{i.slug}}/" class="card-title h5 d-block text-darker">{{i.title}}</a>
+                                <p class="card-description mb-4">
+                                    {{i.content|truncatewords_html:25|safe}}
+                                </p>
+                                <p><a href="article/detail/{{i.slug}}/">Read More</a></p>
+                                <!--<div class="author align-items-center">
+                                    <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-1.jpg" alt="..." class="avatar shadow">
+                                    <div class="name ps-3">
+                                        <span>{{i.admin}}</span>
+                                        <div class="stats">
+                                            <small>{{i.created_at}}</small>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <!--
+                <div class="col-lg-4 mb-lg-0 mb-4">
+                    <div class="card">
+                        <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+                            <a href="javascript:;" class="d-block">
+                                <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGZvb2R8ZW58MHwwfDB8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60" class="img-fluid border-radius-lg">
+                            </a>
+                        </div>
+
+                        <div class="card-body pt-3">
+                            <span class="text-gradient text-info text-uppercase text-xs font-weight-bold my-2">Sea Food</span>
+                            <a href="javascript:;" class="text-darker card-title h5 d-block">Shrimps with Avocado</a>
+                            <p class="card-description mb-4">
+                                Use border utilities to quickly style the border and border-radius of an element. Great for images, buttons.
+                            </p>
+                            <div class="author align-items-center">
+                                <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/ivana-square.jpg" alt="..." class="avatar shadow">
+                                <div class="name ps-3">
+                                    <span>Chriss Smahos</span>
+                                    <div class="stats">
+                                        <small>Posted 2 min ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-lg-0 mb-4">
+                    <div class="card">
+                        <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+                            <a href="javascript:;" class="d-block">
+                                <img src="https://images.unsplash.com/photo-1610614819513-58e34989848b?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2069&amp;q=80" class="img-fluid border-radius-lg">
+                            </a>
+                        </div>
+
+                        <div class="card-body pt-3">
+                            <span class="text-gradient text-warning text-uppercase text-xs font-weight-bold my-2">fast Food</span>
+                            <a href="javascript:;" class="text-darker card-title h5 d-block">Burger with Beef Meet</a>
+                            <p class="card-description mb-4">
+                                Use border utilities to quickly style the border and border-radius of an element. Great for images, buttons.
+                            </p>
+                            <div class="author align-items-center">
+                                <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/marie.jpg" alt="..." class="avatar shadow">
+                                <div class="name ps-3">
+                                    <span>Elijah Miller</span>
+                                    <div class="stats">
+                                        <small>Posted now</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block why-us %}
+    <section class="pt-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 mt-3">
+                    <div class="row flex-row-reverse">
+                        <div class="col-lg-6 justify-content-center d-flex flex-column">
+                            <div class="card rounded-3">
+                                <div class="blur-shadow-image">
+                                    <img src="https://images.unsplash.com/photo-1616669944447-d65d41a222bd?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2054&amp;q=80" alt="img-blur-shadow-blog-2" class="img-fluid shadow rounded-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 pe-lg-5 justify-content-center d-flex flex-column pt-lg-0 pt-3">
+                            <h6 class="category text-info mt-3">Chef Select</h6>
+                            <h3>
+                                <a href="javascript:;" class="text-darker">Duck Breast by Chef Julian&nbsp;Salomé</a>
+                            </h3>
+                            <p>
+                                Warner Music Group announced today it’s acquiring the selected assets of the music platform Songkick, including its app for finding concerts and the company’s trademark. Songkick has been involved in a lawsuit against the major… <a href="javascript:;" class="text-darker icon-move-right text-sm">Read More
+                                    <i class="fas fa-arrow-right text-xs ms-1" aria-hidden="true"></i>
+                                </a>
+                            </p>
+                            <p class="author">
+                                by <a href="javascript:;" class="ms-1"><span class="font-weight-bold text-info">Millie Borough</span></a>, 10 days ago
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block newsletter %}
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 text-start">
+                    <h4>Get Update with the Newest Blogs</h4>
+                    <p class="mb-0">The latest news, articles and resources sent to your inbox weekely.</p>
+                </div>
+                <div class="col-lg-5 ms-auto text-end mt-4 mt-lg-0">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-4 col-7">
+                            <div class="form-group mb-0">
+                                <div class="input-group">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                        <input class="form-control" placeholder="Your Email" type="email">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-5 text-start">
+                            <button type="button" class="btn bg-gradient-primary mb-0 h-100">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block price %}
+    <section class="py-0">
+        <div class="row">
+            <div class="col-6 text-center mx-auto mt-5 mb-4">
+                {% for i in product|slice:":1" %}
+                    <h2 spellcheck="false">{{i.name}}</h2>
+                    <p>{{i.title}}
+                    </p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="pb-6">
+        <div class="container">
+            <div class="row">
+                {% for i in product|slice:"1:" %}
+                    <div class="col-lg-4 mb-lg-0 mb-4">
+                        <div class="card text-center">
+                            <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+                                <a href="javascript:;" class="d-block">
+                                    <img src="/media/{{i.file_path}}" 
+                                    class="img-fluid border-radius-lg">
+                                </a>
+                            </div>
+
+                            <div class="card-body pt-3">
+                                <span class="text-gradient  
+                                    {% if forloop.first %}
+                                        text-warning
+                                    {% elif forloop.last %}
+                                        text-success
+                                    {% else %}
+                                        text-info
+                                    {% endif %}
+                                    text-uppercase text-xs font-weight-bold my-2"  style="font-size:1.5em !important">
+                                    {{i.name}}</span>
+                                <a href="javascript:;" class="card-title h5 d-block text-darker">
+                                    {{i.title}}</a>
+                                <p class="card-description mb-4">
+                                        {{i.content|safe}}
+                                        <!-- <p>10 Free PSD files</p>
+                                        <p>10 Free PSD files</p>
+                                        <p>10 Free PSD files</p>
+                                        <p>10 Free PSD files</p> -->
+                                    
+                                    <hr>
+                                </p>
+                                <div class="align-items-center">
+                                    <!--<img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-1.jpg" alt="..." class="avatar shadow">-->
+                                    <div class="name ps-3">
+                                        <button type="button" class="btn bg-gradient-primary mb-0">Try Now</button>
+                                        <!--<span>Buy Now</span>
+                                        <div class="stats">
+                                            <small>{{i.created_at}}</small>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,1 +1,92 @@
-{% load static %} <!DOCTYPE html> <html lang=en-us  id=extr-page > <meta charset=utf-8 > <title> {{ title }}</title> {% include 'allauth/account/snippets/style.html' %} {% block extra_head %}{% endblock %} <body class="animated fadeInDown"> {% comment %} {% if user.is_authenticated %} <script> console.log('user is authenticate'); </script> {% else %} <script> console.log('user is NOT authenticate'); </script> {% endif %} {% endcomment %} <header id=header > {% block header %}{% endblock %} </header> <div id=main  role=main > {% block content %}{% endblock %} </div> {% include 'allauth/account/snippets/script.html' %} <script> runAllForms(); $(function() { $("#login-form").validate({ rules : { email : { required : true, email : true }, password : { required : true, minlength : 3, maxlength : 20 } }, messages : { email : { required : 'Please enter your email address', email : 'Please enter a VALID email address' }, password : { required : 'Please enter your password' } }, errorPlacement : function(error, element) { error.insertAfter(element.parent()); } }); }); </script> {% block extra_body %}{% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+	<head>
+		<meta charset="utf-8">
+		<title> {{ title }}</title>
+		
+        {% include 'allauth/account/snippets/style.html' %}
+
+        {% block extra_head %}{% endblock %}  
+	</head>
+	
+	<body class="animated fadeInDown">
+            {% comment %}
+            {% if user.is_authenticated %}
+
+                <!-- gunakan replace agar tidak bisa back -->
+
+                <script>
+                    console.log('user is authenticate');
+                </script>   
+            {% else %}
+                <script>
+                    console.log('user is NOT authenticate');
+                </script>
+
+            {% endif %}
+        
+            {% endcomment %}
+		<header id="header">
+
+			{% block header %}{% endblock %}
+
+		</header>
+
+		<div id="main" role="main">
+
+            {% block content %}{% endblock %}
+
+		</div>
+
+		<!--================================================== -->	
+        {% include 'allauth/account/snippets/script.html' %}
+		<!--[if IE 8]>
+			
+			<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+			
+		<![endif]-->
+
+		
+		<script type="text/javascript">
+			runAllForms();
+
+			$(function() {
+				// Validation
+				$("#login-form").validate({
+					// Rules for form validation
+					rules : {
+						email : {
+							required : true,
+							email : true
+						},
+						password : {
+							required : true,
+							minlength : 3,
+							maxlength : 20
+						}
+					},
+
+					// Messages for form validation
+					messages : {
+						email : {
+							required : 'Please enter your email address',
+							email : 'Please enter a VALID email address'
+						},
+						password : {
+							required : 'Please enter your password'
+						}
+					},
+
+					// Do not change code below
+					errorPlacement : function(error, element) {
+						error.insertAfter(element.parent());
+					}
+				});
+			});
+		</script>
+
+
+        {% block extra_body %}{% endblock %}
+	</body>
+</html>

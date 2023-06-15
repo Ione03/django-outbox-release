@@ -1,0 +1,528 @@
+{% extends "villa/direngine/base-index.html" %}
+{% load static %}
+
+{% block hero-image %}
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/aiBYhrzsQw4/1920x1200)"></div>
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/V5Owjg-ZNto/1920x1200)"></div>
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/s1ihVBg5tbI/1920x1200)"></div>
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/Z_t6gnbLmXA/1920x1200)"></div>
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/e3OUQGT9bWU/1920x1200)"></div>
+
+    <!-- <div id="slider" class="slider"> hero-wrap js-fullheight-->
+    <div  id="slider" class="slider">
+        <div class="overlay"></div>
+        <div class="container">
+        
+            <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+            
+                
+                    <div class="slider-item-show">
+                        <div class="col-md-9 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                            
+                            <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Explore <br></strong> your amazing city</h1>
+                            <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find great places to stay</p>
+                            <!-- <div class="block-17 my-4"> -->
+                                <!-- <form action="" method="post" class="d-block d-flex">
+                                <div class="fields d-block d-flex">
+                                    <div class="textfield-search one-third">
+                                        <input type="text" class="form-control" placeholder="Ex: food, service, hotel">
+                                    </div>
+                                    <div class="select-wrap one-third">
+                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <select name="" id="" class="form-control" placeholder="Keyword search">
+                                        <option value="">Where</option>
+                                        <option value="">San Francisco USA</option>
+                                        <option value="">Berlin Germany</option>
+                                        <option value="">Lodon United Kingdom</option>
+                                        <option value="">Paris Italy</option>
+                                    </select>
+                                    </div>
+                                </div>
+                                <input type="submit" class="search-submit btn btn-primary" value="Search">  
+                                </form> -->
+                                <input type="button" class="search-submit btn btn-primary" value=" &nbsp;Book Now&nbsp; ">  
+                            <!-- </div> -->
+                            <!-- <p>Or browse the highlights</p>
+                            <p class="browse d-md-flex">
+                                <span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-fork"></i>Restaurant</a></span>
+                                <span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-hotel"></i>Hotel</a></span> 
+                                <span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-meeting-point"></i>Places</a></span> 
+                                <span class="d-flex justify-content-md-center align-items-md-	center"><a href="#"><i class="flaticon-shopping-bag"></i>Shopping</a></span>
+                            </p> -->
+                            <!-- </div> -->
+
+                            <div class="slider-panel">
+                                <div class="slider-panel__controls">
+                                    <i class="far fa-arrow-alt-circle-left" id="previous"></i>
+                                    <i class="far fa-pause-circle" id="pause-play"></i>
+                                    <i class="far fa-arrow-alt-circle-right" id="next"></i>
+                                </div>
+                                
+                                <div class="slider-panel__navigation">
+                                    <i class="fas fa-circle indicator " data-slide-to="0"></i>
+                                    <i class="far fa-circle indicator" data-slide-to="1"></i>
+                                    <i class="far fa-circle indicator" data-slide-to="2"></i>
+                                    <i class="far fa-circle indicator" data-slide-to="3"></i>
+                                    <i class="far fa-circle indicator" data-slide-to="4"></i>
+                                </div>                        
+                            </div>
+
+                        </div>
+                    </div>
+                    
+
+            </div>
+           
+        </div>
+    <!-- </div> -->
+    </div>
+{% endblock %}
+
+{% block why-us %}
+    <section class="ftco-section services-section bg-light">
+        <div class="container">
+        <div class="row d-flex">
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block text-center">
+                <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-guarantee"></span></div></div>
+                <div class="media-body p-2 mt-2">
+                <h3 class="heading mb-3">Best Price Guarantee</h3>
+                <p>A small river named Duden flows by their place and supplies.</p>
+                </div>
+            </div>      
+            </div>
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block text-center">
+                <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-like"></span></div></div>
+                <div class="media-body p-2 mt-2">
+                <h3 class="heading mb-3">Travellers Love Us</h3>
+                <p>A small river named Duden flows by their place and supplies.</p>
+                </div>
+            </div>    
+            </div>
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block text-center">
+                <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-detective"></span></div></div>
+                <div class="media-body p-2 mt-2">
+                <h3 class="heading mb-3">Best Travel Agent</h3>
+                <p>A small river named Duden flows by their place and supplies.</p>
+                </div>
+            </div>      
+            </div>
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block text-center">
+                <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-support"></span></div></div>
+                <div class="media-body p-2 mt-2">
+                <h3 class="heading mb-3">Our Dedicated Support</h3>
+                <p>A small river named Duden flows by their place and supplies.</p>
+                </div>
+            </div>      
+            </div>
+        </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block fasilities %}
+    <section class="ftco-section ftco-destination">
+        <div class="container">
+            <div class="row justify-content-start ">
+            <div class="col-md-7 heading-section ftco-animate">
+                <span class="subheading">About</span>
+            <h2 class="mb-4"><strong>Narvik Villa</strong> Fasilities</h2>
+            
+            </div>
+            
+
+            </div>
+            <div class="row justify-content-center mb-5 ">
+            <div class="col-md-12">
+                <p>
+                    Situated next to Krandangan National Park, you will be nestled in a beautiful valley surrounded by the lush forest. The villa is perfect for a big family or a group of friend. Only 5 minutes by a car or scooter and 20 minutes on a walk to the beach. Our 4-bedroom spacious villa offers an incredible nature view, a private pool, a BBQ grill, a fully equipped kitchen, an advanced Jura coffee machine, PlayStation 4, Netflix, karaoke, and free WIFI available in all areas. Breakfast is served for free. Lunch and dinner can be ordered outside by our staff or prepared by our professional chef at the villa (surcharge). Rent a car or scooter and a half or full day excursion can be organized by request.
+                </p>
+            </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="destination-slider owl-carousel ftco-animate">
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-1.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Main Room</a></h3>
+                                    <span class="listing">There are two buildings, a large main building and a smaller studio.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-2.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Bedroom</a></h3>
+                                    <span class="listing">We have four bedrooms.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-3.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Bathroom</a></h3>
+                                    <span class="listing">We have three bathrooms.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-4.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Kitchen</a></h3>
+                                    <span class="listing">Our kitchen merges with the main room.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-5.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Swimming Pool</a></h3>
+                                    <span class="listing">The pool is the nicest place for relaxation.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-6.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Paris, Italy</a></h3>
+                                    <span class="listing">3 Listing</span>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block gallery %}
+    <section class="ftco-section ftco-destination">
+        <div class="container">
+            <div class="row justify-content-start ">
+            <div class="col-md-7 heading-section ftco-animate">
+                <span class="subheading">Gallery</span>
+            <h2 class="mb-4"><strong>Narvik Villa</strong> Gallery</h2>
+            
+            </div>
+            
+
+            </div>
+            <div class="row justify-content-center mb-5 ">
+            <div class="col-md-12">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis maxime voluptatem minima architecto at debitis reprehenderit in, ullam magnam iure similique vero nostrum eligendi nisi culpa numquam labore molestias reiciendis!
+                </p>
+            </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="destination-slider owl-carousel ftco-animate">
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-6.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Front Door</a></h3>
+                                    <span class="listing">Front Door description</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-5.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Living Room</a></h3>
+                                    <span class="listing">Living room description.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-3.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Swimming Pool</a></h3>
+                                    <span class="listing">Picture of swimming pool on night</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-2.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Kitchen</a></h3>
+                                    <span class="listing">Our kitchen merges with the main room.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-1.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Swimming Pool</a></h3>
+                                    <span class="listing">The pool is the nicest place for relaxation.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-6.jpg' %});">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Garden</a></h3>
+                                    <span class="listing">Foto get using drone</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block special-offers %}
+    <section class="ftco-section">
+        <div class="container">
+                <div class="row justify-content-start mb-5 pb-3">
+        <div class="col-md-7 heading-section ftco-animate">
+            <span class="subheading">Special Offers</span>
+            <h2 class="mb-4"><strong>Narvik Villa</strong> Best Offers</h2>
+        </div>
+        </div>    		
+            <div class="row">
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="destination">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/restaurant-1.jpg' %});">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3">
+                            <h3><a href="#">Stay 3 Night, 1 Night Off</a></h3>
+                            <p class="rate">
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star-o"></i>
+                                <span>8 Rating</span>
+                            </p>
+                            <p>Far far away, behind the word mountains, far from the countries</p>
+                            <hr>
+                            <p class="bottom-area d-flex">
+                                <span><i class="icon-map-o"></i> </span> 
+                                <span class="ml-auto"><a href="#">Book Now</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="destination">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/restaurant-2.jpg' %});">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3">
+                            <h3><a href="#">Stay 7 Night, 1 Night Off + Free 1 Night For Next Visit</a></h3>
+                            <p class="rate">
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star-o"></i>
+                                <span>8 Rating</span>
+                            </p>
+                            <p>Far far away, behind the word mountains, far from the countries</p>
+                            <hr>
+                            <p class="bottom-area d-flex">
+                                <span><i class="icon-map-o"></i> </span> 
+                                <span class="ml-auto"><a href="#">Book Now</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="destination">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/restaurant-3.jpg' %});">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3">
+                            <h3><a href="#">Stay 2 Night, For 2 Guest, Free Breakfast & Lunch</a></h3>
+                            <p class="rate">
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star-o"></i>
+                                <span>8 Rating</span>
+                            </p>
+                            <p>Far far away, behind the word mountains, far from the countries</p>
+                            <hr>
+                            <p class="bottom-area d-flex">
+                                <span><i class="icon-map-o"></i> </span> 
+                                <span class="ml-auto"><a href="#">Book Now</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="destination">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/restaurant-4.jpg' %});">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3">
+                            <h3><a href="#">Book This Month, Free Souvenir From Narvik Villa</a></h3>
+                            <p class="rate">
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star-o"></i>
+                                <span>8 Rating</span>
+                            </p>
+                            <p>Far far away, behind the word mountains, far from the countries</p>
+                            <hr>
+                            <p class="bottom-area d-flex">
+                                <span><i class="icon-map-o"></i></span> 
+                                <span class="ml-auto"><a href="#">Book Now</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block testimony %}
+    <section class="ftco-section testimony-section bg-light">
+        <div class="container">
+        <div class="row justify-content-start">
+            <div class="col-md-5 heading-section ftco-animate">
+                <span class="subheading">Best Directory Website</span>
+            <h2 class="mb-4 pb-3"><strong>Why</strong> Choose Us?</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life.</p>
+            <p><a href="#" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3">Read more</a></p>
+            </div>
+                    <div class="col-md-1"></div>
+            <div class="col-md-6 heading-section ftco-animate">
+                <span class="subheading">Testimony</span>
+            <h2 class="mb-4 pb-3"><strong>Our</strong> Guests Says</h2>
+                <div class="row ftco-animate">
+                    <div class="col-md-12">
+                    <div class="carousel-testimony owl-carousel">
+                        <div class="item">
+                        <div class="testimony-wrap d-flex">
+                            <div class="user-img mb-5" style="background-image: url({% static 'villa/direngine/images/person_1.jpg' %})">
+                            <span class="quote d-flex align-items-center justify-content-center">
+                                <i class="icon-quote-left"></i>
+                            </span>
+                            </div>
+                            <div class="text ml-md-4">
+                            <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                            <p class="name">Dennis Green</p>
+                            <span class="position">Guest from italy</span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="item">
+                        <div class="testimony-wrap d-flex">
+                            <div class="user-img mb-5" style="background-image: url({% static 'villa/direngine/images/person_2.jpg' %})">
+                            <span class="quote d-flex align-items-center justify-content-center">
+                                <i class="icon-quote-left"></i>
+                            </span>
+                            </div>
+                            <div class="text ml-md-4">
+                            <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                            <p class="name">Dennis Green</p>
+                            <span class="position">Guest from London</span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="item">
+                        <div class="testimony-wrap d-flex">
+                            <div class="user-img mb-5" style="background-image: url({% static 'villa/direngine/images/person_3.jpg' %})">
+                            <span class="quote d-flex align-items-center justify-content-center">
+                                <i class="icon-quote-left"></i>
+                            </span>
+                            </div>
+                            <div class="text ml-md-4">
+                            <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                            <p class="name">Dennis Green</p>
+                            <span class="position">Guest from Philippines</span>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+{% endblock %}

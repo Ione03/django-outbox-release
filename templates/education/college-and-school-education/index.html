@@ -1,1 +1,159 @@
-{% extends "education/college-and-school-education/base-index.html" %} {% load static %} {% block slider %} {% if slideshow %} <div class=container > <div class=row > <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> <div class=tg-homebannervtwo > <div id=tg-homeslider  class="tg-homeslider owl-carousel tg-btnround tg-haslayout"> {% for i in slideshow %} <div class=item > <figure> <img src="/media/{{i.file_path}}" alt="image description"> <figcaption class=tg-slidercontent > <div class=tg-slidercontentbox > <a class=tg-btn  href="slideshow/detail/{{i.slug}}/">read more</a> <div class=tg-titledescription > <h1>{{i.title|truncatewords_html:8}}</h1> <div class=tg-description > <p>{{i.content|striptags|safe|truncatewords_html:30}}</p> </div> </div> </div> </figcaption> </figure> </div> {% endfor %} </div> <div class="tg-noticeboardarea hidden-xs hidden-md hidden-sm"> {% for i in banner|slice:":1" %} <div class="tg-widget tg-widgetadmissionform"> <a href="{{i.link}}" target=_blank ><img src="/media/{{i.file_path}}" alt="top banner"></a> </div> {% endfor %} </div> </div> {% if dailyalert %} {% include 'education/college-and-school-education/snippets/daily_alert.html' %} {% endif %} </div> </div> </div> {% endif %} {% endblock %} {% block main %} <main id=tg-main  class="tg-main tg-haslayout"> <div class=container > <div class=row > <div id=tg-twocolumns  class=tg-twocolumns > <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9"> <div id=tg-content  class=tg-content > {% if greeting %} {% include 'education/college-and-school-education/snippets/greeting.html' %} {% endif %} {% if news %} {% include 'education/college-and-school-education/snippets/news.html' %} {% endif %} {% if events %} {% include 'education/college-and-school-education/snippets/events.html' %} {% endif %} {% if article %} {% include 'education/college-and-school-education/snippets/article.html' %} {% endif %} {% if photogallery or relatedlink %} <section class="tg-sectionspace tg-haslayout"> <div class=tg-latestnews > <div class=row > {% if photogallery%} {% include 'education/college-and-school-education/snippets/photo_gallery.html' %} {% endif %} {% if relatedlink %} {% include 'education/college-and-school-education/snippets/related_links.html' %} {% endif %} </div> <div class=tg-btnsbox > <a class=tg-btn  href="photogallery/list/all/">view all photo</a> </div> </div> </section> {% endif %} {% if videogallery %} {% include 'education/college-and-school-education/snippets/video_gallery.html' %} {% endif %} </div> </div> <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3"> <aside id=tg-sidebar  class=tg-sidebar > {% if announcement %} {% include 'education/college-and-school-education/snippets/side_announcement.html' %} {% endif %} {% if banner %} {% include 'education/college-and-school-education/snippets/side_banner.html' %} {% endif %} {% if document %} {% include 'education/college-and-school-education/snippets/side_documents.html' %} {% endif %} {% if location %} {% include 'education/college-and-school-education/snippets/side_location.html' %} {% endif %} </aside> </div> </div> </div> </div> </main> {% include 'education/college-and-school-education/snippets/modal_form.html' %} {% endblock %} {% block extra_body %} <script> function show_modal(pURL) { $('.video-mo-02').html('<iframe frameborder=0  height=427  src="' + pURL + '?autoplay=0" title="YouTube video player" width=759  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'); $('#modal-video-02').modal(); }; (function ($) { $('#modal-video-02').on('hide.bs.modal', () => { $('.video-mo-02').find('iframe').attr('src', ''); }); }(jQuery)); </script> {% endblock %}
+{% extends "education/college-and-school-education/base-index.html" %}
+{% load static %}
+
+{% block slider %}
+    {% if slideshow %}
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-homebannervtwo">
+                        <div id="tg-homeslider" class="tg-homeslider owl-carousel tg-btnround tg-haslayout">
+
+                            {% for i in slideshow %}
+                                <div class="item">
+                                    <figure>
+                                        <img src="/media/{{i.file_path}}" alt="image description">
+                                        <figcaption class="tg-slidercontent">
+                                            <div class="tg-slidercontentbox">
+                                                <a class="tg-btn" href="slideshow/detail/{{i.slug}}/">read more</a>
+                                                <div class="tg-titledescription">
+                                                    <h1>{{i.title|truncatewords_html:8}}</h1>
+                                                    <div class="tg-description">
+                                                        <p>{{i.content|striptags|safe|truncatewords_html:30}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                            {% endfor %}                    
+                        </div>
+                        <div class="tg-noticeboardarea hidden-xs hidden-md hidden-sm">
+                            {% for i in banner|slice:":1" %}
+                            <div class="tg-widget tg-widgetadmissionform">
+                                <!-- <div class="tg-widgetcontent"> -->
+                                <a href="{{i.link}}" target="_blank"><img src="/media/{{i.file_path}}" alt="top banner"></a>
+                            </div>
+                            {% endfor %}       
+                        </div>
+                    </div>
+
+                    {% if dailyalert %}
+                        {% include 'education/college-and-school-education/snippets/daily_alert.html' %}   
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div id="tg-twocolumns" class="tg-twocolumns">
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+                        <div id="tg-content" class="tg-content">
+                            
+                                         
+                            {% if greeting %}
+                                {% include 'education/college-and-school-education/snippets/greeting.html' %}
+                            {% endif %}
+
+                            {% if news %}
+                                {% include 'education/college-and-school-education/snippets/news.html' %}
+                            {% endif %}
+
+                            {% if events %}
+                                {% include 'education/college-and-school-education/snippets/events.html' %}
+                            {% endif %}
+
+                            {% if article %}
+                                {% include 'education/college-and-school-education/snippets/article.html' %}
+                            {% endif %}
+
+                            {% if photogallery or relatedlink %}                        
+                                <section class="tg-sectionspace tg-haslayout">
+                                    <div class="tg-latestnews">
+                                        <div class="row">
+
+                                            {% if photogallery%}
+                                                {% include 'education/college-and-school-education/snippets/photo_gallery.html' %}
+                                            {% endif %}
+
+                                            {% if relatedlink %}                                   
+                                                {% include 'education/college-and-school-education/snippets/related_links.html' %}                                    
+                                            {% endif %}
+
+                                        </div>
+                                        <div class="tg-btnsbox">
+                                            <a class="tg-btn" href="photogallery/list/all/">view all photo</a>
+                                        </div>
+                                    </div>
+                                </section>
+                            {% endif %}
+
+                            {% if videogallery %}
+                                {% include 'education/college-and-school-education/snippets/video_gallery.html' %}
+                            {% endif %}                        
+                            
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <aside id="tg-sidebar" class="tg-sidebar">                       
+                            {% if announcement %}
+                                {% include 'education/college-and-school-education/snippets/side_announcement.html' %}
+                            {% endif %}                       
+                            
+                            {% if banner %}
+                                {% include 'education/college-and-school-education/snippets/side_banner.html' %}
+                            {% endif %}
+
+                            {% if document %}
+                                {% include 'education/college-and-school-education/snippets/side_documents.html' %}
+                            {% endif %}
+
+                            {% if location %}
+                                {% include 'education/college-and-school-education/snippets/side_location.html' %}
+                            {% endif %}                        
+                        </aside>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </main>
+
+    {% include 'education/college-and-school-education/snippets/modal_form.html' %}
+
+{% endblock %}
+
+{% block extra_body %}
+    <script>
+
+        function show_modal(pURL) {
+            // $('.video-mo-02').css('opacity','1');
+            // setTimeout(function(){
+            //     $('.video-mo-02').css('opacity','0');
+            // },300);
+            //$('.video-mo-02').html('<iframe width="853" height="480" src="https://www.youtube.com/embed/8KDOFMAhWCc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+            // https://www.youtube.com/embed/_P7FX8rhXk4
+            //alert(pURL)
+            $('.video-mo-02').html('<iframe frameborder="0" height="427" src="' + pURL + '?autoplay=0" title="YouTube video player" width="759" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+
+            //$('.video-mo-02').children('iframe')[0].src += "?autoplay=1";
+            $('#modal-video-02').modal();
+        };
+
+
+        (function ($) {
+            $('#modal-video-02').on('hide.bs.modal', () => {
+                // console.log($('.video-mo-02').html());
+                $('.video-mo-02').find('iframe').attr('src', '');
+                // console.log($('.video-mo-02').html());
+            });
+        }(jQuery));
+
+    </script>
+{% endblock %}

@@ -1,1 +1,123 @@
-{% extends "allauth/base.html" %} {% load static %} {% load i18n %} {% load account socialaccount %} {% block header %} <div id=logo-group > <span id=logo > <img src="{% static 'backend/smart-admin-2/img/logo.png' %}" alt=SmartAdmin > </span> </div> <span id=extr-page-header-space > <span class="hidden-mobile hiddex-xs">{% trans "Create an Account" %}?</span> <a href=login.html  class="btn btn-danger">{% trans "Sign Up" %}</a> </span> {% endblock %} {% block content %} <div id=content  class=container > <div class=row > <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm"> {% include "allauth/snippets/login_info.html" %} </div> <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4"> <div class="well no-padding"> <form method=POST  id=signup_form  class="smart-form client-form" action="{% url 'socialaccount_signup' %}"> {% csrf_token %} <header> {% trans "Sign Up" %} </header> <fieldset> {% if form.errors %} <section> <div style="color: crimson ;"><b>{{form.errors}}</b></div><br> </section> {% endif %} <section> {% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to {{site_name}}. As a final step, please complete the following form:{% endblocktrans %} </section> <section> <label class=label >{{form.email.label}}</label> <label class=input > <i class="icon-append fa fa-envelope"></i> {{form.email}} <b class="tooltip tooltip-top-right"><i class="fa fa-envelope txt-color-teal"></i> {% trans "Enter your email" %}</b> </label> {% if redirect_field_value %} <input type=hidden  name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %} </section> </fieldset> <footer> <button type=submit  class="btn btn-primary"> {% trans "Sign Up" %} &raquo; </button> </footer> </form> </div> </div> </div> </div> {% endblock %} {% comment %} {% block head_title %}{% trans "Signup" %}{% endblock %} {% block content %} <h1>{% trans "Sign Up" %}</h1> <p>{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</p> <form class=signup  id=signup_form  method=post  action="{% url 'socialaccount_signup' %}"> {% csrf_token %} {{ form.as_p }} {% if redirect_field_value %} <input type=hidden  name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %} <button type=submit >{% trans "Sign Up" %} &raquo;</button> </form> {% endblock %} {% endcomment %}
+{% extends "allauth/base.html" %}
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block header %}
+    <div id="logo-group">
+        <span id="logo"> <img src="{% static 'backend/smart-admin-2/img/logo.png' %}" alt="SmartAdmin"> 
+
+        <!-- <div class="pull-right"> -->
+            <!-- <button class="btn btn-primary pull-right">
+                Sign Up
+            </button> -->
+        <!-- </div> -->
+            
+        </span>
+        
+        
+    </div>
+    <span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">{% trans "Back to Login" %}?</span> 
+    <a href="{% url 'account_login' %}" class="btn btn-info">{% trans "Login" %}</a>
+    <a href="{% url 'account_signup' %}" class="btn btn-danger">{% trans "Sign Up" %}</a> </span>
+    
+    
+
+    <!-- <span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">Need an account?</span> <a href="register.html" class="btn btn-danger">Create account</a> </span> -->
+{% endblock %}
+
+{% block content %}
+	<!-- MAIN CONTENT -->
+    <div id="content" class="container">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+                {% include "allauth/snippets/login_info.html" %}
+
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">                        
+                <div class="well no-padding">
+                    <form method="POST" id="signup_form" class="smart-form client-form" action="{% url 'socialaccount_signup' %}">
+                        {% csrf_token %}
+                        
+                            <header>
+                                {% trans "Sign Up" %}
+                            </header>
+
+                            <fieldset>
+                                
+                                {% if form.errors %}
+                                <section>
+                                    <div style="color: crimson ;"><b>{{form.errors}}</b></div><br>
+                                </section>
+                                {% endif %}
+                                
+                                {% comment %}
+                                    {{site_name}}
+                                {% endcomment %}
+
+                                <section>
+                                    {% blocktrans with provider_name=account.get_provider.name site_name=site.name %}
+                                    You are about to use your {{provider_name}} account to login to
+                                        authbox.web.id. As a final step, please complete the following form:{% endblocktrans %}
+                                </section>
+                                <section>
+                                    <label class="label">{{form.email.label}}</label>
+                                    <label class="input"> <i class="icon-append fa fa-envelope"></i>
+                                        <!-- <input type="password" name="password"> -->
+                                        {{form.email}}
+                                        <b class="tooltip tooltip-top-right"><i class="fa fa-envelope txt-color-teal"></i> 
+                                            {% trans "Enter your email" %}</b> </label>
+                                    
+    
+                                
+                                    
+                                            
+                                            
+                                    {% if redirect_field_value %}
+                                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                    {% endif %}
+                                </section>
+                            </fieldset>
+
+                       
+                        <footer>
+                            <button type="submit" class="btn btn-primary">
+                                {% trans "Sign Up" %} &raquo;
+                            </button>
+                        </footer>
+                    </form>
+
+                </div>
+                
+                
+                
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% comment %}
+
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Sign Up" %}</h1>
+
+<p>{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
+{{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</p>
+
+<form class="signup" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+</form>
+
+{% endblock %}
+
+{% endcomment %}

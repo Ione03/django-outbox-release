@@ -1,1 +1,167 @@
-{% extends "education/college-and-school-education/base-detail.html" %} {% load static %} {% load hitcount_tags %} {% block inner-banner %} <div class=tg-innerbanner > <div class=container > <div class=row > <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> <ol class=tg-breadcrumb > <li><a href="{{base_url}}/">home</a> <li>Greeting <li class=tg-active >Detail </ol> </div> </div> </div> </div> {% endblock %} {% block main %} <main id=tg-main  class="tg-main tg-haslayout"> <div class=container > <div class=row > <div id=tg-twocolumns  class=tg-twocolumns > <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 pull-right"> <div id=tg-content  class=tg-content > {% for i in greeting|slice:":1" %} <h3>{{i.title}}</h3> <div class="clearfix media"> <img src="/media/{{i.file_path}}" class="pull-left " alt="image description"> {{i.content|safe}} <div class=tg-nameanddesignation > <strong>{{i.name}}</strong> <span>{{i.designation}}</span> </div> </div> {% endfor %} </div> <h3>Share</h3> <ul class=tg-socialicons > <li class=tg-facebook ><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a> <li class=tg-twitter ><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a> </ul> </div> <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 pull-left"> <aside id=tg-sidebar  class=tg-sidebar > <div class="tg-widget tg-widgetcampuses"> {% if latest_announcement %} <div class=tg-widgettitle > <h3>Latest Announcement</h3> </div> <div class=tg-widgetcontent > {% for i in latest_announcement %} <article class="tg-campus tg-campusleftthumb"> <a href="{{base_url}}/announcement/detail/{{i.slug}}"> <img src="/media/{{i.file_path}}" alt="image description"> </a> <br><br> <div class=tg-campuscontent > <div class=tg-datetime > <i class="fa fa-calendar"></i> <span>{{i.created_at}}</span> </div> <div class=tg-campustitle > <h3><a href="{{base_url}}/announcement/detail/{{i.slug}}">{{i.title}}</a></h3> </div> </div> </article> {% endfor %} </div> {% endif %} </div> </aside> </div> </div> </div> </div> </main> {% endblock %} {% block extra_body %} {% endblock %}
+{% extends "education/college-and-school-education/base-detail.html" %}
+{% load static %}
+{% load hitcount_tags %}
+
+{% block inner-banner %}
+    <!--************************************
+            Inner Banner Start
+    *************************************-->
+    <div class="tg-innerbanner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ol class="tg-breadcrumb">
+                        <li><a href="{{base_url}}/">home</a></li>
+                        <!-- # goto list of kind -->
+                        <li>Greeting</li> 
+                        <li class="tg-active">Detail</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--************************************
+            Inner Banner End
+    *************************************-->
+{% endblock %}
+
+{% block main %}
+		<!--************************************
+				Main Start
+		*************************************-->
+		<main id="tg-main" class="tg-main tg-haslayout">
+			<div class="container">
+				<div class="row">
+					<div id="tg-twocolumns" class="tg-twocolumns">
+						<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 pull-right">
+							<div id="tg-content" class="tg-content">
+								<!-- <div class="tg-aboutus tg-rectormessage"> -->
+                                    
+                                    {% for i in greeting|slice:":1" %}
+                                        <!-- <div class="row"> -->
+                                            <h3>{{i.title}}</h3>
+                                            <div class="clearfix media">
+                                                <img src="/media/{{i.file_path}}" class="pull-left " alt="image description">
+                                                <!-- </div> -->
+                                                <!-- <div class="col-2"> -->
+                                                
+                                                {{i.content|safe}}
+                                                <!-- <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt labore dolore msagna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullaasmco laboris nisi uiat aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit etssse cillum dolore eu fugiat nulla pariatur sintasr occaecat cupidatat proident, sunt in culpa qui officia deserunt mollit anim laboruma lota toaks alukamation.</p>
+                                                <p>Sedpiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium sasi totam rem aperiam eaque ipsa quae ab illo inventore veritatis etanas quasi architecto beatae vitae dicta explicabo Nemo enim ipsam.</p>
+                                                <p>Ait aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi.</p> -->
+                                                <div class="tg-nameanddesignation">
+                                                    <strong>{{i.name}}</strong>
+                                                    <span>{{i.designation}}</span>
+                                                </div>
+                                            </div>
+                                            
+                                        <!-- </div> -->
+                                    {% endfor %}
+								<!-- </div> -->
+                                
+							</div>
+
+                            <h3>Share</h3>
+                            <ul class="tg-socialicons">
+                                <li class="tg-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
+                                <li class="tg-twitter"><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
+                                <!-- <li class="tg-linkedin"><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
+                                <li class="tg-googleplus"><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
+                                <li class="tg-rss"><a href="javascript:void(0);"><i class="fa fa-rss"></i></a></li> -->
+                            </ul>
+                            
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 pull-left">
+							<aside id="tg-sidebar" class="tg-sidebar">
+								<div class="tg-widget tg-widgetcampuses">
+                                    {% if latest_announcement %}
+                                        <!-- <div class="tg-widget tg-widgetlatestcourses"> -->
+                                            <div class="tg-widgettitle">
+                                                <h3>Latest Announcement</h3>
+                                            </div>
+                                            <div class="tg-widgetcontent">
+                                                {% for i in latest_announcement %}
+                                                    <article class="tg-campus tg-campusleftthumb">
+                                                        <!-- <figure class="tg-featuredimg"> -->
+                                                            <a href="{{base_url}}/announcement/detail/{{i.slug}}">
+                                                                <img src="/media/{{i.file_path}}" alt="image description">
+                                                            </a>
+                                                        <!-- </figure> -->
+
+                                                        <br><br>
+                                                        <div class="tg-campuscontent">
+                                                            <div class="tg-datetime">
+                                                                <i class="fa fa-calendar"></i>
+                                                                <span>{{i.created_at}}</span>
+                                                            </div>
+                                                            <div class="tg-campustitle">
+                                                                <h3><a href="{{base_url}}/announcement/detail/{{i.slug}}">{{i.title}}</a></h3>
+                                                            </div>
+                                                        </div>
+                                                    </article>
+                                                {% endfor %}
+
+                                                
+                                            </div>
+                                        <!-- </div> -->
+                                    {% endif %}
+                                    
+                                    
+								</div>
+
+                                
+
+								<!-- <div class="tg-widget tg-widgetothercapmus">
+									<div class="tg-widgetcontent">
+										<article class="tg-campus tg-campusleftthumb">
+											<figure class="tg-featuredimg">
+												<a href="javascript:void(0);">
+													<img src="images/img-22.jpg" alt="image description">
+												</a>
+											</figure>
+											<div class="tg-campuscontent">
+												<div class="tg-campustitle">
+													<h3><a href="javascript:void(0);">National College of Arts &amp; Construction</a></h3>
+												</div>
+												<ul>
+													<li>
+														<i class="fa fa- fa-location-arrow"></i>
+														<address>Manchester, England</address>
+													</li>
+												</ul>
+											</div>
+										</article>
+										<article class="tg-campus tg-campusleftthumb">
+											<figure class="tg-featuredimg">
+												<a href="javascript:void(0);">
+													<img src="images/img-23.jpg" alt="image description">
+												</a>
+											</figure>
+											<div class="tg-campuscontent">
+												<div class="tg-campustitle">
+													<h3><a href="javascript:void(0);">Base College of Craft &amp; Arts</a></h3>
+												</div>
+												<ul>
+													<li>
+														<i class="fa fa- fa-location-arrow"></i>
+														<address>Manchester, England</address>
+													</li>
+												</ul>
+											</div>
+										</article>
+									</div>
+								</div> -->
+							</aside>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<!--************************************
+				Main End
+		*************************************-->
+{% endblock %}
+
+
+{% block extra_body %}
+{% endblock %}

@@ -1,1 +1,67 @@
-<section class="tg-sectionspace tg-haslayout"> <div class=tg-latestnews > <div class=tg-borderheading > <h2>Latest Events</h2> </div> <div id=tg-latestnewsslider  class="tg-latestnewsslider owl-carousel tg-posts"> {% for i in events %} <div class=item > <article class="tg-themepost tg-newspost"> <figure class=tg-featuredimg > <a href="events/detail/{{i.slug}}/"> <img src="/media/{{i.file_path}}" alt="image description"> </a> </figure> <div class=tg-themepostcontent > <ul class=tg-matadata > <li> <a href="events/detail/{{i.slug}}/"> <i class="fa fa-calendar"></i> <span>{{i.created_at}}</span> </a> </ul> <div class=tg-themeposttitle > <h3><a href="events/detail/{{i.slug}}/">{{i.title|safe}}</a></h3> </div> <div class=tg-description > <p>{{i.content|striptags|safe|truncatewords_html:15}} <a href="events/detail/{{i.slug}}/">Read More</a></p> </div> </div> </article> </div> {% endfor %} </div> <div class=tg-btnsbox > <a class=tg-btn  href="events/list/all/">view all events</a> </div> </div> </section>
+<section class="tg-sectionspace tg-haslayout">
+    <div class="tg-latestnews">
+        <div class="tg-borderheading">
+            <h2>Latest Events</h2>
+        </div>
+        <div id="tg-latestnewsslider" class="tg-latestnewsslider owl-carousel tg-posts">            
+            {% for i in events %}
+                <div class="item">
+                    <article class="tg-themepost tg-newspost">
+                        <figure class="tg-featuredimg">
+                            <a href="events/detail/{{i.slug}}/">
+                                <img src="/media/{{i.file_path}}" alt="image description">
+                            </a>
+                        </figure>
+                        <div class="tg-themepostcontent">
+                            <ul class="tg-matadata">
+                                <li>
+                                    <a href="events/detail/{{i.slug}}/">
+                                        <i class="fa fa-calendar"></i>
+                                        <span>{{i.created_at}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tg-themeposttitle">
+                                <h3><a href="events/detail/{{i.slug}}/">{{i.title|safe}}</a></h3>
+                            </div>
+                            <div class="tg-description">
+                                <p>{{i.content|striptags|safe|truncatewords_html:15}} <a
+                                        href="events/detail/{{i.slug}}/">Read More</a></p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                    <article class="tg-themepost tg-eventpost">
+                        <figure class="tg-featuredimg">
+                            <a href="events/detail/{{i.slug}}/">
+                                <img src="/media/{{i.file_path}}" alt="image description">
+                            </a>
+                        </figure>
+                        <div class="tg-themepostcontent">
+                            <ul class="tg-matadata">
+                                <li>
+                                    <a href="events/detail/{{i.slug}}/">
+                                        <i class="fa fa-calendar"></i>
+                                        <span>{{i.created_at}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tg-themeposttitle">
+                                <h3><a href="events/detail/{{i.slug}}/">{{i.title}}</a></h3>
+                            </div>
+                            <div class="tg-description">
+                                <p>{{i.content|striptags|safe}}<a href="events/detail/{{i.slug}}/">Read More</a></p>
+                            </div>
+                        </div>
+                    </article>
+                </div> -->
+            {% endfor %}        
+        </div>
+        <div class="tg-btnsbox">
+            <a class="tg-btn" href="events/list/all/">view all events</a>
+        </div>                                        
+    </div>
+</section>
+

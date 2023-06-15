@@ -1,1 +1,51 @@
-{% load static %} {% load menu_tags %} {% menu_create 1 menugroup as my_menu %} <header id=header  class="header d-flex align-items-center fixed-top"> <div class="container-fluid container-xl d-flex align-items-center justify-content-between"> {% for i in logo %} <a href="/" class="logo d-flex align-items-center"> <img src="/media/{{ i.file_path }}" alt=""> </a> {% endfor %} <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i> <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i> <nav id=navbar  class=navbar > <ul> {% for n in my_menu %} {% if n.haveChild %} <li class=dropdown > <a href="{{base_url}}{{n.link}}">{{n.name}}<i class="bi bi-chevron-down dropdown-indicator"></i></a> <ul> {% else %} <li class=dropdown ><a href="{{base_url}}{{n.link}}">{{n.name}}</a> {% endif %} {% for i in n.haveChildEndTag %} {% if forloop.last %} {% if n.parent_id %} </ul> {% if not n.haveChild %} {% endif %} {% endif %} {% else %} </ul> {% endif %} {% endfor %} {% endfor %} </ul> </nav> </div> </header>
+{% load static %}
+{% load menu_tags %}
+{% menu_create 1 menugroup as my_menu %}
+
+<!-- ======= Header ======= -->
+<header id="header" class="header d-flex align-items-center fixed-top">
+  <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+    {% for i in logo %}
+    <a href="/" class="logo d-flex align-items-center">
+      <!-- Uncomment the line below if you also wish to use an image logo -->
+      <img src="/media/{{ i.file_path }}" alt="">
+    </a>
+    {% endfor %}
+    <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+    <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    <nav id="navbar" class="navbar">
+    <ul>
+      {% for n in my_menu %}
+      {% if n.haveChild %}
+      <li class="dropdown">
+        <a href="{{base_url}}{{n.link}}">{{n.name}}<i class="bi bi-chevron-down dropdown-indicator"></i></a>
+        <ul>
+          {% else %}
+          <li class="dropdown"><a href="{{base_url}}{{n.link}}">{{n.name}}</a></li>
+          {% endif %}
+
+          {% for i in n.haveChildEndTag %}
+          {% if forloop.last %}
+          {% if n.parent_id %}
+
+        </ul>
+        {% if not n.haveChild %}
+      </li>
+      {% endif %}
+
+
+      {% endif %}
+
+      {% else %}
+      </li>
+    </ul>
+    {% endif %}
+
+    {% endfor %}
+    {% endfor %}
+    </ul>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->

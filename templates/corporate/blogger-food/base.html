@@ -1,0 +1,30 @@
+<!-- Loopple Templates: https://www.loopple.com/templates | Copyright Loopple (https://www.loopple.com) | This copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{title}}</title>
+
+    {% include 'corporate/blogger-food/snippets/style.html' %}
+
+    {% block extra_head %}{% endblock %}  
+</head>
+
+<!--<body onload="loader()">-->
+<body>
+    <!--<div class="loader1" style="display:inline"></div>-->
+    
+    <!--<div id="body-content" style="display:none">-->
+    
+    
+    {% include 'corporate/blogger-food/snippets/nav.html' %}    
+
+    {% block content %}{% endblock %}    
+
+    {% include 'corporate/blogger-food/snippets/footer.html' %}    
+    
+    
+    {% include 'corporate/blogger-food/snippets/script.html' %}
+
+    {% block extra_body %}{% endblock %}
+</body>

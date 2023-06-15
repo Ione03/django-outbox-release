@@ -1,0 +1,31 @@
+:root{ --color: rgb(33, 149, 207); }
+.loader{
+    width: 64px;
+    height: 64px;
+    margin: 50px auto 0;
+    border: 4px solid var(--color);
+    border-radius: 2px;
+    perspective: 400px;
+    transform-style: preserve-3d;
+    position: fixed; /* relative;*/
+    animation: rotated 4s infinite linear;
+    z-index: 99999;
+} 
+.loader:before,
+.loader:after{
+    content: "";
+    width: 64px;
+    height: 64px;
+    border: 4px solid var(--color);
+    border-radius: 2px;
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    animation: rotated 4s 1s infinite linear;
+}
+.loader:after{ animation: rotated 4s 2s infinite linear; }
+@keyframes rotated{
+    25%{ transform: perspective(200px) rotateX(60deg) rotateY(0deg) rotateZ(0deg); }
+    50%{ transform: perspective(200px) rotateX(180deg) rotateY(180deg) rotateZ(0deg); }
+    75%{ transform: perspective(200px) rotateX(359deg) rotateY(360deg) rotateZ(0deg); }
+}

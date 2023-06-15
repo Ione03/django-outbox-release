@@ -3,3 +3,4 @@ staticfiles/
 __pycache__/
 *.pyc
 *.sqlite3
+sendgrid.env
