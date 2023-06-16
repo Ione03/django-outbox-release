@@ -15,13 +15,13 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from core.models import Agency,Service,Template,User
 def get_site_id(request):
-	C=request;print(C)
-	if not C:return-1
-	E=C.user.id
+	D=request
+	if not D:return-1
+	E=D.user.id
 	if not E:return-1
-	D=User.objects.filter(id=C.user.id)
-	if not D:return-2
-	D=D.get();A=D.agency.filter(is_default=_A)
+	C=User.objects.filter(id=D.user.id)
+	if not C:return-2
+	C=C.get();A=C.agency.filter(is_default=_A)
 	if not A:return-3
 	if len(A)>1:return-31
 	A=A[0];print('agency == ',A);B=Service.objects.filter(agency_id=A.id,is_default=_A)

@@ -2,8 +2,9 @@ _C='defaults'
 _B='condition'
 _A='id'
 import json,os
-from .models import Template,TemplateOwner,ModelList,ModelListSetting
-from menu.models import MenuGroup,Menu
+from allauth.socialaccount.models import SocialApp
+from menu.models import Menu,MenuGroup
+from .models import ModelList,ModelListSetting,Template,TemplateOwner
 def create_template_owner(file_path):
 	A=[]
 	with open(os.path.join(file_path,'template_owner.json'),'r')as C:A=json.load(C)
@@ -33,4 +34,9 @@ def create_model_list_setting(file_path):
 	ModelListSetting.objects.all().delete()
 	for B in A:D,E=ModelListSetting.objects.update_or_create(id=B[_B][_A],defaults=B[_C])
 	print('Done Write data Model List Setting to database!')
-def create_core_data(apps,schema_monitor):A='db';create_template_owner(A);create_template(A);create_menu(A);create_model_list(A);create_model_list_setting(A);print('ALL Done...!')
+def create_social_app(file_path):
+	A=[]
+	with open(os.path.join(file_path,'social_app.json'),'r')as C:A=json.load(C)
+	for B in A:D,E=SocialApp.objects.update_or_create(id=B[_B][_A],defaults=B[_C])
+	print('Done Write data Social App to database!')
+def create_core_data(apps,schema_monitor):A='db';create_template_owner(A);create_template(A);create_menu(A);create_model_list(A);create_model_list_setting(A);create_social_app(A);print('ALL Done...!')

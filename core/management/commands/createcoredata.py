@@ -4,10 +4,11 @@ _C='condition'
 _B='name'
 _A='id'
 import json,os
+from allauth.socialaccount.models import SocialApp
 from django.core.management.base import BaseCommand
 from django.db.models import OuterRef,Subquery
 from menu.models import Menu,MenuTranslation
-from core.models import Template,TemplateOwner,ModelList,ModelListSetting
+from core.models import ModelList,ModelListSetting,Template,TemplateOwner
 class Command(BaseCommand):
 	help='Create or Update File from database to file (This file will use in migrate process, read how to do that?)';file_path='db'
 	def info(A,message):A.stdout.write(message)
@@ -45,4 +46,10 @@ class Command(BaseCommand):
 		if B:
 			with open(os.path.join(C.file_path,'model_list_setting.json'),'w')as G:G.write(json.dumps(B))
 		C.info('Done Write [model_list_setting.json], Total files write: {}'.format(len(B)))
-	def handle(A,*B,**C):A.create_template_owner();A.create_template();A.create_menu();A.create_model_list();A.create_model_list_setting();A.info('All Done ...')
+	def create_social_app(C):
+		B=[];D=SocialApp.objects.all()
+		for A in D:E={_A:A.id};F={'provider':A.provider,_B:A.name,'client_id':A.client_id,'secret':A.secret,'key':A.key};B.append({_C:E,_D:F})
+		if B:
+			with open(os.path.join(C.file_path,'social_app.json'),'w')as G:G.write(json.dumps(B))
+		C.info('Done Write [social_app.json], Total files write: {}'.format(len(B)))
+	def handle(A,*B,**C):A.create_template_owner();A.create_template();A.create_menu();A.create_model_list();A.create_model_list_setting();A.create_social_app();A.info('All Done ...')
