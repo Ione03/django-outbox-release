@@ -1,1 +1,0 @@
-[{"model": "sites.site", "pk": 1, "fields": {"domain": "127.0.0.1:8000", "name": "SMUN I Mataram"}}, {"model": "sites.site", "pk": 2, "fields": {"domain": "localhost:8000", "name": "for testing 2"}}]

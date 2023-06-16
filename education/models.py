@@ -245,8 +245,12 @@ def auto_delete_file_on_change(sender,instance,**E):
 @receiver(post_delete,sender=Menu,dispatch_uid=_M)
 @receiver(post_delete,sender=ModelList,dispatch_uid=_M)
 @receiver(post_delete,sender=ModelListSetting,dispatch_uid=_M)
-def menu_post_delete_handler(sender,**B):A=get_site_id(exposed_request);print('clear cache delete',A);cache.delete(_Y,version=A);cache.delete(_Z,version=A);cache.delete(_a,version=A);cache.delete(_b,version=A);cache.delete(_c,version=A)
+def menu_post_delete_handler(sender,**B):
+	A=get_site_id(exposed_request)
+	if A>0:print('clear cache delete',A);cache.delete(_Y,version=A);cache.delete(_Z,version=A);cache.delete(_a,version=A);cache.delete(_b,version=A);cache.delete(_c,version=A)
 @receiver(post_save,sender=Menu,dispatch_uid=_N)
 @receiver(post_save,sender=ModelList,dispatch_uid=_N)
 @receiver(post_save,sender=ModelListSetting,dispatch_uid=_N)
-def menu_post_save_handler(sender,**B):A=get_site_id(exposed_request);print('clear cache update',A);cache.delete(_Y,version=A);cache.delete(_Z,version=A);cache.delete(_a,version=A);cache.delete(_b,version=A);cache.delete(_c,version=A)
+def menu_post_save_handler(sender,**B):
+	A=get_site_id(exposed_request)
+	if A>0:print('clear cache update',A);cache.delete(_Y,version=A);cache.delete(_Z,version=A);cache.delete(_a,version=A);cache.delete(_b,version=A);cache.delete(_c,version=A)
