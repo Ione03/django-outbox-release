@@ -164,14 +164,14 @@ class PostLoginView(TemplateView):
 	def get(self,request,*args,**kwargs):self.site_id=get_site_id(request);self.template_name='allauth/account/'+'post_login.html';return super(PostLoginView,self).get(request,*(args),**kwargs)
 	def get_context_data(self,*args,**kwargs):context=super(PostLoginView,self).get_context_data(*(args),**kwargs);context[_E]=get_translated_active_page(_A7);return context
 def get_menu_caches(request,caches_name,site_id,active_page,kinds=2):
-	print('siteID',site_id);print('kinds',kinds);caches_timeout=getattr(settings,'CACHES_TIMEOUT',12*60*60);menu=cache.get(f"{caches_name}_{kinds}",version=site_id);menu_class=cache.get(f"{caches_name}_class_{kinds}",version=site_id)
+	print('siteID',site_id);caches_timeout=getattr(settings,'CACHES_TIMEOUT',12*60*60);menu=cache.get(f"{caches_name}_{kinds}",version=site_id);menu_class=cache.get(f"{caches_name}_class_{kinds}",version=site_id)
 	if menu_class is _C:
 		print('load menu from DB');menu_list=[];group_id=0
 		if kinds==2:
 			user_id=request.user.id;obj=User.objects.get(id=user_id);group_id=obj.groups.all()[:1]
 			if group_id:group_id=group_id.get().id
-			print('==',group_id);model_list=[];temp=Template.objects.filter(site__id=site_id,is_frontend=1)
-			if temp:temp=temp.get().id;print('template id = ',temp);model_list=list(ModelListSetting.objects.filter(template_id=temp).values_list('model_list_id',flat=_b));print('model list=',model_list)
+			model_list=[];temp=Template.objects.filter(site__id=site_id,is_frontend=1)
+			if temp:temp=temp.get().id;model_list=list(ModelListSetting.objects.filter(template_id=temp).values_list('model_list_id',flat=_b))
 			if model_list:menu_list=list(ModelList.objects.filter(id__in=model_list).values_list('menu_id',flat=_b))
 		elif kinds==1:
 			group_id=MenuGroup.objects.filter(site_id=site_id,kind=kinds)
@@ -183,7 +183,7 @@ def get_menu_caches(request,caches_name,site_id,active_page,kinds=2):
 class IndexView(TemplateView):
 	site_id=_C
 	def get(self,request,*args,**kwargs):
-		self.site_id=get_site_id(request);print('BASE URL')
+		self.site_id=get_site_id(request)
 		if self.site_id==-1:return redirect(reverse_lazy(_A7))
 		elif self.site_id==-2:return redirect(_At)
 		elif self.site_id==-3 or self.site_id==-31:return redirect(reverse_lazy('user_init_agency'))
@@ -213,9 +213,9 @@ def user_init_service_ajax(request,agency_id,service_id):
 	print('REAL service_id_ajax',agency_id,service_id);mfound=_A;user=User.objects.get(id=request.user.id);agency=user.agency.filter(is_default=_b)[:1]
 	if agency:
 		agency=agency.get()
-		if agency.id==agency_id:print('OKE PARAMETER BENAR');mFound=_b
+		if agency.id==agency_id:print('OKE PARAMETER BENAR');mfound=_b
 	if mfound:
-		service=Service.objects.filter(agency_id=agency.id,is_default=_b)
+		print('clear all is_default service');service=Service.objects.filter(agency_id=agency.id,is_default=_b)
 		for i in service:i.is_default=_A;i.save()
 		service=Service.objects.filter(id=service_id,agency_id=agency.id)
 		if service:service=service.get();service.is_default=_b;service.save()
@@ -228,7 +228,9 @@ def user_init_service(request,agency_id):
 		while not created:
 			site,created=Site.objects.get_or_create(domain=tmp,defaults={_H:name})
 			if not created:tmp=f"{name+str(mcount)}.{main_domain}";mcount+=1
-		subdomain=tmp;print('SUB DOMAIN = ',subdomain);srv=Service.objects.create(site_id=site.id,kind=service,agency_id=agency_id,expired_date=tgl_exp,is_active=_b,is_default=_b);template_id=_C;temp=Template.objects.filter(is_frontend=_b)
+		subdomain=tmp;print('Begin Create SUB DOMAIN = ',subdomain);debug_mode=getattr(settings,'DEBUG',_A)
+		if not debug_mode:create_sub_domain(subdomain)
+		srv=Service.objects.create(site_id=site.id,kind=service,agency_id=agency_id,expired_date=tgl_exp,is_active=_b,is_default=_b);template_id=_C;temp=Template.objects.filter(is_frontend=_b)
 		for i in temp:
 			if service in i.service_option:i.site.add(site);i.save();break
 		temp=Template.objects.filter(is_frontend=_A)

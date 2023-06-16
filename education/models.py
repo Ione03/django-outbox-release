@@ -218,8 +218,9 @@ class Location(BaseAbstractModel,BaseGalleryModel,TranslatableModel):
 	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)));embed=RichTextUploadingField(_('embed'),blank=_A,null=_A,config_name=_W)
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.slug=slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(Location,A).save(*(B),**C)
+def get_upload_path(instance,filename):return os.path.join('credentials',f"{instance.site_id}_{filename}")
 class GoogleCalendar(BaseAbstractModel):
-	site=models.ForeignKey(Site,on_delete=models.CASCADE);cal_name=models.CharField(_('google calendar ID'),max_length=100);cal_credential_path=models.CharField(_('google calendar credentials path'),max_length=255,default='credentials.json',blank=_A);is_default=models.BooleanField(default=_B)
+	site=models.ForeignKey(Site,on_delete=models.CASCADE);cal_name=models.CharField(_('google calendar ID'),max_length=100);file_path_doc=models.FileField(verbose_name=_('google calendar credentials path'),upload_to=get_upload_path,blank=_A,null=_A);is_default=models.BooleanField(default=_B)
 	class Meta:verbose_name=_(_X);verbose_name_plural=_('google calendars')
 	def __str__(A):return A.cal_name
 	def save(A,*B,**C):A.site_id=get_site_id(exposed_request);super(GoogleCalendar,A).save(*(B),**C)
@@ -229,11 +230,13 @@ class GoogleCalendarDetail(BaseAbstractModel):
 	def __str__(A):return f"{A.cal_month}/{A.cal_year}"
 	def save(A,*B,**C):A.site_id=get_site_id(exposed_request);super(GoogleCalendarDetail,A).save(*(B),**C)
 @receiver(models.signals.post_delete,sender=Document)
+@receiver(models.signals.post_delete,sender=GoogleCalendar)
 def auto_delete_file_on_delete(sender,instance,**B):
 	A=instance
 	if A.file_path_doc:
 		if os.path.isfile(A.file_path_doc.path):os.remove(A.file_path_doc.path)
 @receiver(models.signals.pre_save,sender=Document)
+@receiver(models.signals.pre_save,sender=GoogleCalendar)
 def auto_delete_file_on_change(sender,instance,**E):
 	C=sender;A=instance
 	if not A.pk:return _B

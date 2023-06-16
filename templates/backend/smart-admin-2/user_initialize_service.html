@@ -188,7 +188,7 @@
     <script>
         function on_click_service(param) {
             // alert('ok');
-            // alert(param);
+            alert(param);
 
             $.ajax({
                 url: param,
@@ -198,8 +198,9 @@
 
                     // APAPUN RESULT, kembalikan ke dashboard
                     // if (result['result'])
+                    console.log(result);
                     window.location.href = '/dashboard/';
-                        // console.log(param);
+                        
                         // alert(param);
                         // window.location.href = param.replace('agency-ajax','service');
                         // window.location.href = param;
