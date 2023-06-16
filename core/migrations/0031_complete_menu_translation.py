@@ -10,5 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(auto_insert_core_data) 
+        migrations.RunPython(create_core_data) 
     ]

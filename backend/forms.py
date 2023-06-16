@@ -37,7 +37,6 @@ from django.contrib.auth.forms import UserCreationForm
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 class TagsForm(TranslatableModelForm):
-	captcha=ReCaptchaField(widget=ReCaptchaV2Checkbox)
 	class Meta:model=Tags;fields=[_E,_B]
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_E,css_class=_A),Column(_B,css_class=_A)))
 class WhyUsForm(TranslatableModelForm):
