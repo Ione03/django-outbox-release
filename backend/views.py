@@ -131,6 +131,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.cache import cache
+from django.db import transaction
 from django.db.models import Count,F,OuterRef,Subquery
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404,redirect,render
@@ -176,7 +177,8 @@ def get_menu_caches(request,caches_name,site_id,active_page,kinds=2):
 		elif kinds==1:
 			group_id=MenuGroup.objects.filter(site_id=site_id,kind=kinds)
 			if group_id:group_id=group_id[0].id
-		menu_class=Menus(group_id,kinds,menu_list);cache.set(f"{caches_name}_class_{kinds}",menu_class,timeout=caches_timeout,version=site_id)
+		if group_id:menu_class=Menus(group_id,kinds,menu_list);cache.set(f"{caches_name}_class_{kinds}",menu_class,timeout=caches_timeout,version=site_id)
+		else:print('Group ID Not found!')
 	else:print('load menu from Cache')
 	if menu is _C:menu=menu_class.get_menus();cache.set(f"{caches_name}_{kinds}",menu,timeout=caches_timeout,version=site_id)
 	active_page=active_page.replace('_',' ');menu_active=menu_class.get_active_menu_by_name(active_page);return{'my_menu':menu,'my_active':menu_active}
@@ -191,6 +193,7 @@ class IndexView(TemplateView):
 		else:print('GOTO INDEX DASHBOARD');template=get_template(self.site_id,is_frontend=_A);self.template_name=template+'index.html'
 		return super(IndexView,self).get(request,*(args),**kwargs)
 	def get_context_data(self,*args,**kwargs):context=super(IndexView,self).get_context_data(*(args),**kwargs);active_page=get_translated_active_page(_A7);context[_E]=active_page;menu=get_menu_caches(self.request,_D,self.site_id,active_page);context.update(menu);return context
+@transaction.atomic
 def user_init_agency(request):
 	context={};template='backend/smart-admin-2/user_initialize_agency.html';user=User.objects.filter(id=request.user.id)
 	if user:
@@ -221,6 +224,7 @@ def user_init_service_ajax(request,agency_id,service_id):
 		if service:service=service.get();service.is_default=_b;service.save()
 		return JsonResponse({_AY:_b},safe=_A)
 	return JsonResponse({_AY:_A},safe=_A)
+@transaction.atomic
 def user_init_service(request,agency_id):
 	context={};template='backend/smart-admin-2/user_initialize_service.html';context['service_opt']=OptServiceType.choices;service_existing=Service.objects.filter(agency_id=agency_id).order_by('kind');context[_o]=service_existing;context[_Au]=agency_id
 	if request.method==_I:
@@ -236,7 +240,9 @@ def user_init_service(request,agency_id):
 		temp=Template.objects.filter(is_frontend=_A)
 		for i in temp:
 			if service in i.service_option:i.site.add(site);i.save();break
-		print('subdomain',subdomain);group,created=Group.objects.get_or_create(name=subdomain);print(group,created);menu_group,created=MenuGroup.objects.get_or_create(site_id=site.id,group_id=group.id);group,created=Group.objects.get_or_create(name='Admin');user.groups.add(group);user.save();return redirect(reverse_lazy(_A7))
+		print('subdomain',subdomain);group,created=Group.objects.get_or_create(name=subdomain);print(group,created)
+		if created:menu_group,created=MenuGroup.objects.get_or_create(site_id=site.id,group_id=group.id)
+		group,created=Group.objects.get_or_create(name='Admin');user.groups.add(group);user.save();return redirect(reverse_lazy(_A7))
 	return render(request,template,context)
 def service_change_ajax(request,service_id):
 	print('service_id=',service_id);lst=[];temp=Template.objects.filter(is_frontend=_b)
