@@ -182,7 +182,9 @@ def get_menu_caches(request,caches_name,site_id,active_page,kinds=2):
 	else:print('load menu from Cache')
 	if menu is _C:
 		if menu_class:menu=menu_class.get_menus();cache.set(f"{caches_name}_{kinds}",menu,timeout=caches_timeout,version=site_id)
-	active_page=active_page.replace('_',' ');menu_active=menu_class.get_active_menu_by_name(active_page);return{'my_menu':menu,'my_active':menu_active}
+	if menu_class:active_page=active_page.replace('_',' ');menu_active=menu_class.get_active_menu_by_name(active_page)
+	else:menu_active=_C
+	return{'my_menu':menu,'my_active':menu_active}
 class IndexView(TemplateView):
 	site_id=_C
 	def get(self,request,*args,**kwargs):
