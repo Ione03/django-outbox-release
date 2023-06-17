@@ -2,7 +2,7 @@
 # server settings : niagahoster
 # change manually
 
-DEBUG=False
+DEBUG=True
 UNDER_CONSTRUCTION=False
 
 # Change between mysql or sqlite3 

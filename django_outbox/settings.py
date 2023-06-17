@@ -1,4 +1,3 @@
-_a='localhost:8000'
 _Z='MAIN_DOMAIN'
 _Y='secret'
 _X='client_id'
@@ -105,8 +104,7 @@ HITCOUNT_KEEP_HIT_IN_DATABASE={'months':3}
 HITCOUNT_KEEP_HIT_ACTIVE={'minutes':1}
 AUTHENTICATION_BACKENDS=['allauth.account.auth_backends.AuthenticationBackend']
 tmp=key.get(_Z)
-if DEBUG:MAIN_DOMAIN=_a
-else:MAIN_DOMAIN=key[_Z]if tmp else _a
+MAIN_DOMAIN=key[_Z]if tmp else'127.0.0.1:8000'
 CACHES_TIMEOUT=24*60*60
 SENDGRID_API_KEY='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'
 RECAPTCHA_PUBLIC_KEY='6Le_ixcmAAAAABbCXol2K5HaE0vY906KKFrFm0PX'
