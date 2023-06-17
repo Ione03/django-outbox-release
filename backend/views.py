@@ -180,7 +180,8 @@ def get_menu_caches(request,caches_name,site_id,active_page,kinds=2):
 		if group_id:menu_class=Menus(group_id,kinds,menu_list);cache.set(f"{caches_name}_class_{kinds}",menu_class,timeout=caches_timeout,version=site_id)
 		else:print('Group ID Not found!')
 	else:print('load menu from Cache')
-	if menu is _C:menu=menu_class.get_menus();cache.set(f"{caches_name}_{kinds}",menu,timeout=caches_timeout,version=site_id)
+	if menu is _C:
+		if menu_class:menu=menu_class.get_menus();cache.set(f"{caches_name}_{kinds}",menu,timeout=caches_timeout,version=site_id)
 	active_page=active_page.replace('_',' ');menu_active=menu_class.get_active_menu_by_name(active_page);return{'my_menu':menu,'my_active':menu_active}
 class IndexView(TemplateView):
 	site_id=_C
