@@ -21,8 +21,8 @@ _J='link'
 _I=None
 _H='max'
 _G='photo'
-_F='content'
-_E='site'
+_F='site'
+_E='content'
 _D='title'
 _C='--'
 _B=False
@@ -75,35 +75,35 @@ class Categories(BaseAbstractModel,TranslatableModel):
 	def __str__(A):return A.name
 	def save(A,*B,**C):A.slug=slugify(A.name)+_C+str(A.site_id);A.site_id=get_site_id(exposed_request);super(Categories,A).save(*(B),**C)
 class BaseContentModel(models.Model):
-	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_E));admin=models.ForeignKey(User,on_delete=models.PROTECT);view_count=models.PositiveIntegerField(_('view count'),default=0,editable=_B);share_count=models.PositiveIntegerField(_('share count'),default=0,editable=_B);slug=models.SlugField(max_length=255,default='',unique=_A,blank=_A,editable=_B);photo=GenericRelation(Photo,verbose_name=_(_G));tags=models.ManyToManyField(Tags,verbose_name=_('tags'));status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
+	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_F));admin=models.ForeignKey(User,on_delete=models.PROTECT);view_count=models.PositiveIntegerField(_('view count'),default=0,editable=_B);share_count=models.PositiveIntegerField(_('share count'),default=0,editable=_B);slug=models.SlugField(max_length=255,default='',unique=_A,blank=_A,editable=_B);photo=GenericRelation(Photo,verbose_name=_(_G));tags=models.ManyToManyField(Tags,verbose_name=_('tags'));status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
 	class Meta:app_label=_P;abstract=_A
 class Announcement(BaseAbstractModel,BaseContentModel,TranslatableModel):
-	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)),content=encrypt(RichTextUploadingField(_(_F),blank=_A,null=_A)));categories=models.ForeignKey(Categories,on_delete=models.PROTECT);word_count=models.PositiveIntegerField(default=0,blank=_A,editable=_B);reading_time=models.PositiveIntegerField(default=0,blank=_A,editable=_B);priority=models.SmallIntegerField(choices=OptPriority.choices,default=OptPriority.LOW,verbose_name=_(_Q))
+	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)),content=encrypt(RichTextUploadingField(_(_E),blank=_A,null=_A)));categories=models.ForeignKey(Categories,on_delete=models.PROTECT);word_count=models.PositiveIntegerField(default=0,blank=_A,editable=_B);reading_time=models.PositiveIntegerField(default=0,blank=_A,editable=_B);priority=models.SmallIntegerField(choices=OptPriority.choices,default=OptPriority.LOW,verbose_name=_(_Q))
 	class Meta:verbose_name=_('announcement');verbose_name_plural=_('announcements')
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.slug=slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;A.word_count=word_count(A.content);A.reading_time=reading_time(A.word_count);super(Announcement,A).save(*(B),**C)
 class News(BaseAbstractModel,BaseContentModel,TranslatableModel):
-	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)),content=encrypt(RichTextUploadingField(_(_F),blank=_A,null=_A)));categories=models.ForeignKey(Categories,on_delete=models.PROTECT);word_count=models.PositiveIntegerField(default=0,blank=_A,editable=_B);reading_time=models.PositiveIntegerField(default=0,blank=_A,editable=_B)
+	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)),content=encrypt(RichTextUploadingField(_(_E),blank=_A,null=_A)));categories=models.ForeignKey(Categories,on_delete=models.PROTECT);word_count=models.PositiveIntegerField(default=0,blank=_A,editable=_B);reading_time=models.PositiveIntegerField(default=0,blank=_A,editable=_B)
 	class Meta:verbose_name=_('news');verbose_name_plural=_('news')
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.slug=slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;A.word_count=word_count(A.content);A.reading_time=reading_time(A.word_count);super(News,A).save(*(B),**C)
 class Article(BaseAbstractModel,BaseContentModel,TranslatableModel):
-	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)),content=encrypt(RichTextUploadingField(_(_F),blank=_A,null=_A)));categories=models.ForeignKey(Categories,on_delete=models.PROTECT);word_count=models.PositiveIntegerField(default=0,blank=_A,editable=_B);reading_time=models.PositiveIntegerField(default=0,blank=_A,editable=_B);is_header_text=models.BooleanField(default=_B)
+	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)),content=encrypt(RichTextUploadingField(_(_E),blank=_A,null=_A)));categories=models.ForeignKey(Categories,on_delete=models.PROTECT);word_count=models.PositiveIntegerField(default=0,blank=_A,editable=_B);reading_time=models.PositiveIntegerField(default=0,blank=_A,editable=_B);is_header_text=models.BooleanField(default=_B)
 	class Meta:verbose_name=_('article');verbose_name_plural=_('articles')
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.slug=slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;A.word_count=word_count(A.content);A.reading_time=reading_time(A.word_count);super(Article,A).save(*(B),**C)
 class Events(BaseAbstractModel,BaseContentModel,TranslatableModel):
-	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)),content=encrypt(RichTextUploadingField(_(_F),blank=_A,null=_A)),location=encrypt(models.CharField(_('location'),max_length=255,null=_A,blank=_A)));categories=models.ForeignKey(Categories,on_delete=models.PROTECT);word_count=models.PositiveIntegerField(default=0,blank=_A,editable=_B);reading_time=models.PositiveIntegerField(default=0,blank=_A,editable=_B);date=models.DateField(_('date'));time=models.TimeField(_('time'))
+	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)),content=encrypt(RichTextUploadingField(_(_E),blank=_A,null=_A)),location=encrypt(models.CharField(_('location'),max_length=255,null=_A,blank=_A)));categories=models.ForeignKey(Categories,on_delete=models.PROTECT);word_count=models.PositiveIntegerField(default=0,blank=_A,editable=_B);reading_time=models.PositiveIntegerField(default=0,blank=_A,editable=_B);date=models.DateField(_('date'));time=models.TimeField(_('time'))
 	class Meta:verbose_name=_('event');verbose_name_plural=_('events')
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.slug=slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;A.word_count=word_count(A.content);A.reading_time=reading_time(A.word_count);super(Events,A).save(*(B),**C)
 class SlideShow(BaseAbstractModel,TranslatableModel):
-	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_E));admin=models.ForeignKey(User,on_delete=models.PROTECT);photo=GenericRelation(Photo);translations=TranslatedFields(title=models.CharField(_(_D),max_length=500),sub_title=models.CharField(_(_R),max_length=500,null=_A,blank=_A),content=encrypt(RichTextUploadingField(_(_F),blank=_A,null=_A)));slug=models.SlugField(max_length=255,default='',unique=_A,blank=_A,editable=_B);status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
+	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_F));admin=models.ForeignKey(User,on_delete=models.PROTECT);photo=GenericRelation(Photo);translations=TranslatedFields(title=models.CharField(_(_D),max_length=500),sub_title=models.CharField(_(_R),max_length=500,null=_A,blank=_A),content=encrypt(RichTextUploadingField(_(_E),blank=_A,null=_A)));slug=models.SlugField(max_length=255,default='',unique=_A,blank=_A,editable=_B);status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
 	class Meta:verbose_name=_('slide show');verbose_name_plural=_('slides show')
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.slug=slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(SlideShow,A).save(*(B),**C)
 class HeroImage(BaseAbstractModel,TranslatableModel):
-	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_E));admin=models.ForeignKey(User,on_delete=models.PROTECT);photo=GenericRelation(Photo);translations=TranslatedFields(title=models.CharField(_(_D),max_length=100),sub_title=models.CharField(_(_R),max_length=500));status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
+	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_F));admin=models.ForeignKey(User,on_delete=models.PROTECT);photo=GenericRelation(Photo);translations=TranslatedFields(title=models.CharField(_(_D),max_length=100),sub_title=models.CharField(_(_R),max_length=500));status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
 	class Meta:verbose_name=_(_S);verbose_name_plural=_(_S)
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(HeroImage,A).save(*(B),**C)
@@ -118,28 +118,28 @@ class WhyUs(BaseAbstractModel,TranslatableModel):
 	def __str__(A):return A.icon
 	def save(A,*B,**C):A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(WhyUs,A).save(*(B),**C)
 class Greeting(BaseAbstractModel,TranslatableModel):
-	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_E));admin=models.ForeignKey(User,on_delete=models.PROTECT);photo=GenericRelation(Photo,verbose_name=_(_G));translations=TranslatedFields(title=models.CharField(_(_D),max_length=500),content=encrypt(RichTextUploadingField(_(_F),blank=_A,null=_A)),name=encrypt(models.CharField(_('greeting name'),max_length=255,null=_A,blank=_A)),designation=encrypt(models.CharField(_('designation'),max_length=255,null=_A,blank=_A)));slug=models.SlugField(max_length=255,default='',unique=_A,blank=_A,editable=_B);view_count=models.PositiveIntegerField(default=0,editable=_B);status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
+	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_F));admin=models.ForeignKey(User,on_delete=models.PROTECT);photo=GenericRelation(Photo,verbose_name=_(_G));translations=TranslatedFields(title=models.CharField(_(_D),max_length=500),content=encrypt(RichTextUploadingField(_(_E),blank=_A,null=_A)),name=encrypt(models.CharField(_('greeting name'),max_length=255,null=_A,blank=_A)),designation=encrypt(models.CharField(_('designation'),max_length=255,null=_A,blank=_A)));slug=models.SlugField(max_length=255,default='',unique=_A,blank=_A,editable=_B);view_count=models.PositiveIntegerField(default=0,editable=_B);status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
 	class Meta:verbose_name=_('greeting');verbose_name_plural=_('greetings')
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.slug=slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(Greeting,A).save(*(B),**C)
 class Pages(BaseAbstractModel,BaseContentModel,TranslatableModel):
-	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)),content=encrypt(RichTextUploadingField(_(_F),blank=_A,null=_A)));menu=models.ForeignKey(Menu,on_delete=models.PROTECT,verbose_name='Access From Menu',blank=_A);word_count=models.PositiveIntegerField(default=0,blank=_A,editable=_B);reading_time=models.PositiveIntegerField(default=0,blank=_A,editable=_B)
+	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)),content=encrypt(RichTextUploadingField(_(_E),blank=_A,null=_A)));menu=models.ForeignKey(Menu,on_delete=models.PROTECT,verbose_name='Access From Menu',blank=_A);word_count=models.PositiveIntegerField(default=0,blank=_A,editable=_B);reading_time=models.PositiveIntegerField(default=0,blank=_A,editable=_B)
 	class Meta:verbose_name=_('page');verbose_name_plural=_('pages')
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.slug=slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;A.word_count=word_count(A.content);A.reading_time=reading_time(A.word_count);super(Pages,A).save(*(B),**C)
 class SocialMedia(BaseAbstractModel):
-	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_E));kind=models.SmallIntegerField(choices=OptSocialMediaKinds.choices,verbose_name=_('kind'));link=encrypt(models.URLField(_(_J),max_length=255));status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
+	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_F));kind=models.SmallIntegerField(choices=OptSocialMediaKinds.choices,verbose_name=_('kind'));link=encrypt(models.URLField(_(_J),max_length=255));status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
 	def __str__(A):return '{} - {}'.format(A.site.name,A.kind)
 	def save(A,*B,**C):A.site_id=get_site_id(exposed_request);super(SocialMedia,A).save(*(B),**C)
 class BaseGalleryModel(models.Model):
-	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_E));admin=models.ForeignKey(User,on_delete=models.PROTECT);view_count=models.PositiveIntegerField(default=0,editable=_B);slug=models.SlugField(max_length=255,default='',unique=_A,blank=_A);status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
+	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_F));admin=models.ForeignKey(User,on_delete=models.PROTECT);view_count=models.PositiveIntegerField(default=0,editable=_B);slug=models.SlugField(max_length=255,default='',unique=_A,blank=_A);status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
 	class Meta:app_label=_P;abstract=_A
 class PhotoGallery(BaseAbstractModel,BaseGalleryModel,TranslatableModel):
-	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)),content=encrypt(RichTextUploadingField(_(_F),blank=_A,null=_A)));is_header_text=models.BooleanField(default=_B);order_item=models.PositiveIntegerField(default=0);photo=GenericRelation(Photo,verbose_name=_(_G))
+	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)),content=encrypt(RichTextUploadingField(_(_E),blank=_A,null=_A)));is_header_text=models.BooleanField(default=_B);order_item=models.PositiveIntegerField(default=0);photo=GenericRelation(Photo,verbose_name=_(_G))
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.slug=slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(PhotoGallery,A).save(*(B),**C)
 class Fasilities(BaseAbstractModel,BaseGalleryModel,TranslatableModel):
-	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)),content=encrypt(RichTextUploadingField(_(_F),blank=_A,null=_A)));is_header_text=models.BooleanField(default=_B);order_item=models.PositiveIntegerField(default=0);photo=GenericRelation(Photo,verbose_name=_(_G),null=_A,blank=_A)
+	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)),content=encrypt(RichTextUploadingField(_(_E),blank=_A,null=_A)));is_header_text=models.BooleanField(default=_B);order_item=models.PositiveIntegerField(default=0);photo=GenericRelation(Photo,verbose_name=_(_G),null=_A,blank=_A)
 	def __str__(A):return A.title
 	def save(A,*C,**D):
 		A.slug=slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id
@@ -148,8 +148,18 @@ class Fasilities(BaseAbstractModel,BaseGalleryModel,TranslatableModel):
 			if B:
 				if not B[_H]is _I:A.order_item=B[_H]+1
 		super(Fasilities,A).save(*(C),**D)
+class Offers(BaseAbstractModel,BaseGalleryModel,TranslatableModel):
+	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)),content=encrypt(RichTextUploadingField(_(_E),blank=_A,null=_A)));is_header_text=models.BooleanField(default=_B);order_item=models.PositiveIntegerField(default=0);photo=GenericRelation(Photo,verbose_name=_(_G),null=_A,blank=_A)
+	def __str__(A):return A.title
+	def save(A,*C,**D):
+		A.slug=slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id
+		if A.order_item==0:
+			B=Offers.objects.filter(site_id=get_site_id(exposed_request)).aggregate(max=Max(_K))
+			if B:
+				if not B[_H]is _I:A.order_item=B[_H]+1
+		super(Offers,A).save(*(C),**D)
 class HowItWorks(BaseAbstractModel,BaseGalleryModel,TranslatableModel):
-	icon=models.CharField(_('icon'),max_length=100,null=_A,blank=_A);translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=100)),content=encrypt(models.CharField(_(_F),max_length=500)));is_header_text=models.BooleanField(default=_B);order_item=models.PositiveIntegerField(default=0);photo=GenericRelation(Photo,verbose_name=_(_G),null=_A,blank=_A)
+	icon=models.CharField(_('icon'),max_length=100,null=_A,blank=_A);translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=100)),content=encrypt(models.CharField(_(_E),max_length=500)));is_header_text=models.BooleanField(default=_B);order_item=models.PositiveIntegerField(default=0);photo=GenericRelation(Photo,verbose_name=_(_G),null=_A,blank=_A)
 	def __str__(A):return A.title
 	def save(A,*C,**D):
 		A.slug=slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id
@@ -159,7 +169,7 @@ class HowItWorks(BaseAbstractModel,BaseGalleryModel,TranslatableModel):
 				if not B[_H]is _I:A.order_item=B[_H]+1
 		super(HowItWorks,A).save(*(C),**D)
 class Product(BaseAbstractModel,BaseGalleryModel,TranslatableModel):
-	translations=TranslatedFields(name=encrypt(models.CharField(_(_L),max_length=100)),title=encrypt(models.CharField(_(_D),max_length=100)),content=encrypt(RichTextUploadingField(_(_F),blank=_A,null=_A)));is_header_text=models.BooleanField(default=_B);order_item=models.PositiveIntegerField(default=0);photo=GenericRelation(Photo,verbose_name=_(_G),null=_A,blank=_A)
+	translations=TranslatedFields(name=encrypt(models.CharField(_(_L),max_length=100)),title=encrypt(models.CharField(_(_D),max_length=100)),content=encrypt(RichTextUploadingField(_(_E),blank=_A,null=_A)));is_header_text=models.BooleanField(default=_B);order_item=models.PositiveIntegerField(default=0);photo=GenericRelation(Photo,verbose_name=_(_G),null=_A,blank=_A)
 	def __str__(A):return A.name
 	def save(A,*C,**D):
 		A.slug=slugify(A.name)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id
@@ -169,11 +179,11 @@ class Product(BaseAbstractModel,BaseGalleryModel,TranslatableModel):
 				if not B[_H]is _I:A.order_item=B[_H]+1
 		super(Product,A).save(*(C),**D)
 class Cart(BaseAbstractModel):
-	product=models.ForeignKey(Product,on_delete=models.CASCADE,verbose_name=_(_V));qty=models.PositiveIntegerField(default=1,blank=_A,editable=_B);site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_E));admin=models.ForeignKey(User,on_delete=models.PROTECT);status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
+	product=models.ForeignKey(Product,on_delete=models.CASCADE,verbose_name=_(_V));qty=models.PositiveIntegerField(default=1,blank=_A,editable=_B);site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_F));admin=models.ForeignKey(User,on_delete=models.PROTECT);status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
 	def __str__(A):return A.product.name
 	def save(A,*B,**C):A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(Cart,A).save(*(B),**C)
 class Purchasing(BaseAbstractModel):
-	product=models.ForeignKey(Product,on_delete=models.CASCADE,verbose_name=_(_V));qty=models.PositiveIntegerField(default=1,blank=_A,editable=_B);site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_E));admin=models.ForeignKey(User,on_delete=models.PROTECT);status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
+	product=models.ForeignKey(Product,on_delete=models.CASCADE,verbose_name=_(_V));qty=models.PositiveIntegerField(default=1,blank=_A,editable=_B);site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_F));admin=models.ForeignKey(User,on_delete=models.PROTECT);status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
 	def __str__(A):return A.product.name
 	def save(A,*B,**C):A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(Cart,A).save(*(B),**C)
 def save_embed_video(embed):
@@ -194,19 +204,19 @@ class VideoGallery(BaseAbstractModel,BaseGalleryModel,TranslatableModel):
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.slug=slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;A.embed_video=save_embed_video(A.embed);super(VideoGallery,A).save(*(B),**C)
 class RelatedLink(BaseAbstractModel,TranslatableModel):
-	site=models.ForeignKey(Site,on_delete=models.CASCADE,blank=_A,verbose_name=_(_E));link=encrypt(models.URLField(_(_J),max_length=255));translations=TranslatedFields(name=encrypt(models.CharField(_(_L),max_length=150)));status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
+	site=models.ForeignKey(Site,on_delete=models.CASCADE,blank=_A,verbose_name=_(_F));link=encrypt(models.URLField(_(_J),max_length=255));translations=TranslatedFields(name=encrypt(models.CharField(_(_L),max_length=150)));status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
 	def __str__(A):return A.name
 	def save(A,*B,**C):A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(RelatedLink,A).save(*(B),**C)
 class Document(BaseAbstractModel,TranslatableModel):
-	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_E));admin=models.ForeignKey(User,on_delete=models.PROTECT);file_path_doc=models.FileField(verbose_name=_('file path Document'));translations=TranslatedFields(name=encrypt(models.CharField(_(_L),max_length=150)),content=encrypt(RichTextUploadingField(_(_F),blank=_A,null=_A)));categories=models.ForeignKey(Categories,on_delete=models.PROTECT);word_count=models.PositiveIntegerField(default=0,blank=_A,editable=_B);reading_time=models.PositiveIntegerField(default=0,blank=_A,editable=_B);size=models.BigIntegerField(_('size'),null=_A,blank=_A,default=0,editable=_B);hits=models.IntegerField(_('hits'),null=_A,blank=_A,default=0,editable=_B);status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
+	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_F));admin=models.ForeignKey(User,on_delete=models.PROTECT);file_path_doc=models.FileField(verbose_name=_('file path Document'));translations=TranslatedFields(name=encrypt(models.CharField(_(_L),max_length=150)),content=encrypt(RichTextUploadingField(_(_E),blank=_A,null=_A)));categories=models.ForeignKey(Categories,on_delete=models.PROTECT);word_count=models.PositiveIntegerField(default=0,blank=_A,editable=_B);reading_time=models.PositiveIntegerField(default=0,blank=_A,editable=_B);size=models.BigIntegerField(_('size'),null=_A,blank=_A,default=0,editable=_B);hits=models.IntegerField(_('hits'),null=_A,blank=_A,default=0,editable=_B);status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
 	def __str__(A):return A.name
 	def save(A,*B,**C):A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;A.word_count=word_count(A.content);A.reading_time=reading_time(A.word_count);super(Document,A).save(*(B),**C)
 class Popup(BaseAbstractModel,TranslatableModel):
-	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_E));admin=models.ForeignKey(User,on_delete=models.PROTECT);translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)));link=encrypt(models.URLField(_(_J),max_length=255,null=_A,blank=_A));photo=GenericRelation(Photo,verbose_name=_(_G));status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
+	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_F));admin=models.ForeignKey(User,on_delete=models.PROTECT);translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)));link=encrypt(models.URLField(_(_J),max_length=255,null=_A,blank=_A));photo=GenericRelation(Photo,verbose_name=_(_G));status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(Popup,A).save(*(B),**C)
 class Banner(BaseAbstractModel):
-	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_E));admin=models.ForeignKey(User,on_delete=models.PROTECT);photo=GenericRelation(Photo,verbose_name=_(_G));link=models.URLField(max_length=255,null=_A,blank=_A);priority=models.SmallIntegerField(choices=OptPriority.choices,default=OptPriority.LOW,verbose_name=_(_Q));status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
+	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_F));admin=models.ForeignKey(User,on_delete=models.PROTECT);photo=GenericRelation(Photo,verbose_name=_(_G));link=models.URLField(max_length=255,null=_A,blank=_A);priority=models.SmallIntegerField(choices=OptPriority.choices,default=OptPriority.LOW,verbose_name=_(_Q));status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
 	def __str__(A):
 		B=''
 		if A.priority==1:B='High'

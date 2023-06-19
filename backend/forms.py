@@ -57,6 +57,10 @@ class FasilitiesForm(TranslatableModelForm):
 	dim_w=forms.CharField(widget=forms.HiddenInput(),initial=870);dim_h=forms.CharField(widget=forms.HiddenInput(),initial=500)
 	class Meta:model=Fasilities;fields=[_D,_F,_L,_J,_B]
 	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column(_F,css_class=_A),Column(_J,css_class=_A),Column(_B,css_class=_A)))
+class OffersForm(TranslatableModelForm):
+	dim_w=forms.CharField(widget=forms.HiddenInput(),initial=870);dim_h=forms.CharField(widget=forms.HiddenInput(),initial=500)
+	class Meta:model=Offers;fields=[_D,_F,_L,_J,_B]
+	def __init__(self,*args,**kwargs):super().__init__(*(args),**kwargs);self.helper=FormHelper();self.helper.form_method=_C;self.helper.layout=Layout(Row(Column(_D,css_class=_A),Column(_F,css_class=_A),Column(_J,css_class=_A),Column(_B,css_class=_A)))
 class NewsForm(TranslatableModelForm):
 	dim_w=forms.CharField(widget=forms.HiddenInput(),initial=870);dim_h=forms.CharField(widget=forms.HiddenInput(),initial=500)
 	class Meta:model=News;fields=[_D,_F,_G,_H,_B]
