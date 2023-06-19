@@ -135,7 +135,7 @@ class BaseGalleryModel(models.Model):
 	site=models.ForeignKey(Site,on_delete=models.CASCADE,verbose_name=_(_E));admin=models.ForeignKey(User,on_delete=models.PROTECT);view_count=models.PositiveIntegerField(default=0,editable=_B);slug=models.SlugField(max_length=255,default='',unique=_A,blank=_A);status=models.SmallIntegerField(choices=OptStatusPublish.choices,default=OptStatusPublish.PUBLISHED)
 	class Meta:app_label=_P;abstract=_A
 class PhotoGallery(BaseAbstractModel,BaseGalleryModel,TranslatableModel):
-	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)));photo=GenericRelation(Photo,verbose_name=_(_G))
+	translations=TranslatedFields(title=encrypt(models.CharField(_(_D),max_length=500)),content=encrypt(RichTextUploadingField(_(_F),blank=_A,null=_A)));is_header_text=models.BooleanField(default=_B);order_item=models.PositiveIntegerField(default=0);photo=GenericRelation(Photo,verbose_name=_(_G))
 	def __str__(A):return A.title
 	def save(A,*B,**C):A.slug=slugify(A.title)+_C+str(A.id);A.site_id=get_site_id(exposed_request);A.admin_id=exposed_request.user.id;super(PhotoGallery,A).save(*(B),**C)
 class Fasilities(BaseAbstractModel,BaseGalleryModel,TranslatableModel):

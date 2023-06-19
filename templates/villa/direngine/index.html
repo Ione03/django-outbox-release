@@ -156,38 +156,40 @@
 {% endblock %}
 
 {% block fasilities %}
+    
     <section class="ftco-section ftco-destination" id="about">
         <div class="container">
-            <div class="row justify-content-start ">
-            <div class="col-md-7 heading-section ftco-animate">
-                <span class="subheading">About</span>
-            <h2 class="mb-4"><strong>Narvik Villa</strong> Fasilities</h2>
-            
-            </div>
-            
+            {% for i in fasilities|slice:":1" %}
+                
+                <div class="row justify-content-start ">
+                    <div class="col-md-7 heading-section ftco-animate">
+                        <span class="subheading">About</span>
+                        <h2 class="mb-4"><strong>Narvik Villa</strong> {{i.title}}</h2>
+                    
+                    </div>    
+                </div>
+                <div class="row justify-content-center mb-5 ">
+                    <div class="col-md-12">
+                        
+                        {{i.content|safe}}
+                    
+                    </div>
+                </div>
+            {% endfor %}
 
-            </div>
-            <div class="row justify-content-center mb-5 ">
-            <div class="col-md-12">
-                <p>
-                    Situated next to Krandangan National Park, you will be nestled in a beautiful valley surrounded by the lush forest. The villa is perfect for a big family or a group of friend. Only 5 minutes by a car or scooter and 20 minutes on a walk to the beach. Our 4-bedroom spacious villa offers an incredible nature view, a private pool, a BBQ grill, a fully equipped kitchen, an advanced Jura coffee machine, PlayStation 4, Netflix, karaoke, and free WIFI available in all areas. Breakfast is served for free. Lunch and dinner can be ordered outside by our staff or prepared by our professional chef at the villa (surcharge). Rent a car or scooter and a half or full day excursion can be organized by request.
-                </p>                
-            </div>
-
-            </div>
             <div class="bod-modal" data-interval="4" data-title="center">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="destination-slider owl-carousel ftco-animate">
 
                             
-
+                            {% for i in fasilities|slice:"1:" %}
                                 <div class="item">
                                     <div class="destination">
-                                    
-                                        <a href="{% static 'villa/direngine/images/destination-1.jpg' %}" 
+
+                                        <a href="/media/{{i.file_path}}" 
                                             class="img d-flex justify-content-center align-items-center image-popup-no-margins" 
-                                            style="background-image: url({% static 'villa/direngine/images/destination-1.jpg' %});">
+                                            style="background-image: url('/media/{{i.file_path}}')">
                                             <div class="icon d-flex justify-content-center align-items-center">
                                                 <span class="icon-search2"></span>
                                             </div>
@@ -195,13 +197,16 @@
                                         </a>
                                         
                                         <div class="text p-3">
-                                            <h3><a href="#">Main Room</a></h3>
-                                            <span class="listing">There are two buildings, a large main building and a smaller studio.</span>
+                                            <h3><a href="#">{{i.title}}</a></h3>
+                                            <span class="listing">{{i.content|safe}}</span>
                                         </div>
                                     
                                     </div>
                                 </div>
-                                <div class="item">
+
+                            {% endfor %}
+
+                                <!-- <div class="item">
                                     <div class="destination">
                                         <a href="{% static 'villa/direngine/images/destination-2.jpg' %}" 
                                             class="img d-flex justify-content-center align-items-center image-popup-no-margins" 
@@ -260,7 +265,7 @@
                                             <span class="listing">The pool is the nicest place for relaxation.</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             
 
                             <!-- <div class="item">
@@ -287,103 +292,113 @@
 {% block gallery %}
     <section class="ftco-section ftco-destination" id="gallery">
         <div class="container">
-            <div class="row justify-content-start ">
-            <div class="col-md-7 heading-section ftco-animate">
-                <span class="subheading">Gallery</span>
-            <h2 class="mb-4"><strong>Narvik Villa</strong> Gallery</h2>
-            
-            </div>
-            
 
-            </div>
-            <div class="row justify-content-center mb-5 ">
-            <div class="col-md-12">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis maxime voluptatem minima architecto at debitis reprehenderit in, ullam magnam iure similique vero nostrum eligendi nisi culpa numquam labore molestias reiciendis!
-                </p>
-            </div>
+            {% for i in photogallery|slice:":1" %}
+                <div class="row justify-content-start ">
+                    <div class="col-md-7 heading-section ftco-animate">
+                        <span class="subheading">Gallery</span>
+                        <h2 class="mb-4"><strong>Narvik Villa</strong> {{i.title}}</h2>
+                    
+                    </div>
+                
 
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="destination-slider owl-carousel ftco-animate">
-                        <div class="item">
-                            <div class="destination">
-                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-6.jpg' %});">
-                                    <div class="icon d-flex justify-content-center align-items-center">
-                                        <span class="icon-search2"></span>
+                </div>
+                <div class="row justify-content-center mb-5 ">
+                    <div class="col-md-12">
+                        <p>
+                            {{i.content|safe}}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="bod-modal" data-interval="4" data-title="center">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="destination-slider owl-carousel ftco-animate">
+                            {% for i in photogallery|slice:"1:" %}
+
+                                <div class="item">
+                                    <div class="destination">
+                                        <a href="/media/{{i.file_path}}" class="img d-flex justify-content-center align-items-center image-popup-no-margins" 
+                                            style="background-image: url('/media/{{i.file_path}}');">
+                                            <div class="icon d-flex justify-content-center align-items-center">
+                                                <span class="icon-search2"></span>
+                                            </div>
+                                        </a>
+                                        <div class="text p-3">
+                                            <h3><a href="#">{{i.title}}</a></h3>
+                                            <span class="listing">{{i.content|safe}}</span>
+                                        </div>
                                     </div>
-                                </a>
-                                <div class="text p-3">
-                                    <h3><a href="#">Front Door</a></h3>
-                                    <span class="listing">Front Door description</span>
+                                </div>
+                            {% endfor %}
+
+                            <!-- <div class="item">
+                                <div class="destination">
+                                    <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-5.jpg' %});">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="icon-search2"></span>
+                                        </div>
+                                    </a>
+                                    <div class="text p-3">
+                                        <h3><a href="#">Living Room</a></h3>
+                                        <span class="listing">Living room description.</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <div class="destination">
-                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-5.jpg' %});">
-                                    <div class="icon d-flex justify-content-center align-items-center">
-                                        <span class="icon-search2"></span>
+                            <div class="item">
+                                <div class="destination">
+                                    <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-3.jpg' %});">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="icon-search2"></span>
+                                        </div>
+                                    </a>
+                                    <div class="text p-3">
+                                        <h3><a href="#">Swimming Pool</a></h3>
+                                        <span class="listing">Picture of swimming pool on night</span>
                                     </div>
-                                </a>
-                                <div class="text p-3">
-                                    <h3><a href="#">Living Room</a></h3>
-                                    <span class="listing">Living room description.</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <div class="destination">
-                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-3.jpg' %});">
-                                    <div class="icon d-flex justify-content-center align-items-center">
-                                        <span class="icon-search2"></span>
+                            <div class="item">
+                                <div class="destination">
+                                    <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-2.jpg' %});">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="icon-search2"></span>
+                                        </div>
+                                    </a>
+                                    <div class="text p-3">
+                                        <h3><a href="#">Kitchen</a></h3>
+                                        <span class="listing">Our kitchen merges with the main room.</span>
                                     </div>
-                                </a>
-                                <div class="text p-3">
-                                    <h3><a href="#">Swimming Pool</a></h3>
-                                    <span class="listing">Picture of swimming pool on night</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <div class="destination">
-                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-2.jpg' %});">
-                                    <div class="icon d-flex justify-content-center align-items-center">
-                                        <span class="icon-search2"></span>
+                            <div class="item">
+                                <div class="destination">
+                                    <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-1.jpg' %});">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="icon-search2"></span>
+                                        </div>
+                                    </a>
+                                    <div class="text p-3">
+                                        <h3><a href="#">Swimming Pool</a></h3>
+                                        <span class="listing">The pool is the nicest place for relaxation.</span>
                                     </div>
-                                </a>
-                                <div class="text p-3">
-                                    <h3><a href="#">Kitchen</a></h3>
-                                    <span class="listing">Our kitchen merges with the main room.</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <div class="destination">
-                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-1.jpg' %});">
-                                    <div class="icon d-flex justify-content-center align-items-center">
-                                        <span class="icon-search2"></span>
+                            <div class="item">
+                                <div class="destination">
+                                    <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-6.jpg' %});">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="icon-search2"></span>
+                                        </div>
+                                    </a>
+                                    <div class="text p-3">
+                                        <h3><a href="#">Garden</a></h3>
+                                        <span class="listing">Foto get using drone</span>
                                     </div>
-                                </a>
-                                <div class="text p-3">
-                                    <h3><a href="#">Swimming Pool</a></h3>
-                                    <span class="listing">The pool is the nicest place for relaxation.</span>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="destination">
-                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'villa/direngine/images/destination-6.jpg' %});">
-                                    <div class="icon d-flex justify-content-center align-items-center">
-                                        <span class="icon-search2"></span>
-                                    </div>
-                                </a>
-                                <div class="text p-3">
-                                    <h3><a href="#">Garden</a></h3>
-                                    <span class="listing">Foto get using drone</span>
-                                </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -590,14 +605,14 @@
             </div>            
 
             </div>
-            <div class="row justify-content-center mb-5 ">
+            <!-- <div class="row justify-content-center mb-5 ">
             <div class="col-md-12">
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis maxime voluptatem minima architecto at debitis reprehenderit in, ullam magnam iure similique vero nostrum eligendi nisi culpa numquam labore molestias reiciendis!
                 </p>
             </div>
 
-            </div>
+            </div> -->
             <div class="row">
                 <div class="col-md-12 ftco-animate">
                     <div id='calendar'></div>                    
@@ -703,85 +718,31 @@
 		</span>
 	</div>  
 
-    <script>        
+    <script>      
+        var year_, month_;
 
-        document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        // 
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialDate: '2023-01-12',
-            initialView: 'dayGridMonth',
-            headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-            },
-            height: 'auto',
-            navLinks: true, // can click day/week names to navigate views
-            editable: false,
-            selectable: true,
-            selectMirror: true,
-            nowIndicator: true,
-            events: [
-            {
-                title: 'All Day Event',
-                start: '2023-01-01',
-            },
-            {
-                title: 'Long Event',
-                start: '2023-01-07',
-                end: '2023-01-10'
-            },
-            {
-                groupId: 999,
-                title: 'Repeating Event',
-                start: '2023-01-09T16:00:00'
-            },
-            {
-                groupId: 999,
-                title: 'Repeating Event',
-                start: '2023-01-16T16:00:00'
-            },
-            {
-                title: 'Conference',
-                start: '2023-01-11',
-                end: '2023-01-13'
-            },
-            {
-                title: 'Meeting',
-                start: '2023-01-12T10:30:00',
-                end: '2023-01-12T12:30:00'
-            },
-            {
-                title: 'Lunch',
-                start: '2023-01-12T12:00:00'
-            },
-            {
-                title: 'Meeting',
-                start: '2023-01-12T14:30:00'
-            },
-            {
-                title: 'Happy Hour',
-                start: '2023-01-12T17:30:00'
-            },
-            {
-                title: 'Dinner',
-                start: '2023-01-12T20:00:00'
-            },
-            {
-                title: 'Birthday Party',
-                start: '2023-01-13T07:00:00'
-            },
-            {
-                title: 'Click for Google',
-                url: 'http://google.com/',
-                start: '2023-01-28'
-            }
-            ]
-        });
-    
-        calendar.render();
-        });
+        function get_date() {
+            console.log('DATE');
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            today = yyyy + '-' + mm + '-' + dd;
+            console.log(today);
+
+            year_ = yyyy
+            month_ = mm
+            return today;
+        };
+
+                       
+               
+            
+        //document.addEventListener('DOMContentLoaded', function() {
+            
+        //});
+           
 
 
         function mylinkfunction(e, target) {
@@ -798,8 +759,187 @@
             // e.stopPropagation(); 
 
         };
+        var calendar;
+        var list_source = [];
+
+        function cal_click(info) {
+            //onsole.log($('#calendar').FullCalendar('getDate'));
+            // var month = calendar.fullCalendar("getDate").month();
+            var date = calendar.getDate();
+
+            // console.log(date.getFullYear(), date.getMonth()+1);
+
+            var month = date.getMonth()+1;
+            var year = date.getFullYear();
+            tmp = year.toString() + month.toString();
+            console.log(tmp);
+
+            if ((list_source.findIndex(x => x==tmp)) === -1) {
+                list_source.push(tmp); // jangan tunggu ajax selesai, langsung push
+                alert('Wait Calendar Refresh!');
+
+                $.ajax({
+                    url: "/id/villa/get-calendar-ajax/"+ year +"/"+ month +"/", 
+                    success: function(result){ 
+                        
+                        
+                        // if ((list_source.findIndex(x => x==tmp)) === -1)
+                        
+
+                        // list_source.push(year_ + month_);
+                        console.log('list', list_source);
+                        
+                        // calendar.event = result;
+                        // calendar.render();
+                        // calendar.removeEventSource();
+                        calendar.addEventSource(result);
+                        
+                    }
+                });
+            };
+        };
 
         $(document).on("ready", function() {
+
+            
+
+            get_date();
+            console.log(year_, month_);
+            var year=Number(year_);
+            var month=Number(month_);
+            var tmp = year.toString() + month.toString();
+            list_source.push(tmp);
+            console.log('list', list_source);
+
+            $.ajax({
+                url: "/id/villa/get-calendar-ajax/"+ year_ +"/"+ month_ +"/", 
+                success: function(result){ 
+                    console.log(result);
+                        
+                    var calendarEl = document.getElementById('calendar');
+                    // '2023-01-12',
+                    calendar = new FullCalendar.Calendar(calendarEl, {
+                        initialDate: get_date(),
+                        initialView: 'dayGridMonth',
+                        headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                        },
+                        height: 'auto',
+                        navLinks: true, // can click day/week names to navigate views
+                        editable: false,
+                        selectable: true,
+                        selectMirror: true,
+                        nowIndicator: true,
+                        events: result,
+                        // events: [
+                        // {
+                        //     title: 'All Day Event',
+                        //     start: '2023-01-01',
+                        // },
+                        // {
+                        //     title: 'Long Event',
+                        //     start: '2023-01-07',
+                        //     end: '2023-01-10'
+                        // },
+                        // {
+                        //     groupId: 999,
+                        //     title: 'Repeating Event',
+                        //     start: '2023-01-09T16:00:00'
+                        // },
+                        // {
+                        //     groupId: 999,
+                        //     title: 'Repeating Event',
+                        //     start: '2023-01-16T16:00:00'
+                        // },
+                        // {
+                        //     title: 'Conference',
+                        //     start: '2023-01-11',
+                        //     end: '2023-01-13'
+                        // },
+                        // {
+                        //     title: 'Meeting',
+                        //     start: '2023-01-12T10:30:00',
+                        //     end: '2023-01-12T12:30:00'
+                        // },
+                        // {
+                        //     title: 'Lunch',
+                        //     start: '2023-01-12T12:00:00'
+                        // },
+                        // {
+                        //     title: 'Meeting',
+                        //     start: '2023-01-12T14:30:00'
+                        // },
+                        // {
+                        //     title: 'Happy Hour',
+                        //     start: '2023-01-12T17:30:00'
+                        // },
+                        // {
+                        //     title: 'Dinner',
+                        //     start: '2023-01-12T20:00:00'
+                        // },
+                        // {
+                        //     title: 'Birthday Party',
+                        //     start: '2023-01-13T07:00:00'
+                        // },
+                        // {
+                        //     title: 'Click for Google',
+                        //     url: 'http://google.com/',
+                        //     start: '2023-01-28'
+                        // }
+                        //]
+
+                        
+
+                        // nextClick: function (calEvent, jsEvent, view) {
+                        //     alert(calEvent, jsEvent, view);
+                        // },
+
+                        eventClick: function(info) {
+
+                            // var today = info.event.start
+                            // var dd = String(today.getDate()).padStart(2, '0');
+                            // var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                            // var yyyy = today.getFullYear();
+
+                            // start = dd + '-' + mm + '-' + yyyy;
+
+
+                            // var today = info.event.end
+                            // var dd = String(today.getDate()).padStart(2, '0');
+                            // var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                            // var yyyy = today.getFullYear();
+
+                            // end = dd + '-' + mm + '-' + yyyy;
+                            
+                            alert(
+                                'Event: ' + info.event.title + 
+                                ', start: ' + info.event.start.toLocaleString("id") +
+                                ', end: '  + info.event.end.toLocaleString("id") 
+                            
+                            );
+                            // alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+                            // alert('View: ' + info.view.type);
+
+                            // change the border color just for fun
+                            info.el.style.borderColor = 'red';
+                        }
+                    });
+                
+                    calendar.render();
+                    $('.fc-next-button').click(function(info){
+                        cal_click(info);
+                    });
+                    $('.fc-prev-button').click(function(info){
+                        cal_click(info);
+                    });
+                    $('.fc-today-button').click(function(info){
+                        cal_click(info);
+                    });
+                }
+            }); 
+            
 
             $('.image-popup-no-margins').magnificPopup({
                 type: 'image',
