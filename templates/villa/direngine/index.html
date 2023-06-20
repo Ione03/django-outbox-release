@@ -4,7 +4,7 @@
 {% block hero-image %}
     
     {% for i in slideshow %}        
-        <div class="slider-item" style="background-image: url(/media/{{i.file_path}})">
+        <div class="slider-item" style="background-image: url('/media/{{i.file_path}}')">
             <div class="title" style="display:none">{{i.title}}</div>
             <div class="sub-title" style="display:none">{{i.sub_title}}</div>
             <div class="content" style="display:none">&nbsp;{{i.content|safe}}</div>
