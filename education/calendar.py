@@ -1,5 +1,4 @@
-_G='credentials not found!'
-_F='/media'
+_F='credentials not found!'
 _E='error while add event!'
 _D='Delete Calendar Cache'
 _C=False
@@ -42,8 +41,8 @@ def sync_calendar_all(request,year=_A,month=_A):
 	site_id=get_site_id_front(request);gcal_default=GC.objects.filter(site_id=site_id,is_default=_B)[:1];gcal=GC.objects.filter(site_id=site_id,is_default=_C)
 	if gcal_default:gcal_default=gcal_default.get()
 	credentials=''
-	if gcal_default.file_path_doc:credentials=os.path.join(_F,gcal_default.file_path_doc.name)
-	if not credentials:return _G
+	if gcal_default.file_path_doc:credentials=gcal_default.file_path_doc.path
+	if not credentials:return _F
 	for i in gcal:
 		if gcal_default.file_path_doc:sync_calendar(request,i.cal_name,gcal_default.cal_name,credentials=credentials,date=date)
 	res=cache.get(f"calendar_cache_{year}_{month}",version=site_id)
@@ -57,8 +56,8 @@ def add_new_events(request,default_cal,credentials_path,event_name,start,end,des
 	site_id=get_site_id(request);gcal_default=GC.objects.filter(site_id=site_id,is_default=_B)[:1]
 	if gcal_default:gcal_default=gcal_default.get()
 	credentials=''
-	if gcal_default.file_path_doc:credentials=os.path.join(_F,gcal_default.file_path_doc.name)
-	if not credentials:return _G
+	if gcal_default.file_path_doc:credentials=gcal_default.file_path_doc.path
+	if not credentials:return _F
 	event=Event(event_name,start=start,end=end,description=description,minutes_before_email_reminder=50);cal=GoogleCalendar(gcal_default.cal_name,credentials_path=credentials)
 	if not is_event_exists(cal,start,end,event_name):
 		try:cal.add_event(event);print('Event added!');cache.delete(f"calendar_cache_{start.year}_{start.month}",version=site_id);print(_D,str(site_id))
