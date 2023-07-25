@@ -6,9 +6,9 @@ from core.auto_insert_core_data import create_core_data
 class Migration(migrations.Migration):
 
     dependencies = [
-	('core', '0033_auto_20230619_1736'),
+        ('core', '0033_auto_20230619_1736'),
     ]
 
     operations = [
-	migrations.RunPython(auto_insert_core_data) 
+        migrations.RunPython(create_core_data) 
     ]
