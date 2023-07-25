@@ -1,0 +1,75 @@
+{% load static %}
+{% load custom_filters %}
+
+<!--  FOOTER AREA START  -->
+<section id="footer" class="section-padding">
+    <div class="container">
+      <div class="row justify-content-around">
+        <div class="col-lg-4">
+          <div class="footer-widget footer-link">
+            
+            <h4>{{name}}</h4>
+            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore ipsam hic non sunt recusandae atque unde saepe nihil earum voluptatibus aliquid optio suscipit nobis quia vel quod, iure quae.</p> -->
+            {{notes|safe}}
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="footer-widget footer-link">
+            <h4>Menu</h4>
+            <ul>
+              {% for n in my_menu %}
+                {% if n.haveChild == False %}
+                  <li><a href="{{n.link}}">{{n.name}}</a></li>
+                {% endif %}
+              {% endfor %}
+              <!-- <li><a href="#">Landing Page</a></li>
+              <li><a href="#">Cara Kerja</a></li>
+              <li><a href="#">Tentang Kami</a></li>
+              <li><a href="#">Solusi</a></li>
+              <li><a href="#">Artikel</a></li> -->
+              <!-- <li><a href="blog.html">Blog</a></li> -->
+            </ul>
+          </div>
+        </div>
+  
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="footer-widget footer-link">
+            <h4>Link Cepat</h4>
+            <ul>
+              {% for n in my_menu_footer %}
+                <!-- sub menu tidak di buat -->
+                {% if n.haveChild == False %}
+                  <li><a href="{{n.link}}">{{n.name}}</a></li>
+                {% endif %}
+              {% endfor %}
+
+              <!-- <li><a href="#!">How it Works</a></li>
+              <li><a href="#!">Support</a></li>
+              <li><a href="#!">Privacy Policy</a></li>
+              <li><a href="#!">Report Bug</a></li>
+              <li><a href="#!">License</a></li>
+              <li><a href="#!">Terms & Condition</a></li> -->
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12">
+          <div class="footer-widget footer-text">
+            <h4>Our location</h4>
+            <p class="mail"><span><i class="icofont-ui-email"></i> Mail :</span> <a href="mailto:{{ email }}">{{email}}</a></p>
+            <p><span><i class="icofont-phone"></i> Phone :</span> <a href="tel:{{phone}}">{{phone|phone_number}}</a></p>
+            <p><span><i class="icofont-brand-whatsapp"></i> Whatsapp :</span> {{whatsapp|phone_number}}</p>
+            <p><span><i class="icofont-google-map"></i> Location:</span> {{address}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="footer-copy">
+            Copyright &copy; 2023, <a href="#">{{name}}</a>
+            <!-- Designed &amp; Developed by <a href="https://themefisher.com/">Themefisher</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--  FOOTER AREA END  -->

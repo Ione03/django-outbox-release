@@ -28,7 +28,7 @@ class Command(BaseCommand):
 	def create_menu(C):
 		B=[];E=Subquery(MenuTranslation.objects.filter(master_id=OuterRef(_A),language_code='en').values(_B));F=Menu.objects.language(_A).filter(kind=2).annotate(name_en=E)
 		for A in F:
-			G={_A:A.id};H={_B:A.name,'parent_id':A.parent.id if A.parent else _E,'link':A.link,'order_menu':A.order_menu,'icon':A.icon,'kind':A.kind,'is_visibled':A.is_visibled,'is_external':A.is_external,'is_new':A.is_new};I={_B:A.name_en};D=[]
+			G={_A:A.id};H={_B:A.name,'parent_id':A.parent.id if A.parent else _E,'link':A.link,'order_menu':A.order_menu,'icon':A.icon,'kind':A.kind,'is_visibled':A.is_visibled,'is_external':A.is_external,'is_new':A.is_new,'exclude_menu':A.exclude_menu};I={_B:A.name_en};D=[]
 			for J in A.menu_group.all():D.append(J.id)
 			K={'menu_group':D};B.append({_C:G,_D:H,'translation':I,'m2m':K})
 		if B:

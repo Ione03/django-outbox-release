@@ -36,7 +36,9 @@ class OptServiceType(models.IntegerChoices):EDUCATION=1,_('edu');TRAVEL=2,_('tra
 class Photo(BaseAbstractModel):
 	file_path=models.ImageField(blank=_A,null=_A);content_type=models.ForeignKey(ContentType,on_delete=models.CASCADE,blank=_A,null=_A);object_id=models.PositiveIntegerField(blank=_A,null=_A);content_object=GenericForeignKey()
 	class Meta:verbose_name=_('photo');verbose_name_plural=_('photos')
-	def __str__(self):return self.file_path.url
+	def __str__(self):
+		if self.file_path:return self.file_path.url
+		return'-'
 class Agency(BaseAbstractModel,TranslatableModel):
 	name=models.CharField(_(_C),max_length=100);shortuuid=ShortUUIDField(length=4,max_length=10,alphabet=_E,null=_A,blank=_A,editable=_B);email=encrypt(models.EmailField(_(_D),null=_A,blank=_A));phone=encrypt(models.CharField(_('phone'),max_length=20,null=_A,blank=_A));fax=encrypt(models.CharField(_('fax'),max_length=20,null=_A,blank=_A));whatsapp=encrypt(models.CharField(_('whatsapp'),max_length=20,null=_A,blank=_A));country=models.ForeignKey(Country,null=_A,blank=_A,on_delete=models.PROTECT,verbose_name=_('country'));province=models.ForeignKey(Province,null=_A,blank=_A,on_delete=models.PROTECT,verbose_name=_('province'));regency=models.ForeignKey(Regency,null=_A,blank=_A,on_delete=models.PROTECT,verbose_name=_('regency'));sub_district=models.ForeignKey(SubDistrict,null=_A,blank=_A,on_delete=models.PROTECT,verbose_name=_('sub district'));urban_village=models.ForeignKey(UrbanVillage,null=_A,blank=_A,on_delete=models.PROTECT,verbose_name=_('urban village'));billing_type=models.SmallIntegerField(_('billing type'),choices=OptBillingType.choices,default=OptBillingType.TIME_BASE,blank=_A);conversion=models.FloatField(default=0,blank=_A,editable=_B);translations=TranslatedFields(address=encrypt(models.CharField(_('address'),max_length=255,null=_A,blank=_A)),notes=encrypt(RichTextUploadingField(_('description'),null=_A,blank=_A)));is_default=models.BooleanField(default=_B)
 	class Meta:verbose_name=_('agency');verbose_name_plural=_('agencies')

@@ -7,7 +7,7 @@
 
 {% block header %}
     <div id="logo-group">
-        <span id="logo"> <img src="{% static 'backend/smart-admin-2/img/logo.png' %}" alt="SmartAdmin">      
+        <span id="logo"> <img src="{% static 'backend/smart-admin-2/img/authbox-logo.png' %}" alt="SmartAdmin">      
         </span>                
     </div>
 
@@ -51,6 +51,10 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                 <div class="provider text-center">
+                <div id="show_curr_site">
+                    Show : <a id="curr_site" target="_blank"></a> <hr>
+                </div>
+
                 {% get_providers as socialaccount_providers %}
                 {% if socialaccount_providers %}
                     <h5 class="text-center"> - {% trans "Sign in using" %} -</h5>
@@ -68,6 +72,7 @@
                                             <a href="javascript:void(0);" class="btn btn-warning btn-circle"><i class="fa fa-linkedin"></i></a>
                                         </li>
                                     </ul>  -->
+                    
                     <h5 class="text-center"> - {% trans "or" %} -</h5>
                 {% endif %}
                 </div>
@@ -137,6 +142,25 @@
 
     <script>
         $(function() {
+            // LOAD ITEM FROM LOCAL STORAGE
+            var curr_site = $('#curr_site');
+            var retrievedObject = localStorage.getItem('curr_site');
+            if (retrievedObject) {
+                // console.log('retrievedObject',retrievedObject);
+                // alert(retrievedObject);
+                var tmp = JSON.parse(retrievedObject);
+                // console.log('temp',tmp);
+
+                curr_site.attr('href', tmp.href);
+                curr_site.text(tmp.text);
+                // OKE
+                $('#show_curr_site').show();
+            }
+            else {
+                $('#show_curr_site').hide();
+            }
+
+
             // ACTIVE DOMAIN = {{active_domain}}
             // let active_domain = "{{active_domain}}";            
             // console.log(active_domain);

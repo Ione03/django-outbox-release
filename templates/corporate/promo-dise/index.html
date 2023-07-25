@@ -1,0 +1,474 @@
+{% extends "corporate/promo-dise/base-index.html" %}
+{% load static %}
+
+{% block landing-page %}
+    <!--MAIN HEADER AREA END -->
+
+    <!--MAIN BANNER AREA START -->
+    <!-- banner-3 -->
+    <!--  -->
+    <!-- gbr=
+    <img src="{% static 'corporate/promo-dise/images/bg/bg-1.jpg' %}"> -->
+    {% for i in slideshow %}        
+        <div class="slider-item" style="background-image: url('/media/{{i.file_path}}')">
+            <div class="title" style="display:none">{{i.title}}</div>
+            <div class="sub-title" style="display:none">{{i.sub_title}}</div>
+            <div class="content" style="display:none">&nbsp;{{i.content|safe}}</div>
+        </div>
+    {% endfor %}
+
+<!-- 
+    <div class="slider-item" style="background-image: url({% static 'corporate/promo-dise/images/banner/banner-bg.jpg' %}); background-size: cover; position: relative;">
+        <div class="title" style="display:none">We craft seo and digital markting services</div>
+        <div class="sub-title" style="display:none">&nbsp; &nbsp; A CREATIVE AGENCY &nbsp; &nbsp;</div>
+        <div class="content" style="display:none">We provide marketing services to startups and small businesses to looking for a partner for their digital media, design-area.We are a a startup company to be commited to work and time management.</div>
+    </div> -->
+<!-- 
+    <div class="slider-item" style="background-image: url({% static 'corporate/promo-dise/images/banner/bg-2.jpg' %}); background-size: cover; position: relative;">
+        <div class="title" style="display:none">Need a website</div>
+        <div class="sub-title" style="display:none">&nbsp; &nbsp; A CREATIVE AGENCY &nbsp; &nbsp;</div>
+        <div class="content" style="display:none">Lets make it easiest ever.</div>
+    </div>
+
+    <div class="slider-item" style="background-image: url({% static 'corporate/promo-dise/images/banner/1.jpg' %}); background-size: cover; position: relative;">
+        <div class="title" style="display:none">Lets begin</div>
+        <div class="sub-title" style="display:none">&nbsp; &nbsp; A CREATIVE AGENCY &nbsp; &nbsp;</div>
+        <div class="content" style="display:none">Click button below.</div>
+    </div> -->
+
+    <div  id="slider" class="slider">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">            
+            <div class="slider-panel">
+                <div class="slider-panel__controls">
+                    <i class="far fa-arrow-alt-circle-left" id="previous"></i>
+                    <i class="far fa-pause-circle" id="pause-play"></i>
+                    <i class="far fa-arrow-alt-circle-right" id="next"></i>
+                </div>
+                
+                <div class="slider-panel__navigation">
+                    
+                    {% for i in slideshow %} 
+                        <i class="fas fa-circle indicator" data-slide-to="{{forloop.counter0}}"></i>
+                    {% endfor %}
+                    <!-- <i class="far fa-circle indicator" data-slide-to="1"></i>
+                    <i class="far fa-circle indicator" data-slide-to="2"></i>
+                    <i class="far fa-circle indicator" data-slide-to="3"></i>
+                    <i class="far fa-circle indicator" data-slide-to="4"></i> -->
+                </div>                        
+            </div>
+            
+            <div class="slider-item-show">
+                <div class="d-table">
+                    <div class="d-table-cell">
+                    <div class="container">
+                        <div class="row">
+                        <div class="col-lg-8 m-auto text-center col-sm-12 col-md-12">
+                            <div class="banner-content content-padding">
+                            <h5 class="subtitle sub-title">A creative agency &nbsp; &nbsp;</h5>
+                            <h1 class="banner-title title">We craft seo and digital markting services</h1>
+                            <p class="content">We provide marketing services to startups and small businesses to looking for a partner for their digital media, design-area.We are a a startup company to be commited to work and time management.</p>
+    
+                            <a href="#" class="btn btn-white btn-circled">Mulai Sekarang</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+
+        
+
+
+
+    <!-- <div class="banner-area">
+        <div style="background-image: url({% static 'corporate/promo-dise/images/banner/banner-bg.jpg' %}); background-size: cover; position: relative;">
+            <div class="overlay dark-overlay"></div>
+            <div class="d-table">
+                <div class="d-table-cell">
+                <div class="container">
+                    <div class="row">
+                    <div class="col-lg-8 m-auto text-center col-sm-12 col-md-12">
+                        <div class="banner-content content-padding">
+                        <h5 class="subtitle">A creative agency</h5>
+                        <h1 class="banner-title">We craft seo and digital markting services</h1>
+                        <p>We provide marketing services to startups and small businesses to looking for a partner for their digital media, design-area.We are a a startup company to be commited to work and time management.</p>
+
+                        <a href="contact.html" class="btn btn-white btn-circled">lets start</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>  
+    </div> -->
+    <!-- MAIN HEADER AREA END -->
+{% endblock %}
+
+{% block how-it-works %}
+    <!--  ABOUT AREA START  -->
+    <section id="intro" class="section-padding">
+        <div class="container">
+        <div class="row">
+            {% for i in howitworks|slice:":1" %}
+                <div class="col-lg-12 col-sm-12 col-md-12">
+                <div class="section-heading">
+                    <p class="lead">{{i.title}}</p>
+                </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-lg-5 d-none d-lg-block col-sm-12 align-self-end">
+            <div class="intro-img">
+                <img src="{% static 'corporate/promo-dise/images/banner/why-choose.png' %}" alt="intro-img" class="img-fluid">
+            </div>
+            </div>
+            <div class="col-lg-7 col-md-12 col-sm-12">
+            <div class="row">
+                {% for i in howitworks|slice:"1:" %}
+                    <div class="col-lg-6 col-sm-6 col-md-6">
+                        <div class="intro-box">
+                            <span>0{{forloop.counter}}.</span>
+                            <h4>{{i.title}}</h4>
+                            <p>{{i.content|safe}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <!-- <div class="col-lg-6 col-sm-6 col-md-6">
+                <div class="intro-box">
+                    <span>02.</span>
+                    <h4>Strategy</h4>
+                    <p>We’re full service which means we’ve got you covered on design & content right through to digital. </p>
+                </div>
+                </div>
+                <div class="col-lg-6 col-sm-6 col-md-6">
+                <div class="intro-box">
+                    <span>03.</span>
+                    <h4>Experience</h4>
+                    <p>You’ll form a lasting relationship with us, collaboration is central to we do.Digital experiences
+                    connect people.</p>
+                </div>
+                </div>
+                <div class="col-lg-6 col-sm-6 col-md-6">
+                <div class="intro-box">
+                    <span>04.</span>
+                    <h4>Build</h4>
+                    <p>Technology and design are the core of success for real estate related businesses. Leverage our years.
+                    </p>
+                </div>
+                </div> -->
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                <div class="intro-cta">
+                    <!-- Still have any question on mind ?  -->
+                    <p class="lead ">Jika Ada yang perlu ditanyakan ? <a href="contact.html" class="smoth-scroll"> Hubungi Kami</a>
+                    </p>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!--  ABOUT AREA END  -->
+{% endblock %}
+
+{% block about-us %}
+    <!--  SERVICE AREA START  -->
+    <section id="about" class="bg-light">
+        {% for i in aboutus|slice:":1" %}            
+            <div class="about-bg-img d-none d-lg-block d-md-block" style="background: url('/media/{{i.file_path}}') 50% 50%;"></div>
+            <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-sm-12 col-md-8">
+                <div class="about-content">
+                
+                    <h5 class="subtitle">{{i.sub_title}}</h5>
+                    <h3>{{i.title}}</h3>
+                    {{i.content|safe}}
+                
+                </div>
+                </div>
+            </div>
+            </div>
+        {% endfor %}
+    </section>
+    <!--  SERVICE AREA END  -->
+{% endblock %}
+
+{% block fasilities %}
+    <!--  SERVICE PARTNER START  -->
+    <section id="service-head" class=" bg-feature">
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 m-auto">
+            <div class="section-heading text-white">
+                {% for i in fasilities|slice:":1" %}
+                    <h4 class="section-title">{{i.title}}</h4>
+                    {{i.content|safe}}
+                {% endfor %}
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!--  SERVICE PARTNER END  -->
+
+    <!--  SERVICE AREA START  -->
+    <section id="service">
+        <div class="container">
+        <div class="row">
+            {% for i in fasilities|slice:"1:" %}
+                <div class="col-lg-4 col-sm-6 col-md-6">
+                    <div class="service-box">
+                        <div class="service-img-icon">
+                        <a href="#"><img src="/media/{{i.file_path}}" alt="service-icon" class="img-fluid" style="border-radius: 50%;"></a>
+                        </div>
+                        <div class="service-inner">
+                        <a href="#"><h4>{{i.title}}</h4></a>
+                        <!-- <p>Reach a huge area of users and get a publicty of your product and service ,<span>video marketing</span>
+                            solution.</p> -->
+                        {{i.content|safe|truncatewords:20}} <a href="#">lebih lanjut</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <!-- <div class="col-lg-4 col-sm-6 col-md-6">
+            <div class="service-box ">
+                <div class="service-img-icon">
+                <img src="images/icon/008-digital-marketing-2.png" alt="service-icon" class="img-fluid">
+                </div>
+                <div class="service-inner">
+                <h4>Email Marketing</h4>
+                <p>Email Marketing is a great solution to reach a <span>high range of customers</span> eagrerly waiting to
+                    get a service.</p>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-md-6">
+            <div class="service-box">
+                <div class="service-img-icon">
+                <img src="images/icon/003-task.png" alt="service-icon" class="img-fluid">
+                </div>
+                <div class="service-inner">
+                <h4>SEO optimization</h4>
+                <p>we provide wide range of<span> seo service</span> to make your site at top to reach your target customers
+                    provided.</p>
+                </div>
+            </div>
+            </div>
+    
+            <div class="col-lg-4 col-sm-6 col-md-6">
+            <div class="service-box">
+                <div class="service-img-icon">
+                <img src="images/icon/010-digital-marketing.png" alt="service-icon" class="img-fluid">
+                </div>
+                <div class="service-inner">
+                <h4>Custom Website</h4>
+                <p>We provide <span>custom website</span> for any small and large company web based service in large compact
+                    package.</p>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-md-6">
+            <div class="service-box">
+                <div class="service-img-icon">
+                <img src="images/icon/006-analytics.png" alt="service-icon" class="img-fluid">
+                </div>
+                <div class="service-inner">
+                <h4>Content Growth</h4>
+                <p>Content is king,Having a blog site and want to <span>build content</span> make a platform of earning too
+                    we assist you.</p>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-md-6">
+            <div class="service-box">
+                <div class="service-img-icon">
+                <img src="images/icon/004-hiring.png" alt="service-icon" class="img-fluid">
+                </div>
+                <div class="service-inner">
+                <h4>Link Building </h4>
+                <p>Want to grow your <span>potential visitor</span> your site to make it more effective and succesful
+                    business .</p>
+                </div>
+            </div>
+            </div> -->
+        </div>
+        </div>
+    </section>
+    <!--  SERVICE AREA END  -->
+    
+{% endblock %}    
+
+{% block price %}
+    <!-- PRICE AREA START  -->
+    <section id="pricing" class="section-padding bg-main">
+        <div class="container">
+        <div class="row">
+            {% for i in product|slice:":1" %}
+                <div class="col-lg-12 col-sm-12 m-auto">
+                <div class="section-heading">
+                    <h4 class="section-title">{{i.title}}</h4>
+                    <!-- <p>We have different type of pricing table to choose with your need. Check which one is most suitble for you
+                    and your business purpose. </p> -->
+                    {{i.content|safe}}
+                </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            {% for i in product|slice:"1:" %}
+                <div class="col-lg-4 col-sm-6">
+                <div class="pricing-block ">
+                    <div class="price-header">
+                    <a href="#"><i class="{{i.icon}}"></i></a>
+        
+                    <h4 class="price"><a href="#">{{i.name}}</a></h4>
+                    <h5><a href="#">{{i.title}}</a></h5>
+                    </div>
+                    <div class="line"></div>
+                    {{i.content|safe}}
+                    <!-- <ul>
+                    <li>5 GB Bandwidth</li>
+                    <li>Highest Speed</li>
+                    <li>1 GB Storage</li>
+                    <li>Unlimited Website</li>
+                    <li>Unlimited Users</li>
+                    <li>Data Security and Backups</li>
+                    <li>24x7 Great Support</li>
+                    <li>Monthly Reports and Analytics</li>
+                    </ul> -->
+        
+                    <a href="pricing.html" class="btn btn-hero btn-circled">select plan</a>
+                </div>
+                </div>
+            {% endfor %}
+
+            <!-- <div class="col-lg-4 col-sm-6">
+            <div class="pricing-block ">
+                <div class="price-header">
+                <i class="icofont-rocket-alt-1"></i>
+    
+                <h4 class="price"><small>$</small>46</h4>
+                <h5>Monthly pack</h5>
+                </div>
+                <div class="line"></div>
+                <ul>
+                <li>5 GB Bandwidth</li>
+                <li>Highest Speed</li>
+                <li>1 GB Storage</li>
+                <li>Unlimited Website</li>
+                <li>Unlimited Users</li>
+                <li>Data Security and Backups</li>
+                <li>24x7 Great Support</li>
+                <li>Monthly Reports and Analytics</li>
+                </ul>
+    
+                <a href="pricing.html" class="btn btn-hero btn-circled">select plan</a>
+            </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+            <div class="pricing-block">
+                <div class="price-header">
+                <i class="icofont-light-bulb"></i>
+    
+                <h4 class="price"><small>$</small>76</h4>
+                <h5>Monthly pack</h5>
+                </div>
+                <div class="line"></div>
+                <ul>
+                <li>5 GB Bandwidth</li>
+                <li>Highest Speed</li>
+                <li>1 GB Storage</li>
+                <li>Unlimited Website</li>
+                <li>Unlimited Users</li>
+                <li>Data Security and Backups</li>
+                <li>24x7 Great Support</li>
+                <li>Monthly Reports and Analytics</li>
+                </ul>
+    
+                <a href="pricing.html" class="btn btn-hero btn-circled">select plan</a>
+            </div>
+            </div> -->
+        </div>
+        </div>
+    </section>
+    <!-- PRICE AREA END  -->
+{% endblock %} 
+
+{% block article %}
+    <!--  BLOG AREA START  -->
+
+    <section id="blog" class="section-padding bg-main">
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 m-auto">
+            <div class="section-heading">
+                {% for i in article|slice:":1" %}
+                    <h4 class="section-title">{{i.title}}</h4>
+                    <div class="line"></div>
+                    {{i.content|safe}}
+                    <!-- <p>Our blog journey may come handy to build a community to make more effective success for business. Latest and trend tricks will help a lot </p> -->
+                {% endfor %}
+            </div>
+            </div>
+        </div>
+    
+        <div class="row">
+            {% for i in article|slice:"1:" %}
+                <div class="col-lg-4 col-sm-6 col-md-4">
+                <div class="blog-block ">
+                    <a href="#"><img src="/media/{{i.file_path}}" alt="" class="w-100"></a>
+                    <div class="blog-text">
+                    <h6 class="author-name"><span><a href="#">{{i.categories}}</a></span>{{i.admin}}</h6>
+                    <a href="#" class="h5 my-2 d-inline-block">
+                        {{i.title}}
+                    </a>
+                    {{i.content|safe|truncatewords:20}} <a href="#">lebih lanjut</a>
+                    <!-- <p>If you want to grow your content quality and standard you should foolow these tips properly voluptatibus.
+                    </p> -->
+                    </div>
+                </div>
+                </div>
+            {% endfor %}
+            <!-- <div class="col-lg-4 col-sm-6 col-md-4">
+            <div class="blog-block ">
+                <img src="images/blog/blog-2.jpg" alt="" class="w-100">
+                <div class="blog-text">
+                <h6 class="author-name"><span>Branding</span>john Doe</h6>
+                <a href="blog-single.html" class="h5 my-2 d-inline-block">
+                    Brand your site at top in few minuts.
+                </a>
+                <p>Brand your site at top, boost your audioance corporis facilis animi voluptas alias ex saepe quo
+                    voluptatibus.</p>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-md-4">
+            <div class="blog-block ">
+                <img src="images/blog/blog-3.jpg" alt="" class="w-100">
+                <div class="blog-text">
+                <h6 class="author-name"><span>Marketing</span>john Doe</h6>
+                <a href="blog-single.html" class="h5 my-2 d-inline-block">
+                    How to become a best sale <br>marketer in a year!
+                </a>
+                <p>Becomeing a best sale marketer is not easy but not impossible too.Need to follow up some proper guidance
+                    and strategy .</p>
+                </div>
+            </div>
+            </div> -->
+        </div>
+        </div>
+    </section>
+    <!--  BLOG AREA END  -->
+{% endblock %}    
+    

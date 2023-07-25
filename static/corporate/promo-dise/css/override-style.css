@@ -1,0 +1,29 @@
+/* override style "style.css" */
+
+.banner-content .banner-title {
+    text-shadow: 1px 1px 15px black;
+    /* line-height: 55px; */
+}
+
+.banner-content .subtitle {    
+    box-shadow: 1px 1px 15px black;
+    margin-bottom: 30px;
+}
+
+.banner-content p {
+    color: white; /* #eee;*/    
+    text-shadow: 1px 1px 10px black;
+    font-size: 20px;
+}
+
+.about-bg-img {    
+    box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.06);
+}
+  
+.btn-white {
+    box-shadow: 1px 1px 15px black;
+}
+
+.banner-content {
+    padding-right: 0px;    
+}

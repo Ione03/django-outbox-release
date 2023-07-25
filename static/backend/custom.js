@@ -130,6 +130,7 @@ function do_create_table(url, one_record_only=false, edit_button=true, delete_bu
             if (res.data.length>0) {
                 $('#datatable_tabletools').DataTable({
                     // dom: "Bfrtip",
+                    "deferRender": true,    // for lazy load data (load per page)
                     "data": res.data,
                     "columns": res.columns,
                     "order": [[ 2, "desc" ]],   

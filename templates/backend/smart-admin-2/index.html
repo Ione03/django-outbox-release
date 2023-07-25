@@ -1,5 +1,7 @@
 {% extends "backend/smart-admin-2/base-crud.html" %}
 {% load static %}
+{% load custom_filters %}
+
 {% comment %}
     {% load menu_tags %}
 {% endcomment %}
@@ -219,8 +221,10 @@
                                                                                 Service: 
                                                                                     <strong>{{k.get_kind_display}}</strong>, 
                                                                                     expired: {{k.expired_date}}
-                                                                                </span> &ndash; Site: <a href="javascript:void(0);">
-                                                                                    {{k.site}}</a>                                                                
+                                                                                </span> &ndash; Site: 
+                                                                                    <a href="https://{{k.site}}/" target="_blank" id="current_site">
+                                                                                            {{k.site}}                                                                                                                                                                                        
+                                                                                    </a>                                                                
                                                                         </li>
                                                                     {% endif %}
                                                                 {% endfor %}
@@ -229,6 +233,8 @@
                                                         </ul>
                                                     </li>
                                                 {% endfor %}
+                                                
+                                               
                                                 <!-- <li>
                                                     <span class="label label-success"><i class="fa fa-lg fa-minus-circle"></i> Tuesday, January 8: 8.00 hours</span>
                                                     <ul>
@@ -503,6 +509,27 @@
         };        
 
         $(document).ready(function() {
+            // console.log($('#current_site').attr('href'));
+            // console.log($('#current_site').text());
+            var current_site = $('#current_site');
+            // alert(current_site.attr('href'));
+            // alert(current_site.text());
+
+            var curr_site = { 'href': current_site.attr('href'), 
+                'text': current_site.text()};
+
+            // Put the object into the storage
+            // alert(person);
+            localStorage.setItem('curr_site', JSON.stringify(curr_site));
+                
+            // Parse di halman login
+            
+            // // LOAD ITEM FROM LOCAL STORAGE
+            // var retrievedObject = localStorage.getItem('curr_site');
+            // // alert(retrievedObject);
+            // var tmp = JSON.parse(retrievedObject);
+            // console.log('curr_site: ', tmp.href, tmp.text);
+            // // OKE
 
             // $('.period').text('Daily');
             change_period(2, 'Daily');

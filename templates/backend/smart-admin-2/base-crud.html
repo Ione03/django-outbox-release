@@ -104,13 +104,12 @@
     </aside>
 {% endblock %}
 
-
 {% block header %}
     <header id="header">
         <div id="logo-group">
 
             <!-- PLACE YOUR LOGO HERE -->
-            <span id="logo"> <img src="{% static 'backend/smart-admin-2/img/logo.png' %}" alt="SmartAdmin"> </span>
+            <span id="logo"> <img src="{% static 'backend/smart-admin-2/img/authbox-logo.png' %}" alt="SmartAdmin"> </span>
             <!-- END LOGO PLACEHOLDER -->
 
             <!-- Note: The activity badge color changes when clicked and resets the number to 0
@@ -276,6 +275,26 @@
 
             <!-- multiple lang dropdown : find all flags in the flags page hidden-xs -->
             <ul class="header-dropdown-list">
+                <li>
+                    {% for i in agency %}
+                        
+                        {% for j in service|slice:"forloop.counter0:forloop.counter0+1" %}
+                            {% for k in j %}
+                                {% if k.agency_id == i.id %}
+                                    <a href="https://{{k.site}}/" title="https://{{k.site}}/" class="dropdown-toggle" target="_blank">
+                                        <!-- <img src="{% static 'backend/smart-admin-2/img/blank.gif' %}" class="flag flag-us" alt="United States">  -->
+                                    Show: <strong> {{i.name}} </strong></a>
+                                    
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        
+                    {% endfor %}
+                    
+                    
+                
+
+                </li>
                 <li>
                     <a href="javascript:void(0);" onclick='change_language_to(document.URL)' id="tg-languages" class="dropdown-toggle" data-toggle="dropdown"> 
                         <!-- <img src="{% static 'backend/smart-admin-2/img/blank.gif' %}" class="flag flag-us" alt="Flag language"> 

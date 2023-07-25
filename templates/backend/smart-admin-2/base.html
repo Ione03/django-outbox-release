@@ -1,11 +1,5 @@
 {% load static %}
 {% load menu_tags %}
-{% comment %}
-	{% menu_create 2 menugroup as my_menu %} 
-	{% menu_active_by_name active_page as my_active %}
-{% endcomment %}
-
-
 
 <!DOCTYPE html>
 <html lang="id">
@@ -61,7 +55,7 @@
 		* 'fixed-page-footer' - Fixes footer
 		* 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
 	-->
-	<body class="desktop-detected  fixed-header  pace-done smart-style-1">                        
+	<body class="desktop-detected  fixed-header  pace-done smart-style-3">                        
 
 		<!-- #HEADER -->
         {% block header %}{% endblock %}
@@ -79,9 +73,7 @@
             
 			<!-- RIBBON -->
             {% block breadcrumb %}{% endblock %}
-			<!-- END RIBBON -->
-			
-			
+			<!-- END RIBBON -->					
 
 			<!-- MAIN CONTENT -->
 			{% block content %}{% endblock %}
@@ -150,7 +142,6 @@
 
                 var url = document.URL;
                 
-
                 if (url.indexOf('/id/') > 0) {
                     $("#tg-languages").empty();
                     $("#tg-languages").append( 

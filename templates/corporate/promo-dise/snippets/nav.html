@@ -1,0 +1,72 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg fixed-top trans-navigation ">
+    
+    <div class="overlay dark-overlay"></div>
+    <div class="container" style="z-index: 99;">
+      
+      <a class="navbar-brand" href="index.html">
+        <img src="{% static 'corporate/promo-dise/images/logo.png' %}" alt="" class="img-fluid b-logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav" aria-controls="mainNav"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">
+          <i class="fa fa-bars"></i>
+        </span>
+      </button>
+      
+
+      <div class="collapse navbar-collapse justify-content-end" id="mainNav">        
+        <ul class="navbar-nav ">
+         
+          {% for n in my_menu %}
+
+            <li class="nav-item">
+              {% if n.haveChild %}
+                <ul class="dropdown-menu" aria-labelledby="navbarWelcome">
+              {% else %}                                
+                <a class="nav-link smoth-scroll" href="{{n.link}}">
+                  {{n.name}}
+                </a>
+              {% endif %}
+
+              {% for i in n.haveChildEndTag %}                  
+                  {% if forloop.last %}
+                      {% if n.parent_id %}
+                          </ul></li>
+                          {% if not n.haveChild %}                                                
+                              </li> 
+                          {% endif %}  
+                      {% else %}
+                          </li>
+                      {% endif %}
+
+                  {% else %}
+                      </ul></li>
+                  {% endif %}       
+
+              {% endfor %}                             
+
+          {% endfor %}
+
+
+
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#!" id="navbarWelcome" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Home <i class="fas fa-chevron-down"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarWelcome">
+              <li><a class="dropdown-item" href="index.html">Home-1</a></li>              
+            </ul>
+          </li>           
+          -->
+
+        </ul>
+      </div>
+
+      
+    </div>
+
+    
+</nav>
