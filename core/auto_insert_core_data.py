@@ -40,3 +40,4 @@ def create_social_app(file_path):
 	for B in A:D,E=SocialApp.objects.update_or_create(id=B[_B][_A],defaults=B[_C])
 	print('Done Write data Social App to database!')
 def create_core_data(apps,schema_monitor):A='db';create_template_owner(A);create_template(A);create_menu(A);create_model_list(A);create_model_list_setting(A);create_social_app(A);print('ALL Done...!')
+def update_core_data():A='db';create_template_owner(A);create_template(A);create_menu(A);create_model_list(A);create_model_list_setting(A);create_social_app(A);print('ALL Data Updated...!')

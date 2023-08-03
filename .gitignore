@@ -3,7 +3,6 @@ staticfiles/
 locale/
 education/
 django_outbox/
-db/
 credentials/
 core/
 backend/
