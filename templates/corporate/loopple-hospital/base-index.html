@@ -1,0 +1,223 @@
+{% extends 'corporate/loopple-hospital/base.html' %}
+
+{% block content %}
+
+    {% block slideshow %}
+    {% endblock %}
+
+    {% block fasilities %}
+    {% endblock %}
+
+    {% block greetings %}        
+    {% endblock %}    
+
+    {% block about-us %}        
+    {% endblock %}    
+
+
+{% endblock %}
+
+
+<!-- <section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 mx-auto text-center mb-5">
+                <h3 class="text-gradient text-info mb-0">Our Team</h3>
+                <h3 spellcheck="false">Meet our specialists</h3>
+                <p>This is the paragraph where you can write more details about your team. Keep you user engaged by providing meaningful information.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="card card-profile">
+                    <a href="javascript:;">
+                        <div class="p-3">
+                            <img class="w-100 border-radius-md" src="https://images.unsplash.com/photo-1584999734482-0361aecad844?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80">
+                        </div>
+                    </a>
+                    <div class="card-body blur justify-content-center text-center mt-n5 mx-4 mb-4 border-radius-md">
+                        <h4 class="mb-0">Hattie McKenzie</h4>
+                        <p>Montreal, QC</p>
+                        <div class="row justify-content-center text-center">
+                            <div class="col-lg-4 col-4">
+                                <h5 class="text-info mb-0">323</h5>
+                                <small>Patients</small>
+                            </div>
+                            <div class="col-lg-4 col-4">
+                                <h5 class="text-info mb-0">500+</h5>
+                                <small>Hours</small>
+                            </div>
+                            <div class="col-lg-4 col-4">
+                                <h5 class="text-info mb-0">24/7</h5>
+                                <small>Support</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card card-profile mt-md-0 mt-5">
+                    <a href="javascript:;">
+                        <div class="p-3">
+                            <img class="w-100 border-radius-md" src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80">
+                        </div>
+                    </a>
+                    <div class="card-body blur justify-content-center text-center mt-n5 mx-4 mb-4 border-radius-md">
+                        <h4 class="mb-0">Annie Spratt</h4>
+                        <p>Bucharest, RO</p>
+                        <div class="row justify-content-center text-center">
+                            <div class="col-lg-4 col-4">
+                                <h5 class="text-info mb-0">450</h5>
+                                <small>Patients</small>
+                            </div>
+                            <div class="col-lg-4 col-4">
+                                <h5 class="text-info mb-0">400+</h5>
+                                <small>Hours</small>
+                            </div>
+                            <div class="col-lg-4 col-4">
+                                <h5 class="text-info mb-0">24/7</h5>
+                                <small>Support</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mx-md-auto">
+                <div class="card card-profile mt-md-0 mt-5">
+                    <a href="javascript:;">
+                        <div class="p-3">
+                            <img class="w-100 border-radius-md" src="https://images.unsplash.com/photo-1628430034114-aff6ee554113?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80">
+                        </div>
+                    </a>
+                    <div class="card-body blur justify-content-center text-center mt-n5 mx-4 mb-4 border-radius-md">
+                        <h4 class="mb-0">Bruce Mars</h4>
+                        <p>Atlanta, U.S.</p>
+                        <div class="row justify-content-center text-center">
+                            <div class="col-lg-4 col-4">
+                                <h5 class="text-info mb-0">750</h5>
+                                <small>Patients</small>
+                            </div>
+                            <div class="col-lg-4 col-4">
+                                <h5 class="text-info mb-0">800+</h5>
+                                <small>Hours</small>
+                            </div>
+                            <div class="col-lg-4 col-4">
+                                <h5 class="text-info mb-0">24/7</h5>
+                                <small>Support</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="position-relative overflow-hidden py-0">
+    <div class="row">
+        <div class="col-6 text-center mx-auto mt-5 mb-4">
+            <h2>Clients reviews</h2>
+            <p>See what people from all around the world are saying about our hospital.
+            </p>
+        </div>
+    </div>
+    <div class="bg-gradient-dark">
+        <div id="carouselExampleIndicators" class="carousel slide pt-7 pb-11" data-bs-ride="carousel">
+            <ol class="carousel-indicators pb-7">
+                <a href="javascript:;">
+                    <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-4.jpg" alt="..." class="avatar avatar-sm avatar-scale-up shadow border-radius-lg border-0 active" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-current="true"> <span class="text-white mx-2">|</span>
+                </a>
+
+                <a href="javascript:;">
+                    <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-3.jpg" alt="..." class="avatar avatar-sm avatar-scale-up shadow border-radius-lg border-0" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"> <span class="text-white mx-2">|</span>
+                </a>
+
+                <a href="javascript:;">
+                    <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-2.jpg" alt="..." class="avatar avatar-sm avatar-scale-up shadow border-radius-lg border-0" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2">
+                </a>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7 mx-auto text-center">
+                                <img class="w-50 mb-4 avatar avatar-xl" src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-4.jpg" alt="">
+                                <p class="lead text-white">"We’re not always in the position that we want to be at. We’re constantly growing. We’re constantly making mistakes. We’re constantly trying to express ourselves and actualize our dreams." </p>
+                                <div class="author justify-content-center">
+                                    <div class="name ps-2">
+                                        <span class="text-white">John Down</span>
+                                        <div class="stats">
+                                            <small class="text-white opacity-6">Visionary, Google</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7 mx-auto text-center">
+                                <img class="w-50 mb-4 avatar avatar-xl" src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-3.jpg" alt="">
+                                <p class="lead text-white">"We’re not always in the position that we want to be at. We’re constantly growing. We’re constantly making mistakes. We’re constantly trying to express ourselves and actualize our dreams."</p>
+                                <div class="author justify-content-center">
+                                    <div class="name ps-2">
+                                        <span class="text-white">Marcell Glock</span>
+                                        <div class="stats">
+                                            <small class="text-white opacity-6">Chief Executive, Spotify</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7 mx-auto text-center">
+                                <img class="w-50 mb-4 avatar avatar-xl" src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-2.jpg" alt="">
+                                <p class="lead text-white">"We’re not always in the position that we want to be at. We’re constantly growing. We’re constantly making mistakes. We’re constantly trying to express ourselves and actualize our dreams." </p>
+                                <div class="author justify-content-center">
+                                    <div class="name ps-2">
+                                        <span class="text-white">Mathew Goat</span>
+                                        <div class="stats">
+                                            <small class="text-white opacity-6">Social Media Executive, Netflix</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 text-start">
+                <h4>Subscribe for news</h4>
+                <p class="mb-0">The latest news, articles and resources sent to your inbox weekely.</p>
+            </div>
+            <div class="col-lg-5 ms-auto text-end mt-4 mt-lg-0">
+                <div class="row">
+                    <div class="col-lg-8 col-md-4 col-7">
+                        <div class="form-group mb-0">
+                            <div class="input-group">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                    <input class="form-control" placeholder="Your Email" type="email">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-5 text-start">
+                        <button type="button" class="btn mb-0 h-100 btn-dark">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
