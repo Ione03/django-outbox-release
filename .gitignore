@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 media/*
 staticfiles/*
 locale/*
@@ -7,6 +8,17 @@ credentials/*
 core/*
 backend/*
 __pycache__/*
+=======
+media/
+staticfiles/
+locale/
+education/
+django_outbox/
+credentials/
+core/
+backend/
+__pycache__/
+>>>>>>> parent of 34a96eb (Fix error command updatecoredata)
 *.pyc
 *.sqlite3
 sendgrid.env
