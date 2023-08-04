@@ -1,11 +1,5 @@
 media/
 staticfiles/
-locale/
-education/
-django_outbox/
-credentials/
-core/
-backend/
 __pycache__/
 *.pyc
 *.sqlite3
