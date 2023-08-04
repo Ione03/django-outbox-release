@@ -1,2 +1,0 @@
-from .models import MenuGroup
-def create_model_list(apps,schema_monitor):A=['Dashboard','Logo','Agency','Content','Announcement','News','Article','Events','Daily Alert','Greeting','Pages','Document','Gallery','Slide Show','Photo Gallery','Video Gallery','Categories','Tags','Social Media','Related Link','Banner','Menu','Location']

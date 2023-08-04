@@ -1,6 +1,14 @@
 media/
 staticfiles/
+locale/
+education/
+django_outbox/
+credentials/
+core/
+db/
+backend/
 __pycache__/
 *.pyc
 *.sqlite3
 sendgrid.env
+!.gitignore

@@ -1,3 +1,0 @@
-from django.urls import path,include
-from .views import IndexView,DetailView,ListView,DescriptionView,GreetingView,get_calendar_ajax,BookingView
-urlpatterns=[path('',IndexView.as_view(),name='education_index'),path('<str:kind>/detail/<slug:slug>/',DetailView.as_view(),name='education_detail'),path('<str:kind>/list/<slug:slug>/',ListView.as_view(),name='education_list'),path('description/detail/',DescriptionView.as_view(),name='pages_description'),path('greeting/detail/',GreetingView.as_view(),name='pages_greeting'),path('booking/detail/',BookingView.as_view(),name='pages_booking'),path('get-calendar-ajax/<int:year>/<int:month>/',get_calendar_ajax,name='get_calendar_ajax')]
