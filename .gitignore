@@ -5,6 +5,7 @@ education/
 django_outbox/
 credentials/
 backend/
+core/
 __pycache__/
 *.pyc
 *.sqlite3

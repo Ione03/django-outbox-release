@@ -1,3 +1,4 @@
+#TEST
 _B=False
 _A=True
 import uuid
